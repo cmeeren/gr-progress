@@ -22,11 +22,16 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
     private $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
+        'goodreadsAttribution' => 'Data from Goodreads',
         'userid' => '',
         'apiKey' => '',
         'currentlyReadingShelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
+        'displayReviewExcerptCurrentlyReadingShelf' => false,
         'displayProgressUpdateTime' => true,
+        'intervalTemplate' => '{num} {period} ago',
+        'intervalSingular' => ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+        'intervalPlural' => ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'],
         'useProgressBar' => true,
         'currentlyReadingShelfSortBy' => 'date_updated',
         'currentlyReadingShelfSortOrder' => 'd',
@@ -34,6 +39,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         'additionalShelfName' => 'to-read',
         'additionalShelfHeading' => 'Reading soon',
         'emptyMessageAdditional' => "Nothing planned at the moment.",
+        'displayReviewExcerptAdditionalShelf' => false,
         'additionalShelfSortBy' => 'position',
         'additionalShelfSortOrder' => 'a',
         'maxBooksAdditionalShelf' => 3,
@@ -169,7 +175,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
     }
 
     private function printGoodreadsAttribution() {
-        echo "<p class='goodreads-attribution'>Data from Goodreads</p>";
+        echo "<p class='goodreads-attribution'>{$this->widgetData['goodreadsAttribution']}</p>";
     }
 
     private function printCurrentlyReadingShelf() {
@@ -205,6 +211,11 @@ class gr_progress_cvdm_widget extends WP_Widget {
                     $this->printProgressString($book);
                 }
             }
+            
+            if ($book->hasComment()) {
+                echo "<p class='bookComment'>{$book->getComment()}</p>";
+            }
+            
             echo "</div>";
             echo "</li>";
         }
@@ -213,7 +224,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private function printProgressBar($book) {
         $percent = $book->getProgressInPercent();
         $progressStatusUpdateTime = $book->getProgressStatusUpdateTime();
-        $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . time_elapsed_string("@" . strval($progressStatusUpdateTime)) . ")" : "";
+        $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . $this->time_elapsed_string("@" . strval($progressStatusUpdateTime)) . ")" : "";
         ?>
         <div class="progress progress-bar-wrapper">
             <div class="progress-bar" style="width: <?php echo $percent ?>%;">
@@ -227,8 +238,30 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private function printProgressString($book) {
         $percent = $book->getProgressInPercent();
         $progressStatusUpdateTime = $book->getProgressStatusUpdateTime();
-        $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . time_elapsed_string("@" . strval($progressStatusUpdateTime)) . ")" : "";
+        $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . $this->time_elapsed_string("@" . strval($progressStatusUpdateTime)) . ")" : "";
         echo "<p class='progress progress-string'>$percent&thinsp;%$time</p>";
+    }
+
+    private function time_elapsed_string($datetime) {
+        $now = new DateTime;
+        $then = new DateTime($datetime);
+        $dateInterval = $now->diff($then);
+
+        $dateInterval->w = floor($dateInterval->d / 7);
+        $dateInterval->d -= $dateInterval->w * 7;
+
+        // make sure it's at least 1 second ago so we don't have to deal with "just now"
+        // (which would complicate the widget settings)
+        $dateInterval->s = max($dateInterval->s, 1);
+
+        $intervalCodes = array('y', 'm', 'w', 'd', 'h', 'i', 's',);
+        foreach ($intervalCodes as $i => $interval) {
+            $numberOfIntervals = $dateInterval->$interval;
+            if ($numberOfIntervals > 0) {
+                $intervalName = $numberOfIntervals > 1 ? $this->widgetData['intervalPlural'][$i] : $this->widgetData['intervalSingular'][$i];
+                return str_replace(['{num}', '{period}'], [$numberOfIntervals, $intervalName], $this->widgetData['intervalTemplate']);
+            }
+        }
     }
 
     private function printAdditionalShelfHeading() {
@@ -269,6 +302,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         ?>
 
         <p style="text-align: center; color: #31708f; background-color: #d9edf7; border: 1px solid #bce8f1; border-radius: 4px; padding: 15px;"><strong>Important!</strong> Remember to make your Goodreads profile public, otherwise no books will be visible.</p>
+        <p style="text-align: center; color: #31708f; background-color: #d9edf7; border: 1px solid #bce8f1; border-radius: 4px; padding: 15px;">If the styling isn't working out for your theme, style the widget however you want in your theme's CSS file.</p>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>">
                 Title:
@@ -281,6 +315,22 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 value="<?php echo esc_attr($instance['title']); ?>"
                 />
         </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('goodreadsAttribution'); ?>">
+                Goodreads attribution text:
+            </label>
+            <input
+                class="widefat"
+                type="text"
+                id="<?php echo $this->get_field_id('goodreadsAttribution'); ?>"
+                name="<?php echo $this->get_field_name('goodreadsAttribution'); ?>"
+                value="<?php echo esc_attr($instance['goodreadsAttribution']); ?>"
+                placeholder="<?php echo $this->DEFAULT_SETTINGS['goodreadsAttribution'] ?>"
+                />
+            <br />
+            <small>Required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. Provided here in case you want to translate it. Displayed below the widget heading.</small>
+        </p>
+
         <h3 style="margin-top: 2.5rem;">Goodreads configuration</h3>
         <p>
             <label for="<?php echo $this->get_field_id('userid'); ?>">
@@ -296,7 +346,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         </p>
         <p>
             <label for="<?php echo $this->get_field_id('apiKey'); ?>">
-                Goodreads API key (get one <a target="_blank" href="https://www.goodreads.com/api/keys">here</a>):
+                Goodreads API key (get one <a target="_blank" href="https://www.goodreads.com/api/keys">here</a> - doesn't matter what application/company name you write):
             </label>
             <input
                 class="widefat"
@@ -308,7 +358,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         </p>
 
         <h3 style="margin-top: 2.5rem;">"Currently reading" shelf</h3>
-        <p>This is the shelf where reading progress will be displayed.</p>
+        <p>Reading progress will be displayed for books on this shelf.</p>
         <p>
             <label for="<?php echo $this->get_field_id('currentlyReadingShelfName'); ?>">
                 Name of shelf on Goodreads:
@@ -335,21 +385,80 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 />
         </p>
         <p>
+            <label for="<?php echo $this->get_field_id('displayReviewExcerptCurrentlyReadingShelf'); ?>">
+                <input
+                    id="<?php echo $this->get_field_id('displayReviewExcerptCurrentlyReadingShelf'); ?>"
+                    name="<?php echo $this->get_field_name('displayReviewExcerptCurrentlyReadingShelf'); ?>"
+                    <?php echo $instance['displayReviewExcerptCurrentlyReadingShelf'] ? "checked" : ""; ?>
+                    type="checkbox">
+                Display the first line of your Goodreads review for each book<br/>
+                <small>Intended for quick notes such as "reading this together with Bob" or "recommended by Alice" or whatever else strikes you fancy.</small>
+            </label>
+        </p>
+        <p>
             <label for="<?php echo $this->get_field_id('displayProgressUpdateTime'); ?>">
                 <input
                     id="<?php echo $this->get_field_id('displayProgressUpdateTime'); ?>"
                     name="<?php echo $this->get_field_name('displayProgressUpdateTime'); ?>"
-        <?php echo $instance['displayProgressUpdateTime'] ? "checked" : ""; ?>
+                    <?php echo $instance['displayProgressUpdateTime'] ? "checked" : ""; ?>
                     type="checkbox">
                 Display time since last progress update (e.g. "2 days ago")
             </label>
         </p>
+        <p>If you need to, you can translate the time shown:</p>
+        <table>
+            <label for="<?php echo $this->get_field_id('intervalTemplate'); ?>">
+                Template:
+            </label>
+            <input
+                class="widefat"
+                type="text"
+                id="<?php echo $this->get_field_id('intervalTemplate'); ?>"
+                name="<?php echo $this->get_field_name('intervalTemplate'); ?>"
+                value="<?php echo esc_attr($instance['intervalTemplate']); ?>"
+                />
+            <tr>
+                <td>Year</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][0] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][0] ?>" /></td>
+            </tr>
+            <tr>
+                <td>Month</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][1]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][1] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][1]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][1] ?>" /></td>
+            </tr>
+            <tr>
+                <td>Week</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][2]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][2] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][2]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][2] ?>" /></td>
+            </tr>
+            <tr>
+                <td>Day</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][3]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][3] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][3]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][3] ?>" /></td>
+            </tr>
+            <tr>
+                <td>Hour</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][4]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][4] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][4]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][4] ?>" /></td>
+            </tr>
+            <tr>
+                <td>Minute</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][5]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][5] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][5]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][5] ?>" /></td>
+            </tr>
+            <tr>
+                <td>Second</td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][6] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][6] ?>" /></td>
+            </tr>
+        </table>
         <p>
             <label for="<?php echo $this->get_field_id('useProgressBar'); ?>">
                 <input
                     id="<?php echo $this->get_field_id('useProgressBar'); ?>"
                     name="<?php echo $this->get_field_name('useProgressBar'); ?>"
-        <?php echo $instance['useProgressBar'] ? "checked" : ""; ?>
+                    <?php echo $instance['useProgressBar'] ? "checked" : ""; ?>
                     value="useProgressBar"
                     type="radio">
                 Display progress bar
@@ -359,7 +468,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <input
                     id="<?php echo $this->get_field_id('useProgressText'); ?>"
                     name="<?php echo $this->get_field_name('useProgressBar'); ?>"
-        <?php echo!$instance['useProgressBar'] ? "checked" : ""; ?>
+                    <?php echo!$instance['useProgressBar'] ? "checked" : ""; ?>
                     value="useProgressText"
                     type="radio">
                 Display progress as text (no progress bar)
@@ -375,7 +484,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>"
                 name="<?php echo $this->get_field_name('currentlyReadingShelfSortBy'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['currentlyReadingShelfSortBy']); ?>
+                    <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['currentlyReadingShelfSortBy']); ?>
             </select>
         </p>
         <p>
@@ -387,7 +496,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('currentlyReadingShelfSortOrder'); ?>"
                 name="<?php echo $this->get_field_name('currentlyReadingShelfSortOrder'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['currentlyReadingShelfSortOrder']); ?>
+                    <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['currentlyReadingShelfSortOrder']); ?>
             </select>
         </p>
         <p>
@@ -406,7 +515,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         </p>
 
         <h3 style="margin-top: 2.5rem;">Additional shelf</h3>
-        <p>Here you can choose to display e.g. books you intend to read soon.</p>
+        <p>Here you can choose to display e.g. books you intend to read soon, or whatever you want. Feel free to create a new shelf for this on Goodreads if you want to control which books appear here.</p>
         <p>
             <label for="<?php echo $this->get_field_id('additionalShelfName'); ?>">
                 Name of shelf on Goodreads (leave blank to disable):
@@ -445,6 +554,17 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 />
         </p>
         <p>
+            <label for="<?php echo $this->get_field_id('displayReviewExcerptAdditionalShelf'); ?>">
+                <input
+                    id="<?php echo $this->get_field_id('displayReviewExcerptAdditionalShelf'); ?>"
+                    name="<?php echo $this->get_field_name('displayReviewExcerptAdditionalShelf'); ?>"
+                    <?php echo $instance['displayReviewExcerptAdditionalShelf'] ? "checked" : ""; ?>
+                    type="checkbox">
+                Display the first line of your Goodreads review for each book<br/>
+                <small>Intended for quick notes such as "reading this together with Bob" or "recommended by Alice" or whatever else strikes you fancy.</small>
+            </label>
+        </p>
+        <p>
             <label for="<?php echo $this->get_field_id('additionalShelfSortBy'); ?>">
                 Sort by:
             </label>
@@ -453,7 +573,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('additionalShelfSortBy'); ?>"
                 name="<?php echo $this->get_field_name('additionalShelfSortBy'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['additionalShelfSortBy']); ?>
+                    <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['additionalShelfSortBy']); ?>
             </select>
         </p>
         <p>
@@ -465,7 +585,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('additionalShelfSortOrder'); ?>"
                 name="<?php echo $this->get_field_name('additionalShelfSortOrder'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['additionalShelfSortOrder']); ?>
+                    <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['additionalShelfSortOrder']); ?>
             </select>
         </p>
         <p>
@@ -518,7 +638,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <input
                     id="<?php echo $this->get_field_id('deleteCacheOnSave'); ?>"
                     name="<?php echo $this->get_field_name('regenerateCacheOnSave'); ?>"
-        <?php echo!$instance['regenerateCacheOnSave'] ? "checked" : ""; ?>
+                    <?php echo!$instance['regenerateCacheOnSave'] ? "checked" : ""; ?>
                     value="noRegenerateCache"
                     type="radio">
                 Delete cache when saving widget (first visitor will regenerate)
@@ -528,7 +648,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <input
                     id="<?php echo $this->get_field_id('regenerateCacheOnSave'); ?>"
                     name="<?php echo $this->get_field_name('regenerateCacheOnSave'); ?>"
-        <?php echo $instance['regenerateCacheOnSave'] ? "checked" : ""; ?>
+                    <?php echo $instance['regenerateCacheOnSave'] ? "checked" : ""; ?>
                     value="regenerateCache"
                     type="radio">
                 Regenerate cache when saving widget (visitors will not notice any slowdown)
@@ -542,113 +662,97 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <input
                     id="<?php echo $this->get_field_id('deleteCoverURLCacheOnSave'); ?>"
                     name="<?php echo $this->get_field_name('deleteCoverURLCacheOnSave'); ?>"
-        <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save     ?>
+                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save     ?>
                     type="checkbox">
                 Delete the cover URL cache the next time you save these settings.
             </label>
         </p>
 
-                    <?php
+        <?php
+    }
+
+    private function makeHTMLSelectOptions($options, $selectedOption) {
+        foreach ($options as $value => $description) {
+            $selected = $selectedOption == $value ? 'selected="selected"' : '';
+            echo "<option value='$value' $selected>";
+            echo $description;
+            echo "</option>";
+        }
+    }
+
+    public function update($new_instance, $old_instance) {
+        $instance = $old_instance;
+        $instance['title'] = strip_tags($new_instance['title']);
+        $goodreadsAttribution = trim(strip_tags($new_instance['goodreadsAttribution']));
+        $instance['goodreadsAttribution'] = $goodreadsAttribution ? : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
+
+        preg_match("/\d+/", $new_instance['userid'], $matches_userid);
+        $instance['userid'] = count($matches_userid) > 0 ? $matches_userid[0] : "";
+        $instance['apiKey'] = strip_tags($new_instance['apiKey']);
+        $instance['currentlyReadingShelfName'] = strip_tags($new_instance['currentlyReadingShelfName']);
+        $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
+        $instance['displayReviewExcerptCurrentlyReadingShelf'] = isset($new_instance['displayReviewExcerptCurrentlyReadingShelf']) ? true : false;
+        $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
+        $instance['intervalTemplate'] = strip_tags($new_instance['intervalTemplate']);
+
+        foreach (['intervalSingular', 'intervalPlural'] as $intervalPluralSingular) {
+            $instance[$intervalPluralSingular] = $new_instance[$intervalPluralSingular];
+            foreach ($instance[$intervalPluralSingular] as $i => &$str) {
+                $str = trim(strip_tags($str));
+                if (empty($str)) {
+                    $str = $this->DEFAULT_SETTINGS[$intervalPluralSingular][$i];
                 }
-
-                private function makeHTMLSelectOptions($options, $selectedOption) {
-                    foreach ($options as $value => $description) {
-                        $selected = $selectedOption == $value ? 'selected="selected"' : '';
-                        echo "<option value='$value' $selected>";
-                        echo $description;
-                        echo "</option>";
-                    }
-                }
-
-                public function update($new_instance, $old_instance) {
-                    $instance = $old_instance;
-                    $instance['title'] = strip_tags($new_instance['title']);
-
-                    preg_match("/\d+/", $new_instance['userid'], $matches_userid);
-                    $instance['userid'] = count($matches_userid) > 0 ? $matches_userid[0] : "";
-                    $instance['apiKey'] = strip_tags($new_instance['apiKey']);
-                    $instance['currentlyReadingShelfName'] = strip_tags($new_instance['currentlyReadingShelfName']);
-                    $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
-                    $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
-                    $instance['useProgressBar'] = $new_instance['useProgressBar'] == 'useProgressBar' ? true : false;
-                    $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['currentlyReadingShelfSortBy'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortBy'];
-                    $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortOrder'];
-                    $instance['maxBooksCurrentlyReadingShelf'] = preg_match("/\d+/", $new_instance['maxBooksCurrentlyReadingShelf']) ? intval($new_instance['maxBooksCurrentlyReadingShelf']) : 10;
-                    $instance['additionalShelfName'] = strip_tags($new_instance['additionalShelfName']);
-                    $instance['additionalShelfHeading'] = strip_tags($new_instance['additionalShelfHeading']);
-                    $instance['emptyMessageAdditional'] = strip_tags($new_instance['emptyMessageAdditional']);
-                    $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['additionalShelfSortBy'] : $this->DEFAULT_SETTINGS['additionalShelfSortBy'];
-                    $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['additionalShelfSortOrder'] : $this->DEFAULT_SETTINGS['additionalShelfSortOrder'];
-                    $instance['maxBooksAdditionalShelf'] = preg_match("/\d+/", $new_instance['maxBooksAdditionalShelf']) ? intval($new_instance['maxBooksAdditionalShelf']) : 10;
-                    $instance['progressCacheHours'] = preg_match("/\d+/", $new_instance['progressCacheHours']) ? intval($new_instance['progressCacheHours']) : 24;
-                    $instance['bookCacheHours'] = preg_match("/\d+/", $new_instance['bookCacheHours']) ? intval($new_instance['bookCacheHours']) : 24;
-                    $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
-
-                    $this->widgetData = $instance;
-
-                    if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
-                        delete_option("gr_progress_cvdm_coverURLs");
-                    }
-
-                    if ($instance['regenerateCacheOnSave']) {
-                        $this->regenerateCache($instance);
-                    } else {
-                        $this->deleteCache();
-                    }
-
-                    return $instance;
-                }
-
-                private function regenerateCache() {
-                    $this->fetchNewShelvesIfNeeded();
-                    $this->updateProgressIfNeeded();
-                    $this->saveCacheIfNeeded();
-                }
-
-                private function deleteCache() {
-                    delete_option("gr_progress_cvdm_shelves");
-                    delete_option("gr_progress_cvdm_lastRetrievalErrorTime");
-                }
-
             }
+        }
+
+        $instance['useProgressBar'] = $new_instance['useProgressBar'] == 'useProgressBar' ? true : false;
+        $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['currentlyReadingShelfSortBy'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortBy'];
+        $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortOrder'];
+        $instance['maxBooksCurrentlyReadingShelf'] = preg_match("/\d+/", $new_instance['maxBooksCurrentlyReadingShelf']) ? intval($new_instance['maxBooksCurrentlyReadingShelf']) : 10;
+        $instance['additionalShelfName'] = strip_tags($new_instance['additionalShelfName']);
+        $instance['additionalShelfHeading'] = strip_tags($new_instance['additionalShelfHeading']);
+        $instance['emptyMessageAdditional'] = strip_tags($new_instance['emptyMessageAdditional']);
+        $instance['displayReviewExcerptAdditionalShelf'] = isset($new_instance['displayReviewExcerptAdditionalShelf']) ? true : false;
+        $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['additionalShelfSortBy'] : $this->DEFAULT_SETTINGS['additionalShelfSortBy'];
+        $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['additionalShelfSortOrder'] : $this->DEFAULT_SETTINGS['additionalShelfSortOrder'];
+        $instance['maxBooksAdditionalShelf'] = preg_match("/\d+/", $new_instance['maxBooksAdditionalShelf']) ? intval($new_instance['maxBooksAdditionalShelf']) : 10;
+        $instance['progressCacheHours'] = preg_match("/\d+/", $new_instance['progressCacheHours']) ? intval($new_instance['progressCacheHours']) : 24;
+        $instance['bookCacheHours'] = preg_match("/\d+/", $new_instance['bookCacheHours']) ? intval($new_instance['bookCacheHours']) : 24;
+        $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
+
+        $this->widgetData = $instance;
+
+        if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
+            delete_option("gr_progress_cvdm_coverURLs");
+        }
+
+        if ($instance['regenerateCacheOnSave']) {
+            $this->regenerateCache($instance);
+        } else {
+            $this->deleteCache();
+        }
+
+        return $instance;
+    }
+
+    private function regenerateCache() {
+        $this->fetchNewShelvesIfNeeded();
+        $this->updateProgressIfNeeded();
+        $this->saveCacheIfNeeded();
+    }
+
+    private function deleteCache() {
+        delete_option("gr_progress_cvdm_shelves");
+        delete_option("gr_progress_cvdm_lastRetrievalErrorTime");
+    }
+
+}
 
 // Register and load the widget
-            function gr_progress_cvdm_load_widget() {
-                register_widget('gr_progress_cvdm_widget');
-                wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'style.css');
-            }
+function gr_progress_cvdm_load_widget() {
+    register_widget('gr_progress_cvdm_widget');
+    wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'style.css');
+}
 
-            add_action('widgets_init', 'gr_progress_cvdm_load_widget');
+add_action('widgets_init', 'gr_progress_cvdm_load_widget');
 
-            function time_elapsed_string($datetime, $full = false) {
-                // from http://stackoverflow.com/a/18602474/2978652
-                $now = new DateTime;
-                $ago = new DateTime($datetime);
-                $diff = $now->diff($ago);
-
-                $diff->w = floor($diff->d / 7);
-                $diff->d -= $diff->w * 7;
-
-                $string = array(
-                    'y' => 'year',
-                    'm' => 'month',
-                    'w' => 'week',
-                    'd' => 'day',
-                    'h' => 'hour',
-                    'i' => 'minute',
-                    's' => 'second',
-                );
-                foreach ($string as $k => &$v) {
-                    if ($diff->$k) {
-                        $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-                    } else {
-                        unset($string[$k]);
-                    }
-                }
-
-                if (!$full) {
-                    $string = array_slice($string, 0, 1);
-                }
-                return $string ? implode(', ', $string) . ' ago' : 'just now';
-            }
-            

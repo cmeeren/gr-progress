@@ -48,7 +48,19 @@ class Shelf {
             foreach ($bookElement->find("author") as $author) {
                 $authors[] = $author->find("name", 0)->plaintext;
             }
-            $this->books[$id] = new Book($id, $title, $authors, $this->widgetData);
+
+            $reviewBodyFirstLine = null;
+            $showBookComment = $this->isCurrentlyReadingShelf() ? $this->widgetData['displayReviewExcerptCurrentlyReadingShelf'] : $this->widgetData['displayReviewExcerptAdditionalShelf'];
+            if ($showBookComment) {
+                $reviewBody = $reviewElement->find("body", 0)->plaintext;
+                $reviewBody =  preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $reviewBody);
+                $reviewBodySplit = explode("<br", $reviewBody, 2);
+                if (!empty($reviewBodySplit)) {
+                    $reviewBodyFirstLine = $reviewBodySplit[0];
+                }
+            }
+
+            $this->books[$id] = new Book($id, $title, $authors, $reviewBodyFirstLine, $this->widgetData);
         }
     }
 

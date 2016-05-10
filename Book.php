@@ -5,16 +5,18 @@ class Book {
     private $id;
     private $title;
     private $authors;
+    private $comment;
     private $coverURL;
     private $progressInPercent;
     private $progressStatusUpdateTime;
     private $widgetData;
     public $retrievalError = false;
 
-    public function Book($id, $title, $authors, $widgetData) {
+    public function Book($id, $title, $authors, $comment, $widgetData) {
         $this->id = $id;
         $this->title = $title;
         $this->authors = $authors;
+        $this->comment = $comment;
         $this->widgetData = $widgetData;
     }
 
@@ -48,6 +50,14 @@ class Book {
 
     public function getProgressStatusUpdateTime() {
         return $this->progressStatusUpdateTime;
+    }
+    
+    public function hasComment() {
+        return $this->comment !== null;
+    }
+    
+    public function getComment() {
+        return $this->comment;
     }
 
     public function fetchProgressUsingAPI() {
