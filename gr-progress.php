@@ -15,71 +15,65 @@ class gr_progress_cvdm_widget extends WP_Widget {
 
     private $shelves;
     private $widgetData;
-    private $defaults;
-    private $sortByOptions;
-    private $sortOrderOptions;
     private $cacheNeedsUpdate = false;
     private $CURRENTLY_READING_SHELF_KEY = 'currentlyReadingShelf';
     private $ADDITIONAL_SHELF_KEY = 'additionalShelf';
     private $DEFAULT_TIMEOUT_IN_SECONDS = 5;
     private $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
+    private $defaults = [
+        'title' => 'Currently reading',
+        'userid' => '',
+        'apiKey' => '',
+        'currentlyReadingShelfName' => 'currently-reading',
+        'emptyMessage' => 'Not currently reading anything.',
+        'displayProgressUpdateTime' => true,
+        'useProgressBar' => true,
+        'currentlyReadingShelfSortBy' => 'date_updated',
+        'currentlyReadingShelfSortOrder' => 'd',
+        'maxBooksCurrentlyReadingShelf' => 3,
+        'additionalShelfName' => 'to-read',
+        'additionalShelfHeading' => 'Reading soon',
+        'emptyMessageAdditional' => "Nothing planned at the moment.",
+        'additionalShelfSortBy' => 'position',
+        'additionalShelfSortOrder' => 'a',
+        'maxBooksAdditionalShelf' => 3,
+        'progressCacheHours' => 24,
+        'bookCacheHours' => 24,
+        'regenerateCacheOnSave' => false,
+        'deleteCoverURLCacheOnSave' => false,
+    ];
+    private $sortByOptions = [
+        'title' => 'Title',
+        'author' => 'Author',
+        'position' => 'Shelf position',
+        'date_added' => 'Date added',
+        'date_purchased' => 'Date purchased',
+        'date_started' => 'Date started',
+        'date_updated' => 'Date updated',
+        'date_read' => 'Date read',
+        'rating' => 'Rating',
+        'avg_rating' => 'Average rating',
+        'read_count' => 'Read count',
+        'num_pages' => 'Number of pages',
+        'random' => 'Random',
+    ];
+    private $sortOrderOptions = [
+        'a' => 'Ascending',
+        'd' => 'Descending',
+    ];
 
     function __construct() {
         parent::__construct(
                 'gr_progress_cvdm_widget', 'GR progress', ['description' => 'Displays reading progress and shelves from Goodreads.']
         );
 
-        $this->initializeMembers();
+        $this->initializeEmptyShelves();
     }
 
-    function initializeMembers() {
+    function initializeEmptyShelves() {
         $this->shelves = [
             $this->CURRENTLY_READING_SHELF_KEY => null,
             $this->ADDITIONAL_SHELF_KEY => null];
-
-        $this->defaults = [
-            'title' => 'Currently reading',
-            'userid' => '',
-            'apiKey' => '',
-            'currentlyReadingShelfName' => 'currently-reading',
-            'emptyMessage' => 'Not currently reading anything.',
-            'displayProgressUpdateTime' => true,
-            'useProgressBar' => true,
-            'currentlyReadingShelfSortBy' => 'date_updated',
-            'currentlyReadingShelfSortOrder' => 'd',
-            'maxBooksCurrentlyReadingShelf' => 3,
-            'additionalShelfName' => 'to-read',
-            'additionalShelfHeading' => 'Reading soon',
-            'emptyMessageAdditional' => "Nothing planned at the moment.",
-            'additionalShelfSortBy' => 'position',
-            'additionalShelfSortOrder' => 'a',
-            'maxBooksAdditionalShelf' => 3,
-            'progressCacheHours' => 24,
-            'bookCacheHours' => 24,
-            'regenerateCacheOnSave' => false,
-            'deleteCoverURLCacheOnSave' => false,
-        ];
-
-        $this->sortByOptions = [
-            'title' => 'Title',
-            'author' => 'Author',
-            'position' => 'Shelf position',
-            'date_added' => 'Date added',
-            'date_purchased' => 'Date purchased',
-            'date_started' => 'Date started',
-            'date_updated' => 'Date updated',
-            'date_read' => 'Date read',
-            'rating' => 'Rating',
-            'avg_rating' => 'Average rating',
-            'read_count' => 'Read count',
-            'num_pages' => 'Number of pages',
-            'random' => 'Random',
-        ];
-
-        $this->sortOrderOptions = [
-            'a' => 'Ascending',
-            'd' => 'Descending',
-        ];
     }
 
     public function widget($args, $instance) {
@@ -115,7 +109,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
             $this->shelves = $shelves;
         }
     }
-    
+
     private function sufficientTimeSinceLastretrievalError() {
         return time() - get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0) > $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH;
     }
@@ -173,7 +167,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
             $this->printAdditionalShelf();
         }
     }
-    
+
     private function printGoodreadsAttribution() {
         echo "<p class='goodreads-attribution'>Data from Goodreads</p>";
     }
@@ -184,7 +178,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
             $secondsLeftUntilRetry = get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0) + $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH - time();
             $retryMessage = "";
             if ($secondsLeftUntilRetry > 0) {
-                $retryMessage = " Will retry in " . intval(ceil($secondsLeftUntilRetry/60)) . " min.";
+                $retryMessage = " Will retry in " . intval(ceil($secondsLeftUntilRetry / 60)) . " min.";
             }
             echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads.$retryMessage</p>";
         } elseif ($currentlyReadingShelf->isEmpty()) {
@@ -250,7 +244,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
             $secondsLeftUntilRetry = get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0) + $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH - time();
             $retryMessage = "";
             if ($secondsLeftUntilRetry > 0) {
-                $retryMessage = " Will retry in " . intval(ceil($secondsLeftUntilRetry/60)) . " min.";
+                $retryMessage = " Will retry in " . intval(ceil($secondsLeftUntilRetry / 60)) . " min.";
             }
             echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads.$retryMessage</p>";
         } elseif ($additionalShelf->isEmpty()) {
@@ -548,112 +542,113 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <input
                     id="<?php echo $this->get_field_id('deleteCoverURLCacheOnSave'); ?>"
                     name="<?php echo $this->get_field_name('deleteCoverURLCacheOnSave'); ?>"
-        <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save    ?>
+        <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save     ?>
                     type="checkbox">
                 Delete the cover URL cache the next time you save these settings.
             </label>
         </p>
 
-        <?php
-    }
+                    <?php
+                }
 
-    private function makeHTMLSelectOptions($options, $selectedOption) {
-        foreach ($options as $value => $description) {
-            $selected = $selectedOption == $value ? 'selected="selected"' : '';
-            echo "<option value='$value' $selected>";
-            echo $description;
-            echo "</option>";
-        }
-    }
+                private function makeHTMLSelectOptions($options, $selectedOption) {
+                    foreach ($options as $value => $description) {
+                        $selected = $selectedOption == $value ? 'selected="selected"' : '';
+                        echo "<option value='$value' $selected>";
+                        echo $description;
+                        echo "</option>";
+                    }
+                }
 
-    public function update($new_instance, $old_instance) {
-        $instance = $old_instance;
-        $instance['title'] = strip_tags($new_instance['title']);
+                public function update($new_instance, $old_instance) {
+                    $instance = $old_instance;
+                    $instance['title'] = strip_tags($new_instance['title']);
 
-        preg_match("/\d+/", $new_instance['userid'], $matches_userid);
-        $instance['userid'] = count($matches_userid) > 0 ? $matches_userid[0] : "";
-        $instance['apiKey'] = strip_tags($new_instance['apiKey']);
-        $instance['currentlyReadingShelfName'] = strip_tags($new_instance['currentlyReadingShelfName']);
-        $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
-        $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
-        $instance['useProgressBar'] = $new_instance['useProgressBar'] == 'useProgressBar' ? true : false;
-        $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->sortByOptions) ? $new_instance['currentlyReadingShelfSortBy'] : $this->defaults['currentlyReadingShelfSortBy'];
-        $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->sortOrderOptions) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->defaults['currentlyReadingShelfSortOrder'];
-        $instance['maxBooksCurrentlyReadingShelf'] = preg_match("/\d+/", $new_instance['maxBooksCurrentlyReadingShelf']) ? intval($new_instance['maxBooksCurrentlyReadingShelf']) : 10;
-        $instance['additionalShelfName'] = strip_tags($new_instance['additionalShelfName']);
-        $instance['additionalShelfHeading'] = strip_tags($new_instance['additionalShelfHeading']);
-        $instance['emptyMessageAdditional'] = strip_tags($new_instance['emptyMessageAdditional']);
-        $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->sortByOptions) ? $new_instance['additionalShelfSortBy'] : $this->defaults['additionalShelfSortBy'];
-        $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->sortOrderOptions) ? $new_instance['additionalShelfSortOrder'] : $this->defaults['additionalShelfSortOrder'];
-        $instance['maxBooksAdditionalShelf'] = preg_match("/\d+/", $new_instance['maxBooksAdditionalShelf']) ? intval($new_instance['maxBooksAdditionalShelf']) : 10;
-        $instance['progressCacheHours'] = preg_match("/\d+/", $new_instance['progressCacheHours']) ? intval($new_instance['progressCacheHours']) : 24;
-        $instance['bookCacheHours'] = preg_match("/\d+/", $new_instance['bookCacheHours']) ? intval($new_instance['bookCacheHours']) : 24;
-        $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
+                    preg_match("/\d+/", $new_instance['userid'], $matches_userid);
+                    $instance['userid'] = count($matches_userid) > 0 ? $matches_userid[0] : "";
+                    $instance['apiKey'] = strip_tags($new_instance['apiKey']);
+                    $instance['currentlyReadingShelfName'] = strip_tags($new_instance['currentlyReadingShelfName']);
+                    $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
+                    $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
+                    $instance['useProgressBar'] = $new_instance['useProgressBar'] == 'useProgressBar' ? true : false;
+                    $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->sortByOptions) ? $new_instance['currentlyReadingShelfSortBy'] : $this->defaults['currentlyReadingShelfSortBy'];
+                    $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->sortOrderOptions) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->defaults['currentlyReadingShelfSortOrder'];
+                    $instance['maxBooksCurrentlyReadingShelf'] = preg_match("/\d+/", $new_instance['maxBooksCurrentlyReadingShelf']) ? intval($new_instance['maxBooksCurrentlyReadingShelf']) : 10;
+                    $instance['additionalShelfName'] = strip_tags($new_instance['additionalShelfName']);
+                    $instance['additionalShelfHeading'] = strip_tags($new_instance['additionalShelfHeading']);
+                    $instance['emptyMessageAdditional'] = strip_tags($new_instance['emptyMessageAdditional']);
+                    $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->sortByOptions) ? $new_instance['additionalShelfSortBy'] : $this->defaults['additionalShelfSortBy'];
+                    $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->sortOrderOptions) ? $new_instance['additionalShelfSortOrder'] : $this->defaults['additionalShelfSortOrder'];
+                    $instance['maxBooksAdditionalShelf'] = preg_match("/\d+/", $new_instance['maxBooksAdditionalShelf']) ? intval($new_instance['maxBooksAdditionalShelf']) : 10;
+                    $instance['progressCacheHours'] = preg_match("/\d+/", $new_instance['progressCacheHours']) ? intval($new_instance['progressCacheHours']) : 24;
+                    $instance['bookCacheHours'] = preg_match("/\d+/", $new_instance['bookCacheHours']) ? intval($new_instance['bookCacheHours']) : 24;
+                    $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
 
-        $this->widgetData = $instance;
+                    $this->widgetData = $instance;
 
-        if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
-            delete_option("gr_progress_cvdm_coverURLs");
-        }
+                    if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
+                        delete_option("gr_progress_cvdm_coverURLs");
+                    }
 
-        if ($instance['regenerateCacheOnSave']) {
-            $this->regenerateCache($instance);
-        } else {
-            $this->deleteCache();
-        }
+                    if ($instance['regenerateCacheOnSave']) {
+                        $this->regenerateCache($instance);
+                    } else {
+                        $this->deleteCache();
+                    }
 
-        return $instance;
-    }
+                    return $instance;
+                }
 
-    private function regenerateCache() {
-        $this->fetchNewShelvesIfNeeded();
-        $this->updateProgressIfNeeded();
-        $this->saveCacheIfNeeded();
-    }
+                private function regenerateCache() {
+                    $this->fetchNewShelvesIfNeeded();
+                    $this->updateProgressIfNeeded();
+                    $this->saveCacheIfNeeded();
+                }
 
-    private function deleteCache() {
-        delete_option("gr_progress_cvdm_shelves");
-        delete_option("gr_progress_cvdm_lastRetrievalErrorTime");
-    }
+                private function deleteCache() {
+                    delete_option("gr_progress_cvdm_shelves");
+                    delete_option("gr_progress_cvdm_lastRetrievalErrorTime");
+                }
 
-}
+            }
 
 // Register and load the widget
-function gr_progress_cvdm_load_widget() {
-    register_widget('gr_progress_cvdm_widget');
-    wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'style.css');
-}
+            function gr_progress_cvdm_load_widget() {
+                register_widget('gr_progress_cvdm_widget');
+                wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'style.css');
+            }
 
-add_action('widgets_init', 'gr_progress_cvdm_load_widget');
+            add_action('widgets_init', 'gr_progress_cvdm_load_widget');
 
-function time_elapsed_string($datetime, $full = false) {
-    // from http://stackoverflow.com/a/18602474/2978652
-    $now = new DateTime;
-    $ago = new DateTime($datetime);
-    $diff = $now->diff($ago);
+            function time_elapsed_string($datetime, $full = false) {
+                // from http://stackoverflow.com/a/18602474/2978652
+                $now = new DateTime;
+                $ago = new DateTime($datetime);
+                $diff = $now->diff($ago);
 
-    $diff->w = floor($diff->d / 7);
-    $diff->d -= $diff->w * 7;
+                $diff->w = floor($diff->d / 7);
+                $diff->d -= $diff->w * 7;
 
-    $string = array(
-        'y' => 'year',
-        'm' => 'month',
-        'w' => 'week',
-        'd' => 'day',
-        'h' => 'hour',
-        'i' => 'minute',
-        's' => 'second',
-    );
-    foreach ($string as $k => &$v) {
-        if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-        } else {
-            unset($string[$k]);
-        }
-    }
+                $string = array(
+                    'y' => 'year',
+                    'm' => 'month',
+                    'w' => 'week',
+                    'd' => 'day',
+                    'h' => 'hour',
+                    'i' => 'minute',
+                    's' => 'second',
+                );
+                foreach ($string as $k => &$v) {
+                    if ($diff->$k) {
+                        $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                    } else {
+                        unset($string[$k]);
+                    }
+                }
 
-    if (!$full) {
-        $string = array_slice($string, 0, 1);
-    }
-    return $string ? implode(', ', $string) . ' ago' : 'just now';
-}
+                if (!$full) {
+                    $string = array_slice($string, 0, 1);
+                }
+                return $string ? implode(', ', $string) . ' ago' : 'just now';
+            }
+            
