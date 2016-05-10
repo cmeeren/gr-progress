@@ -20,7 +20,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private $ADDITIONAL_SHELF_KEY = 'additionalShelf';
     private $DEFAULT_TIMEOUT_IN_SECONDS = 5;
     private $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
-    private $defaults = [
+    private $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
         'userid' => '',
         'apiKey' => '',
@@ -42,7 +42,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         'regenerateCacheOnSave' => false,
         'deleteCoverURLCacheOnSave' => false,
     ];
-    private $sortByOptions = [
+    private $SORT_BY_OPTIONS = [
         'title' => 'Title',
         'author' => 'Author',
         'position' => 'Shelf position',
@@ -57,7 +57,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         'num_pages' => 'Number of pages',
         'random' => 'Random',
     ];
-    private $sortOrderOptions = [
+    private $SORT_ORDER_OPTIONS = [
         'a' => 'Ascending',
         'd' => 'Descending',
     ];
@@ -261,7 +261,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
 
     public function form($instance) {
 
-        foreach ($this->defaults as $setting => $defaultValue) {
+        foreach ($this->DEFAULT_SETTINGS as $setting => $defaultValue) {
             if (!isset($instance[$setting])) {
                 $instance[$setting] = $defaultValue;
             }
@@ -375,7 +375,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>"
                 name="<?php echo $this->get_field_name('currentlyReadingShelfSortBy'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->sortByOptions, $instance['currentlyReadingShelfSortBy']); ?>
+        <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['currentlyReadingShelfSortBy']); ?>
             </select>
         </p>
         <p>
@@ -387,7 +387,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('currentlyReadingShelfSortOrder'); ?>"
                 name="<?php echo $this->get_field_name('currentlyReadingShelfSortOrder'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->sortOrderOptions, $instance['currentlyReadingShelfSortOrder']); ?>
+        <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['currentlyReadingShelfSortOrder']); ?>
             </select>
         </p>
         <p>
@@ -453,7 +453,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('additionalShelfSortBy'); ?>"
                 name="<?php echo $this->get_field_name('additionalShelfSortBy'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->sortByOptions, $instance['additionalShelfSortBy']); ?>
+        <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['additionalShelfSortBy']); ?>
             </select>
         </p>
         <p>
@@ -465,7 +465,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 id="<?php echo $this->get_field_id('additionalShelfSortOrder'); ?>"
                 name="<?php echo $this->get_field_name('additionalShelfSortOrder'); ?>"
                 >
-        <?php $this->makeHTMLSelectOptions($this->sortOrderOptions, $instance['additionalShelfSortOrder']); ?>
+        <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['additionalShelfSortOrder']); ?>
             </select>
         </p>
         <p>
@@ -571,14 +571,14 @@ class gr_progress_cvdm_widget extends WP_Widget {
                     $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
                     $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
                     $instance['useProgressBar'] = $new_instance['useProgressBar'] == 'useProgressBar' ? true : false;
-                    $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->sortByOptions) ? $new_instance['currentlyReadingShelfSortBy'] : $this->defaults['currentlyReadingShelfSortBy'];
-                    $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->sortOrderOptions) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->defaults['currentlyReadingShelfSortOrder'];
+                    $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['currentlyReadingShelfSortBy'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortBy'];
+                    $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortOrder'];
                     $instance['maxBooksCurrentlyReadingShelf'] = preg_match("/\d+/", $new_instance['maxBooksCurrentlyReadingShelf']) ? intval($new_instance['maxBooksCurrentlyReadingShelf']) : 10;
                     $instance['additionalShelfName'] = strip_tags($new_instance['additionalShelfName']);
                     $instance['additionalShelfHeading'] = strip_tags($new_instance['additionalShelfHeading']);
                     $instance['emptyMessageAdditional'] = strip_tags($new_instance['emptyMessageAdditional']);
-                    $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->sortByOptions) ? $new_instance['additionalShelfSortBy'] : $this->defaults['additionalShelfSortBy'];
-                    $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->sortOrderOptions) ? $new_instance['additionalShelfSortOrder'] : $this->defaults['additionalShelfSortOrder'];
+                    $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['additionalShelfSortBy'] : $this->DEFAULT_SETTINGS['additionalShelfSortBy'];
+                    $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['additionalShelfSortOrder'] : $this->DEFAULT_SETTINGS['additionalShelfSortOrder'];
                     $instance['maxBooksAdditionalShelf'] = preg_match("/\d+/", $new_instance['maxBooksAdditionalShelf']) ? intval($new_instance['maxBooksAdditionalShelf']) : 10;
                     $instance['progressCacheHours'] = preg_match("/\d+/", $new_instance['progressCacheHours']) ? intval($new_instance['progressCacheHours']) : 24;
                     $instance['bookCacheHours'] = preg_match("/\d+/", $new_instance['bookCacheHours']) ? intval($new_instance['bookCacheHours']) : 24;
