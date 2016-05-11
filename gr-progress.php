@@ -92,7 +92,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         $this->printWidgetContents();
         $this->printWidgetBoilerplateEnd($args);
     }
-    
+
     private function printWidgetBoilerplateStart($args) {
         echo $args['before_widget'];  // defined by themes
 
@@ -101,7 +101,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
             echo $args['before_title'] . $title . $args['after_title'];
         }
     }
-    
+
     private function printWidgetBoilerplateEnd($args) {
         echo $args['after_widget'];  // defined by themes
     }
@@ -185,19 +185,32 @@ class gr_progress_cvdm_widget extends WP_Widget {
     }
 
     private function printCurrentlyReadingShelf() {
-        $currentlyReadingShelf = $this->shelves[$this->CURRENTLY_READING_SHELF_KEY];
-        if ($currentlyReadingShelf === null) {
+        $shelf = $this->shelves[$this->CURRENTLY_READING_SHELF_KEY];
+        $this->printShelf($shelf, true);
+    }
+
+    private function printAdditionalShelf() {
+        $shelf = $this->shelves[$this->ADDITIONAL_SHELF_KEY];
+        $this->printShelf($shelf, false);
+    }
+
+    private function printShelf($shelf, $isCurrentlyReadingShelf) {
+        if ($shelf === null) {
             $secondsLeftUntilRetry = get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0) + $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH - time();
             $retryMessage = "";
             if ($secondsLeftUntilRetry > 0) {
                 $retryMessage = " Will retry in " . intval(ceil($secondsLeftUntilRetry / 60)) . " min.";
             }
             echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads.$retryMessage</p>";
-        } elseif ($currentlyReadingShelf->isEmpty()) {
-            echo "<p class='emptyShelfMessage'>{$this->widgetData['emptyMessage']}</p>";
+        } elseif ($shelf->isEmpty()) {
+            $messageIfEmpty = $isCurrentlyReadingShelf ? $this->widgetData['emptyMessage'] : $this->widgetData['emptyMessageAdditional'];
+            if (!empty($messageIfEmpty)) {
+                echo "<p class='emptyShelfMessage'>$messageIfEmpty</p>";
+            }
         } else {
-            echo "<ul class='bookshelf currently-reading-shelf'>";
-            $this->printBooksOnShelf($this->shelves[$this->CURRENTLY_READING_SHELF_KEY]);
+            $class = $isCurrentlyReadingShelf ? 'currently-reading-shelf' : 'additional-shelf';
+            echo "<ul class='bookshelf $class'>";
+            $this->printBooksOnShelf($shelf);
             echo "</ul>";
         }
     }
@@ -274,27 +287,6 @@ class gr_progress_cvdm_widget extends WP_Widget {
         $heading = $this->widgetData['additionalShelfHeading'];
         if (!empty($heading)) {
             echo "<h3 class='additional-shelf-heading'>{$this->widgetData['additionalShelfHeading']}</h3>";
-        }
-    }
-
-    private function printAdditionalShelf() {
-        $additionalShelf = $this->shelves[$this->ADDITIONAL_SHELF_KEY];
-        if ($additionalShelf === null) {
-            $secondsLeftUntilRetry = get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0) + $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH - time();
-            $retryMessage = "";
-            if ($secondsLeftUntilRetry > 0) {
-                $retryMessage = " Will retry in " . intval(ceil($secondsLeftUntilRetry / 60)) . " min.";
-            }
-            echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads.$retryMessage</p>";
-        } elseif ($additionalShelf->isEmpty()) {
-            $messageIfEmpty = $this->widgetData['emptyMessageAdditional'];
-            if (!empty($messageIfEmpty)) {
-                echo "<p class='emptyShelfMessage'>$messageIfEmpty</p>";
-            }
-        } else {
-            echo "<ul class='bookshelf additional-shelf'>";
-            $this->printBooksOnShelf($this->shelves[$this->ADDITIONAL_SHELF_KEY]);
-            echo "</ul>";
         }
     }
 
@@ -678,7 +670,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <input
                     id="<?php echo $this->get_field_id('deleteCoverURLCacheOnSave'); ?>"
                     name="<?php echo $this->get_field_name('deleteCoverURLCacheOnSave'); ?>"
-                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save     ?>
+                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save      ?>
                     type="checkbox">
                 Delete the cover URL cache the next time you save these settings.
             </label>
