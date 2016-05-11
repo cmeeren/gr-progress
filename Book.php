@@ -1,5 +1,7 @@
 <?php
 
+require_once("GoodreadsFetcher.php");
+
 class Book {
 
     private $id;
@@ -63,12 +65,12 @@ class Book {
     public function fetchProgressUsingAPI() {
         $allStatusUpdates = [];
 
-        $ctx = stream_context_create(['http' => ['timeout' => GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS]]);
-        $xml = file_get_html(
+        $fetcher = new GoodreadsFetcher();
+        $xml = str_get_html($fetcher->fetch(
                 "http://www.goodreads.com/review/show_by_user_and_book.xml"
                 . "?key={$this->widgetData['apiKey']}"
                 . "&book_id={$this->id}"
-                . "&user_id={$this->widgetData['userid']}", false, $ctx);
+                . "&user_id={$this->widgetData['userid']}"));
 
         if ($xml === false) {
             $this->retrievalError = true;

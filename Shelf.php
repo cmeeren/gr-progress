@@ -1,6 +1,7 @@
 <?php
 
 require_once("Book.php");
+require_once("GoodreadsFetcher.php");
 
 class Shelf {
 
@@ -25,8 +26,8 @@ class Shelf {
     }
 
     private function fetchBooksFromGoodreadsUsingAPI() {
-        $ctx = stream_context_create(['http' => ['timeout' => GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS]]);
-        $xml = file_get_html(
+        $fetcher = new GoodreadsFetcher();
+        $xml = str_get_html($fetcher->fetch(
                 "http://www.goodreads.com/review/list/"
                 . "{$this->widgetData['userid']}.xml"
                 . "?v=2"
@@ -34,7 +35,7 @@ class Shelf {
                 . "&shelf={$this->shelfName}"
                 . "&per_page={$this->getMaxBooks()}"
                 . "&sort={$this->getSortBy()}"
-                . "&order={$this->getSortOrder()}", false, $ctx);
+                . "&order={$this->getSortOrder()}"));
 
         if ($xml === false) {
             $this->retrievalError = true;
@@ -118,15 +119,16 @@ class Shelf {
     }
 
     private function fetchAllCoverURLs() {
-        $ctx = stream_context_create(['http' => ['timeout' => GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS]]);
-        $html = file_get_html(
+        $fetcher = new GoodreadsFetcher();
+        $html = str_get_html($fetcher->fetch(
                 "http://www.goodreads.com/review/list/"
                 . "{$this->widgetData['userid']}"
                 . "?shelf={$this->shelfName}"
                 . "&per_page={$this->getMaxBooks()}"
                 . "&sort={$this->getSortBy()}"
-                . "&order={$this->getSortOrder()}", false, $ctx);
+                . "&order={$this->getSortOrder()}"));
 
+        // FIXME: will fetcher->fetch return false, or str_get_html (if fetcher->fetch returns false)?
         if ($html === false) {
             $this->retrievalError = true;
             return;
