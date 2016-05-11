@@ -1,13 +1,17 @@
 <?php
+
 require 'HTML5Validate.php';
+
+define("GR_PROGRESS_TESTING", true);
+
 class WidgetTest extends WP_UnitTestCase {
     private $widget;
     
     private $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
         'goodreadsAttribution' => 'Data from Goodreads',
-        'userid' => '19975155',
-        'apiKey' => 'EdrntanQLkNlry1sNUqQ',
+        'userid' => '55769144',
+        'apiKey' => 'HAZB53duIFj5Ur87DiOW7Q',
         'currentlyReadingShelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
         'displayReviewExcerptCurrentlyReadingShelf' => false,

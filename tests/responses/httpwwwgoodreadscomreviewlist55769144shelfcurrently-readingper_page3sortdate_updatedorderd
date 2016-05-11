@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html class="desktop">
+
+<head>
+  <title>
+
+Neil Mackenzie's bookshelf: currently-reading (showing
+1-4
+of
+4)
+
+(sorted by: date added)  
+</title>
+
+
+
+          <script type="text/javascript">
+        if (window.Mobvious === undefined) {
+          window.Mobvious = {};
+        }
+        window.Mobvious.device_type = 'desktop';
+        </script>
+
+
+  
+<script src="http://s.gr-assets.com/assets/webfontloader-730347934d349a1528d00ac36544df4b.js"></script>
+<script>
+//<![CDATA[
+
+  WebFont.load({
+    classes: false,
+    custom: {
+      families: ["Lato:n4,n7,i4", "Merriweather:n4,n7,i4"],
+      urls: ["http://s.gr-assets.com/assets/gr/fonts-e256f84093cc13b27f5b82343398031a.css"]
+    }
+  });
+
+//]]>
+</script>
+
+  <link rel="stylesheet" media="all" href="http://s.gr-assets.com/assets/goodreads-3b5c37c498968ce39cc009c98eb94ce7.css" />
+<!--[if lte IE 9]>
+<link rel="stylesheet" media="all" href="http://s.gr-assets.com/assets/goodreads_split2-8b3e559e19ec693377f3e817aa8f572c.css" />
+<![endif]-->
+    <link rel="stylesheet" media="screen,print" href="http://s.gr-assets.com/assets/review/list-c7caf51ad9683822a84ba51a62e86eaa.css" />
+  <link rel="stylesheet" media="print" href="http://s.gr-assets.com/assets/review/list_print-69cdc091138f212e543aacc82b58622a.css" />
+  <!--[if lte IE 8]>
+    <style type="text/css" media="screen">
+      #pagestuff .buttons { border-top: 1px solid #ccc; }
+      #pagestuff.anchored .buttons { padding: 10px 0 10px 10px; }
+        .controlGroup .open { padding: 5px 5px 11px; }
+    </style>
+  <![endif]-->
+
+
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" media="screen" href="http://s.gr-assets.com/assets/ie-243e73b5c2539766a7d02b37fdf277f8.css" />
+  <![endif]-->
+
+  <!--[if lt IE 8]>
+    <link rel="stylesheet" media="screen" href="http://s.gr-assets.com/assets/common_images_ie-7473c41f112e67c8b25fca50b8a0f140.css" />
+  <![endif]-->
+
+  <!--[if gte IE 8]><!-->
+  <link rel="stylesheet" media="screen" href="http://s.gr-assets.com/assets/common_images-f8b07b42f354547849242c1d85ac25dc.css" />
+  <!--<![endif]-->
+
+  <script src="http://s.gr-assets.com/assets/desktop/libraries-e2f9865539d7ce74ad0cb4c7eddc7f0a.js"></script>
+  <script src="http://s.gr-assets.com/assets/application-7712614ba8d9d958098ca9d0751dd82b.js"></script>
+
+  <script>
+  //<![CDATA[
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+      var gads = document.createElement("script");
+      gads.async = true;
+      gads.type = "text/javascript";
+      var useSSL = "https:" == document.location.protocol;
+      gads.src = (useSSL ? "https:" : "http:") +
+      "//www.googletagservices.com/tag/js/gpt.js";
+      var node = document.getElementsByTagName("script")[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+    // page settings
+    googletag.cmd.push(function() {
+      googletag.pubads().setTargeting("sid", "15e946f0edf437f5e6ae19c620c28a10");
+    googletag.pubads().setTargeting("grsession", "15e946f0edf437f5e6ae19c620c28a10");
+    googletag.pubads().setTargeting("shelf", ["read","currentlyreading","toread"]);
+    googletag.pubads().setTargeting("gtargeting", "1");
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+  //]]>
+</script>
+
+  
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="mqzIC5czmvExcTxHHnTktrLqrjzYvHK7r/2p5fQm805a8D++GkRpyeLojQ5mE0uNJGRSP8kJhR+r7orp1gwTGA==" />
+
+  <meta name="request-id" content="0GR8V46784MX5SHDCNQX" />
+
+      <link rel="canonical" href="http://www.goodreads.com/review/list/55769144" />
+
+  <script src="http://s.gr-assets.com/assets/react_client_side/external_dependencies-29602c84e2.js"></script>
+<script src="http://s.gr-assets.com/assets/react_client_side/site_header-5467b10083.js"></script>
+<script src="http://s.gr-assets.com/assets/react_ujs-f00feeb1a44854a745b8789cf56dc3d9.js"></script>
+
+
+    <script type="text/javascript" charset="utf-8">
+  //<![CDATA[
+    var VIEW = 'table';
+    var EDITABLE_USER_SHELF_NAME = '';
+    var DRAGGABLE_REORDER = false;
+    var VISIBLE_CONTROL = 'null';
+    var INFINITE_SCROLL = true;
+    var FB_NONCONNECTED_SHOW_ICON = false;
+    var FB_COG_READ = false;
+  //]]>
+  </script>
+  <script src="http://s.gr-assets.com/assets/review/list-6eb7ef3dab8e6f97add6394d0f7f2160.js"></script>
+<script>
+  //<![CDATA[
+    if (typeof isShowingBuyableFeatures === 'undefined' || isShowingBuyableFeatures()) {
+      googletag.cmd.push(function() {
+        googletag.defineSlot("/4215/goodr.review.bottom.728x90", [728, 90], "div-gpt-ad-3a063446fb")
+                 .addService(googletag.pubads()).setCollapseEmptyDiv(true);
+    
+        googletag.pubads().addEventListener('slotRenderEnded', function(event) {
+          if (event.slot.getSlotId().getDomId() == "div-gpt-ad-3a063446fb") {
+            var attrs = $gr.shared.dfpAd.imageAdAttrs();
+            attrs.dfpEvent = event;
+            attrs.adDeviceType = "desktop";
+            attrs.pmetImpressionTrackUrl = "http://www.goodreads.com/dfp/impression";
+            attrs.pmetClickTrackUrl = "http://www.goodreads.com/dfp/click";
+            $gr.shared.dfpAd.attachTo("#div-gpt-ad-3a063446fb", attrs);
+    
+            if (false && document.getElementById("div-gpt-ad-3a063446fb").style.display != "none") {
+              var css = document.createElement("link");
+              css.rel  = 'stylesheet';
+              css.type = 'text/css';
+              css.href = '/assets/ad_skins.css';
+              css.media = 'all';
+              document.getElementsByTagName('head')[0].appendChild(css);
+            }
+          }
+        });
+      });
+    }
+  //]]>
+</script>
+
+
+  <link rel="alternate" type="application/atom+xml" title="Bookshelves" href="http://www.goodreads.com/review/list_rss/55769144?shelf=currently-reading" />
+  
+  
+
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Goodreads">
+
+  <script>
+  //<![CDATA[
+    var GoodreadsAnalytics = GoodreadsAnalytics || {};
+    var _gaq = _gaq || [];
+    var isDebug = false;
+    
+    $j(function () {
+      if (isDebug) {
+        $j("#google-analytics-debug").show();
+      }
+    });
+    
+    GoodreadsAnalytics.push = function () {
+      _gaq.push.apply(_gaq, arguments);
+    
+      if (isDebug) {
+        var args = arguments[0];
+        $j(function () {
+          var li = $j("<li/>").text(JSON.stringify(args));
+          $j("#google-analytics-debug ol").append(li);
+        });
+      }
+    }
+    
+    GoodreadsAnalytics.push(['_setAccount', 'UA-968618-1']);
+    GoodreadsAnalytics.push(['_setCustomVar',
+      1,                        // Slot 1
+      'User Status',            // Custom variable name
+      'signed_out',  // Custom variable value: signed_out, signed_in,
+                                //   signed_in_facebook_connected, or
+                                //   goodreads_member_previously_signed_in
+      2                         // Visit-level scope, which means slot 1 will be
+                                //   free when the visit ends.
+    ]);
+    GoodreadsAnalytics.push(['_setCustomVar',
+      2,                        // Slot 2
+      'Device Type',            // Custom variable name
+      'desktop',         // Custom variable value: desktop, mobile, or
+                                //   tablet
+      2                         // Visit-level scope, which means slot 2 will be
+                                //   free when the visit ends.
+    ]);
+    GoodreadsAnalytics.push(['_trackPageview']);
+    
+    (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  //]]>
+</script>
+
+
+    <meta name="description" content="Neil Mackenzie has 4 books on their currently-reading shelf: The Chronicles of Narnia by C.S. Lewis, A Game of Thrones by George R.R. Martin, The Lord of...">
+
+  <meta name="verify-v1" content="cEf8XOH0pulh1aYQeZ1gkXHsQ3dMPSyIGGYqmF53690=">
+  <meta name="google-site-verification" content="PfFjeZ9OK1RrUrKlmAPn_iZJ_vgHaZO1YQ-QlG2VsJs" />
+  <meta name="apple-itunes-app" content="app-id=355833469">
+  
+</head>
+
+
+<body class="">
+<div class="content">
+  
+
+    <script>
+  //<![CDATA[
+    // Load Facebook JS SDK
+    $grfb.initialize({
+      appId: "2415071772",
+      grSession: "false",
+      serverFBUser: "null",
+      serverPublishEnabled: "null",
+      suppressAutoLogin: "false",
+      brokenFbConnectionTracked: "false",
+      publishPermissionVerified: "false"
+    });
+  //]]>
+</script>
+<div class='siteHeader gr-box gr-box--withShadow'>
+<script>
+//<![CDATA[
+  ReactStores.NotificationsStore.updateWith({});
+  ReactStores.CurrentUserStore.initializeWith({"currentUser":null});
+  ReactStores.FavoriteGenresStore.updateWith({"allGenres":[{"name":"Art","url":"/genres/art"},{"name":"Biography","url":"/genres/biography"},{"name":"Business","url":"/genres/business"},{"name":"Chick Lit","url":"/genres/chick-lit"},{"name":"Children's","url":"/genres/children-s"},{"name":"Christian","url":"/genres/christian"},{"name":"Classics","url":"/genres/classics"},{"name":"Comics","url":"/genres/comics"},{"name":"Contemporary","url":"/genres/contemporary"},{"name":"Cookbooks","url":"/genres/cookbooks"},{"name":"Crime","url":"/genres/crime"},{"name":"Ebooks","url":"/genres/ebooks"},{"name":"Fantasy","url":"/genres/fantasy"},{"name":"Fiction","url":"/genres/fiction"},{"name":"Gay and Lesbian","url":"/genres/gay-and-lesbian"},{"name":"Graphic Novels","url":"/genres/graphic-novels"},{"name":"Historical Fiction","url":"/genres/historical-fiction"},{"name":"History","url":"/genres/history"},{"name":"Horror","url":"/genres/horror"},{"name":"Humor and Comedy","url":"/genres/humor-and-comedy"},{"name":"Manga","url":"/genres/manga"},{"name":"Memoir","url":"/genres/memoir"},{"name":"Music","url":"/genres/music"},{"name":"Mystery","url":"/genres/mystery"},{"name":"Nonfiction","url":"/genres/non-fiction"},{"name":"Paranormal","url":"/genres/paranormal"},{"name":"Philosophy","url":"/genres/philosophy"},{"name":"Poetry","url":"/genres/poetry"},{"name":"Psychology","url":"/genres/psychology"},{"name":"Religion","url":"/genres/religion"},{"name":"Romance","url":"/genres/romance"},{"name":"Science","url":"/genres/science"},{"name":"Science Fiction","url":"/genres/science-fiction"},{"name":"Self Help","url":"/genres/self-help"},{"name":"Suspense","url":"/genres/suspense"},{"name":"Spirituality","url":"/genres/spirituality"},{"name":"Sports","url":"/genres/sports"},{"name":"Thriller","url":"/genres/thriller"},{"name":"Travel","url":"/genres/travel"},{"name":"Young Adult","url":"/genres/young-adult"}],"favoriteGenres":[]});
+  ReactStores.TabsStore.updateWith({"communitySpotlight":"groups"});
+
+//]]>
+</script><div data-react-class="ReactComponents.HeaderStoreConnector" data-react-props="{&quot;myBooksUrl&quot;:&quot;/review/list&quot;,&quot;browseUrl&quot;:&quot;/book&quot;,&quot;recommendationsUrl&quot;:&quot;/recommendations&quot;,&quot;choiceAwardsUrl&quot;:&quot;/choiceawards&quot;,&quot;giveawayUrl&quot;:&quot;/giveaway&quot;,&quot;homeUrl&quot;:&quot;/&quot;,&quot;listUrl&quot;:&quot;/list&quot;,&quot;editorsPicksUrl&quot;:&quot;/voice&quot;,&quot;communityUrl&quot;:&quot;/group&quot;,&quot;groupsUrl&quot;:&quot;/group&quot;,&quot;quotesUrl&quot;:&quot;/quotes&quot;,&quot;featuredAskAuthorUrl&quot;:&quot;/featured_lists/117-featured-authors-answering-questions&quot;,&quot;triviaUrl&quot;:&quot;/trivia&quot;,&quot;quizzesUrl&quot;:&quot;/quizzes&quot;,&quot;storiesUrl&quot;:&quot;/story&quot;,&quot;peopleUrl&quot;:&quot;/user/best_reviewers&quot;,&quot;eventUrl&quot;:&quot;/event&quot;,&quot;searchPath&quot;:&quot;/search&quot;,&quot;autocompleteUrl&quot;:&quot;/book/auto_complete&quot;,&quot;logoActionUrl&quot;:&quot;/&quot;,&quot;newReleasesUrl&quot;:&quot;/book/popular_by_date/2016/5&quot;,&quot;signInUrl&quot;:&quot;/user/sign_in&quot;,&quot;signUpUrl&quot;:&quot;/user/sign_up&quot;,&quot;signInWithReturnUrl&quot;:true,&quot;deployServices&quot;:[]}"><div data-reactid=".1jawvglewao" data-react-checksum="618432023"><header class="siteHeader__contents" data-reactid=".1jawvglewao.0"><a href="/" class="siteHeader__logo" title="Goodreads home" data-reactid=".1jawvglewao.0.0"></a><nav class="primaryNav" data-reactid=".1jawvglewao.0.1"><ul role="menu" data-reactid=".1jawvglewao.0.1.0"><li class="siteHeader__topLevelItem" data-reactid=".1jawvglewao.0.1.0.0"><a href="/" class="siteHeader__topLevelLink" data-reactid=".1jawvglewao.0.1.0.0.0">Home</a></li><li class="siteHeader__topLevelItem" data-reactid=".1jawvglewao.0.1.0.1"><a href="/review/list" class="siteHeader__topLevelLink" data-reactid=".1jawvglewao.0.1.0.1.0">My Books</a></li><li class="siteHeader__topLevelItem" data-reactid=".1jawvglewao.0.1.0.2"><div class="dropdown dropdown--siteHeader" data-reactid=".1jawvglewao.0.1.0.2.0"><a class="dropdown__trigger dropdown__trigger--siteHeader dropdown__trigger--triggerEventTypeHover" href="/book" role="button" aria-haspopup="true" aria-expanded="false" data-reactid=".1jawvglewao.0.1.0.2.0.0"><span data-reactid=".1jawvglewao.0.1.0.2.0.0.0">Browse ▾</span></a><div class="dropdown__menu dropdown__menu--siteHeader gr-box gr-box--withShadowLarge" role="menu" data-reactid=".1jawvglewao.0.1.0.2.0.1"><ul class="siteHeader__subNav" data-reactid=".1jawvglewao.0.1.0.2.0.1.0"><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.0"><a href="/recommendations" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.0.0">Recommendations</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.1"><a href="/choiceawards" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.1.0">Choice Awards</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.2"><a href="/giveaway" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.2.0">Giveaways</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.3"><a href="/book/popular_by_date/2016/5" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.3.0">New Releases</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.4"><a href="/list" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.4.0">Lists</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.5"><a href="/voice" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.5.0">News &amp; Interviews</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.6"><a href="/book" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.0.6.0">Explore</a></li></ul><div class="siteHeader__spotlight siteHeader__spotlight--withoutSubMenu" data-reactid=".1jawvglewao.0.1.0.2.0.1.1"><div class="genreListContainer" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0"><div class="siteHeader__title" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.0">Genres</div><ul class="genreList" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0"><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Art"><a href="/genres/art" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Art.0">Art</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Biography"><a href="/genres/biography" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Biography.0">Biography</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Business"><a href="/genres/business" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Business.0">Business</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Chick Lit"><a href="/genres/chick-lit" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Chick Lit.0">Chick Lit</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Children&#x27;s"><a href="/genres/children-s" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Children&#x27;s.0">Children&#x27;s</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Christian"><a href="/genres/christian" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Christian.0">Christian</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Classics"><a href="/genres/classics" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Classics.0">Classics</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Comics"><a href="/genres/comics" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Comics.0">Comics</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Contemporary"><a href="/genres/contemporary" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Contemporary.0">Contemporary</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Cookbooks"><a href="/genres/cookbooks" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList0.$Cookbooks.0">Cookbooks</a></li></ul><ul class="genreList" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1"><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Crime"><a href="/genres/crime" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Crime.0">Crime</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Ebooks"><a href="/genres/ebooks" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Ebooks.0">Ebooks</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Fantasy"><a href="/genres/fantasy" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Fantasy.0">Fantasy</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Fiction"><a href="/genres/fiction" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Fiction.0">Fiction</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Gay and Lesbian"><a href="/genres/gay-and-lesbian" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Gay and Lesbian.0">Gay and Lesbian</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Graphic Novels"><a href="/genres/graphic-novels" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Graphic Novels.0">Graphic Novels</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Historical Fiction"><a href="/genres/historical-fiction" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Historical Fiction.0">Historical Fiction</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$History"><a href="/genres/history" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$History.0">History</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Horror"><a href="/genres/horror" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Horror.0">Horror</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Humor and Comedy"><a href="/genres/humor-and-comedy" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList1.$Humor and Comedy.0">Humor and Comedy</a></li></ul><ul class="genreList" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2"><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Manga"><a href="/genres/manga" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Manga.0">Manga</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Memoir"><a href="/genres/memoir" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Memoir.0">Memoir</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Music"><a href="/genres/music" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Music.0">Music</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Mystery"><a href="/genres/mystery" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Mystery.0">Mystery</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Nonfiction"><a href="/genres/non-fiction" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Nonfiction.0">Nonfiction</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Paranormal"><a href="/genres/paranormal" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Paranormal.0">Paranormal</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Philosophy"><a href="/genres/philosophy" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Philosophy.0">Philosophy</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Poetry"><a href="/genres/poetry" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Poetry.0">Poetry</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Psychology"><a href="/genres/psychology" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Psychology.0">Psychology</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Religion"><a href="/genres/religion" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList2.$Religion.0">Religion</a></li></ul><ul class="genreList" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3"><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Romance"><a href="/genres/romance" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Romance.0">Romance</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Science"><a href="/genres/science" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Science.0">Science</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Science Fiction"><a href="/genres/science-fiction" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Science Fiction.0">Science Fiction</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Self Help"><a href="/genres/self-help" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Self Help.0">Self Help</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Suspense"><a href="/genres/suspense" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Suspense.0">Suspense</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Spirituality"><a href="/genres/spirituality" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Spirituality.0">Spirituality</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Sports"><a href="/genres/sports" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Sports.0">Sports</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Thriller"><a href="/genres/thriller" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Thriller.0">Thriller</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Travel"><a href="/genres/travel" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Travel.0">Travel</a></li><li role="menuitem" class="genreList__genre" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Young Adult"><a href="/genres/young-adult" class="genreList__genreLink" data-reactid=".1jawvglewao.0.1.0.2.0.1.1.0.1:$genreList3.$Young Adult.0">Young Adult</a></li></ul></div></div></div></div></li><li class="siteHeader__topLevelItem" data-reactid=".1jawvglewao.0.1.0.3"><div class="dropdown dropdown--siteHeader" data-reactid=".1jawvglewao.0.1.0.3.0"><a class="dropdown__trigger dropdown__trigger--siteHeader dropdown__trigger--triggerEventTypeHover" href="/group" role="button" aria-haspopup="true" aria-expanded="false" data-reactid=".1jawvglewao.0.1.0.3.0.0"><span data-reactid=".1jawvglewao.0.1.0.3.0.0.0">Community ▾</span></a><div class="dropdown__menu dropdown__menu--siteHeader gr-box gr-box--withShadowLarge" role="menu" data-reactid=".1jawvglewao.0.1.0.3.0.1"><ul class="siteHeader__subNav" data-reactid=".1jawvglewao.0.1.0.3.0.1.0"><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.0"><a href="/group" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.0.0">Groups</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.1"><a href="/quotes" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.1.0">Quotes</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.2"><a href="/featured_lists/117-featured-authors-answering-questions" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.2.0">Ask the Author</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.3"><a href="/trivia" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.3.0">Trivia</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.4"><a href="/quizzes" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.4.0">Quizzes</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.5"><a href="/story" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.5.0">Creative Writing</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.6"><a href="/user/best_reviewers" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.6.0">People</a></li><li role="menuitem" class="menuLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.7"><a href="/event" class="siteHeader__subNavLink" data-reactid=".1jawvglewao.0.1.0.3.0.1.0.7.0">Events</a></li></ul></div></div></li></ul></nav><div accept-charset="UTF-8" class="searchBox searchBox--navbar" data-reactid=".1jawvglewao.0.2"><form autocomplete="off" action="/search" role="search" data-reactid=".1jawvglewao.0.2.0"><input class="searchBox__input searchBox__input--navbar" autocomplete="off" name="q" type="text" placeholder="Search books" aria-label="Search books form" aria-controls="searchResults" data-reactid=".1jawvglewao.0.2.0.0"/><button type="submit" class="gr-button
+                                 gr-button--asLink
+                                 searchBox__icon searchBox__icon--magnifyingGlass" role="button" aria-label="Search" data-reactid=".1jawvglewao.0.2.0.1"></button></form></div><ul class="siteHeader__personal" data-reactid=".1jawvglewao.0.3"><li class="siteHeader__topLevelItem siteHeader__topLevelItem--signedOut" data-reactid=".1jawvglewao.0.3.0"><a href="/user/sign_in" rel="nofollow" class="siteHeader__topLevelLink" data-reactid=".1jawvglewao.0.3.0.0">Sign In</a></li><li class="siteHeader__topLevelItem siteHeader__topLevelItem--signedOut" data-reactid=".1jawvglewao.0.3.1"><a href="/user/sign_up" rel="nofollow" class="siteHeader__topLevelLink" data-reactid=".1jawvglewao.0.3.1.0">Join</a></li></ul></header></div></div>
+</div>
+<script>
+  //<![CDATA[
+    var csm_enabled = false;
+    var scope = "mountComponents";
+    if (typeof window.uet == "function") {
+      csm_enabled = true;
+    }
+    if (csm_enabled) {
+      window.uet("ne");
+      window.ues("ctb", scope, "1");
+      var rid = ue.identifier.newRID();
+      window.ues("id", scope, rid);
+      window.uet("tc", scope);
+      window.ues("t0", scope, new Date());
+      window.ue.tag("review:list:signed_out:mountComponents", scope);
+    }
+    ReactRailsUJS.mountComponents();
+    if (csm_enabled) {
+      window.uex("ld", scope);
+    }
+  //]]>
+</script>
+
+
+  
+
+  <div class="mainContentContainer ">
+    
+    <div class="mainContent">
+      
+      <div class="mainContentFloat">
+        <div id="flashContainer">
+
+
+
+</div>
+
+        
+
+
+
+
+<div id="leadercol">
+  <div id="header" style="float: left">
+    <h1>
+        <a href="/user/show/55769144-neil-mackenzie">Neil</a>
+        &gt;
+        <a href="/review/list/55769144-neil-mackenzie?page=1&amp;shelf=currently-reading">Books</a>: 
+          <span class="h1Shelf">
+            currently-reading&lrm;
+            <span class="greyText">(4)</span>
+            <a href="/review/list/55769144?shelf="><img src="http://s.gr-assets.com/assets/layout/delete-small-d4ae0181ae7f3438c6eb1f1c658e6002.png" alt="Delete small" /></a>
+          </span>
+    </h1>
+  </div>
+
+  <div id="controls" class="uitext right">
+    <span class="controlGroup uitext">
+        <span class="bookMeta">
+          <div class='myBooksSearch'>
+<form id="myBooksSearchForm" class="inlineblock" action="/review/list/55769144-neil-mackenzie" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" /><input id="sitesearch_field" size="22" class="smallText" placeholder="Search and add books" type="text" name="search[query]" />
+</form>
+<a class="myBooksSearchButton" href="#" onclick="$j(&#39;#myBooksSearchForm&#39;).submit(); return false;"><img title="my books search" alt="search" src="http://s.gr-assets.com/assets/layout/magnifying_glass-a2d7514d50bcee1a0061f1ece7821750.png" /></a>
+</div>
+
+          <div class='myBooksNav'>
+<ul>
+<li>
+<a class="actionLinkLite controlLink" href="/user/compare/55769144">Compare Books</a>
+</li>
+<li>
+<a id="shelfSettingsLink" class="actionLinkLite controlLink" href="#" onclick="toggleControl(this); return false;">Settings</a>
+</li>
+<li>
+<a class="actionLinkLite controlLink" href="/review/stats/55769144">Stats</a>
+</li>
+<li>
+<a class="actionLinkLite controlLink" target="_blank" href="/review/list/55769144-neil-mackenzie?print=true&amp;shelf=currently-reading">Print</a>
+</li>
+<li>
+<span class="greyText">&nbsp;|&nbsp;</span>
+</li>
+<li>
+<a class="listViewIcon selected" href="/review/list/55769144-neil-mackenzie?shelf=currently-reading&amp;view=table"><img title="table view" alt="table view" src="http://s.gr-assets.com/assets/layout/list-fe412c89a6a612c841b5b58681660b82.png" /></a>
+</li>
+<li>
+<a class="gridViewIcon " href="/review/list/55769144-neil-mackenzie?shelf=currently-reading&amp;view=covers"><img title="cover view" alt="cover view" src="http://s.gr-assets.com/assets/layout/grid-2c030bffe1065f73ddca41540e8a267d.png" /></a>
+</li>
+</ul>
+</div>
+
+        </span>
+    </span>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div id="columnContainer" class="myBooksPage">
+    <div id="leftCol" class="col reviewListLeft">
+      <div id="sidewrapper">
+        <div id="side">
+          <h3>bookshelves </h3>
+          <a class="actionLinkLite" href="/review/list/55769144?shelf=%23ALL%23">all (15)</a>
+          <br/>
+          <div id="paginatedShelfList" class="stacked">
+              <div class="userShelf">
+        <a class="greyText right multiLink" style="display: none" rel="nofollow" title="View books on your &quot;currently-reading&quot;, and &quot;read&quot; shelves" href="/review/list/55769144-neil-mackenzie?page=1&amp;shelf=currently-reading%2Cread">+</a>
+    <a title="Neil&#39;s read shelf" class="actionLinkLite" href="/review/list/55769144-neil-mackenzie?shelf=read">read  &lrm;(1)</a>
+  </div>
+  <div class="userShelf">
+        <a class="greyText right multiLink" rel="nofollow" style="display: none" href="/review/list/55769144-neil-mackenzie?shelf=">&minus;</a>
+    <a title="Neil&#39;s currently-reading shelf" class="selectedShelf" href="/review/list/55769144-neil-mackenzie?shelf=currently-reading">currently-reading  &lrm;(4)</a>
+  </div>
+  <div class="userShelf">
+        <a class="greyText right multiLink" style="display: none" rel="nofollow" title="View books on your &quot;currently-reading&quot;, and &quot;to-read&quot; shelves" href="/review/list/55769144-neil-mackenzie?page=1&amp;shelf=currently-reading%2Cto-read">+</a>
+    <a title="Neil&#39;s to-read shelf" class="actionLinkLite" href="/review/list/55769144-neil-mackenzie?shelf=to-read">to-read  &lrm;(10)</a>
+  </div>
+
+
+
+          </div>
+          <div class="stacked">
+          </div>
+            <div class="actionLinkLites">
+              <a rel="nofollow" href="/review/stats/55769144-neil-mackenzie">stats</a>
+              <br/>
+              <a rel="nofollow" href="/user/most_read_authors/55769144-neil-mackenzie">most read authors</a>
+            </div>
+            <br/>
+            <div id="self_serve_ads"></div>
+        </div>
+      </div>
+    </div>
+  <div id="rightCol" class="last col">
+    <div id="shelfSettings" class="controlBody" style="display: none">
+      <form id="fieldsForm" class="new_user_shelf" action="/shelf/update" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" />        <table>
+          <tr>
+            <td>
+              <label class="hlabel">
+                visible columns
+                <span class="greyText smallText">
+                  <a href="#" onclick="showColumns([&quot;checkbox&quot;,&quot;position&quot;,&quot;cover&quot;,&quot;title&quot;,&quot;author&quot;,&quot;isbn&quot;,&quot;avg_rating&quot;,&quot;num_ratings&quot;,&quot;date_pub&quot;,&quot;rating&quot;,&quot;shelves&quot;,&quot;review&quot;,&quot;notes&quot;,&quot;comments&quot;,&quot;votes&quot;,&quot;date_read&quot;,&quot;date_added&quot;,&quot;date_purchased&quot;,&quot;purchase_location&quot;,&quot;owned&quot;,&quot;condition&quot;,&quot;actions&quot;,&quot;recommender&quot;,&quot;date_started&quot;,&quot;read_count&quot;,&quot;isbn13&quot;,&quot;num_pages&quot;,&quot;date_pub_edition&quot;,&quot;asin&quot;,&quot;format&quot;]); return false;">select all</a>
+                </span>
+              </label>
+              <div class="greyText">
+                These settings only apply to table view.
+              </div>
+                <div class="left" style="margin-right: 10px">
+                    <input type="checkbox" name="shelf[display_fields][asin]" id="asin_field" value="1" alt="asin" />
+                    <label for="asin_field">asin</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][author]" id="author_field" value="1" alt="author" checked="checked" />
+                    <label for="author_field">author</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][avg_rating]" id="avg_rating_field" value="1" alt="avg_rating" checked="checked" />
+                    <label for="avg_rating_field">avg rating</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][comments]" id="comments_field" value="1" alt="comments" />
+                    <label for="comments_field">comments</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][condition]" id="condition_field" value="1" alt="condition" />
+                    <label for="condition_field">condition</label><br/>
+                </div>
+                <div class="left" style="margin-right: 10px">
+                    <input type="checkbox" name="shelf[display_fields][cover]" id="cover_field" value="1" alt="cover" checked="checked" />
+                    <label for="cover_field">cover</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][date_added]" id="date_added_field" value="1" alt="date_added" checked="checked" />
+                    <label for="date_added_field">date added</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][date_pub]" id="date_pub_field" value="1" alt="date_pub" />
+                    <label for="date_pub_field">date pub</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][date_pub_edition]" id="date_pub_edition_field" value="1" alt="date_pub_edition" />
+                    <label for="date_pub_edition_field">date pub (ed.)</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][date_purchased]" id="date_purchased_field" value="1" alt="date_purchased" />
+                    <label for="date_purchased_field">date purchased</label><br/>
+                </div>
+                <div class="left" style="margin-right: 10px">
+                    <input type="checkbox" name="shelf[display_fields][date_read]" id="date_read_field" value="1" alt="date_read" checked="checked" />
+                    <label for="date_read_field">date read</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][date_started]" id="date_started_field" value="1" alt="date_started" />
+                    <label for="date_started_field">date started</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][format]" id="format_field" value="1" alt="format" />
+                    <label for="format_field">format</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][isbn]" id="isbn_field" value="1" alt="isbn" />
+                    <label for="isbn_field">isbn</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][isbn13]" id="isbn13_field" value="1" alt="isbn13" />
+                    <label for="isbn13_field">isbn13</label><br/>
+                </div>
+                <div class="left" style="margin-right: 10px">
+                    <input type="checkbox" name="shelf[display_fields][notes]" id="notes_field" value="1" alt="notes" />
+                    <label for="notes_field">notes</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][num_pages]" id="num_pages_field" value="1" alt="num_pages" />
+                    <label for="num_pages_field">num pages</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][num_ratings]" id="num_ratings_field" value="1" alt="num_ratings" />
+                    <label for="num_ratings_field">num ratings</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][owned]" id="owned_field" value="1" alt="owned" />
+                    <label for="owned_field">owned</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][position]" id="position_field" value="1" alt="position" />
+                    <label for="position_field">position</label><br/>
+                </div>
+                <div class="left" style="margin-right: 10px">
+                    <input type="checkbox" name="shelf[display_fields][purchase_location]" id="purchase_location_field" value="1" alt="purchase_location" />
+                    <label for="purchase_location_field">purchase location</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][rating]" id="rating_field" value="1" alt="rating" checked="checked" />
+                    <label for="rating_field">rating</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][read_count]" id="read_count_field" value="1" alt="read_count" />
+                    <label for="read_count_field">read count</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][recommender]" id="recommender_field" value="1" alt="recommender" />
+                    <label for="recommender_field">recommender</label><br/>
+                </div>
+                <div class="left" style="margin-right: 10px">
+                    <input type="checkbox" name="shelf[display_fields][review]" id="review_field" value="1" alt="review" />
+                    <label for="review_field">review</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][shelves]" id="shelves_field" value="1" alt="shelves" checked="checked" />
+                    <label for="shelves_field">shelves</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][title]" id="title_field" value="1" alt="title" checked="checked" />
+                    <label for="title_field">title</label><br/>
+                    <input type="checkbox" name="shelf[display_fields][votes]" id="votes_field" value="1" alt="votes" />
+                    <label for="votes_field">votes</label><br/>
+                </div>
+                <input type="checkbox" name="shelf[display_fields][actions]" id="actions_field" value="1" alt="actions" style="display: none" checked="checked" />
+            </td>
+            <td valign="top">
+              <div id="presetFields">
+                <label class="hlabel">column sets</label>
+                  <a id="mainFieldSetLink" class="actionLinkLite selected" href="#" onclick="showColumns([&quot;position&quot;,&quot;cover&quot;,&quot;title&quot;,&quot;author&quot;,&quot;avg_rating&quot;,&quot;rating&quot;,&quot;shelves&quot;,&quot;date_read&quot;,&quot;date_added&quot;,&quot;actions&quot;], {fieldSet: &#39;main&#39;}); return false;">main</a>
+                  <br/>
+                  <a id="readingFieldSetLink" class="actionLinkLite " href="#" onclick="showColumns([&quot;position&quot;,&quot;cover&quot;,&quot;title&quot;,&quot;author&quot;,&quot;avg_rating&quot;,&quot;date_added&quot;,&quot;actions&quot;], {fieldSet: &#39;reading&#39;}); return false;">reading</a>
+                  <br/>
+                  <a id="listFieldSetLink" class="actionLinkLite " href="#" onclick="showColumns([&quot;position&quot;,&quot;title&quot;,&quot;author&quot;,&quot;avg_rating&quot;,&quot;num_ratings&quot;,&quot;date_pub&quot;,&quot;rating&quot;,&quot;comments&quot;,&quot;votes&quot;,&quot;date_read&quot;,&quot;date_added&quot;,&quot;actions&quot;], {fieldSet: &#39;list&#39;}); return false;">list</a>
+                  <br/>
+                  <a id="reviewFieldSetLink" class="actionLinkLite " href="#" onclick="showColumns([&quot;cover&quot;,&quot;title&quot;,&quot;rating&quot;,&quot;shelves&quot;,&quot;review&quot;,&quot;notes&quot;,&quot;comments&quot;,&quot;votes&quot;,&quot;date_read&quot;,&quot;actions&quot;], {fieldSet: &#39;review&#39;}); return false;">review</a>
+                  <br/>
+                  <a id="ownedFieldSetLink" class="actionLinkLite " href="#" onclick="showColumns([&quot;cover&quot;,&quot;title&quot;,&quot;author&quot;,&quot;isbn&quot;,&quot;date_pub&quot;,&quot;shelves&quot;,&quot;date_read&quot;,&quot;date_added&quot;,&quot;date_purchased&quot;,&quot;purchase_location&quot;,&quot;condition&quot;,&quot;actions&quot;], {fieldSet: &#39;owned&#39;}); return false;">owned</a>
+                  <br/>
+              </div>
+            </td>
+          </tr>
+        </table>
+</form>      <a class="actionLinkLite greyText smallText right" href="#" onclick="hideControl($(&#39;shelfSettingsLink&#39;)); return false;">close</a>
+      <div class="clear"></div>
+    </div>
+    <table id="books" class="table stacked" border="0">
+      <thead>
+        <tr id="booksHeader" class="tableList">
+            <th alt="checkbox" class="header field checkbox" style="">
+            </th>
+            <th alt="position" class="header field position" style="display: none">
+                  #
+            </th>
+            <th alt="cover" class="header field cover" style="">
+                  cover
+            </th>
+            <th alt="title" class="header field title" style="">
+                  title
+            </th>
+            <th alt="author" class="header field author" style="">
+                  author
+            </th>
+            <th alt="isbn" class="header field isbn" style="display: none">
+                  isbn
+            </th>
+            <th alt="isbn13" class="header field isbn13" style="display: none">
+                  isbn13
+            </th>
+            <th alt="asin" class="header field asin" style="display: none">
+                  asin
+            </th>
+            <th alt="num_pages" class="header field num_pages" style="display: none">
+                  num pages
+            </th>
+            <th alt="avg_rating" class="header field avg_rating" style="">
+                  avg rating
+            </th>
+            <th alt="num_ratings" class="header field num_ratings" style="display: none">
+                  num ratings
+            </th>
+            <th alt="date_pub" class="header field date_pub" style="display: none">
+                  date pub
+            </th>
+            <th alt="date_pub_edition" class="header field date_pub_edition" style="display: none">
+                  date pub (ed.)
+            </th>
+            <th alt="rating" class="header field rating" style="">
+                  rating
+            </th>
+            <th alt="shelves" class="header field shelves" style="">
+                  my rating
+            </th>
+            <th alt="review" class="header field review" style="display: none">
+                  review
+            </th>
+            <th alt="notes" class="header field notes" style="display: none">
+                  notes
+            </th>
+            <th alt="recommender" class="header field recommender" style="display: none">
+                  recommender
+            </th>
+            <th alt="comments" class="header field comments" style="display: none">
+                  comments
+            </th>
+            <th alt="votes" class="header field votes" style="display: none">
+                  votes
+            </th>
+            <th alt="read_count" class="header field read_count" style="display: none">
+                  read count
+            </th>
+            <th alt="date_started" class="header field date_started" style="display: none">
+                  date started
+            </th>
+            <th alt="date_read" class="header field date_read" style="">
+                  date read
+            </th>
+            <th alt="date_added" class="header field date_added" style="">
+                  date added
+            </th>
+            <th alt="date_purchased" class="header field date_purchased" style="display: none">
+                  date purchased
+            </th>
+            <th alt="owned" class="header field owned" style="display: none">
+                  owned
+            </th>
+            <th alt="purchase_location" class="header field purchase_location" style="display: none">
+                  purchase location
+            </th>
+            <th alt="condition" class="header field condition" style="display: none">
+                  condition
+            </th>
+            <th alt="format" class="header field format" style="display: none">
+                  format
+            </th>
+            <th alt="actions" class="header field actions" style="">
+            </th>
+        </tr>
+      </thead>
+      <tbody id="booksBody">
+          
+<tr id="review_1635396168" class="bookalike review">
+  <td class="field checkbox"><label>checkbox</label><div class="value">      &nbsp;
+</div></td>  <td class="field position" style="display: none"><label>position</label><div class="value"></div></td>  <td class="field cover"><label>cover</label><div class="value">        <div class="js-dataTooltip" data-use-wtr-tooltip="true" data-current-user-id =false >
+          <div class="js-tooltipTrigger tooltipTrigger" data-resource-type="Book" data-resource-id="11127">
+            <a href="/book/show/11127.The_Chronicles_of_Narnia"><img alt="The Chronicles of Narnia (Chronicles of Narnia, #1-7)" id="cover_review_1635396168" src="http://d.gr-assets.com/books/1449868701s/11127.jpg" /></a>
+          </div>
+        </div>
+</div></td>  <td class="field title"><label>title</label><div class="value">    <a title="The Chronicles of Narnia (Chronicles of Narnia, #1-7)" href="/book/show/11127.The_Chronicles_of_Narnia">
+      The Chronicles of Narnia
+        <span class="darkGreyText">(Chronicles of Narnia, #1-7)</span>
+</a></div></td>  <td class="field author"><label>author</label><div class="value">      <a href="/author/show/1069006.C_S_Lewis">Lewis, C.S.</a>
+</div></td>  <td class="field isbn" style="display: none"><label>isbn</label><div class="value">    0066238501
+</div></td>  <td class="field isbn13" style="display: none"><label>isbn13</label><div class="value">    9780066238500
+</div></td>  <td class="field asin" style="display: none"><label>asin</label><div class="value">
+</div></td>  <td class="field num_pages" style="display: none"><label>num pages</label><div class="value">      <nobr>
+        767
+        <span class="greyText">pp</span>
+      </nobr>
+</div></td>  <td class="field avg_rating"><label>avg rating</label><div class="value">    4.23
+</div></td>  <td class="field num_ratings" style="display: none"><label>num ratings</label><div class="value">    363,153
+</div></td>  <td class="field date_pub" style="display: none"><label>date pub</label><div class="value">      Jan 01, 1949
+</div></td>  <td class="field date_pub_edition" style="display: none"><label>date pub edition</label><div class="value">      Sep 16, 2002
+</div></td>    
+<td class="field rating"><label>Neil&#39;s rating</label><div class="value">
+        <span class=" staticStars"><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span></span>
+</div></td><td class="field shelves"><label>my rating</label><div class="value">        <div class="stars" data-resource-id="11127" data-user-id="0" data-submit-url="/review/rate/11127?stars_click=false" data-rating="0"><a class="star off" title="did not like it" href="#" ref="">1 of 5 stars</a><a class="star off" title="it was ok" href="#" ref="">2 of 5 stars</a><a class="star off" title="liked it" href="#" ref="">3 of 5 stars</a><a class="star off" title="really liked it" href="#" ref="">4 of 5 stars</a><a class="star off" title="it was amazing" href="#" ref="">5 of 5 stars</a></div>
+        <span id="reviewMessage11127_false"></span>
+        <span id="successMessage11127_false"></span>
+        <div>
+              <a class="smallText actionLinkLite" rel="nofollow" href="/user/new">add to shelves</a>
+        </div>
+</div></td><td class="field review" style="display: none"><label>review</label><div class="value">        
+<span id="freeTextContainerreview1635396168">Only line, with <a target="_blank" href="http://google.com" rel="nofollow">link</a>.</span>
+
+    <div class="clear"></div>
+</div></td><td class="field notes" style="display: none"><label>notes</label><div class="value">        <span class="greyText">Notes are private!</span>
+</div></td><td class="field recommender" style="display: none"><label>recommender</label><div class="value">        <span class="greyText">none</span>
+</div></td>
+<td class="field comments" style="display: none"><label>comments</label><div class="value">    <a href="/review/show/1635396168">0</a>
+</div></td>
+<td class="field votes" style="display: none"><label>votes</label><div class="value">    <a href="/rating/voters/1635396168?resource_type=Review">0</a>
+</div></td>
+<td class="field read_count" style="display: none"><label># times read</label><div class="value">        0
+</div></td><td class="field date_started" style="display: none"><label>date started</label><div class="value">        May 11, 2016
+</div></td><td class="field date_read"><label>date read</label><div class="value">    
+    <span class="greyText">not set</span>
+
+</div></td><td class="field date_added"><label>date added</label><div class="value">    <span title="May 11, 2016">
+    May 11, 2016
+  </span>
+</div></td><td class="field date_purchased" style="display: none"><label>date purchased</label><div class="value"></div></td><td class="field owned" style="display: none"><label>owned</label><div class="value"></div></td><td class="field purchase_location" style="display: none"><label>purchase location</label><div class="value"></div></td><td class="field condition" style="display: none"><label>condition</label><div class="value"></div></td><td class="field format" style="display: none"><label>format</label><div class="value">        Paperback
+</div></td><td class="field actions"><label>actions</label><div class="value">        <div>
+          <a class="nobreak" href="/review/show/1635396168">view (with text)</a>
+        </div>
+</div></td>
+</tr>
+
+<tr id="review_1635396101" class="bookalike review">
+  <td class="field checkbox"><label>checkbox</label><div class="value">      &nbsp;
+</div></td>  <td class="field position" style="display: none"><label>position</label><div class="value"></div></td>  <td class="field cover"><label>cover</label><div class="value">        <div class="js-dataTooltip" data-use-wtr-tooltip="true" data-current-user-id =false >
+          <div class="js-tooltipTrigger tooltipTrigger" data-resource-type="Book" data-resource-id="6421982">
+            <a href="/book/show/6421982-a-game-of-thrones"><img alt="A Game of Thrones (A Song of Ice and Fire, #1)" id="cover_review_1635396101" src="http://d.gr-assets.com/books/1327957410s/6421982.jpg" /></a>
+          </div>
+        </div>
+</div></td>  <td class="field title"><label>title</label><div class="value">    <a title="A Game of Thrones (A Song of Ice and Fire, #1)" href="/book/show/6421982-a-game-of-thrones">
+      A Game of Thrones
+        <span class="darkGreyText">(A Song of Ice and Fire, #1)</span>
+</a></div></td>  <td class="field author"><label>author</label><div class="value">      <a href="/author/show/346732.George_R_R_Martin">Martin, George R.R.</a>
+</div></td>  <td class="field isbn" style="display: none"><label>isbn</label><div class="value">
+</div></td>  <td class="field isbn13" style="display: none"><label>isbn13</label><div class="value">
+</div></td>  <td class="field asin" style="display: none"><label>asin</label><div class="value">    B000QCS8TW
+</div></td>  <td class="field num_pages" style="display: none"><label>num pages</label><div class="value">      <nobr>
+        819
+        <span class="greyText">pp</span>
+      </nobr>
+</div></td>  <td class="field avg_rating"><label>avg rating</label><div class="value">    4.44
+</div></td>  <td class="field num_ratings" style="display: none"><label>num ratings</label><div class="value">    1,177,054
+</div></td>  <td class="field date_pub" style="display: none"><label>date pub</label><div class="value">      Aug 06, 1996
+</div></td>  <td class="field date_pub_edition" style="display: none"><label>date pub edition</label><div class="value">      Jan 01, 2003
+</div></td>    
+<td class="field rating"><label>Neil&#39;s rating</label><div class="value">
+        <span class=" staticStars"><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span></span>
+</div></td><td class="field shelves"><label>my rating</label><div class="value">        <div class="stars" data-resource-id="6421982" data-user-id="0" data-submit-url="/review/rate/6421982?stars_click=false" data-rating="0"><a class="star off" title="did not like it" href="#" ref="">1 of 5 stars</a><a class="star off" title="it was ok" href="#" ref="">2 of 5 stars</a><a class="star off" title="liked it" href="#" ref="">3 of 5 stars</a><a class="star off" title="really liked it" href="#" ref="">4 of 5 stars</a><a class="star off" title="it was amazing" href="#" ref="">5 of 5 stars</a></div>
+        <span id="reviewMessage6421982_false"></span>
+        <span id="successMessage6421982_false"></span>
+        <div>
+              <a class="smallText actionLinkLite" rel="nofollow" href="/user/new">add to shelves</a>
+        </div>
+</div></td><td class="field review" style="display: none"><label>review</label><div class="value">        
+<span id="freeTextContainerreview1635396101">First line.<br><br>Foobar<br><br>Foobar2</span>
+
+    <div class="clear"></div>
+</div></td><td class="field notes" style="display: none"><label>notes</label><div class="value">        <span class="greyText">Notes are private!</span>
+</div></td><td class="field recommender" style="display: none"><label>recommender</label><div class="value">        <span class="greyText">none</span>
+</div></td>
+<td class="field comments" style="display: none"><label>comments</label><div class="value">    <a href="/review/show/1635396101">0</a>
+</div></td>
+<td class="field votes" style="display: none"><label>votes</label><div class="value">    <a href="/rating/voters/1635396101?resource_type=Review">0</a>
+</div></td>
+<td class="field read_count" style="display: none"><label># times read</label><div class="value">        0
+</div></td><td class="field date_started" style="display: none"><label>date started</label><div class="value">        May 11, 2016
+</div></td><td class="field date_read"><label>date read</label><div class="value">    
+    <span class="greyText">not set</span>
+
+</div></td><td class="field date_added"><label>date added</label><div class="value">    <span title="May 11, 2016">
+    May 11, 2016
+  </span>
+</div></td><td class="field date_purchased" style="display: none"><label>date purchased</label><div class="value"></div></td><td class="field owned" style="display: none"><label>owned</label><div class="value"></div></td><td class="field purchase_location" style="display: none"><label>purchase location</label><div class="value"></div></td><td class="field condition" style="display: none"><label>condition</label><div class="value"></div></td><td class="field format" style="display: none"><label>format</label><div class="value">        Kindle Edition
+</div></td><td class="field actions"><label>actions</label><div class="value">        <div>
+          <a class="nobreak" href="/review/show/1635396101">view (with text)</a>
+        </div>
+</div></td>
+</tr>
+
+<tr id="review_1635396049" class="bookalike review">
+  <td class="field checkbox"><label>checkbox</label><div class="value">      &nbsp;
+</div></td>  <td class="field position" style="display: none"><label>position</label><div class="value"></div></td>  <td class="field cover"><label>cover</label><div class="value">        <div class="js-dataTooltip" data-use-wtr-tooltip="true" data-current-user-id =false >
+          <div class="js-tooltipTrigger tooltipTrigger" data-resource-type="Book" data-resource-id="33">
+            <a href="/book/show/33.The_Lord_of_the_Rings"><img alt="The Lord of the Rings (The Lord of the Rings, #1-3)" id="cover_review_1635396049" src="http://d.gr-assets.com/books/1411114164s/33.jpg" /></a>
+          </div>
+        </div>
+</div></td>  <td class="field title"><label>title</label><div class="value">    <a title="The Lord of the Rings (The Lord of the Rings, #1-3)" href="/book/show/33.The_Lord_of_the_Rings">
+      The Lord of the Rings
+        <span class="darkGreyText">(The Lord of the Rings, #1-3)</span>
+</a></div></td>  <td class="field author"><label>author</label><div class="value">      <a href="/author/show/656983.J_R_R_Tolkien">Tolkien, J.R.R.</a>
+</div></td>  <td class="field isbn" style="display: none"><label>isbn</label><div class="value">    0618640150
+</div></td>  <td class="field isbn13" style="display: none"><label>isbn13</label><div class="value">    9780618640157
+</div></td>  <td class="field asin" style="display: none"><label>asin</label><div class="value">
+</div></td>  <td class="field num_pages" style="display: none"><label>num pages</label><div class="value">      <nobr>
+        1,216
+        <span class="greyText">pp</span>
+      </nobr>
+</div></td>  <td class="field avg_rating"><label>avg rating</label><div class="value">    4.46
+</div></td>  <td class="field num_ratings" style="display: none"><label>num ratings</label><div class="value">    381,953
+</div></td>  <td class="field date_pub" style="display: none"><label>date pub</label><div class="value">      1955
+</div></td>  <td class="field date_pub_edition" style="display: none"><label>date pub edition</label><div class="value">      Oct 12, 2005
+</div></td>    
+<td class="field rating"><label>Neil&#39;s rating</label><div class="value">
+        <span class=" staticStars"><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span></span>
+</div></td><td class="field shelves"><label>my rating</label><div class="value">        <div class="stars" data-resource-id="33" data-user-id="0" data-submit-url="/review/rate/33?stars_click=false" data-rating="0"><a class="star off" title="did not like it" href="#" ref="">1 of 5 stars</a><a class="star off" title="it was ok" href="#" ref="">2 of 5 stars</a><a class="star off" title="liked it" href="#" ref="">3 of 5 stars</a><a class="star off" title="really liked it" href="#" ref="">4 of 5 stars</a><a class="star off" title="it was amazing" href="#" ref="">5 of 5 stars</a></div>
+        <span id="reviewMessage33_false"></span>
+        <span id="successMessage33_false"></span>
+        <div>
+              <a class="smallText actionLinkLite" rel="nofollow" href="/user/new">add to shelves</a>
+        </div>
+</div></td><td class="field review" style="display: none"><label>review</label><div class="value">        
+<span id="freeTextContainerreview1635396049"><br>Empty first line</span>
+
+    <div class="clear"></div>
+</div></td><td class="field notes" style="display: none"><label>notes</label><div class="value">        <span class="greyText">Notes are private!</span>
+</div></td><td class="field recommender" style="display: none"><label>recommender</label><div class="value">        <span class="greyText">none</span>
+</div></td>
+<td class="field comments" style="display: none"><label>comments</label><div class="value">    <a href="/review/show/1635396049">0</a>
+</div></td>
+<td class="field votes" style="display: none"><label>votes</label><div class="value">    <a href="/rating/voters/1635396049?resource_type=Review">0</a>
+</div></td>
+<td class="field read_count" style="display: none"><label># times read</label><div class="value">        0
+</div></td><td class="field date_started" style="display: none"><label>date started</label><div class="value">        May 11, 2016
+</div></td><td class="field date_read"><label>date read</label><div class="value">    
+    <span class="greyText">not set</span>
+
+</div></td><td class="field date_added"><label>date added</label><div class="value">    <span title="May 11, 2016">
+    May 11, 2016
+  </span>
+</div></td><td class="field date_purchased" style="display: none"><label>date purchased</label><div class="value"></div></td><td class="field owned" style="display: none"><label>owned</label><div class="value"></div></td><td class="field purchase_location" style="display: none"><label>purchase location</label><div class="value"></div></td><td class="field condition" style="display: none"><label>condition</label><div class="value"></div></td><td class="field format" style="display: none"><label>format</label><div class="value">        Paperback
+</div></td><td class="field actions"><label>actions</label><div class="value">        <div>
+          <a class="nobreak" href="/review/show/1635396049">view (with text)</a>
+        </div>
+</div></td>
+</tr>
+
+<tr id="review_1635395966" class="bookalike review">
+  <td class="field checkbox"><label>checkbox</label><div class="value">      &nbsp;
+</div></td>  <td class="field position" style="display: none"><label>position</label><div class="value"></div></td>  <td class="field cover"><label>cover</label><div class="value">        <div class="js-dataTooltip" data-use-wtr-tooltip="true" data-current-user-id =false >
+          <div class="js-tooltipTrigger tooltipTrigger" data-resource-type="Book" data-resource-id="3">
+            <a href="/book/show/3.Harry_Potter_and_the_Sorcerer_s_Stone"><img alt="Harry Potter and the Sorcerer's Stone (Harry Potter, #1)" id="cover_review_1635395966" src="http://d.gr-assets.com/books/1361572757s/3.jpg" /></a>
+          </div>
+        </div>
+</div></td>  <td class="field title"><label>title</label><div class="value">    <a title="Harry Potter and the Sorcerer's Stone (Harry Potter, #1)" href="/book/show/3.Harry_Potter_and_the_Sorcerer_s_Stone">
+      Harry Potter and the Sorcerer's Stone
+        <span class="darkGreyText">(Harry Potter, #1)</span>
+</a></div></td>  <td class="field author"><label>author</label><div class="value">      <a href="/author/show/1077326.J_K_Rowling">Rowling, J.K.</a>
+</div></td>  <td class="field isbn" style="display: none"><label>isbn</label><div class="value">    0439554934
+</div></td>  <td class="field isbn13" style="display: none"><label>isbn13</label><div class="value">    9780439554930
+</div></td>  <td class="field asin" style="display: none"><label>asin</label><div class="value">
+</div></td>  <td class="field num_pages" style="display: none"><label>num pages</label><div class="value">      <nobr>
+        310
+        <span class="greyText">pp</span>
+      </nobr>
+</div></td>  <td class="field avg_rating"><label>avg rating</label><div class="value">    4.42
+</div></td>  <td class="field num_ratings" style="display: none"><label>num ratings</label><div class="value">    3,875,177
+</div></td>  <td class="field date_pub" style="display: none"><label>date pub</label><div class="value">      Jun 26, 1997
+</div></td>  <td class="field date_pub_edition" style="display: none"><label>date pub edition</label><div class="value">      Nov 01, 2003
+</div></td>    
+<td class="field rating"><label>Neil&#39;s rating</label><div class="value">
+        <span class=" staticStars"><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span><span size="15x15" class="staticStar p0"></span></span>
+</div></td><td class="field shelves"><label>my rating</label><div class="value">        <div class="stars" data-resource-id="3" data-user-id="0" data-submit-url="/review/rate/3?stars_click=false" data-rating="0"><a class="star off" title="did not like it" href="#" ref="">1 of 5 stars</a><a class="star off" title="it was ok" href="#" ref="">2 of 5 stars</a><a class="star off" title="liked it" href="#" ref="">3 of 5 stars</a><a class="star off" title="really liked it" href="#" ref="">4 of 5 stars</a><a class="star off" title="it was amazing" href="#" ref="">5 of 5 stars</a></div>
+        <span id="reviewMessage3_false"></span>
+        <span id="successMessage3_false"></span>
+        <div>
+              <a class="smallText actionLinkLite" rel="nofollow" href="/user/new">add to shelves</a>
+        </div>
+</div></td><td class="field review" style="display: none"><label>review</label><div class="value">        <span class="greyText">None</span>
+    <div class="clear"></div>
+</div></td><td class="field notes" style="display: none"><label>notes</label><div class="value">        <span class="greyText">Notes are private!</span>
+</div></td><td class="field recommender" style="display: none"><label>recommender</label><div class="value">        <span class="greyText">none</span>
+</div></td>
+<td class="field comments" style="display: none"><label>comments</label><div class="value">    <a href="/review/show/1635395966">0</a>
+</div></td>
+<td class="field votes" style="display: none"><label>votes</label><div class="value">    <a href="/rating/voters/1635395966?resource_type=Review">0</a>
+</div></td>
+<td class="field read_count" style="display: none"><label># times read</label><div class="value">        0
+</div></td><td class="field date_started" style="display: none"><label>date started</label><div class="value">        May 11, 2016
+</div></td><td class="field date_read"><label>date read</label><div class="value">    
+    <span class="greyText">not set</span>
+
+</div></td><td class="field date_added"><label>date added</label><div class="value">    <span title="May 11, 2016">
+    May 11, 2016
+  </span>
+</div></td><td class="field date_purchased" style="display: none"><label>date purchased</label><div class="value"></div></td><td class="field owned" style="display: none"><label>owned</label><div class="value"></div></td><td class="field purchase_location" style="display: none"><label>purchase location</label><div class="value"></div></td><td class="field condition" style="display: none"><label>condition</label><div class="value"></div></td><td class="field format" style="display: none"><label>format</label><div class="value">        Hardcover
+</div></td><td class="field actions"><label>actions</label><div class="value">        <div>
+          <a class="nobreak" href="/review/show/1635395966">view</a>
+        </div>
+</div></td>
+</tr>
+
+</tbody></table>    <div class="clear"></div>
+      <div class="clear"></div>
+      <div id="pagestuff">
+        <div class="buttons clearFloats uitext">
+          <div id="infiniteLoading" class="inter loading uitext" style="display: none">
+            <img src="http://s.gr-assets.com/assets/loading-trans-ced157046184c3bc7c180ffbfc6825a4.gif" alt="Loading trans" /> Loading...
+          </div>
+          <div id="infiniteStatus" class="inter loading uitext" style="display: none">
+            4 of 4 loaded
+          </div>
+          <form id="sortForm" name="sortForm" class="inter" action="/review/list/55769144-neil-mackenzie" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />              <input type="hidden" name="shelf" id="shelf" value="currently-reading" />
+              <input type="hidden" name="title" id="title" value="neil-mackenzie" />
+            <a href="http://www.goodreads.com/review/list_rss/55769144?shelf=currently-reading"><img style="vertical-align: middle" class="inter" src="http://s.gr-assets.com/assets/links/rss_infinite.gif" alt="Rss infinite" /></a>
+              <a class="actionLink inter" href="/shelf/search?shelf=currently-reading">More books shelved as 'currently-reading' &raquo;</a>
+</form>          <div class="inter">
+            
+
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 20px">
+        <div id='div-gpt-ad-3a063446fb' style='width: 728px; height: 90px;'>
+<script>
+  //<![CDATA[
+    if (typeof isShowingBuyableFeatures === 'undefined' || isShowingBuyableFeatures()) {
+      googletag.cmd.push(function() {
+        googletag.display("div-gpt-ad-3a063446fb");
+      });
+    } else {
+      // remove the whitespace
+      document.getElementById("div-gpt-ad-3a063446fb").style.display = "none";
+    }
+  //]]>
+</script>
+</div>
+
+      </div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="clear"></div>
+  <div class='footerContainer'>
+<div class='footer'>
+<div class='copyright'>
+&copy;
+2016
+Goodreads Inc
+</div>
+<div class='adminLinksContainer'>
+<ul class='adminLinks'>
+<li>
+<a rel="nofollow" class="first" href="/about/us">about us</a>
+</li>
+<li>
+<a rel="nofollow" href="/advertisers">advertise</a>
+</li>
+<li>
+<a rel="nofollow" href="/author/program">author program</a>
+</li>
+<li>
+<a rel="nofollow" href="/jobs">jobs</a>
+</li>
+<li>
+<a rel="nofollow" href="/api">api</a>
+</li>
+<li>
+<a rel="nofollow" href="/blog/index">our blog</a>
+</li>
+<li>
+<a rel="nofollow" href="/authors-advertisers">authors &amp; advertisers blog</a>
+</li>
+<li>
+<a rel="nofollow" href="/about/terms">terms</a>
+</li>
+<li>
+<a rel="nofollow" href="/about/privacy">privacy</a>
+</li>
+<li>
+<a rel="nofollow" class="last" href="/help">help</a>
+</li>
+<li class='mobileToggleLink'>
+<span class='label'>switch to:</span>
+<a rel="nofollow" href="/toggle_mobile?switch_to=mobile">mobile version</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+</div>
+
+<div id="overlay" style="display:none" onclick="Lightbox.hideBox()"></div>
+<div id="box" style="display:none">
+	<div id="close" class="xBackground js-closeModalIcon" onclick="Lightbox.hideBox()" title="Close this window"></div>
+	<div id="boxContents"></div>
+	<div id="boxContentsLeftovers" style="display:none"></div>
+	<div class="clear"></div>
+</div>
+
+<div id="fbSigninNotification" style="display:none;">
+  <p>Welcome back. Just a moment while we sign you in to your Goodreads account.</p>
+  <img src="http://s.gr-assets.com/assets/facebook/login_animation-085464711e6c1ed5ba287a2f40ba3343.gif" alt="Login animation" />
+</div>
+
+  <script src="http://ads.goodreads.com/ad?p=review_list&amp;s=130x300&amp;uid=false&amp;sid=15e946f0edf437f5e6ae19c620c28a10&amp;gtargeting=1" async="async"></script>
+
+<div id="fb-root"></div>
+<script type="text/javascript">
+//<![CDATA[  
+  $grfb.initialize({
+    appId: "2415071772",
+    grSession: false,
+    serverFBUser: null,
+    serverPublishEnabled: null,
+    suppressAutoLogin: false,
+    brokenFbConnectionTracked: false,
+    publishPermissionVerified: false
+  });
+//]]>
+</script>
+
+
+<script>
+  //<![CDATA[
+    qcdata = {} || qcdata;
+      (function(){
+        var elem = document.createElement('script');
+        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://pixel") + ".quantserve.com/aquant.js?a=p-0dUe_kJAjvkoY";
+        elem.async = true;
+        elem.type = "text/javascript";
+        var scpt = document.getElementsByTagName('script')[0];
+        scpt.parentNode.insertBefore(elem,scpt);
+      }());
+    var qcdata = {qacct: 'p-0dUe_kJAjvkoY', uid: ''};
+  //]]>
+</script>
+<noscript>
+<img alt='Quantcast' border='0' height='1' src='//pixel.quantserve.com/pixel/p-0dUe_kJAjvkoY.gif' style='display: none;' width='1'>
+</noscript>
+
+<script>
+  //<![CDATA[
+    var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "6035830", c3: "", c4: "", c5: "", c6: "", c15: ""});
+    (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+    })();
+  //]]>
+</script>
+<noscript>
+<img style="display: none" width="0" height="0" alt="" src="http://b.scorecardresearch.com/p?c1=2&amp;amp;c2=6035830&amp;amp;c3=&amp;amp;c4=&amp;amp;c5=&amp;amp;c6=&amp;amp;c15=&amp;amp;cv=2.0&amp;amp;cj=1" />
+</noscript>
+
+
+</body>
+</html>
