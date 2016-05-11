@@ -56,7 +56,7 @@ class Shelf {
                 $reviewBody =  preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $reviewBody);
                 $reviewBodySplit = explode("<br", $reviewBody, 2);
                 if (!empty($reviewBodySplit)) {
-                    $reviewBodyFirstLine = $reviewBodySplit[0];
+                    $reviewBodyFirstLine = trim($reviewBodySplit[0]);
                 }
             }
 

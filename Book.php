@@ -53,7 +53,7 @@ class Book {
     }
     
     public function hasComment() {
-        return $this->comment !== null;
+        return !empty($this->comment);
     }
     
     public function getComment() {
