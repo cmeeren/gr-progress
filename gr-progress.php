@@ -328,13 +328,13 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 placeholder="<?php echo $this->DEFAULT_SETTINGS['goodreadsAttribution'] ?>"
                 />
             <br />
-            <small>Required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. Provided here in case you want to translate it. Displayed below the widget heading.</small>
+            <small>Goodreads attribution is required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. This field is intended to let you change/translate it, not remove it.</small>
         </p>
 
         <h3 style="margin-top: 2.5rem;">Goodreads configuration</h3>
         <p>
             <label for="<?php echo $this->get_field_id('userid'); ?>">
-                Goodreads user ID or profile URL:
+                Your Goodreads user ID or profile URL:
             </label>
             <input
                 class="widefat"
@@ -346,7 +346,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         </p>
         <p>
             <label for="<?php echo $this->get_field_id('apiKey'); ?>">
-                Goodreads API key (get one <a target="_blank" href="https://www.goodreads.com/api/keys">here</a> - doesn't matter what application/company name you write):
+                Your Goodreads API key (get one <a target="_blank" href="https://www.goodreads.com/api/keys">here</a> - doesn't matter what application/company name you write):
             </label>
             <input
                 class="widefat"
@@ -394,6 +394,66 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 Display the first line of your Goodreads review for each book<br/>
                 <small>Intended for quick notes such as "reading this together with Bob" or "recommended by Alice" or whatever else strikes you fancy.</small>
             </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>">
+                Sort by:
+            </label>
+            <select
+                class="widefat"
+                id="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>"
+                name="<?php echo $this->get_field_name('currentlyReadingShelfSortBy'); ?>"
+                >
+                    <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['currentlyReadingShelfSortBy']); ?>
+            </select>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('currentlyReadingShelfSortOrder'); ?>">
+                Sort order:
+            </label>
+            <select
+                class="widefat"
+                id="<?php echo $this->get_field_id('currentlyReadingShelfSortOrder'); ?>"
+                name="<?php echo $this->get_field_name('currentlyReadingShelfSortOrder'); ?>"
+                >
+                    <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['currentlyReadingShelfSortOrder']); ?>
+            </select>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('maxBooksCurrentlyReadingShelf'); ?>">
+                Display at most
+                <input
+                    id="<?php echo $this->get_field_id('maxBooksCurrentlyReadingShelf'); ?>"
+                    name="<?php echo $this->get_field_name('maxBooksCurrentlyReadingShelf'); ?>"
+                    step="1"
+                    min="1"
+                    value="<?php echo $instance['maxBooksCurrentlyReadingShelf']; ?>"
+                    style="width: 5em;"
+                    type="number">
+                books from this shelf
+            </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('useProgressBar'); ?>">
+                <input
+                    id="<?php echo $this->get_field_id('useProgressBar'); ?>"
+                    name="<?php echo $this->get_field_name('useProgressBar'); ?>"
+                    <?php echo $instance['useProgressBar'] ? "checked" : ""; ?>
+                    value="useProgressBar"
+                    type="radio">
+                Display progress bar
+            </label>
+            <br />
+            <label for="<?php echo $this->get_field_id('useProgressText'); ?>">
+                <input
+                    id="<?php echo $this->get_field_id('useProgressText'); ?>"
+                    name="<?php echo $this->get_field_name('useProgressBar'); ?>"
+                    <?php echo!$instance['useProgressBar'] ? "checked" : ""; ?>
+                    value="useProgressText"
+                    type="radio">
+                Display progress as text (no progress bar)
+            </label>
+            <br />
         </p>
         <p>
             <label for="<?php echo $this->get_field_id('displayProgressUpdateTime'); ?>">
@@ -453,66 +513,6 @@ class gr_progress_cvdm_widget extends WP_Widget {
                 <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][6] ?>" /></td>
             </tr>
         </table>
-        <p>
-            <label for="<?php echo $this->get_field_id('useProgressBar'); ?>">
-                <input
-                    id="<?php echo $this->get_field_id('useProgressBar'); ?>"
-                    name="<?php echo $this->get_field_name('useProgressBar'); ?>"
-                    <?php echo $instance['useProgressBar'] ? "checked" : ""; ?>
-                    value="useProgressBar"
-                    type="radio">
-                Display progress bar
-            </label>
-            <br />
-            <label for="<?php echo $this->get_field_id('useProgressText'); ?>">
-                <input
-                    id="<?php echo $this->get_field_id('useProgressText'); ?>"
-                    name="<?php echo $this->get_field_name('useProgressBar'); ?>"
-                    <?php echo!$instance['useProgressBar'] ? "checked" : ""; ?>
-                    value="useProgressText"
-                    type="radio">
-                Display progress as text (no progress bar)
-            </label>
-            <br />
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>">
-                Sort by:
-            </label>
-            <select
-                class="widefat"
-                id="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>"
-                name="<?php echo $this->get_field_name('currentlyReadingShelfSortBy'); ?>"
-                >
-                    <?php $this->makeHTMLSelectOptions($this->SORT_BY_OPTIONS, $instance['currentlyReadingShelfSortBy']); ?>
-            </select>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id('currentlyReadingShelfSortOrder'); ?>">
-                Sort order:
-            </label>
-            <select
-                class="widefat"
-                id="<?php echo $this->get_field_id('currentlyReadingShelfSortOrder'); ?>"
-                name="<?php echo $this->get_field_name('currentlyReadingShelfSortOrder'); ?>"
-                >
-                    <?php $this->makeHTMLSelectOptions($this->SORT_ORDER_OPTIONS, $instance['currentlyReadingShelfSortOrder']); ?>
-            </select>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id('maxBooksCurrentlyReadingShelf'); ?>">
-                Display at most
-                <input
-                    id="<?php echo $this->get_field_id('maxBooksCurrentlyReadingShelf'); ?>"
-                    name="<?php echo $this->get_field_name('maxBooksCurrentlyReadingShelf'); ?>"
-                    step="1"
-                    min="1"
-                    value="<?php echo $instance['maxBooksCurrentlyReadingShelf']; ?>"
-                    style="width: 5em;"
-                    type="number">
-                books from this shelf
-            </label>
-        </p>
 
         <h3 style="margin-top: 2.5rem;">Additional shelf</h3>
         <p>Here you can choose to display e.g. books you intend to read soon, or whatever you want. Feel free to create a new shelf for this on Goodreads if you want to control which books appear here.</p>
@@ -657,7 +657,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
             <small>Please be patient when cache is regenerating.</small>
         </p>
         <p>
-            Cover URLs take several seconds to fetch from Goodreads and are cached separately. If you experience trouble with cover images, you can delete the cache by ticking the box below.<br />
+            Cover URLs take several seconds to fetch from Goodreads and are cached separately. If you experience trouble with cover images, you can empty the cache by ticking the box below.<br />
             <label for="<?php echo $this->get_field_id('deleteCoverURLCacheOnSave'); ?>">
                 <input
                     id="<?php echo $this->get_field_id('deleteCoverURLCacheOnSave'); ?>"
@@ -666,6 +666,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
                     type="checkbox">
                 Delete the cover URL cache the next time you save these settings.
             </label>
+        <p style="text-align: center; color: #31708f; background-color: #d9edf7; border: 1px solid #bce8f1; border-radius: 4px; padding: 15px;">If you have selected "Regenerate cache when saving widget" above, please be patient while saving. If it takes more than 30 seconds, something probably went wrong.</p>
         </p>
 
         <?php
@@ -684,7 +685,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         $instance = $old_instance;
         $instance['title'] = strip_tags($new_instance['title']);
         $goodreadsAttribution = trim(strip_tags($new_instance['goodreadsAttribution']));
-        $instance['goodreadsAttribution'] = $goodreadsAttribution ? : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
+        $instance['goodreadsAttribution'] = !empty($goodreadsAttribution) ? $goodreadsAttribution : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
 
         preg_match("/\d+/", $new_instance['userid'], $matches_userid);
         $instance['userid'] = count($matches_userid) > 0 ? $matches_userid[0] : "";
