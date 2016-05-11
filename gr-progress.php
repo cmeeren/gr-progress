@@ -21,7 +21,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private $CURRENTLY_READING_SHELF_KEY = 'currentlyReadingShelf';
     private $ADDITIONAL_SHELF_KEY = 'additionalShelf';
     private $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
-    private $DEFAULT_SETTINGS = [
+    public $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
         'goodreadsAttribution' => 'Data from Goodreads',
         'userid' => '',
