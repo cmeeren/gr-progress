@@ -25,6 +25,7 @@ class Shelf {
     }
 
     private function fetchBooksFromGoodreadsUsingAPI() {
+        $ctx = stream_context_create(['http' => ['timeout' => GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS]]);
         $xml = file_get_html(
                 "http://www.goodreads.com/review/list/"
                 . "{$this->widgetData['userid']}.xml"
@@ -33,7 +34,7 @@ class Shelf {
                 . "&shelf={$this->shelfName}"
                 . "&per_page={$this->getMaxBooks()}"
                 . "&sort={$this->getSortBy()}"
-                . "&order={$this->getSortOrder()}");
+                . "&order={$this->getSortOrder()}", false, $ctx);
 
         if ($xml === false) {
             $this->retrievalError = true;
@@ -117,13 +118,14 @@ class Shelf {
     }
 
     private function fetchAllCoverURLs() {
+        $ctx = stream_context_create(['http' => ['timeout' => GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS]]);
         $html = file_get_html(
                 "http://www.goodreads.com/review/list/"
                 . "{$this->widgetData['userid']}"
                 . "?shelf={$this->shelfName}"
                 . "&per_page={$this->getMaxBooks()}"
                 . "&sort={$this->getSortBy()}"
-                . "&order={$this->getSortOrder()}");
+                . "&order={$this->getSortOrder()}", false, $ctx);
 
         if ($html === false) {
             $this->retrievalError = true;

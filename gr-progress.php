@@ -7,6 +7,8 @@
   License: MIT
  */
 
+define("GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS", 5);
+
 require_once("simple_html_dom.php");
 require_once("Shelf.php");
 
@@ -18,7 +20,6 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private $cacheNeedsUpdate = false;
     private $CURRENTLY_READING_SHELF_KEY = 'currentlyReadingShelf';
     private $ADDITIONAL_SHELF_KEY = 'additionalShelf';
-    private $DEFAULT_TIMEOUT_IN_SECONDS = 5;
     private $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
     private $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
@@ -108,7 +109,6 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private function loadWidgetData() {
         $this->loadCachedShelves();
         if ($this->sufficientTimeSinceLastRetrievalError()) {
-            ini_set('default_socket_timeout', $this->DEFAULT_TIMEOUT_IN_SECONDS);
             $this->fetchNewShelvesIfNeeded();
             $this->updateProgressIfNeeded();
             $this->saveCacheIfNeeded();
