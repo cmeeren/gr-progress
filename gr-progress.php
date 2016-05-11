@@ -28,6 +28,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         'currentlyReadingShelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
         'displayReviewExcerptCurrentlyReadingShelf' => false,
+        'sortByReadingProgress' => false,
         'displayProgressUpdateTime' => true,
         'intervalTemplate' => '{num} {period} ago',
         'intervalSingular' => ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
@@ -79,23 +80,28 @@ class gr_progress_cvdm_widget extends WP_Widget {
     function initializeEmptyShelves() {
         $this->shelves = [
             $this->CURRENTLY_READING_SHELF_KEY => null,
-            $this->ADDITIONAL_SHELF_KEY => null];
+            $this->ADDITIONAL_SHELF_KEY => null
+        ];
     }
 
     public function widget($args, $instance) {
-
         $this->widgetData = $instance;
-
+        $this->printWidgetBoilerplateStart($args);
+        $this->loadWidgetData();
+        $this->printWidgetContents();
+        $this->printWidgetBoilerplateEnd($args);
+    }
+    
+    private function printWidgetBoilerplateStart($args) {
         echo $args['before_widget'];  // defined by themes
 
         $title = apply_filters('widget_title', $this->widgetData['title']);
         if (!empty($title)) {
             echo $args['before_title'] . $title . $args['after_title'];
         }
-
-        $this->loadWidgetData();
-        $this->printWidgetContents();
-
+    }
+    
+    private function printWidgetBoilerplateEnd($args) {
         echo $args['after_widget'];  // defined by themes
     }
 
@@ -396,6 +402,16 @@ class gr_progress_cvdm_widget extends WP_Widget {
             </label>
         </p>
         <p>
+            <label for="<?php echo $this->get_field_id('sortByReadingProgress'); ?>">
+                <input
+                    id="<?php echo $this->get_field_id('sortByReadingProgress'); ?>"
+                    name="<?php echo $this->get_field_name('sortByReadingProgress'); ?>"
+                    <?php echo $instance['sortByReadingProgress'] ? "checked" : ""; ?>
+                    type="checkbox">
+                Sort books on this shelf by reading progress instead of the options below (which will be used if reading progress is identical or missing).
+            </label>
+        </p>
+        <p>
             <label for="<?php echo $this->get_field_id('currentlyReadingShelfSortBy'); ?>">
                 Sort by:
             </label>
@@ -693,6 +709,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         $instance['currentlyReadingShelfName'] = strip_tags($new_instance['currentlyReadingShelfName']);
         $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
         $instance['displayReviewExcerptCurrentlyReadingShelf'] = isset($new_instance['displayReviewExcerptCurrentlyReadingShelf']) ? true : false;
+        $instance['sortByReadingProgress'] = isset($new_instance['sortByReadingProgress']) ? true : false;
         $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
         $instance['intervalTemplate'] = strip_tags($new_instance['intervalTemplate']);
 
