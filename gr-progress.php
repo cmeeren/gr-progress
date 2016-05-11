@@ -29,7 +29,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
         'currentlyReadingShelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
         'displayReviewExcerptCurrentlyReadingShelf' => false,
-        'sortByReadingProgress' => false,
+        'sortByReadingProgress' => false,  // FIXME: this only sorts the <maxBooksCurrentlyReadingShelf> first books returned by the other ordering
         'displayProgressUpdateTime' => true,
         'intervalTemplate' => '{num} {period} ago',
         'intervalSingular' => ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
