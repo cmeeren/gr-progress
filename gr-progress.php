@@ -198,10 +198,10 @@ class gr_progress_cvdm_widget extends WP_Widget {
 
     private function printBooksOnShelf($shelf) {
         foreach ($shelf->getBooks() as $book) {
-            echo "<li>";
-            echo "<img src='{$book->getCoverURL()}' />";
+            echo "<li class='book'>";
+            echo "<div class='coverImage'><img src='{$book->getCoverURL()}' /></div>";
             echo "<div class='desc'>";
-            echo "<h3>{$book->getTitle()}</h3>";
+            echo "<p class='bookTitle'>{$book->getTitle()}</p>";
             echo "<p class='author'>{$book->getAuthor()}</p>";
 
             if ($book->hasProgress()) {
@@ -211,11 +211,11 @@ class gr_progress_cvdm_widget extends WP_Widget {
                     $this->printProgressString($book);
                 }
             }
-            
+
             if ($book->hasComment()) {
                 echo "<p class='bookComment'>{$book->getComment()}</p>";
             }
-            
+
             echo "</div>";
             echo "</li>";
         }
@@ -267,7 +267,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private function printAdditionalShelfHeading() {
         $heading = $this->widgetData['additionalShelfHeading'];
         if (!empty($heading)) {
-            echo "<h2>{$this->widgetData['additionalShelfHeading']}</h2>";
+            echo "<h3 class='additional-shelf-heading'>{$this->widgetData['additionalShelfHeading']}</h3>";
         }
     }
 

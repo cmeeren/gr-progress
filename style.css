@@ -2,50 +2,76 @@
     Don't change this file (your changes will be lost when upgrading the plugin).
     Add styles to your custom Wordpress stylesheet or something.
 */
-
-/* FIXME: make sure styles are only active within the widget */
-
-.widget_gr_progress_cvdm_widget .bookshelf {
-    list-style-type: none;
-    margin: 0;
-}
-.widget_gr_progress_cvdm_widget .bookshelf li {
-    margin-bottom: 2em;
-}
-.widget_gr_progress_cvdm_widget .bookshelf .desc {
-    width: 60%;
-}
-.widget_gr_progress_cvdm_widget .bookshelf img {
-    width: 40%;
-    float: left;
-    margin: 0 1em 0 0;
-    border: 1px #ccc solid;
-    box-shadow: 3px 3px 5px 1px #ccc;
-}
-.widget_gr_progress_cvdm_widget .bookshelf .featured .desc {
-    width: 50%;
-}
-.widget_gr_progress_cvdm_widget .bookshelf .featured img {
-    width: 50%;
-}
-.widget_gr_progress_cvdm_widget .additional-shelf img {
-    width: 20% !important;
-}
-.widget_gr_progress_cvdm_widget .bookshelf .desc {
-    display: table-cell;
-}
-.widget_gr_progress_cvdm_widget .bookshelf h3 {
-    font-size: inherit;
-    margin-bottom: 0;
-}
-.widget_gr_progress_cvdm_widget .bookshelf p.author {
-    margin-top: 0;
-}
 .widget_gr_progress_cvdm_widget .goodreads-attribution {
     font-style: italic;
 }
-.widget_gr_progress_cvdm_widget .bookshelf .progress {
-    margin-top: 1em;
+.widget_gr_progress_cvdm_widget .bookshelf {
+    list-style-type: none;
+    margin: 0;
+    display: table;
+    table-layout: fixed;
+    border-collapse: collapse;
+    max-width: 25rem;
+}
+.widget_gr_progress_cvdm_widget .book {
+    display: table-row;
+    border: none;
+}
+.widget_gr_progress_cvdm_widget .coverImage
+{
+    display: table-cell;
+    vertical-align: top;
+    width: 40%;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+}
+.widget_gr_progress_cvdm_widget .additional-shelf .coverImage {
+    width: 20%;
+    padding-bottom: 0.8rem;
+}
+.widget_gr_progress_cvdm_widget .coverImage img {
+    border: 1px #ccc solid;
+    box-shadow: 3px 3px 5px 1px #ccc;
+    margin-bottom: 3px;
+}
+.widget_gr_progress_cvdm_widget .desc {
+    display: table-cell;
+    vertical-align: top;
+    width: 60%;
+    padding-bottom: 1rem;
+}
+.widget_gr_progress_cvdm_widget .additional-shelf .coverImage
+{
+    padding-right: 0.8rem;
+}
+.widget_gr_progress_cvdm_widget .additional-shelf .desc {
+    width: 80% !important;
+    padding-bottom: 0.8rem;
+}
+.widget_gr_progress_cvdm_widget .desc p:last-child {
+    margin-bottom: 0 !important;
+}
+.widget_gr_progress_cvdm_widget .bookTitle {
+    font-size: inherit;
+    font-weight: bold;
+    margin: 0;
+}
+.widget_gr_progress_cvdm_widget h3.additional-shelf-heading {
+    margin: 1.5rem 0 1rem 0 !important;
+    font-size: 120%;
+}
+.widget_gr_progress_cvdm_widget .author {
+    margin: 0; /* no margin between book title and author */
+}
+.widget_gr_progress_cvdm_widget .progress,
+.widget_gr_progress_cvdm_widget .bookComment
+{
+    margin: 0;
+    margin-top: 1rem;
+}
+.widget_gr_progress_cvdm_widget .additional-shelf .bookComment
+{
+    margin-top: 0.5rem;
 }
 /* Progress bar */
 .widget_gr_progress_cvdm_widget .progress-bar-wrapper {
@@ -62,12 +88,13 @@
     position: absolute;
     z-index: 10;
     overflow: hidden;
-    white-space: nowrap;
     color: #fff;
     background-color: #337ab7;
 }
 .widget_gr_progress_cvdm_widget .progress-bar-wrapper span {
-    padding: 0.5em;
+    padding: 0.5rem;
+    white-space: nowrap;
+    text-overflow: clip;
 }
 /* clearfix */
 .widget_gr_progress_cvdm_widget .bookshelf li:before, .widget_gr_progress_cvdm_widget .bookshelf li:after {
