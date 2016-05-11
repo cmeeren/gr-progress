@@ -220,7 +220,7 @@ class gr_progress_cvdm_widget extends WP_Widget {
     private function printBooksOnShelf($shelf) {
         foreach ($shelf->getBooks() as $book) {
             echo "<li class='book'>";
-            echo "<div class='coverImage'><img src='{$book->getCoverURL()}' /></div>";
+            echo "<div class='coverImage'><img alt='Cover of {$book->getTitle()}' src='{$book->getCoverURL()}' /></div>";
             echo "<div class='desc'>";
             echo "<p class='bookTitle'>{$book->getTitle()}</p>";
             echo "<p class='author'>{$book->getAuthor()}</p>";
