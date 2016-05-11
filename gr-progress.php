@@ -123,7 +123,9 @@ class gr_progress_cvdm_widget extends WP_Widget {
     }
 
     private function sufficientTimeSinceLastretrievalError() {
-        return time() - get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0) > $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH;
+        $lastRetrievalErrorTime = get_option("gr_progress_cvdm_lastRetrievalErrorTime", 0);
+        $secondsSinceLastRetrievalError = time() - $lastRetrievalErrorTime;
+        return $secondsSinceLastRetrievalError > $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH;
     }
 
     private function fetchNewShelvesIfNeeded() {
