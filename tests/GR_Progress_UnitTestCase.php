@@ -120,7 +120,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
     
     public function assertNoSecondaryShelf($html) {
         $dom = str_get_html($html);
-        $this->assertCount(0, $dom->find('.additional-shelf', "Found secondary shelf but expected none"));
+        $this->assertCount(0, $dom->find('.additional-shelf'), "Found secondary shelf but expected none");
     }
     
     public function assertDefaultBooksOnPrimaryShelf($html) {
