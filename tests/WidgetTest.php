@@ -57,4 +57,18 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
+    public function testSetting_additionalShelfNameAndEmptyMessage() {
+        $html = $this->getWidgetHTML(['additionalShelfName' => 'empty-shelf', 'emptyMessageAdditional' => 'CUSTOM_EMPTY_MESSAGE_SECONDARY_SHELF']);
+        $this->assertContains("CUSTOM_EMPTY_MESSAGE_SECONDARY_SHELF", $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertNoSecondaryShelf($html);
+    }
+    
+    public function testSetting_displayReviewExcerptCurrentlyReadingShelf() {
+        $html = $this->getWidgetHTML(['displayReviewExcerptCurrentlyReadingShelf' => true]);
+        $this->assertBookHasNoComment("The Lord of the Rings", $html);
+        $this->assertBookHasComment("A Game of Thrones", "First line.", $html);
+        
+    }
+
 }
