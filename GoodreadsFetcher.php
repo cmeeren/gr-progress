@@ -5,9 +5,13 @@ require_once("simple_html_dom.php");  // FIXME: needed?
 class GoodreadsFetcher {
 
     private $DEFAULT_TIMEOUT_IN_SECONDS = 5;
+    public static $test_local = false;
+    public static $test_fail = false;
 
     public function fetch($url) {
-        if (defined("GR_PROGRESS_TESTING")) {
+        if (self::$test_fail) {
+            return false;
+        } elseif (self::$test_local) {
             return $this->fetchFromFile($url);
         } else {
             return $this->fetchFromGoodreads($url);
@@ -29,7 +33,7 @@ class GoodreadsFetcher {
             return $html;
         }
     }
-    
+
     private function getPath() {
         return dirname(__FILE__) . '/tests/responses/';
     }
