@@ -28,14 +28,14 @@ class Shelf {
     private function fetchBooksFromGoodreadsUsingAPI() {
         $fetcher = new GoodreadsFetcher();
         $xml = str_get_html($fetcher->fetch(
-                "http://www.goodreads.com/review/list/"
-                . "{$this->widgetData['userid']}.xml"
-                . "?v=2"
-                . "&key={$this->widgetData['apiKey']}"
-                . "&shelf={$this->shelfName}"
-                . "&per_page={$this->getMaxBooks()}"
-                . "&sort={$this->getSortBy()}"
-                . "&order={$this->getSortOrder()}"));
+                        "http://www.goodreads.com/review/list/"
+                        . "{$this->widgetData['userid']}.xml"
+                        . "?v=2"
+                        . "&key={$this->widgetData['apiKey']}"
+                        . "&shelf={$this->shelfName}"
+                        . "&per_page={$this->getMaxBooks()}"
+                        . "&sort={$this->getSortBy()}"
+                        . "&order={$this->getSortOrder()}"));
 
         if ($xml === false) {
             $this->retrievalError = true;
@@ -91,7 +91,9 @@ class Shelf {
         if ($showBookComment) {
             $reviewBodyWithCDATATag = $reviewElement->find("body", 0)->plaintext;
             $reviewBody = preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $reviewBodyWithCDATATag);
-            $reviewBodySplit = explode("<br", $reviewBody, 2);
+            // for some reason, if the first line is empty, Goodreads may
+            // return &lt;br /&gt; instead of <br />, so split by that too
+            $reviewBodySplit = preg_split("/(<|&lt;)br/", $reviewBody, 2);
             if (!empty($reviewBodySplit)) {
                 $reviewBodyFirstLine = trim($reviewBodySplit[0]);
             }
@@ -121,12 +123,12 @@ class Shelf {
     private function fetchAllCoverURLs() {
         $fetcher = new GoodreadsFetcher();
         $html = str_get_html($fetcher->fetch(
-                "http://www.goodreads.com/review/list/"
-                . "{$this->widgetData['userid']}"
-                . "?shelf={$this->shelfName}"
-                . "&per_page={$this->getMaxBooks()}"
-                . "&sort={$this->getSortBy()}"
-                . "&order={$this->getSortOrder()}"));
+                        "http://www.goodreads.com/review/list/"
+                        . "{$this->widgetData['userid']}"
+                        . "?shelf={$this->shelfName}"
+                        . "&per_page={$this->getMaxBooks()}"
+                        . "&sort={$this->getSortBy()}"
+                        . "&order={$this->getSortOrder()}"));
 
         // FIXME: will fetcher->fetch return false, or str_get_html (if fetcher->fetch returns false)?
         if ($html === false) {
