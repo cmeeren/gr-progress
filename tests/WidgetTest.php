@@ -14,30 +14,47 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         delete_option("gr_progress_cvdm_coverURLs");
     }
 
-    public function testValidHTML() {
+    public function testWidgetOutputIsValidHTML() {
         $html = $this->getWidgetHTML();
         $this->assertIsValidHTML($html);
     }
 
-    public function testTitle() {
+    public function testCorrectBooksUsingDefaultSettings() {
+        $html = $this->getWidgetHTML();
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSetting_title() {
         $html = $this->getWidgetHTML(['title' => 'CUSTOM_TITLE_FOOBAR']);
-        $this->assertRegExp("/CUSTOM_TITLE_FOOBAR/", $html);
+        $this->assertContains("CUSTOM_TITLE_FOOBAR", $html);
     }
 
-    public function testGoodreadsAttribution() {
+    public function testSetting_goodreadsAttribution() {
         $html = $this->getWidgetHTML(['goodreadsAttribution' => 'GOODREADS_ATTRIBUTION_FOOBAR']);
-        $this->assertRegExp("/GOODREADS_ATTRIBUTION_FOOBAR/", $html);
+        $this->assertContains("GOODREADS_ATTRIBUTION_FOOBAR", $html);
     }
 
-    public function testErrorMessage() {
+    public function testErrorMessageOnFailedFetch() {
         GoodreadsFetcher::$test_fail = true;
         $html = $this->getWidgetHTML();
-        $this->assertRegExp("/Error retrieving data from Goodreads\. Will retry in/", $html);
+        $this->assertContains("Error retrieving data from Goodreads. Will retry in", $html);
     }
 
-    public function testBooksDefault() {
-        $html = $this->getWidgetHTML();
-        $this->assertOrderedBookTitlesOnPrimaryShelfContains(["The Lord of the Rings", "A Game of Thrones", "The Chronicles of Narnia"], $html);
+    public function testUseCacheOnFailedFetch() {
+        $this->getWidgetHTML();  // saves books to cache
+        GoodreadsFetcher::$test_fail = true;
+        $html = $this->getWidgetHTML();  // fetch fails, should use cached data
+        $this->assertNotContains("Error retrieving data", $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSetting_currentlyReadingShelfNameAndEmptyMessage() {
+        $html = $this->getWidgetHTML(['currentlyReadingShelfName' => 'empty-shelf', 'emptyMessage' => 'CUSTOM_EMPTY_MESSAGE_PRIMARY_SHELF']);
+        $this->assertContains("CUSTOM_EMPTY_MESSAGE_PRIMARY_SHELF", $html);
+        $this->assertNoPrimaryShelf($html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
 }

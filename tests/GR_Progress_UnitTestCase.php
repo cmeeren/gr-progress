@@ -112,5 +112,23 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
             $this->assertContains($bookTitlesExpected[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
         }
     }
+    
+    public function assertNoPrimaryShelf($html) {
+        $dom = str_get_html($html);
+        $this->assertCount(0, $dom->find('.currently-reading-shelf'), "Found primary shelf but expected none");
+    }
+    
+    public function assertNoSecondaryShelf($html) {
+        $dom = str_get_html($html);
+        $this->assertCount(0, $dom->find('.additional-shelf', "Found secondary shelf but expected none"));
+    }
+    
+    public function assertDefaultBooksOnPrimaryShelf($html) {
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains(["The Lord of the Rings", "A Game of Thrones", "The Chronicles of Narnia"], $html);
+    }
+    
+    public function assertDefaultBooksOnSecondaryShelf($html) {
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains(["The Name of the Wind", "The Eye of the World", "His Dark Materials"], $html);
+    }
 
 }
