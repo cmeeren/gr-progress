@@ -63,12 +63,50 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertDefaultBooksOnPrimaryShelf($html);
         $this->assertNoSecondaryShelf($html);
     }
-    
+
+    public function testdisplayNoCommentsUsingDefaultSettings() {
+        $html = $this->getWidgetHTML();
+        $this->assertNoBooksHaveComment($html);
+    }
+
     public function testSetting_displayReviewExcerptCurrentlyReadingShelf() {
         $html = $this->getWidgetHTML(['displayReviewExcerptCurrentlyReadingShelf' => true]);
+        // primary shelf
         $this->assertBookHasNoComment("The Lord of the Rings", $html);
         $this->assertBookHasComment("A Game of Thrones", "First line.", $html);
-        
+        $this->assertBookHasComment("The Chronicles of Narnia", "Only line, with", $html);
+        $this->assertBookHasNoComment("Harry Potter and the Sorcerer", $html);
+        // secondary shelf
+        $this->assertBookHasNoComment("The Name of the Wind", $html);
+        $this->assertBookHasNoComment("The Eye of the World", $html);
+        $this->assertBookHasNoComment("His Dark Materials", $html);
+        $this->assertBookHasNoComment("The Lightning Thief", $html);
+        $this->assertBookHasNoComment("Mistborn", $html);
+        $this->assertBookHasNoComment("City of Bones", $html);
+        $this->assertBookHasNoComment("The Way of Kings", $html);
+        $this->assertBookHasNoComment("The Gunslinger", $html);
+        $this->assertBookHasNoComment("The Color of Magic", $html);
+        $this->assertBookHasNoComment("Artemis Fowl", $html);
+    }
+
+    public function testSetting_displayReviewExcerptAdditionalShelf() {
+        $html = $this->getWidgetHTML(['displayReviewExcerptAdditionalShelf' => true]);
+        // primary shelf
+        $this->assertBookHasNoComment("The Lord of the Rings", $html);
+        $this->assertBookHasNoComment("A Game of Thrones", $html);
+        $this->assertBookHasNoComment("The Chronicles of Narnia", $html);
+        $this->assertBookHasNoComment("Harry Potter and the Sorcerer", $html);
+        // secondary shelf
+        $this->assertBookHasComment("The Name of the Wind", "Sounds interesting!", $html);
+        $this->assertBookHasComment("The Eye of the World", "Recommended by John.", $html);
+        $this->assertBookHasNoComment("His Dark Materials", $html);
+        $this->assertBookHasNoComment("The Lightning Thief", $html);
+        $this->assertBookHasNoComment("Mistborn", $html);
+        $this->assertBookHasNoComment("City of Bones", $html);
+        $this->assertBookHasNoComment("The Way of Kings", $html);
+        $this->assertBookHasNoComment("The Gunslinger", $html);
+        $this->assertBookHasNoComment("The Color of Magic", $html);
+        $this->assertBookHasNoComment("Artemis Fowl", $html);
     }
 
 }
