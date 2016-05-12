@@ -21,14 +21,14 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         'useProgressBar' => true,
         'currentlyReadingShelfSortBy' => 'date_updated',
         'currentlyReadingShelfSortOrder' => 'd',
-        'maxBooksCurrentlyReadingShelf' => 3,
+        'maxBooksCurrentlyReadingShelf' => 15,
         'additionalShelfName' => 'to-read',
         'additionalShelfHeading' => 'Reading soon',
         'emptyMessageAdditional' => "Nothing planned at the moment.",
         'displayReviewExcerptAdditionalShelf' => false,
         'additionalShelfSortBy' => 'position',
         'additionalShelfSortOrder' => 'a',
-        'maxBooksAdditionalShelf' => 3,
+        'maxBooksAdditionalShelf' => 15,
         'progressCacheHours' => 24,
         'bookCacheHours' => 24,
         'regenerateCacheOnSave' => false,
@@ -136,7 +136,11 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      * @param string $html
      */
     public function assertDefaultBooksOnPrimaryShelf($html) {
-        $this->assertOrderedBookTitlesOnPrimaryShelfContains(["The Lord of the Rings", "A Game of Thrones", "The Chronicles of Narnia"], $html);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains([
+            "The Lord of the Rings",
+            "A Game of Thrones",
+            "The Chronicles of Narnia",
+            "Harry Potter and the Sorcerer"], $html);
     }
 
     /**
@@ -144,7 +148,17 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      * @param string $html
      */
     public function assertDefaultBooksOnSecondaryShelf($html) {
-        $this->assertOrderedBookTitlesOnSecondaryShelfContains(["The Name of the Wind", "The Eye of the World", "His Dark Materials"], $html);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains([
+            "The Name of the Wind",
+            "The Eye of the World",
+            "His Dark Materials",
+            "The Lightning Thief",
+            "Mistborn",
+            "City of Bones",
+            "The Way of Kings",
+            "The Gunslinger",
+            "The Color of Magic",
+            "Artemis Fowl"], $html);
     }
 
     /**
