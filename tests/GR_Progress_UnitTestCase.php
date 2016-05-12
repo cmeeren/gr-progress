@@ -112,7 +112,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
             $this->assertContains($bookTitlesExpected[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
         }
     }
-    
+
     /**
      * Asserts that there is no primary shelf in the input string.
      * @param string $html
@@ -121,7 +121,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         $dom = str_get_html($html);
         $this->assertCount(0, $dom->find('.currently-reading-shelf'), "Found primary shelf but expected none");
     }
-    
+
     /**
      * Asserts that there is no secondary shelf in the input string.
      * @param string $html
@@ -130,7 +130,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         $dom = str_get_html($html);
         $this->assertCount(0, $dom->find('.additional-shelf'), "Found secondary shelf but expected none");
     }
-    
+
     /**
      * Asserts that the primary shelf contains the books for the default settings.
      * @param string $html
@@ -138,13 +138,72 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
     public function assertDefaultBooksOnPrimaryShelf($html) {
         $this->assertOrderedBookTitlesOnPrimaryShelfContains(["The Lord of the Rings", "A Game of Thrones", "The Chronicles of Narnia"], $html);
     }
-    
+
     /**
      * Asserts that the secondary shelf contains the books for the default settings.
      * @param string $html
      */
     public function assertDefaultBooksOnSecondaryShelf($html) {
         $this->assertOrderedBookTitlesOnSecondaryShelfContains(["The Name of the Wind", "The Eye of the World", "His Dark Materials"], $html);
+    }
+
+    /**
+     * Asserts that the book with name mathing $bookName contains a comment
+     * matching $commentString.
+     * @param string $bookNameSubstring
+     * @param string $commentSubstring
+     * @param string $html
+     */
+    public function assertBookHasComment($bookNameSubstring, $commentSubstring, $html) {
+        $this->assertBookExists($bookNameSubstring, $html);
+        $dom = str_get_html($html);
+        foreach ($dom->find('.desc') as $descriptionElement) {
+            $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
+            $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
+            if ($titleMatches) {
+                $bookCommentElement = $descriptionElement->find(".bookComment", 0);
+                $this->assertNotNull($bookCommentElement, "No comment found for book " . $bookNameSubstring);
+                $this->assertContains($commentSubstring, $bookCommentElement->plaintext, "Review not matching expected substring for book " . $bookNameSubstring);  // FIXME: unsure if plaintext is correct (perhaps ->save()?)
+                break;
+            }
+        }
+    }
+
+    public function assertBookHasNoComment($bookNameSubstring, $html) {
+        $this->assertBookExists($bookNameSubstring, $html);
+        $dom = str_get_html($html);
+        foreach ($dom->find('.desc') as $descriptionElement) {
+            $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
+            $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
+            if ($titleMatches) {
+                $bookCommentElements = $descriptionElement->find(".bookComment");
+                $this->assertCount(0, $bookCommentElements, "Expected no comment but found comment for book " . $bookNameSubstring);
+                break;
+            }
+        }
+    }
+
+    public function assertNoBooksHaveComment($html) {
+        $dom = str_get_html($html);
+        foreach ($dom->find('.desc') as $descriptionElement) {
+            $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
+            $bookCommentElements = $descriptionElement->find(".bookComment");
+            $this->assertCount(0, $bookCommentElements, "Expected no comment but found comment for book " . $bookTitle);
+        }
+    }
+
+    public function assertBookExists($bookNameSubstring, $html) {
+        $ok = false;
+        $dom = str_get_html($html);
+        foreach ($dom->find('.bookTitle') as $bookTitleElement) {
+            $bookTitle = $bookTitleElement->plaintext;
+            $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
+            if ($titleMatches) {
+                $ok = true;
+                break;
+            }
+        }
+        $this->assertTrue($ok, "No books found with title mathing " . $bookNameSubstring);
     }
 
 }
