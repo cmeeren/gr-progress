@@ -41,6 +41,11 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         'after_title' => '</h2>',
     ];
 
+    /**
+     * Returns the HTML used for rendering the widget.
+     * @param array $overrideSettings Key-value pairs of settings to override
+     * @return string
+     */
     public function getWidgetHTML($overrideSettings = []) {
         $settings = $this->DEFAULT_SETTINGS;
         foreach ($overrideSettings as $k => $v) {
@@ -55,32 +60,54 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         return $html;
     }
 
+    /**
+     * Asserts that input string is valid HTML.
+     * @param string $html
+     */
     public function assertIsValidHTML($html) {
         $validator = new HTML5Validate();
         $result = $validator->Assert($html);
         $this->assertTrue($result, $validator->message);
     }
 
+    /**
+     * Asserts that the book titles on the primary shelf contains the substrings
+     * given in $bookTitles, in order.
+     * @param string[] $bookTitles
+     * @param string $html
+     */
     public function assertOrderedBookTitlesOnPrimaryShelfContains($bookTitles, $html) {
         $dom = str_get_html($html);
         $primaryShelf = $dom->find('.currently-reading-shelf', 0);
         $this->assertOrderedBookTitlesContains($bookTitles, $primaryShelf);
     }
 
+    /**
+     * Asserts that the book titles on the secondary shelf contains the
+     * substrings given in $bookTitles, in order.
+     * @param string[] $bookTitles
+     * @param string $html
+     */
     public function assertOrderedBookTitlesOnSecondaryShelfContains($bookTitles, $html) {
         $dom = str_get_html($html);
         $secondaryShelf = $dom->find('.additional-shelf', 0);
         $this->assertOrderedBookTitlesContains($bookTitles, $secondaryShelf);
     }
 
+    /**
+     * Asserts that the book titles in the given dom element contains the
+     * substrings given in $bookTitlesExpected, in order.
+     * @param string[] $bookTitlesExpected
+     * @param simple_html_dom_node $domElement
+     */
     private function assertOrderedBookTitlesContains($bookTitlesExpected, $domElement) {
         $bookTitlesActual = [];
         foreach ($domElement->find(".bookTitle") as $bookTitleElement) {
             $bookTitlesActual[] = $bookTitleElement->plaintext;
         }
-        
+
         $this->assertCount(count($bookTitlesExpected), $bookTitlesActual, "Shelf does not contain expected number of books");
-        
+
         for ($i = 0; $i < count($bookTitlesExpected); $i++) {
             $this->assertContains($bookTitlesExpected[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
         }
