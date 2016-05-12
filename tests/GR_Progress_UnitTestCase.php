@@ -119,7 +119,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      */
     public function assertNoPrimaryShelf($html) {
         $dom = str_get_html($html);
-        $this->assertCount(0, $dom->find('.currently-reading-shelf'), "Found primary shelf but expected none");
+        $this->assertEmpty($dom->find('.currently-reading-shelf'), "Found primary shelf but expected none");
     }
 
     /**
@@ -128,7 +128,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      */
     public function assertNoSecondaryShelf($html) {
         $dom = str_get_html($html);
-        $this->assertCount(0, $dom->find('.additional-shelf'), "Found secondary shelf but expected none");
+        $this->assertEmpty($dom->find('.additional-shelf'), "Found secondary shelf but expected none");
     }
 
     /**
@@ -175,9 +175,9 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
-                $bookCommentElement = $descriptionElement->find(".bookComment", 0);
-                $this->assertNotNull($bookCommentElement, "No comment found for book " . $bookNameSubstring);
-                $this->assertContains($commentSubstring, $bookCommentElement->plaintext, "Review not matching expected substring for book " . $bookNameSubstring);  // FIXME: unsure if plaintext is correct (perhaps ->save()?)
+                $bookCommentElements = $descriptionElement->find(".bookComment");
+                $this->assertNotEmpty($bookCommentElements, "Expected comment but found none for book " . $bookNameSubstring);
+                $this->assertContains($commentSubstring, $bookCommentElements[0]->plaintext, "Review not matching expected substring for book " . $bookNameSubstring);  // FIXME: unsure if plaintext is correct (perhaps ->save()?)
                 break;
             }
         }
@@ -191,18 +191,18 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
                 $bookCommentElements = $descriptionElement->find(".bookComment");
-                $this->assertCount(0, $bookCommentElements, "Expected no comment but found comment for book " . $bookNameSubstring);
+                $this->assertEmpty($bookCommentElements, "Expected no comment but found comment for book " . $bookNameSubstring);
                 break;
             }
         }
     }
-
+    
     public function assertNoBooksHaveComment($html) {
         $dom = str_get_html($html);
         foreach ($dom->find('.desc') as $descriptionElement) {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $bookCommentElements = $descriptionElement->find(".bookComment");
-            $this->assertCount(0, $bookCommentElements, "Expected no comment but found comment for book " . $bookTitle);
+            $this->assertEmpty( $bookCommentElements, "Expected no comment but found comment for book " . $bookTitle);
         }
     }
 
