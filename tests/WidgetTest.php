@@ -8,6 +8,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
     public function setUp() {
         GoodreadsFetcher::$test_local = true;
+        GoodreadsFetcher::$test_fail = false;
         delete_option("gr_progress_cvdm_shelves");
         delete_option("gr_progress_cvdm_lastRetrievalErrorTime");
         delete_option("gr_progress_cvdm_coverURLs");
@@ -31,7 +32,6 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function testErrorMessage() {
         GoodreadsFetcher::$test_fail = true;
         $html = $this->getWidgetHTML();
-        GoodreadsFetcher::$test_fail = false;
         $this->assertRegExp("/Error retrieving data from Goodreads\. Will retry in/", $html);
     }
 
