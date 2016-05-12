@@ -31,8 +31,8 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function testErrorMessage() {
         GoodreadsFetcher::$test_fail = true;
         $html = $this->getWidgetHTML();
-        $this->assertRegExp("/Error retrieving data from Goodreads\. Will retry in/", $html);
         GoodreadsFetcher::$test_fail = false;
+        $this->assertRegExp("/Error retrieving data from Goodreads\. Will retry in/", $html);
     }
 
     public function testBooksDefault() {
