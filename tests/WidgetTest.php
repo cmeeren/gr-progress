@@ -119,16 +119,6 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         }
     }
 
-    public function testAllBooksHaveCoverImage_bugBecauseBookOrderingIsIncorrectWhenGettingHTMLShelf() {
-        $html = $this->getWidgetHTML(['userid' => 17334072, 'additionalShelfSortBy' => 'position', 'additionalShelfSortOrder' => 'a',]);
-        $dom = str_get_html($html);
-        foreach ($dom->find(".book") as $book) {
-            $img = $book->find("img", 0);
-            $bookTitle = $book->find(".bookTitle", 0)->plaintext;
-            $this->assertNotEmpty($img->src, "Missing cover on book $bookTitle");
-        }
-    }
-
     public function testProgressDefaultSettings() {
         $html = $this->getWidgetHTML();
         // primary shelf
