@@ -114,13 +114,18 @@ class Shelf {
     private function fetchCoverURLsIfMissing() {
         foreach ($this->books as $book) {
             if (!$book->hasCover()) {
-                $this->fetchAllCoverURLs();
+                $this->fetchAllCoverURLsUsingRSS();
                 break;
             }
         }
     }
 
-    private function fetchAllCoverURLs() {
+    /**
+     * Don't use - suffers from a bug. It appears that only the 'shelf' parameter
+     * is taken into account, and if there are many books on the shelf, then not
+     * all books are returned and thus some books might not get a cover.
+     */
+    private function fetchAllCoverURLsUsingHTML() {
         $fetcher = new GoodreadsFetcher();
         $html = str_get_html($fetcher->fetch(
                         "http://www.goodreads.com/review/list/"
@@ -147,6 +152,31 @@ class Shelf {
                 if (array_key_exists($bookID, $this->books)) {
                     $this->books[$bookID]->setCoverURL($largeImageSrc);
                 }
+            }
+        }
+
+        $this->addCoverURLsToCache();
+    }
+
+    private function fetchAllCoverURLsUsingRSS() {
+        $fetcher = new GoodreadsFetcher();
+        $xml = str_get_html($fetcher->fetch(
+                        "http://www.goodreads.com/review/list_rss/"
+                        . "{$this->widgetData['userid']}"
+                        . "?shelf={$this->shelfName}"));
+
+        // FIXME: will fetcher->fetch return false, or str_get_html (if fetcher->fetch returns false)?
+        if ($xml === false) {
+            $this->retrievalError = true;
+            return;
+        }
+
+        foreach ($xml->find("item") as $item) {
+            $bookID = $item->find("book_id", 0)->plaintext;
+            $srcWithCDATA = $item->find("book_large_image_url", 0)->plaintext;
+            $src = preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $srcWithCDATA);
+            if (array_key_exists($bookID, $this->books)) {
+                $this->books[$bookID]->setCoverURL($src);
             }
         }
 
