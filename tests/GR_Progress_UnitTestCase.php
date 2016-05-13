@@ -169,40 +169,56 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      * @param string $html
      */
     public function assertBookHasComment($bookNameSubstring, $commentSubstring, $html) {
+        $this->assertBookDescriptionFieldMatches($bookNameSubstring, ".bookComment", $commentSubstring, $html);
+    }
+
+    public function assertBookHasNoComment($bookNameSubstring, $html) {
+        $this->assertBookDoesNotHaveDescriptionField($bookNameSubstring, ".bookComment", $html);
+    }
+
+    public function assertBookHasProgress($bookNameSubstring, $progressInPercent, $html) {
+        $this->assertBookDescriptionFieldMatches($bookNameSubstring, ".progress", $progressInPercent, $html);
+    }
+
+    public function assertBookHasNoProgress($bookNameSubstring, $html) {
+        $this->assertBookDoesNotHaveDescriptionField($bookNameSubstring, ".progress", $html);
+    }
+
+    private function assertBookDescriptionFieldMatches($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $html) {
         $this->assertBookExists($bookNameSubstring, $html);
         $dom = str_get_html($html);
         foreach ($dom->find('.desc') as $descriptionElement) {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
-                $bookCommentElements = $descriptionElement->find(".bookComment");
-                $this->assertNotEmpty($bookCommentElements, "Expected comment but found none for book " . $bookNameSubstring);
-                $this->assertContains($commentSubstring, $bookCommentElements[0]->plaintext, "Review not matching expected substring for book " . $bookNameSubstring);  // FIXME: unsure if plaintext is correct (perhaps ->save()?)
+                $bookCommentElements = $descriptionElement->find($descriptionFieldSelector);
+                $this->assertNotEmpty($bookCommentElements, "Expected element with selector '$descriptionFieldSelector' but found none for book $bookNameSubstring");
+                $this->assertContains($fieldContains, $bookCommentElements[0]->plaintext, "Actual progress not matching expected progress for book " . $bookNameSubstring);
                 break;
             }
         }
     }
 
-    public function assertBookHasNoComment($bookNameSubstring, $html) {
+    public function assertBookDoesNotHaveDescriptionField($bookNameSubstring, $descriptionFieldSelector, $html) {
         $this->assertBookExists($bookNameSubstring, $html);
         $dom = str_get_html($html);
         foreach ($dom->find('.desc') as $descriptionElement) {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
-                $bookCommentElements = $descriptionElement->find(".bookComment");
-                $this->assertEmpty($bookCommentElements, "Expected no comment but found comment for book " . $bookNameSubstring);
+                $bookCommentElements = $descriptionElement->find($descriptionFieldSelector);
+                $this->assertEmpty($bookCommentElements, "Found unexpected element with selector '$descriptionFieldSelector' for book $bookNameSubstring");
                 break;
             }
         }
     }
-    
+
     public function assertNoBooksHaveComment($html) {
         $dom = str_get_html($html);
         foreach ($dom->find('.desc') as $descriptionElement) {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $bookCommentElements = $descriptionElement->find(".bookComment");
-            $this->assertEmpty( $bookCommentElements, "Expected no comment but found comment for book " . $bookTitle);
+            $this->assertEmpty($bookCommentElements, "Expected no comment but found comment for book " . $bookTitle);
         }
     }
 
@@ -217,7 +233,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
                 break;
             }
         }
-        $this->assertTrue($ok, "No books found with title mathing " . $bookNameSubstring);
+        $this->assertTrue($ok, "No books found with title mathcing " . $bookNameSubstring);
     }
 
 }
