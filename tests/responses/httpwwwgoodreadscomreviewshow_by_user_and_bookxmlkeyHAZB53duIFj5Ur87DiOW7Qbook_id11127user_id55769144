@@ -39,7 +39,7 @@
   <publication_year>2002</publication_year>
   <publication_month>9</publication_month>
   <average_rating>4.23</average_rating>
-  <ratings_count>363689</ratings_count>
+  <ratings_count>363691</ratings_count>
   <description>Journeys to the end of the world, fantastic creatures, and epic battles between good and evil—what more could any reader ask for in one book? The book that has it all is &lt;em&gt;The Lion, the Witch and the Wardrobe&lt;/em&gt;, written in 1949 by Clive Stables Lewis. But Lewis did not stop there. Six more books followed, and together they became known as &lt;em&gt;The Chronicles of Narnia.&lt;/em&gt;&lt;br&gt;&lt;br&gt;For the past fifty years, &lt;em&gt;The Chronicles of Narnia&lt;/em&gt; have transcended the fantasy genre to become part of the canon of classic literature. Each of the seven books is a masterpiece, drawing the reader into a land where magic meets reality, and the result is a fictional world whose scope has fascinated generations.&lt;br&gt;&lt;br&gt;This edition presents all seven books—unabridged—in one impressive volume. The books are presented here in chronlogical order, each chapter graced with an illustration by the original artist, Pauline Baynes. Deceptively simple and direct, &lt;em&gt;The Chronicles of Narnia&lt;/em&gt; continue to captivate fans with adventures, characters, and truths that speak to readers of all ages, even fifty years after they were first published.</description>
 <authors>
 <author>
@@ -54,7 +54,7 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/1069006.C_S_Lewis]]></link>
 <average_rating>4.12</average_rating>
-<ratings_count>3800572</ratings_count>
+<ratings_count>3800603</ratings_count>
 <text_reviews_count>80490</text_reviews_count>
 </author>
 </authors>
@@ -104,10 +104,10 @@
   <started_at>Wed May 11 00:00:00 -0700 2016</started_at>
   <read_at></read_at>
   <date_added>Wed May 11 13:31:52 -0700 2016</date_added>
-  <date_updated>Wed May 11 13:38:55 -0700 2016</date_updated>
+  <date_updated>Fri May 13 11:04:48 -0700 2016</date_updated>
   <read_count></read_count>
   <body>
-      <![CDATA[Only line, with <a target="_blank" href="http://google.com" rel="nofollow">link</a>.]]>
+      <![CDATA[Only line, with &lt;3 and <a target="_blank" href="http://google.com" rel="nofollow">link</a>.]]>
   </body>
   <comments_count>0</comments_count>
     <url><![CDATA[http://www.goodreads.com/review/show/1635396168]]></url>

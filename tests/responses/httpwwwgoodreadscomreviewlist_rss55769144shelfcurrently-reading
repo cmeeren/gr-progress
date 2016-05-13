@@ -9,7 +9,7 @@
     <atom:link href="http://www.goodreads.com/review/list_rss/55769144?shelf=currently-reading" rel="self" type="application/rss+xml" />
     <description><![CDATA[Neil's bookshelf: currently-reading]]></description>
     <language>en-US</language>
-    <lastBuildDate>Wed, 11 May 2016 13:39:35 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 13 May 2016 11:04:53 -0700</lastBuildDate>
     <ttl>60</ttl>
     <image>
       <title>Neil's bookshelf: currently-reading</title>
@@ -19,6 +19,86 @@
       <url>http://www.goodreads.com/images/layout/goodreads_logo_144.jpg</url>
     </image>
     
+  <item>
+    <guid><![CDATA[http://www.goodreads.com/review/show/1635396101?utm_medium=api&utm_source=rss]]></guid>
+    <pubDate><![CDATA[Fri, 13 May 2016 11:04:53 -0700]]></pubDate>
+    <title><![CDATA[A Game of Thrones (A Song of Ice and Fire, #1)]]></title>
+    <link><![CDATA[http://www.goodreads.com/review/show/1635396101?utm_medium=api&utm_source=rss]]></link>
+    <book_id>6421982</book_id>
+    <book_image_url><![CDATA[http://d.gr-assets.com/books/1327957410s/6421982.jpg]]></book_image_url>
+    <book_small_image_url><![CDATA[http://d.gr-assets.com/books/1327957410s/6421982.jpg]]></book_small_image_url>
+    <book_medium_image_url><![CDATA[http://d.gr-assets.com/books/1327957410m/6421982.jpg]]></book_medium_image_url>
+    <book_large_image_url><![CDATA[http://d.gr-assets.com/books/1327957410l/6421982.jpg]]></book_large_image_url>
+    <book_description><![CDATA[<strong>A NEW ORIGINAL SERIES, NOW ON HBO.</strong><br><br>Here is the first volume in George R. R. Martin’s magnificent cycle of novels that includes <em>A Clash of Kings</em> and <em>A Storm of Swords</em>. As a whole, this series comprises a genuine masterpiece of modern fantasy, bringing together the best the genre has to offer. Magic, mystery, intrigue, romance, and adventure fill these pages and transport us to a world unlike any we have ever experienced. Already hailed as a classic, George R. R. Martin’s stunning series is destined to stand as one of the great achievements of imaginative fiction.<br><br><strong>A GAME OF THRONES<br><br></strong>Long ago, in a time forgotten, a preternatural event threw the seasons out of balance. In a land where summers can last decades and winters a lifetime, trouble is brewing. The cold is returning, and in the frozen wastes to the north of Winterfell, sinister and supernatural forces are massing beyond the kingdom’s protective Wall. At the center of the conflict lie the Starks of Winterfell, a family as harsh and unyielding as the land they were born to. Sweeping from a land of brutal cold to a distant summertime kingdom of epicurean plenty, here is a tale of lords and ladies, soldiers and sorcerers, assassins and bastards, who come together in a time of grim omens.<br><br>Here an enigmatic band of warriors bear swords of no human metal; a tribe of fierce wildlings carry men off into madness; a cruel young dragon prince barters his sister to win back his throne; and a determined woman undertakes the most treacherous of journeys. Amid plots and counterplots, tragedy and betrayal, victory and terror, the fate of the Starks, their allies, and their enemies hangs perilously in the balance, as each endeavors to win that deadliest of conflicts: the game of thrones.<br><br>BONUS: This edition contains an excerpt from George R.R. Martin's<em> A Clash of Kings</em> and a preview of <em>A Game of Thrones: The Graphic Novel.</em>]]></book_description>
+    <book id="6421982">
+      <num_pages>819</num_pages>
+    </book>
+    <author_name>George R.R. Martin</author_name>
+    <isbn></isbn>
+    <user_name>Neil</user_name>
+    <user_rating>0</user_rating>
+    <user_read_at></user_read_at>
+    <user_date_added><![CDATA[Fri, 13 May 2016 11:04:53 -0700]]></user_date_added>
+    <user_date_created><![CDATA[Wed, 11 May 2016 13:31:47 -0700]]></user_date_created>
+    <user_shelves>currently-reading</user_shelves>
+    <user_review><![CDATA[First line. &lt;3<br /><br />Foobar<br /><br />Foobar2]]></user_review>
+    <average_rating>4.45</average_rating>
+    <book_published>1996</book_published>
+    <description>
+      <![CDATA[
+      <a href="http://www.goodreads.com/book/show/6421982-a-game-of-thrones?utm_medium=api&amp;utm_source=rss"><img alt="A Game of Thrones (A Song of Ice and Fire, #1)" src="http://d.gr-assets.com/books/1327957410s/6421982.jpg" /></a><br/>
+                                      author: George R.R. Martin<br/>
+                                      name: Neil<br/>
+                                      average rating: 4.45<br/>
+                                      book published: 1996<br/>
+                                      rating: 0<br/>
+                                      read at: <br/>
+                                      date added: 2016/05/13<br/>
+                                      shelves: currently-reading<br/>
+                                      review: <br/>First line. &lt;3<br /><br />Foobar<br /><br />Foobar2<br/>
+                                      ]]>
+    </description>
+  </item>
+  <item>
+    <guid><![CDATA[http://www.goodreads.com/review/show/1635396168?utm_medium=api&utm_source=rss]]></guid>
+    <pubDate><![CDATA[Fri, 13 May 2016 11:04:48 -0700]]></pubDate>
+    <title><![CDATA[The Chronicles of Narnia (Chronicles of Narnia, #1-7)]]></title>
+    <link><![CDATA[http://www.goodreads.com/review/show/1635396168?utm_medium=api&utm_source=rss]]></link>
+    <book_id>11127</book_id>
+    <book_image_url><![CDATA[http://d.gr-assets.com/books/1449868701s/11127.jpg]]></book_image_url>
+    <book_small_image_url><![CDATA[http://d.gr-assets.com/books/1449868701s/11127.jpg]]></book_small_image_url>
+    <book_medium_image_url><![CDATA[http://d.gr-assets.com/books/1449868701m/11127.jpg]]></book_medium_image_url>
+    <book_large_image_url><![CDATA[http://d.gr-assets.com/books/1449868701l/11127.jpg]]></book_large_image_url>
+    <book_description><![CDATA[Journeys to the end of the world, fantastic creatures, and epic battles between good and evil—what more could any reader ask for in one book? The book that has it all is <em>The Lion, the Witch and the Wardrobe</em>, written in 1949 by Clive Stables Lewis. But Lewis did not stop there. Six more books followed, and together they became known as <em>The Chronicles of Narnia.</em><br><br>For the past fifty years, <em>The Chronicles of Narnia</em> have transcended the fantasy genre to become part of the canon of classic literature. Each of the seven books is a masterpiece, drawing the reader into a land where magic meets reality, and the result is a fictional world whose scope has fascinated generations.<br><br>This edition presents all seven books—unabridged—in one impressive volume. The books are presented here in chronlogical order, each chapter graced with an illustration by the original artist, Pauline Baynes. Deceptively simple and direct, <em>The Chronicles of Narnia</em> continue to captivate fans with adventures, characters, and truths that speak to readers of all ages, even fifty years after they were first published.]]></book_description>
+    <book id="11127">
+      <num_pages>767</num_pages>
+    </book>
+    <author_name>C.S. Lewis</author_name>
+    <isbn>0066238501</isbn>
+    <user_name>Neil</user_name>
+    <user_rating>0</user_rating>
+    <user_read_at></user_read_at>
+    <user_date_added><![CDATA[Fri, 13 May 2016 11:04:48 -0700]]></user_date_added>
+    <user_date_created><![CDATA[Wed, 11 May 2016 13:31:52 -0700]]></user_date_created>
+    <user_shelves>currently-reading</user_shelves>
+    <user_review><![CDATA[Only line, with &lt;3 and <a target="_blank" href="http://google.com" rel="nofollow">link</a>.]]></user_review>
+    <average_rating>4.23</average_rating>
+    <book_published>1949</book_published>
+    <description>
+      <![CDATA[
+      <a href="http://www.goodreads.com/book/show/11127.The_Chronicles_of_Narnia?utm_medium=api&amp;utm_source=rss"><img alt="The Chronicles of Narnia (Chronicles of Narnia, #1-7)" src="http://d.gr-assets.com/books/1449868701s/11127.jpg" /></a><br/>
+                                      author: C.S. Lewis<br/>
+                                      name: Neil<br/>
+                                      average rating: 4.23<br/>
+                                      book published: 1949<br/>
+                                      rating: 0<br/>
+                                      read at: <br/>
+                                      date added: 2016/05/13<br/>
+                                      shelves: currently-reading<br/>
+                                      review: <br/>Only line, with &lt;3 and <a target="_blank" href="http://google.com" rel="nofollow">link</a>.<br/>
+                                      ]]>
+    </description>
+  </item>
   <item>
     <guid><![CDATA[http://www.goodreads.com/review/show/1635396049?utm_medium=api&utm_source=rss]]></guid>
     <pubDate><![CDATA[Wed, 11 May 2016 13:39:35 -0700]]></pubDate>
@@ -56,86 +136,6 @@
                                       date added: 2016/05/11<br/>
                                       shelves: currently-reading<br/>
                                       review: <br/><br />Empty first line<br/>
-                                      ]]>
-    </description>
-  </item>
-  <item>
-    <guid><![CDATA[http://www.goodreads.com/review/show/1635396101?utm_medium=api&utm_source=rss]]></guid>
-    <pubDate><![CDATA[Wed, 11 May 2016 13:39:16 -0700]]></pubDate>
-    <title><![CDATA[A Game of Thrones (A Song of Ice and Fire, #1)]]></title>
-    <link><![CDATA[http://www.goodreads.com/review/show/1635396101?utm_medium=api&utm_source=rss]]></link>
-    <book_id>6421982</book_id>
-    <book_image_url><![CDATA[http://d.gr-assets.com/books/1327957410s/6421982.jpg]]></book_image_url>
-    <book_small_image_url><![CDATA[http://d.gr-assets.com/books/1327957410s/6421982.jpg]]></book_small_image_url>
-    <book_medium_image_url><![CDATA[http://d.gr-assets.com/books/1327957410m/6421982.jpg]]></book_medium_image_url>
-    <book_large_image_url><![CDATA[http://d.gr-assets.com/books/1327957410l/6421982.jpg]]></book_large_image_url>
-    <book_description><![CDATA[<strong>A NEW ORIGINAL SERIES, NOW ON HBO.</strong><br><br>Here is the first volume in George R. R. Martin’s magnificent cycle of novels that includes <em>A Clash of Kings</em> and <em>A Storm of Swords</em>. As a whole, this series comprises a genuine masterpiece of modern fantasy, bringing together the best the genre has to offer. Magic, mystery, intrigue, romance, and adventure fill these pages and transport us to a world unlike any we have ever experienced. Already hailed as a classic, George R. R. Martin’s stunning series is destined to stand as one of the great achievements of imaginative fiction.<br><br><strong>A GAME OF THRONES<br><br></strong>Long ago, in a time forgotten, a preternatural event threw the seasons out of balance. In a land where summers can last decades and winters a lifetime, trouble is brewing. The cold is returning, and in the frozen wastes to the north of Winterfell, sinister and supernatural forces are massing beyond the kingdom’s protective Wall. At the center of the conflict lie the Starks of Winterfell, a family as harsh and unyielding as the land they were born to. Sweeping from a land of brutal cold to a distant summertime kingdom of epicurean plenty, here is a tale of lords and ladies, soldiers and sorcerers, assassins and bastards, who come together in a time of grim omens.<br><br>Here an enigmatic band of warriors bear swords of no human metal; a tribe of fierce wildlings carry men off into madness; a cruel young dragon prince barters his sister to win back his throne; and a determined woman undertakes the most treacherous of journeys. Amid plots and counterplots, tragedy and betrayal, victory and terror, the fate of the Starks, their allies, and their enemies hangs perilously in the balance, as each endeavors to win that deadliest of conflicts: the game of thrones.<br><br>BONUS: This edition contains an excerpt from George R.R. Martin's<em> A Clash of Kings</em> and a preview of <em>A Game of Thrones: The Graphic Novel.</em>]]></book_description>
-    <book id="6421982">
-      <num_pages>819</num_pages>
-    </book>
-    <author_name>George R.R. Martin</author_name>
-    <isbn></isbn>
-    <user_name>Neil</user_name>
-    <user_rating>0</user_rating>
-    <user_read_at></user_read_at>
-    <user_date_added><![CDATA[Wed, 11 May 2016 13:39:16 -0700]]></user_date_added>
-    <user_date_created><![CDATA[Wed, 11 May 2016 13:31:47 -0700]]></user_date_created>
-    <user_shelves>currently-reading</user_shelves>
-    <user_review><![CDATA[First line.<br /><br />Foobar<br /><br />Foobar2]]></user_review>
-    <average_rating>4.45</average_rating>
-    <book_published>1996</book_published>
-    <description>
-      <![CDATA[
-      <a href="http://www.goodreads.com/book/show/6421982-a-game-of-thrones?utm_medium=api&amp;utm_source=rss"><img alt="A Game of Thrones (A Song of Ice and Fire, #1)" src="http://d.gr-assets.com/books/1327957410s/6421982.jpg" /></a><br/>
-                                      author: George R.R. Martin<br/>
-                                      name: Neil<br/>
-                                      average rating: 4.45<br/>
-                                      book published: 1996<br/>
-                                      rating: 0<br/>
-                                      read at: <br/>
-                                      date added: 2016/05/11<br/>
-                                      shelves: currently-reading<br/>
-                                      review: <br/>First line.<br /><br />Foobar<br /><br />Foobar2<br/>
-                                      ]]>
-    </description>
-  </item>
-  <item>
-    <guid><![CDATA[http://www.goodreads.com/review/show/1635396168?utm_medium=api&utm_source=rss]]></guid>
-    <pubDate><![CDATA[Wed, 11 May 2016 13:38:55 -0700]]></pubDate>
-    <title><![CDATA[The Chronicles of Narnia (Chronicles of Narnia, #1-7)]]></title>
-    <link><![CDATA[http://www.goodreads.com/review/show/1635396168?utm_medium=api&utm_source=rss]]></link>
-    <book_id>11127</book_id>
-    <book_image_url><![CDATA[http://d.gr-assets.com/books/1449868701s/11127.jpg]]></book_image_url>
-    <book_small_image_url><![CDATA[http://d.gr-assets.com/books/1449868701s/11127.jpg]]></book_small_image_url>
-    <book_medium_image_url><![CDATA[http://d.gr-assets.com/books/1449868701m/11127.jpg]]></book_medium_image_url>
-    <book_large_image_url><![CDATA[http://d.gr-assets.com/books/1449868701l/11127.jpg]]></book_large_image_url>
-    <book_description><![CDATA[Journeys to the end of the world, fantastic creatures, and epic battles between good and evil—what more could any reader ask for in one book? The book that has it all is <em>The Lion, the Witch and the Wardrobe</em>, written in 1949 by Clive Stables Lewis. But Lewis did not stop there. Six more books followed, and together they became known as <em>The Chronicles of Narnia.</em><br><br>For the past fifty years, <em>The Chronicles of Narnia</em> have transcended the fantasy genre to become part of the canon of classic literature. Each of the seven books is a masterpiece, drawing the reader into a land where magic meets reality, and the result is a fictional world whose scope has fascinated generations.<br><br>This edition presents all seven books—unabridged—in one impressive volume. The books are presented here in chronlogical order, each chapter graced with an illustration by the original artist, Pauline Baynes. Deceptively simple and direct, <em>The Chronicles of Narnia</em> continue to captivate fans with adventures, characters, and truths that speak to readers of all ages, even fifty years after they were first published.]]></book_description>
-    <book id="11127">
-      <num_pages>767</num_pages>
-    </book>
-    <author_name>C.S. Lewis</author_name>
-    <isbn>0066238501</isbn>
-    <user_name>Neil</user_name>
-    <user_rating>0</user_rating>
-    <user_read_at></user_read_at>
-    <user_date_added><![CDATA[Wed, 11 May 2016 13:38:55 -0700]]></user_date_added>
-    <user_date_created><![CDATA[Wed, 11 May 2016 13:31:52 -0700]]></user_date_created>
-    <user_shelves>currently-reading</user_shelves>
-    <user_review><![CDATA[Only line, with <a target="_blank" href="http://google.com" rel="nofollow">link</a>.]]></user_review>
-    <average_rating>4.23</average_rating>
-    <book_published>1949</book_published>
-    <description>
-      <![CDATA[
-      <a href="http://www.goodreads.com/book/show/11127.The_Chronicles_of_Narnia?utm_medium=api&amp;utm_source=rss"><img alt="The Chronicles of Narnia (Chronicles of Narnia, #1-7)" src="http://d.gr-assets.com/books/1449868701s/11127.jpg" /></a><br/>
-                                      author: C.S. Lewis<br/>
-                                      name: Neil<br/>
-                                      average rating: 4.23<br/>
-                                      book published: 1949<br/>
-                                      rating: 0<br/>
-                                      read at: <br/>
-                                      date added: 2016/05/11<br/>
-                                      shelves: currently-reading<br/>
-                                      review: <br/>Only line, with <a target="_blank" href="http://google.com" rel="nofollow">link</a>.<br/>
                                       ]]>
     </description>
   </item>

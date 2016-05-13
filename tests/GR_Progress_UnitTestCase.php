@@ -137,9 +137,9 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      */
     public function assertDefaultBooksOnPrimaryShelf($html) {
         $this->assertOrderedBookTitlesOnPrimaryShelfContains([
-            "The Lord of the Rings",
             "A Game of Thrones",
             "The Chronicles of Narnia",
+            "The Lord of the Rings",
             "Harry Potter and the Sorcerer"], $html);
     }
 
@@ -193,7 +193,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
             if ($titleMatches) {
                 $bookCommentElements = $descriptionElement->find($descriptionFieldSelector);
                 $this->assertNotEmpty($bookCommentElements, "Expected element with selector '$descriptionFieldSelector' but found none for book $bookNameSubstring");
-                $this->assertContains($fieldContains, $bookCommentElements[0]->plaintext, "Actual progress not matching expected progress for book " . $bookNameSubstring);
+                $this->assertContains($fieldContains, $bookCommentElements[0]->innertext, "Element with selector '$descriptionFieldSelector' does not contain expecte substring for book " . $bookNameSubstring);
                 break;
             }
         }

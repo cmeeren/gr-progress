@@ -89,8 +89,14 @@ class Shelf {
         $reviewBodyFirstLine = null;
         $showBookComment = $this->isCurrentlyReadingShelf() ? $this->widgetData['displayReviewExcerptCurrentlyReadingShelf'] : $this->widgetData['displayReviewExcerptAdditionalShelf'];
         if ($showBookComment) {
-            $reviewBodyWithCDATATag = $reviewElement->find("body", 0)->plaintext;
-            $reviewBody = preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $reviewBodyWithCDATATag);
+            $reviewBody = $reviewElement->find("body", 0)->plaintext;
+            $re_CDATA = "/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/";
+            if (preg_match($re_CDATA, $reviewBody)) {
+                $reviewBody = preg_replace($re_CDATA, '$1', $reviewBody);
+            } else {
+                $reviewBody = html_entity_decode($reviewBody);  // to fix GR bug
+            }
+            
             // for some reason, if the first line is empty, Goodreads may
             // return &lt;br /&gt; instead of <br />, so split by that too
             $reviewBodySplit = preg_split("/(<|&lt;)br/", $reviewBody, 2);

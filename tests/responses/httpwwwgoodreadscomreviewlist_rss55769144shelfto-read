@@ -9,7 +9,7 @@
     <atom:link href="http://www.goodreads.com/review/list_rss/55769144?shelf=to-read" rel="self" type="application/rss+xml" />
     <description><![CDATA[Neil's bookshelf: to-read]]></description>
     <language>en-US</language>
-    <lastBuildDate>Fri, 13 May 2016 10:57:48 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 13 May 2016 11:05:09 -0700</lastBuildDate>
     <ttl>60</ttl>
     <image>
       <title>Neil's bookshelf: to-read</title>
@@ -19,6 +19,46 @@
       <url>http://www.goodreads.com/images/layout/goodreads_logo_144.jpg</url>
     </image>
     
+  <item>
+    <guid><![CDATA[http://www.goodreads.com/review/show/1635396262?utm_medium=api&utm_source=rss]]></guid>
+    <pubDate><![CDATA[Fri, 13 May 2016 11:05:09 -0700]]></pubDate>
+    <title><![CDATA[The Name of the Wind (The Kingkiller Chronicle, #1)]]></title>
+    <link><![CDATA[http://www.goodreads.com/review/show/1635396262?utm_medium=api&utm_source=rss]]></link>
+    <book_id>186074</book_id>
+    <book_image_url><![CDATA[http://d.gr-assets.com/books/1452624379s/186074.jpg]]></book_image_url>
+    <book_small_image_url><![CDATA[http://d.gr-assets.com/books/1452624379s/186074.jpg]]></book_small_image_url>
+    <book_medium_image_url><![CDATA[http://d.gr-assets.com/books/1452624379m/186074.jpg]]></book_medium_image_url>
+    <book_large_image_url><![CDATA[http://d.gr-assets.com/books/1452624379l/186074.jpg]]></book_large_image_url>
+    <book_description><![CDATA[Told in Kvothe's own voice, this is the tale of the magically gifted young man who grows to be the most notorious wizard his world has ever seen. <br><br>The intimate narrative of his childhood in a troupe of traveling players, his years spent as a near-feral orphan in a crime-ridden city, his daringly brazen yet successful bid to enter a legendary school of magic, and his life as a fugitive after the murder of a king form a gripping coming-of-age story unrivaled in recent literature. <br><br>A high-action story written with a poet's hand, <em>The Name of the Wind</em> is a masterpiece that will transport readers into the body and mind of a wizard.]]></book_description>
+    <book id="186074">
+      <num_pages>662</num_pages>
+    </book>
+    <author_name>Patrick Rothfuss</author_name>
+    <isbn>075640407X</isbn>
+    <user_name>Neil</user_name>
+    <user_rating>0</user_rating>
+    <user_read_at></user_read_at>
+    <user_date_added><![CDATA[Fri, 13 May 2016 11:05:09 -0700]]></user_date_added>
+    <user_date_created><![CDATA[Wed, 11 May 2016 13:31:58 -0700]]></user_date_created>
+    <user_shelves>to-read</user_shelves>
+    <user_review>Sounds interesting! &amp;lt;3</user_review>
+    <average_rating>4.56</average_rating>
+    <book_published>2007</book_published>
+    <description>
+      <![CDATA[
+      <a href="http://www.goodreads.com/book/show/186074.The_Name_of_the_Wind?utm_medium=api&amp;utm_source=rss"><img alt="The Name of the Wind (The Kingkiller Chronicle, #1)" src="http://d.gr-assets.com/books/1452624379s/186074.jpg" /></a><br/>
+                                      author: Patrick Rothfuss<br/>
+                                      name: Neil<br/>
+                                      average rating: 4.56<br/>
+                                      book published: 2007<br/>
+                                      rating: 0<br/>
+                                      read at: <br/>
+                                      date added: 2016/05/13<br/>
+                                      shelves: to-read<br/>
+                                      review: <br/>Sounds interesting! &lt;3<br/>
+                                      ]]>
+    </description>
+  </item>
   <item>
     <guid><![CDATA[http://www.goodreads.com/review/show/1635397540?utm_medium=api&utm_source=rss]]></guid>
     <pubDate><![CDATA[Fri, 13 May 2016 10:57:48 -0700]]></pubDate>
@@ -96,46 +136,6 @@
                                       date added: 2016/05/11<br/>
                                       shelves: to-read<br/>
                                       review: <br/>Recommended by John.<br/>
-                                      ]]>
-    </description>
-  </item>
-  <item>
-    <guid><![CDATA[http://www.goodreads.com/review/show/1635396262?utm_medium=api&utm_source=rss]]></guid>
-    <pubDate><![CDATA[Wed, 11 May 2016 13:42:05 -0700]]></pubDate>
-    <title><![CDATA[The Name of the Wind (The Kingkiller Chronicle, #1)]]></title>
-    <link><![CDATA[http://www.goodreads.com/review/show/1635396262?utm_medium=api&utm_source=rss]]></link>
-    <book_id>186074</book_id>
-    <book_image_url><![CDATA[http://d.gr-assets.com/books/1452624379s/186074.jpg]]></book_image_url>
-    <book_small_image_url><![CDATA[http://d.gr-assets.com/books/1452624379s/186074.jpg]]></book_small_image_url>
-    <book_medium_image_url><![CDATA[http://d.gr-assets.com/books/1452624379m/186074.jpg]]></book_medium_image_url>
-    <book_large_image_url><![CDATA[http://d.gr-assets.com/books/1452624379l/186074.jpg]]></book_large_image_url>
-    <book_description><![CDATA[Told in Kvothe's own voice, this is the tale of the magically gifted young man who grows to be the most notorious wizard his world has ever seen. <br><br>The intimate narrative of his childhood in a troupe of traveling players, his years spent as a near-feral orphan in a crime-ridden city, his daringly brazen yet successful bid to enter a legendary school of magic, and his life as a fugitive after the murder of a king form a gripping coming-of-age story unrivaled in recent literature. <br><br>A high-action story written with a poet's hand, <em>The Name of the Wind</em> is a masterpiece that will transport readers into the body and mind of a wizard.]]></book_description>
-    <book id="186074">
-      <num_pages>662</num_pages>
-    </book>
-    <author_name>Patrick Rothfuss</author_name>
-    <isbn>075640407X</isbn>
-    <user_name>Neil</user_name>
-    <user_rating>0</user_rating>
-    <user_read_at></user_read_at>
-    <user_date_added><![CDATA[Wed, 11 May 2016 13:42:05 -0700]]></user_date_added>
-    <user_date_created><![CDATA[Wed, 11 May 2016 13:31:58 -0700]]></user_date_created>
-    <user_shelves>to-read</user_shelves>
-    <user_review>Sounds interesting!</user_review>
-    <average_rating>4.56</average_rating>
-    <book_published>2007</book_published>
-    <description>
-      <![CDATA[
-      <a href="http://www.goodreads.com/book/show/186074.The_Name_of_the_Wind?utm_medium=api&amp;utm_source=rss"><img alt="The Name of the Wind (The Kingkiller Chronicle, #1)" src="http://d.gr-assets.com/books/1452624379s/186074.jpg" /></a><br/>
-                                      author: Patrick Rothfuss<br/>
-                                      name: Neil<br/>
-                                      average rating: 4.56<br/>
-                                      book published: 2007<br/>
-                                      rating: 0<br/>
-                                      read at: <br/>
-                                      date added: 2016/05/11<br/>
-                                      shelves: to-read<br/>
-                                      review: <br/>Sounds interesting!<br/>
                                       ]]>
     </description>
   </item>

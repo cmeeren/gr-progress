@@ -73,8 +73,8 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html = $this->getWidgetHTML(['displayReviewExcerptCurrentlyReadingShelf' => true]);
         // primary shelf
         $this->assertBookHasNoComment("The Lord of the Rings", $html);
-        $this->assertBookHasComment("A Game of Thrones", "First line.", $html);
-        $this->assertBookHasComment("The Chronicles of Narnia", "Only line, with", $html);
+        $this->assertBookHasComment("A Game of Thrones", "First line. &lt;3", $html);
+        $this->assertBookHasComment("The Chronicles of Narnia", "Only line, with &lt;3 and <a", $html);
         $this->assertBookHasNoComment("Harry Potter and the Sorcerer", $html);
         // secondary shelf
         $this->assertBookHasNoComment("The Name of the Wind", $html);
@@ -97,7 +97,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasNoComment("The Chronicles of Narnia", $html);
         $this->assertBookHasNoComment("Harry Potter and the Sorcerer", $html);
         // secondary shelf
-        $this->assertBookHasComment("The Name of the Wind", "Sounds interesting!", $html);
+        $this->assertBookHasComment("The Name of the Wind", "Sounds interesting! &lt;3", $html);
         $this->assertBookHasComment("The Eye of the World", "Recommended by John.", $html);
         $this->assertBookHasNoComment("His Dark Materials", $html);
         $this->assertBookHasNoComment("The Lightning Thief", $html);
