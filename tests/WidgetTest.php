@@ -109,4 +109,44 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasNoComment("Artemis Fowl", $html);
     }
 
+    public function testAllBooksHaveCoverImage() {
+        $html = $this->getWidgetHTML();
+        $dom = str_get_html($html);
+        foreach ($dom->find(".book") as $book) {
+            $img = $book->find("img", 0);
+            $bookTitle = $book->find(".bookTitle", 0)->plaintext;
+            $this->assertNotEmpty($img->src, "Missing cover on book $bookTitle");
+        }
+    }
+
+    public function testAllBooksHaveCoverImage_bugBecauseBookOrderingIsIncorrectWhenGettingHTMLShelf() {
+        $html = $this->getWidgetHTML(['userid' => 17334072, 'additionalShelfSortBy' => 'position', 'additionalShelfSortOrder' => 'a',]);
+        $dom = str_get_html($html);
+        foreach ($dom->find(".book") as $book) {
+            $img = $book->find("img", 0);
+            $bookTitle = $book->find(".bookTitle", 0)->plaintext;
+            $this->assertNotEmpty($img->src, "Missing cover on book $bookTitle");
+        }
+    }
+
+    public function testProgressDefaultSettings() {
+        $html = $this->getWidgetHTML();
+        // primary shelf
+        $this->assertBookHasProgress("The Lord of the Rings", "20", $html);
+        $this->assertBookHasProgress("A Game of Thrones", "20", $html);
+        $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
+        $this->assertBookHasProgress("Harry Potter and the Sorcerer", "30", $html);
+        // secondary shelf
+        $this->assertBookHasNoProgress("The Name of the Wind", $html);
+        $this->assertBookHasNoProgress("The Eye of the World", $html);
+        $this->assertBookHasNoProgress("His Dark Materials", $html);
+        $this->assertBookHasNoProgress("The Lightning Thief", $html);
+        $this->assertBookHasNoProgress("Mistborn", $html);
+        $this->assertBookHasNoProgress("City of Bones", $html);
+        $this->assertBookHasNoProgress("The Way of Kings", $html);
+        $this->assertBookHasNoProgress("The Gunslinger", $html);
+        $this->assertBookHasNoProgress("The Color of Magic", $html);
+        $this->assertBookHasNoProgress("Artemis Fowl", $html);
+    }
+
 }
