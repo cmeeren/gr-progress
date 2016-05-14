@@ -37,8 +37,8 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
     private $DEFAULT_ARGS = [
         'before_widget' => '',
         'after_widget' => '',
-        'before_title' => '<h2>',
-        'after_title' => '</h2>',
+        'before_title' => '',
+        'after_title' => '',
     ];
 
     /**

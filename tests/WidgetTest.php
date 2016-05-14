@@ -30,6 +30,11 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertContains("CUSTOM_TITLE_FOOBAR", $html);
     }
 
+    public function testSetting_additionalShelfHeading() {
+        $html = $this->getWidgetHTML(['title' => 'CUSTOM_SECONDARY_TITLE_FOOBAR']);
+        $this->assertContains("CUSTOM_SECONDARY_TITLE_FOOBAR", $html);
+    }
+
     public function testSetting_goodreadsAttribution() {
         $html = $this->getWidgetHTML(['goodreadsAttribution' => 'GOODREADS_ATTRIBUTION_FOOBAR']);
         $this->assertContains("GOODREADS_ATTRIBUTION_FOOBAR", $html);
