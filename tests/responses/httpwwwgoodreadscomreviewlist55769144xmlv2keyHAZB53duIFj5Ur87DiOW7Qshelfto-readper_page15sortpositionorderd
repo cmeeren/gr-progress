@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GoodreadsResponse>
+  <Request>
+    <authentication>true</authentication>
+      <key><![CDATA[HAZB53duIFj5Ur87DiOW7Q]]></key>
+    <method><![CDATA[review_list]]></method>
+  </Request>
+  <reviews start="1" end="10" total="10">
+    <review>
+  <id>1635397540</id>
+    <book>
+  <id type="integer">249747</id>
+  <isbn>0786817879</isbn>
+  <isbn13>9780786817870</isbn13>
+  <text_reviews_count type="integer">6499</text_reviews_count>
+  <title>Artemis Fowl (Artemis Fowl, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1327945104m/249747.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1327945104s/249747.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/249747.Artemis_Fowl</link>
+  <num_pages>316</num_pages>
+  <format>Paperback</format>
+  <edition_information/>
+  <publisher>Miramax</publisher>
+  <publication_day>31</publication_day>
+  <publication_year>2003</publication_year>
+  <publication_month>3</publication_month>
+  <average_rating>3.81</average_rating>
+  <ratings_count>353655</ratings_count>
+  <description>Twelve-year-old Artemis Fowl is a millionaire, a genius—and, above all, a criminal mastermind. But even Artemis doesn't know what he's taken on when he kidnaps a fairy, Captain Holly Short of the LEPrecon Unit. These aren't the fairies of bedtime stories—they're dangerous! Full of unexpected twists and turns, &lt;em&gt;Artemis Fowl&lt;/em&gt; is a riveting, magical adventure.</description>
+<authors>
+<author>
+<id>10896</id>
+<name>Eoin Colfer</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1254336426p5/10896.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1254336426p2/10896.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/10896.Eoin_Colfer]]></link>
+<average_rating>3.92</average_rating>
+<ratings_count>975431</ratings_count>
+<text_reviews_count>28955</text_reviews_count>
+</author>
+</authors>
+  <published>2003</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1308773676" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:33:20 -0700 2016</date_added>
+  <date_updated>Fri May 13 10:57:48 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635397540]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635397540]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635397490</id>
+    <book>
+  <id type="integer">34497</id>
+  <isbn>0060855924</isbn>
+  <isbn13>9780060855925</isbn13>
+  <text_reviews_count type="integer">3053</text_reviews_count>
+  <title>The Color of Magic (Discworld, #1; Rincewind #1)</title>
+  <image_url>http://d.gr-assets.com/books/1407111017m/34497.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1407111017s/34497.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/34497.The_Color_of_Magic</link>
+  <num_pages>228</num_pages>
+  <format>Hardcover</format>
+  <edition_information/>
+  <publisher>Harper</publisher>
+  <publication_day>13</publication_day>
+  <publication_year>2005</publication_year>
+  <publication_month>9</publication_month>
+  <average_rating>3.95</average_rating>
+  <ratings_count>188440</ratings_count>
+  <description>Terry Pratchett's profoundly irreverent, bestselling novels have garnered him a revered position in the halls of parody next to the likes of Mark Twain, Kurt Vonnegut, Douglas Adams, and Carl Hiaasen.&lt;br&gt;&lt;br&gt;&lt;em&gt;The Color of Magic&lt;/em&gt; is Terry Pratchett's maiden voyage through the now-legendary land of Discworld. This is where it all begins -- with the tourist Twoflower and his wizard guide, Rincewind.&lt;br&gt;&lt;br&gt;&lt;em&gt;On a world supported on the back of a giant turtle (sex unknown), a gleeful, explosive, wickedly eccentric expedition sets out. There's an avaricious but inept wizard, a naive tourist whose luggage moves on hundreds of dear little legs, dragons who only exist if you believe in them, and of course THE EDGE of the planet...&lt;/em&gt;</description>
+<authors>
+<author>
+<id>1654</id>
+<name>Terry Pratchett</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1235562205p5/1654.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1235562205p2/1654.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/1654.Terry_Pratchett]]></link>
+<average_rating>4.12</average_rating>
+<ratings_count>2752292</ratings_count>
+<text_reviews_count>84828</text_reviews_count>
+</author>
+</authors>
+  <published>2005</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307204254" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:33:17 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:33:18 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635397490]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635397490]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635397092</id>
+    <book>
+  <id type="integer">43615</id>
+  <isbn>0452284694</isbn>
+  <isbn13>9780452284692</isbn13>
+  <text_reviews_count type="integer">6955</text_reviews_count>
+  <title>The Gunslinger (The Dark Tower, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1375776480m/43615.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1375776480s/43615.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/43615.The_Gunslinger</link>
+  <num_pages>231</num_pages>
+  <format>Paperback</format>
+  <edition_information/>
+  <publisher>NAL</publisher>
+  <publication_day>24</publication_day>
+  <publication_year>2003</publication_year>
+  <publication_month>6</publication_month>
+  <average_rating>4.00</average_rating>
+  <ratings_count>293873</ratings_count>
+  <description>&lt;p&gt;Beginning with a short story appearing in &lt;em&gt;The Magazine of Fantasy and Science Fiction&lt;/em&gt; in 1978, the publication of Stephen King's epic work of fantasy -- what he considers to be a single long novel and his magnum opus -- has spanned a quarter of a century.&lt;/p&gt;&lt;p&gt;Set in a world of extraordinary circumstances, filled with stunning visual imagery and unforgettable characters, &lt;em&gt;The Dark Tower&lt;/em&gt; series is King's most visionary feat of storytelling, a magical mix of science fiction, fantasy, and horror that may well be his crowning achievement.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Book I&lt;/strong&gt;&lt;br&gt;In &lt;em&gt;The Gunslinger&lt;/em&gt; (originally published in 1982), King introduces his most enigmatic hero, Roland Deschain of Gilead, the Last Gunslinger. He is a haunting, solitary figure at first, on a mysterious quest through a desolate world that eerily mirrors our own. Pursuing the man in black, an evil being who can bring the dead back to life, Roland is a good man who seems to leave nothing but death in his wake.&lt;/p&gt;&lt;p&gt;This new edition of &lt;em&gt;The Gunslinger&lt;/em&gt; has been revised and expanded throughout by King, with new story material, in addition to a new introduction and foreword. It also includes four full-color illustrations in the hardcover and trade paperback formats.&lt;/p&gt;</description>
+<authors>
+<author>
+<id>3389</id>
+<name>Stephen King</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1362814142p5/3389.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1362814142p2/3389.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/3389.Stephen_King]]></link>
+<average_rating>3.99</average_rating>
+<ratings_count>8791049</ratings_count>
+<text_reviews_count>280155</text_reviews_count>
+</author>
+</authors>
+  <published>2003</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203909" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:52 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:53 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635397092]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635397092]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635397047</id>
+    <book>
+  <id type="integer">7235533</id>
+  <isbn>0765326353</isbn>
+  <isbn13>9780765326355</isbn13>
+  <text_reviews_count type="integer">7438</text_reviews_count>
+  <title>The Way of Kings (The Stormlight Archive, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1448127430m/7235533.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1448127430s/7235533.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/7235533-the-way-of-kings</link>
+  <num_pages>1527</num_pages>
+  <format>Hardcover</format>
+  <edition_information/>
+  <publisher>Tor Books</publisher>
+  <publication_day>31</publication_day>
+  <publication_year>2010</publication_year>
+  <publication_month>8</publication_month>
+  <average_rating>4.62</average_rating>
+  <ratings_count>125825</ratings_count>
+  <description>Speak again the ancient oaths,&lt;br&gt;&lt;em&gt;Life before death.&lt;br&gt;Strength before weakness.&lt;br&gt;Journey before Destination.&lt;/em&gt;&lt;br&gt;and return to men the Shards they once bore.&lt;br&gt;&lt;strong&gt;The Knights Radiant must stand again.&lt;/strong&gt;&lt;br&gt;&lt;br&gt;Roshar is a world of stone swept by tempests that shape ecology and civilization. Animals and plants retract; cities are built in shelter. In centuries since ten orders of Knights fell, their Shardblade swords and Shardplate armor still transform men into near-invincible warriors. Wars are fought for them, and won by them.&lt;br&gt;&lt;br&gt;In one such war on ruined Shattered Plains, slave Kaladin struggles to save his men and fathom leaders who deem them expendable, in senseless wars where ten armies fight separately against one foe. &lt;br&gt;&lt;br&gt;Brightlord Dalinar Kholin commands one of those other armies. Fascinated by ancient text &lt;em&gt;The Way of Kings&lt;/em&gt;, troubled by visions of ancient times, he doubts his sanity.&lt;br&gt;&lt;br&gt;Across the ocean, Shallan trains under eminent scholar and notorious heretic, Dalinar’s niece Jasnah. Though Shallan genuinely loves learning, she plans a daring theft. Her research hints at secrets of the Knights Radiant and the true cause of the war.</description>
+<authors>
+<author>
+<id>38550</id>
+<name>Brandon Sanderson</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1394044556p5/38550.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1394044556p2/38550.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/38550.Brandon_Sanderson]]></link>
+<average_rating>4.36</average_rating>
+<ratings_count>1474521</ratings_count>
+<text_reviews_count>98636</text_reviews_count>
+</author>
+</authors>
+  <published>2010</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203873" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:50 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:50 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635397047]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635397047]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635396929</id>
+    <book>
+  <id type="integer">256683</id>
+  <isbn>1416914285</isbn>
+  <isbn13>9781416914280</isbn13>
+  <text_reviews_count type="integer">38502</text_reviews_count>
+  <title>City of Bones (The Mortal Instruments, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1432730315m/256683.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1432730315s/256683.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/256683.City_of_Bones</link>
+  <num_pages>485</num_pages>
+  <format>Hardcover</format>
+  <edition_information/>
+  <publisher>Margaret K. McElderry Books</publisher>
+  <publication_day>27</publication_day>
+  <publication_year>2007</publication_year>
+  <publication_month>3</publication_month>
+  <average_rating>4.12</average_rating>
+  <ratings_count>1057966</ratings_count>
+  <description>When fifteen-year-old Clary Fray heads out to the Pandemonium Club in New York City, she hardly expects to witness a murder― much less a murder committed by three teenagers covered with strange tattoos and brandishing bizarre weapons. Then the body disappears into thin air. It's hard to call the police when the murderers are invisible to everyone else and when there is nothing―not even a smear of blood―to show that a boy has died. Or was he a boy?&lt;br&gt;&lt;br&gt;This is Clary's first meeting with the Shadowhunters, warriors dedicated to ridding the earth of demons. It's also her first encounter with Jace, a Shadowhunter who looks a little like an angel and acts a lot like a jerk. Within twenty-four hours Clary is pulled into Jace's world with a vengeance, when her mother disappears and Clary herself is attacked by a demon. But why would demons be interested in ordinary mundanes like Clary and her mother? And how did Clary suddenly get the Sight? The Shadowhunters would like to know... &lt;br&gt;&lt;br&gt;Exotic and gritty, exhilarating and utterly gripping, Cassandra Clare's ferociously entertaining fantasy takes readers on a wild ride that they will never want to end.</description>
+<authors>
+<author>
+<id>150038</id>
+<name>Cassandra Clare</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1270502031p5/150038.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1270502031p2/150038.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/150038.Cassandra_Clare]]></link>
+<average_rating>4.27</average_rating>
+<ratings_count>4219313</ratings_count>
+<text_reviews_count>235252</text_reviews_count>
+</author>
+</authors>
+  <published>2007</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203770" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:42 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:42 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396929]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396929]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635396721</id>
+    <book>
+  <id type="integer">68428</id>
+  <isbn>076531178X</isbn>
+  <isbn13>9780765311788</isbn13>
+  <text_reviews_count type="integer">8608</text_reviews_count>
+  <title>Mistborn: The Final Empire (Mistborn, #1)</title>
+  <image_url>http://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png</image_url>
+  <small_image_url>http://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/68428.Mistborn</link>
+  <num_pages>541</num_pages>
+  <format>Hardcover</format>
+  <edition_information/>
+  <publisher>Tor Books</publisher>
+  <publication_day>25</publication_day>
+  <publication_year>2006</publication_year>
+  <publication_month>7</publication_month>
+  <average_rating>4.41</average_rating>
+  <ratings_count>187071</ratings_count>
+  <description>In a world where ash falls from the sky, and mist dominates the night, an evil cloaks the land and stifles all life. The future of the empire rests on the shoulders of a troublemaker and his young apprentice. Together, can they fill the world with color once more?&lt;br&gt;&lt;br&gt;In Brandon Sanderson's intriguing tale of love, loss, despair and hope, a new kind of magic enters the stage — Allomancy, a magic of the metals.</description>
+<authors>
+<author>
+<id>38550</id>
+<name>Brandon Sanderson</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1394044556p5/38550.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1394044556p2/38550.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/38550.Brandon_Sanderson]]></link>
+<average_rating>4.36</average_rating>
+<ratings_count>1474521</ratings_count>
+<text_reviews_count>98636</text_reviews_count>
+</author>
+</authors>
+  <published>2006</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203560" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:28 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:29 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396721]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396721]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635396667</id>
+    <book>
+  <id type="integer">28187</id>
+  <isbn>0786838655</isbn>
+  <isbn13>9780786838653</isbn13>
+  <text_reviews_count type="integer">34762</text_reviews_count>
+  <title>The Lightning Thief (Percy Jackson and the Olympians, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1400602609m/28187.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1400602609s/28187.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/28187.The_Lightning_Thief</link>
+  <num_pages>377</num_pages>
+  <format>Paperback</format>
+  <edition_information>First edition</edition_information>
+  <publisher>Disney Hyperion Books</publisher>
+  <publication_day>1</publication_day>
+  <publication_year>2006</publication_year>
+  <publication_month>3</publication_month>
+  <average_rating>4.21</average_rating>
+  <ratings_count>1174747</ratings_count>
+  <description>Percy Jackson is a good kid, but he can't seem to focus on his schoolwork or control his temper. And lately, being away at boarding school is only getting worse—Percy could have sworn his pre-algebra teacher turned into a monster and tried to kill him. When Percy's mom finds out, she knows it's time that he knew the truth about where he came from, and that he go to the one place he'll be safe. She sends Percy to Camp Half Blood, a summer camp for demigods (on Long Island), where he learns that the father he never knew is Poseidon, God of the Sea. Soon a mystery unfolds and together with his friends—one a satyr and the other the demigod daughter of Athena—Percy sets out on a quest across the United States to reach the gates of the Underworld (located in a recording studio in Hollywood) and prevent a catastrophic war between the gods.</description>
+<authors>
+<author>
+<id>15872</id>
+<name>Rick Riordan</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1383677264p5/15872.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1383677264p2/15872.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/15872.Rick_Riordan]]></link>
+<average_rating>4.30</average_rating>
+<ratings_count>4890007</ratings_count>
+<text_reviews_count>196244</text_reviews_count>
+</author>
+</authors>
+  <published>2006</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203505" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:25 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:26 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396667]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396667]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635396502</id>
+    <book>
+  <id type="integer">18116</id>
+  <isbn>0440238609</isbn>
+  <isbn13>9780440238607</isbn13>
+  <text_reviews_count type="integer">3398</text_reviews_count>
+  <title>His Dark Materials (His Dark Materials #1-3)</title>
+  <image_url>http://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png</image_url>
+  <small_image_url>http://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/18116.His_Dark_Materials</link>
+  <num_pages>1088</num_pages>
+  <format></format>
+  <edition_information/>
+  <publisher></publisher>
+  <publication_day></publication_day>
+  <publication_year></publication_year>
+  <publication_month></publication_month>
+  <average_rating>4.24</average_rating>
+  <ratings_count>93449</ratings_count>
+  <description>The extraordinary story moves between parallel universes. Beginning in Oxford, it takes Lyra and her animal-daemon Pantalaimon on a dangerous rescue mission to the ice kingdoms of the far North, where she begins to learn about the mysterious particles they call Dust - a substance for which terrible war between different worlds will be fought...</description>
+<authors>
+<author>
+<id>3618</id>
+<name>Philip Pullman</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1396622492p5/3618.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1396622492p2/3618.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/3618.Philip_Pullman]]></link>
+<average_rating>3.97</average_rating>
+<ratings_count>1539664</ratings_count>
+<text_reviews_count>35911</text_reviews_count>
+</author>
+</authors>
+  <published></published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203323" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:14 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:15 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396502]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396502]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635396413</id>
+    <book>
+  <id type="integer">228665</id>
+  <isbn>0812511816</isbn>
+  <isbn13>9780812511819</isbn13>
+  <text_reviews_count type="integer">6173</text_reviews_count>
+  <title>The Eye of the World (Wheel of Time, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1337818095m/228665.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1337818095s/228665.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/228665.The_Eye_of_the_World</link>
+  <num_pages>814</num_pages>
+  <format>Mass Market Paperback</format>
+  <edition_information/>
+  <publisher>Tor Books</publisher>
+  <publication_day>15</publication_day>
+  <publication_year>1990</publication_year>
+  <publication_month>11</publication_month>
+  <average_rating>4.16</average_rating>
+  <ratings_count>228137</ratings_count>
+  <description>The Wheel of Time turns and Ages come and go, leaving memories that become legend. Legend fades to myth, and even myth is long forgotten when the Age that gave it birth returns again. In the Third Age, an Age of Prophecy, the World and Time themselves hang in the balance. What was, what will be, and what is, may yet fall under the Shadow.</description>
+<authors>
+<author>
+<id>6252</id>
+<name>Robert Jordan</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1175475715p5/6252.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1175475715p2/6252.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/6252.Robert_Jordan]]></link>
+<average_rating>4.15</average_rating>
+<ratings_count>1534116</ratings_count>
+<text_reviews_count>33855</text_reviews_count>
+</author>
+</authors>
+  <published>1990</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203241" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:09 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:42:22 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+      Recommended by John.
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396413]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396413]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>1635396262</id>
+    <book>
+  <id type="integer">186074</id>
+  <isbn>075640407X</isbn>
+  <isbn13>9780756404079</isbn13>
+  <text_reviews_count type="integer">18286</text_reviews_count>
+  <title>The Name of the Wind (The Kingkiller Chronicle, #1)</title>
+  <image_url>http://d.gr-assets.com/books/1452624379m/186074.jpg</image_url>
+  <small_image_url>http://d.gr-assets.com/books/1452624379s/186074.jpg</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/186074.The_Name_of_the_Wind</link>
+  <num_pages>662</num_pages>
+  <format>Hardcover</format>
+  <edition_information/>
+  <publisher>Penguin Group DAW Hardcover</publisher>
+  <publication_day>27</publication_day>
+  <publication_year>2007</publication_year>
+  <publication_month>3</publication_month>
+  <average_rating>4.55</average_rating>
+  <ratings_count>339928</ratings_count>
+  <description>Told in Kvothe's own voice, this is the tale of the magically gifted young man who grows to be the most notorious wizard his world has ever seen. &lt;br&gt;&lt;br&gt;The intimate narrative of his childhood in a troupe of traveling players, his years spent as a near-feral orphan in a crime-ridden city, his daringly brazen yet successful bid to enter a legendary school of magic, and his life as a fugitive after the murder of a king form a gripping coming-of-age story unrivaled in recent literature. &lt;br&gt;&lt;br&gt;A high-action story written with a poet's hand, &lt;em&gt;The Name of the Wind&lt;/em&gt; is a masterpiece that will transport readers into the body and mind of a wizard.</description>
+<authors>
+<author>
+<id>108424</id>
+<name>Patrick Rothfuss</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1351307341p5/108424.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1351307341p2/108424.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/108424.Patrick_Rothfuss]]></link>
+<average_rating>4.49</average_rating>
+<ratings_count>635819</ratings_count>
+<text_reviews_count>43877</text_reviews_count>
+</author>
+</authors>
+  <published>2007</published>
+</book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203082" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:31:58 -0700 2016</date_added>
+  <date_updated>Fri May 13 11:05:09 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+      Sounds interesting! &amp;lt;3
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396262]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396262]]></link>
+    <owned>0</owned>
+</review>
+
+</reviews>
+
+</GoodreadsResponse>

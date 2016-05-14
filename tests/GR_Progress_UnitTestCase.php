@@ -235,5 +235,14 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         }
         $this->assertTrue($ok, "No books found with title mathcing " . $bookNameSubstring);
     }
+    
+    public function assertAllBooksHaveCoverImage($html) {
+        $dom = str_get_html($html);
+        foreach ($dom->find(".book") as $book) {
+            $img = $book->find("img", 0);
+            $bookTitle = $book->find(".bookTitle", 0)->plaintext;
+            $this->assertNotEmpty($img->src, "Missing cover on book $bookTitle");
+        }
+    }
 
 }

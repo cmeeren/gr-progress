@@ -111,12 +111,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
     public function testAllBooksHaveCoverImage() {
         $html = $this->getWidgetHTML();
-        $dom = str_get_html($html);
-        foreach ($dom->find(".book") as $book) {
-            $img = $book->find("img", 0);
-            $bookTitle = $book->find(".bookTitle", 0)->plaintext;
-            $this->assertNotEmpty($img->src, "Missing cover on book $bookTitle");
-        }
+        $this->assertAllBooksHaveCoverImage($html);
     }
 
     public function testProgressDefaultSettings() {
@@ -137,6 +132,262 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasNoProgress("The Gunslinger", $html);
         $this->assertBookHasNoProgress("The Color of Magic", $html);
         $this->assertBookHasNoProgress("Artemis Fowl", $html);
+    }
+
+    public function testSortPrimary_author_a() {
+        $books = [
+            'The Chronicles of Narnia',
+            'A Game of Thrones',
+            'Harry Potter and the Sorcerer',
+            'The Lord of the Rings',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'a']);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortPrimary_author_d() {
+        $books = [
+            'The Lord of the Rings',
+            'Harry Potter and the Sorcerer',
+            'A Game of Thrones',
+            'The Chronicles of Narnia',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'd']);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortPrimary_title_a() {
+        $books = [
+            'The Chronicles of Narnia',
+            'A Game of Thrones',
+            'Harry Potter and the Sorcerer',
+            'The Lord of the Rings',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'a']);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortPrimary_title_d() {
+        $books = [
+            'The Lord of the Rings',
+            'Harry Potter and the Sorcerer',
+            'A Game of Thrones',
+            'The Chronicles of Narnia',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'd']);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortSecondary_position_a() {
+        $books = [
+            "The Name of the Wind",
+            "The Eye of the World",
+            "His Dark Materials",
+            "The Lightning Thief",
+            "Mistborn",
+            "City of Bones",
+            "The Way of Kings",
+            "The Gunslinger",
+            "The Color of Magic",
+            "Artemis Fowl",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'position', 'additionalShelfSortOrder' => 'a']);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+    }
+
+    public function testSortSecondary_position_d() {
+        $books = [
+            "Artemis Fowl",
+            "The Color of Magic",
+            "The Gunslinger",
+            "The Way of Kings",
+            "City of Bones",
+            "Mistborn",
+            "The Lightning Thief",
+            "His Dark Materials",
+            "The Eye of the World",
+            "The Name of the Wind",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'position', 'additionalShelfSortOrder' => 'd']);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+    }
+
+    public function testSSortSecondary_title_a() {
+        $books = [
+            "Artemis Fowl",
+            "City of Bones",
+            "The Color of Magic",
+            "The Eye of the World",
+            "The Gunslinger",
+            "His Dark Materials",
+            "The Lightning Thief",
+            "Mistborn",
+            "The Name of the Wind",
+            "The Way of Kings",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'title', 'additionalShelfSortOrder' => 'a']);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+    }
+
+    public function testSortSecondary_title_d() {
+        $books = [
+            "The Way of Kings",
+            "The Name of the Wind",
+            "Mistborn",
+            "The Lightning Thief",
+            "His Dark Materials",
+            "The Gunslinger",
+            "The Eye of the World",
+            "The Color of Magic",
+            "City of Bones",
+            "Artemis Fowl",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'title', 'additionalShelfSortOrder' => 'd']);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+    }
+
+    public function testSortPrimary_author_a_maxBooks() {
+        $books = [
+            'The Chronicles of Narnia',
+            'A Game of Thrones',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'a', 'maxBooksCurrentlyReadingShelf' => 2]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortPrimary_author_d_maxBooks() {
+        $books = [
+            'The Lord of the Rings',
+            'Harry Potter and the Sorcerer',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'd', 'maxBooksCurrentlyReadingShelf' => 2]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortPrimary_title_a_maxBooks() {
+        $books = [
+            'The Chronicles of Narnia',
+            'A Game of Thrones',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'a', 'maxBooksCurrentlyReadingShelf' => 2]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortPrimary_title_d_maxBooks() {
+        $books = [
+            'The Lord of the Rings',
+            'Harry Potter and the Sorcerer',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'd', 'maxBooksCurrentlyReadingShelf' => 2]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortSecondary_position_a_maxBooks() {
+        $books = [
+            "The Name of the Wind",
+            "The Eye of the World",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'position', 'additionalShelfSortOrder' => 'a', 'maxBooksAdditionalShelf' => 2]);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortSecondary_position_d_maxBooks() {
+        $books = [
+            "Artemis Fowl",
+            "The Color of Magic",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'position', 'additionalShelfSortOrder' => 'd', 'maxBooksAdditionalShelf' => 2]);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSSortSecondary_title_a_maxBooks() {
+        $books = [
+            "Artemis Fowl",
+            "City of Bones",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'title', 'additionalShelfSortOrder' => 'a', 'maxBooksAdditionalShelf' => 2]);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortSecondary_title_d_maxBooks() {
+        $books = [
+            "The Way of Kings",
+            "The Name of the Wind",
+        ];
+        $html = $this->getWidgetHTML(['additionalShelfSortBy' => 'title', 'additionalShelfSortOrder' => 'd', 'maxBooksAdditionalShelf' => 2]);
+        $this->assertOrderedBookTitlesOnSecondaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnPrimaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testSortByProgress_Title_a() {
+        $books = [
+            'Harry Potter and the Sorcerer',
+            'A Game of Thrones',
+            'The Lord of the Rings',
+            'The Chronicles of Narnia',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'a', 'sortByReadingProgress' => true]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortByProgress_Title_d() {
+        $books = [
+            'Harry Potter and the Sorcerer',
+            'The Lord of the Rings',
+            'A Game of Thrones',
+            'The Chronicles of Narnia',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'd', 'sortByReadingProgress' => true]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortByProgress_Author_a() {
+        $books = [
+            'Harry Potter and the Sorcerer',
+            'A Game of Thrones',
+            'The Lord of the Rings',
+            'The Chronicles of Narnia',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'a', 'sortByReadingProgress' => true]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testSortByProgress_Author_d() {
+        $books = [
+            'Harry Potter and the Sorcerer',
+            'The Lord of the Rings',
+            'A Game of Thrones',
+            'The Chronicles of Narnia',
+        ];
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'd', 'sortByReadingProgress' => true]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
 }
