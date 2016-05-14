@@ -254,7 +254,9 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
 
     public function assertAllBooksHaveCoverImage($html) {
         $dom = str_get_html($html);
-        foreach ($dom->find(".book") as $book) {
+        $books = $dom->find(".book");
+        $this->assertNotEmpty($books, "Shelves empty, cannot check for cover images");
+        foreach ($books as $book) {
             $img = $book->find("img", 0);
             $bookTitle = $book->find(".bookTitle", 0)->plaintext;
             $this->assertNotEmpty($img->src, "Missing cover on book $bookTitle");
