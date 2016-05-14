@@ -176,8 +176,12 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         $this->assertBookDoesNotHaveDescriptionField($bookNameSubstring, ".bookComment", $html);
     }
 
-    public function assertBookHasProgress($bookNameSubstring, $progressInPercent, $html) {
+    public function assertBookProgressContains($bookNameSubstring, $progressInPercent, $html) {
         $this->assertBookDescriptionFieldContains($bookNameSubstring, ".progress", $progressInPercent, $html);
+    }
+
+    public function assertBookProgressNotContains($bookNameSubstring, $progressInPercent, $html) {
+        $this->assertBookDescriptionFieldNotContains($bookNameSubstring, ".progress", $progressInPercent, $html);
     }
 
     public function assertBookHasNoProgress($bookNameSubstring, $html) {
@@ -185,15 +189,27 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
     }
 
     private function assertBookDescriptionFieldContains($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $html) {
+        $this->assertBookDescrptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, false, $html);
+    }
+
+    private function assertBookDescriptionFieldNotContains($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $html) {
+        $this->assertBookDescrptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, true, $html);
+    }
+
+    private function assertBookDescrptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $exclude, $html) {
         $this->assertBookExists($bookNameSubstring, $html);
         $dom = str_get_html($html);
         foreach ($dom->find('.desc') as $descriptionElement) {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
-                $bookCommentElements = $descriptionElement->find($descriptionFieldSelector);
-                $this->assertNotEmpty($bookCommentElements, "Expected element with selector '$descriptionFieldSelector' but found none for book $bookNameSubstring");
-                $this->assertContains($fieldContains, $bookCommentElements[0]->innertext, "Element with selector '$descriptionFieldSelector' does not contain expecte substring for book " . $bookNameSubstring);
+                $descriptionFieldElement = $descriptionElement->find($descriptionFieldSelector);
+                $this->assertNotEmpty($descriptionFieldElement, "Expected element with selector '$descriptionFieldSelector' but found none for book $bookNameSubstring");
+                if ($exclude) {
+                    $this->assertNotContains($fieldContains, $descriptionFieldElement[0]->innertext, "Element with selector '$descriptionFieldSelector' contains substring for book " . $bookNameSubstring);
+                } else {
+                    $this->assertContains($fieldContains, $descriptionFieldElement[0]->innertext, "Element with selector '$descriptionFieldSelector' does not contain expected substring for book " . $bookNameSubstring);
+                }
                 break;
             }
         }
@@ -206,8 +222,8 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
             $bookTitle = $descriptionElement->find(".bookTitle", 0)->plaintext;
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
-                $bookCommentElements = $descriptionElement->find($descriptionFieldSelector);
-                $this->assertEmpty($bookCommentElements, "Found unexpected element with selector '$descriptionFieldSelector' for book $bookNameSubstring");
+                $descriptionFieldElements = $descriptionElement->find($descriptionFieldSelector);
+                $this->assertEmpty($descriptionFieldElements, "Found unexpected element with selector '$descriptionFieldSelector' for book $bookNameSubstring");
                 break;
             }
         }
@@ -235,7 +251,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
         }
         $this->assertTrue($ok, "No books found with title mathcing " . $bookNameSubstring);
     }
-    
+
     public function assertAllBooksHaveCoverImage($html) {
         $dom = str_get_html($html);
         foreach ($dom->find(".book") as $book) {

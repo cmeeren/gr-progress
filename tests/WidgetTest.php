@@ -117,10 +117,10 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function testProgressDefaultSettings() {
         $html = $this->getWidgetHTML();
         // primary shelf
-        $this->assertBookHasProgress("The Lord of the Rings", "20", $html);
-        $this->assertBookHasProgress("A Game of Thrones", "20", $html);
+        $this->assertBookProgressContains("The Lord of the Rings", "20", $html);
+        $this->assertBookProgressContains("A Game of Thrones", "20", $html);
         $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
-        $this->assertBookHasProgress("Harry Potter and the Sorcerer", "30", $html);
+        $this->assertBookProgressContains("Harry Potter and the Sorcerer", "30", $html);
         // secondary shelf
         $this->assertBookHasNoProgress("The Name of the Wind", $html);
         $this->assertBookHasNoProgress("The Eye of the World", $html);
@@ -132,6 +132,30 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasNoProgress("The Gunslinger", $html);
         $this->assertBookHasNoProgress("The Color of Magic", $html);
         $this->assertBookHasNoProgress("Artemis Fowl", $html);
+    }
+
+    /**
+     * Tests that "Artemis Fowl" on the to-read shelf shows its progress
+     * when to-read is selected as the primary shelf
+     */
+    public function testProgressInvertedShelves() {
+        $html = $this->getWidgetHTML(['currentlyReadingShelfName' => 'to-read', 'additionalShelfName' => 'currently-reading']);
+        // primary shelf
+        $this->assertBookHasNoProgress("The Name of the Wind", $html);
+        $this->assertBookHasNoProgress("The Eye of the World", $html);
+        $this->assertBookHasNoProgress("His Dark Materials", $html);
+        $this->assertBookHasNoProgress("The Lightning Thief", $html);
+        $this->assertBookHasNoProgress("Mistborn", $html);
+        $this->assertBookHasNoProgress("City of Bones", $html);
+        $this->assertBookHasNoProgress("The Way of Kings", $html);
+        $this->assertBookHasNoProgress("The Gunslinger", $html);
+        $this->assertBookHasNoProgress("The Color of Magic", $html);
+        $this->assertBookProgressContains("Artemis Fowl", "10", $html);
+        // secondary shelf
+        $this->assertBookHasNoProgress("The Lord of the Rings", $html);
+        $this->assertBookHasNoProgress("A Game of Thrones", $html);
+        $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
+        $this->assertBookHasNoProgress("Harry Potter and the Sorcerer", $html);
     }
 
     public function testSortPrimary_author_a() {
@@ -388,6 +412,32 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'd', 'sortByReadingProgress' => true]);
         $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
         $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    public function testProgressUpdateTimeEnabled() {
+        $html = $this->getWidgetHTML([
+            'displayProgressUpdateTime' => true,
+            'intervalTemplate' => '{num} {period} since update',
+            'intervalSingular' => ['foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars'],
+            'intervalPlural' => ['foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars']
+        ]);
+        $this->assertBookProgressContains("The Lord of the Rings", "foobars since update", $html);
+        $this->assertBookProgressContains("A Game of Thrones", "foobars since update", $html);
+        $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
+        $this->assertBookProgressContains("Harry Potter and the Sorcerer", "foobars since update", $html);
+    }
+    
+    public function testProgressUpdateTimeDisabled() {
+        $html = $this->getWidgetHTML([
+            'displayProgressUpdateTime' => false,
+            'intervalTemplate' => '{num} {period} since update',
+            'intervalSingular' => ['foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars'],
+            'intervalPlural' => ['foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars', 'foobars']
+        ]);
+        $this->assertBookProgressNotContains("The Lord of the Rings", "foobars since update", $html);
+        $this->assertBookProgressNotContains("A Game of Thrones", "foobars since update", $html);
+        $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
+        $this->assertBookProgressNotContains("Harry Potter and the Sorcerer", "foobars since update", $html);
     }
 
 }
