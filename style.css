@@ -13,11 +13,11 @@
     border-collapse: collapse;
     max-width: 25rem;
 }
-.widget_gr_progress_cvdm_widget .book {
+.widget_gr_progress_cvdm_widget .bookshelf .book {
     display: table-row;
     border: none;
 }
-.widget_gr_progress_cvdm_widget .coverImage
+.widget_gr_progress_cvdm_widget .bookshelf .book .coverImage
 {
     display: table-cell;
     vertical-align: top;
@@ -25,33 +25,36 @@
     padding-bottom: 1rem;
     padding-right: 1rem;
 }
-.widget_gr_progress_cvdm_widget .additional-shelf .coverImage {
+.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .book .coverImage {
     width: 20%;
     padding-bottom: 0.8rem;
 }
-.widget_gr_progress_cvdm_widget .coverImage img {
+.widget_gr_progress_cvdm_widget .bookshelf .book .coverImage img {
     border: 1px #ccc solid;
     box-shadow: 3px 3px 5px 1px #ccc;
     margin-bottom: 3px;
 }
-.widget_gr_progress_cvdm_widget .desc {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc {
     display: table-cell;
     vertical-align: top;
     width: 60%;
     padding-bottom: 1rem;
 }
-.widget_gr_progress_cvdm_widget .additional-shelf .coverImage
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc p {
+    line-height: 1.5;
+}
+.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .coverImage
 {
     padding-right: 0.8rem;
 }
-.widget_gr_progress_cvdm_widget .additional-shelf .desc {
+.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .desc {
     width: 80% !important;
     padding-bottom: 0.8rem;
 }
-.widget_gr_progress_cvdm_widget .desc p:last-child {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc p:last-child {
     margin-bottom: 0 !important;
 }
-.widget_gr_progress_cvdm_widget .bookTitle {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .bookTitle {
     font-size: inherit;
     font-weight: bold;
     margin: 0;
@@ -60,21 +63,21 @@
     margin: 1.5rem 0 1rem 0 !important;
     font-size: 120%;
 }
-.widget_gr_progress_cvdm_widget .author {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .author {
     margin: 0; /* no margin between book title and author */
 }
-.widget_gr_progress_cvdm_widget .progress,
-.widget_gr_progress_cvdm_widget .bookComment
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .progress,
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .bookComment
 {
     margin: 0;
     margin-top: 1rem;
 }
-.widget_gr_progress_cvdm_widget .additional-shelf .bookComment
+.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .book .desc .bookComment
 {
     margin-top: 0.5rem;
 }
 /* Progress bar */
-.widget_gr_progress_cvdm_widget .progress-bar-wrapper {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .progress-bar-wrapper {
     position: relative;
     width: 100%;
     font-size: 80%;
@@ -84,26 +87,27 @@
     border-radius: 4px;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
-.widget_gr_progress_cvdm_widget .progress-bar {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .progress-bar {
     position: absolute;
     z-index: 10;
     overflow: hidden;
     color: #fff;
     background-color: #337ab7;
 }
-.widget_gr_progress_cvdm_widget .progress-bar-wrapper span {
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .progress-bar-wrapper span {
     padding: 0.5rem;
     white-space: nowrap;
     text-overflow: clip;
 }
 /* clearfix */
-.widget_gr_progress_cvdm_widget .bookshelf li:before, .widget_gr_progress_cvdm_widget .bookshelf li:after {
+.widget_gr_progress_cvdm_widget .bookshelf .book:before,
+.widget_gr_progress_cvdm_widget .bookshelf .book:after {
     content: "";
     display: table !important;
 }
-.widget_gr_progress_cvdm_widget .bookshelf li:after {
+.widget_gr_progress_cvdm_widget .bookshelf .book:after {
     clear: both;
 }
-.widget_gr_progress_cvdm_widget .bookshelf li {
+.widget_gr_progress_cvdm_widget .bookshelf .book {
     zoom: 1;
 }
