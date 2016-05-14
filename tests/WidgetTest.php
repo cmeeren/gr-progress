@@ -1,7 +1,5 @@
 <?php
 
-require_once('GoodreadsFetcher.php');
-require_once('HTML5Validate.php');
 require_once('GR_Progress_UnitTestCase.php');
 
 class WidgetTest extends GR_Progress_UnitTestCase {
@@ -9,6 +7,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function setUp() {
         GoodreadsFetcher::$test_local = true;
         GoodreadsFetcher::$test_fail = false;
+        Shelf::$test_disableCoverFetching = false;
         delete_option("gr_progress_cvdm_shelves");
         delete_option("gr_progress_cvdm_lastRetrievalErrorTime");
         delete_option("gr_progress_cvdm_coverURLs");
@@ -53,6 +52,18 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertNotContains("Error retrieving data", $html);
         $this->assertDefaultBooksOnPrimaryShelf($html);
         $this->assertDefaultBooksOnSecondaryShelf($html);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
+    public function testUseCachedCovers() {
+        $this->getWidgetHTML();  // saves books and covers to cache
+        Shelf::$test_disableCoverFetching = true;
+        // delete cache so shelves will be rebuilt.
+        delete_option("gr_progress_cvdm_shelves");
+        // rebuild shelves - since cover fetching is disabled,
+        // using cached covers is the only option
+        $html = $this->getWidgetHTML();
+        $this->assertAllBooksHaveCoverImage($html);
     }
 
     public function testSetting_currentlyReadingShelfNameAndEmptyMessage() {

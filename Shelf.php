@@ -11,13 +11,16 @@ class Shelf {
     private $bookRetrievalTimestamp;
     private $lastProgressRetrievalTimestamp = 0;
     public $retrievalError = false;
+    public static $test_disableCoverFetching = false;
 
     function Shelf($shelfName, $widgetData) {
         $this->shelfName = $shelfName;
         $this->widgetData = $widgetData;
         $this->fetchBooksFromGoodreads();
         $this->loadCachedCoverURLs();
+        if (!self::$test_disableCoverFetching) {
             $this->fetchCoverURLsIfMissing();
+        }
     }
 
     private function fetchBooksFromGoodreads() {
