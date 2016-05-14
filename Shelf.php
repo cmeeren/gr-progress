@@ -17,7 +17,7 @@ class Shelf {
         $this->widgetData = $widgetData;
         $this->fetchBooksFromGoodreads();
         $this->loadCachedCoverURLs();
-        $this->fetchCoverURLsIfMissing();
+            $this->fetchCoverURLsIfMissing();
     }
 
     private function fetchBooksFromGoodreads() {
@@ -96,7 +96,7 @@ class Shelf {
             } else {
                 $reviewBody = html_entity_decode($reviewBody);  // to fix GR bug
             }
-            
+
             // for some reason, if the first line is empty, Goodreads may
             // return &lt;br /&gt; instead of <br />, so split by that too
             $reviewBodySplit = preg_split("/(<|&lt;)br/", $reviewBody, 2);
@@ -127,9 +127,14 @@ class Shelf {
     }
 
     /**
-     * Don't use - suffers from a bug. It appears that only the 'shelf' parameter
-     * is taken into account, and if there are many books on the shelf, then not
-     * all books are returned and thus some books might not get a cover.
+     * Unused - suffers from a bug. It appears that only the 'shelf' parameter
+     * is taken into account. A combination of missing per_page, sort, and order
+     * parameters may cause fewer/different books to be returned as compared to
+     * when we got the shelf via the API. Thus, some books might not get a cover.
+     * Solve this by getting cover images from RSS feed instead of HTML
+     * (see fetchAllCoverURLsUsingRSS). Keeping the function here until
+     * the RSS method has proven problem-free in the wild.
+     * @codeCoverageIgnore
      */
     private function fetchAllCoverURLsUsingHTML() {
         $fetcher = new GoodreadsFetcher();
@@ -242,8 +247,11 @@ class Shelf {
 
 }
 
-// sorting function from http://php.net/manual/en/function.usort.php#38827
-// preserves ordering if elements compare as equal
+/**
+ * sorting function from http://php.net/manual/en/function.usort.php#38827
+ * preserves ordering if elements compare as equal
+ * @codeCoverageIgnore
+ */
 function mergesort(&$array, $cmp_function = 'strcmp') {
     // Arrays of size < 2 require no action.
     if (count($array) < 2) {
