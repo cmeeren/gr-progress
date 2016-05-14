@@ -19,9 +19,10 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">.</directory>
             <exclude>
+                <directory>tests</directory>
                 <file>simple_html_dom.php</file>
             </exclude>
         </whitelist>
     </filter>
-    -->
+    -->    
 </phpunit>
