@@ -426,7 +426,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
         $this->assertBookProgressContains("Harry Potter and the Sorcerer", "foobars since update", $html);
     }
-    
+
     public function testProgressUpdateTimeDisabled() {
         $html = $this->getWidgetHTML([
             'displayProgressUpdateTime' => false,
@@ -438,6 +438,23 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookProgressNotContains("A Game of Thrones", "foobars since update", $html);
         $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
         $this->assertBookProgressNotContains("Harry Potter and the Sorcerer", "foobars since update", $html);
+    }
+
+    public function testProgressBarEnabled() {
+        $html = $this->getWidgetHTML(['useProgressBar' => true]);
+        $dom = str_get_html($html);
+        $numProgress = count($dom->find(".progress"));
+        $numProgressBar = count($dom->find(".progress-bar"));
+        $this->assertEquals($numProgress, $numProgressBar, "Number of progress bars ($numProgressBar) expected to match number of progress elements ($numProgress)");
+    }
+
+    public function testProgressBarDisabled() {
+        $html = $this->getWidgetHTML(['useProgressBar' => false]);
+        $dom = str_get_html($html);
+        $numProgress = count($dom->find(".progress"));
+        $numProgressBar = count($dom->find(".progress-bar"));
+        $this->assertNotEquals(0, $numProgress, "Expected to find non-zero number of progress elements");
+        $this->assertEquals(0, $numProgressBar, "Expected no progress bars but found $numProgressBar");
     }
 
 }
