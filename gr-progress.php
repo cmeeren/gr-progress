@@ -7,8 +7,6 @@
   License: MIT
  */
 
-define("GR_PROGRESS_CVDM_DEFAULT_TIMEOUT_IN_SECONDS", 5);
-
 require_once("simple_html_dom.php");
 require_once("Shelf.php");
 
