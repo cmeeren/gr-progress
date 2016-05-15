@@ -476,51 +476,51 @@ class gr_progress_cvdm_widget extends WP_Widget {
             </label>
         </p>
         <p>If you need to, you can translate the time shown:</p>
+        <label for="<?php echo $this->get_field_id('intervalTemplate'); ?>">
+            Template:
+        </label>
+        <input
+            class="widefat"
+            type="text"
+            id="<?php echo $this->get_field_id('intervalTemplate'); ?>"
+            name="<?php echo $this->get_field_name('intervalTemplate'); ?>"
+            value="<?php echo esc_attr($instance['intervalTemplate']); ?>"
+            />
         <table>
-            <label for="<?php echo $this->get_field_id('intervalTemplate'); ?>">
-                Template:
-            </label>
-            <input
-                class="widefat"
-                type="text"
-                id="<?php echo $this->get_field_id('intervalTemplate'); ?>"
-                name="<?php echo $this->get_field_name('intervalTemplate'); ?>"
-                value="<?php echo esc_attr($instance['intervalTemplate']); ?>"
-                />
             <tr>
                 <td>Year</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][0] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][0] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularYear'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][0] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralYear'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][0] ?>" /></td>
             </tr>
             <tr>
                 <td>Month</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][1]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][1] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][1]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][1] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularMonth'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][1]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][1] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralMonth'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][1]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][1] ?>" /></td>
             </tr>
             <tr>
                 <td>Week</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][2]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][2] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][2]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][2] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularWeek'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][2]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][2] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralWeek'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][2]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][2] ?>" /></td>
             </tr>
             <tr>
                 <td>Day</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][3]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][3] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][3]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][3] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularDay'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][3]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][3] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralDay'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][3]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][3] ?>" /></td>
             </tr>
             <tr>
                 <td>Hour</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][4]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][4] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][4]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][4] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularHour'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][4]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][4] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralHour'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][4]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][4] ?>" /></td>
             </tr>
             <tr>
                 <td>Minute</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][5]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][5] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][5]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][5] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularMinute'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][5]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][5] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralMinute'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][5]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][5] ?>" /></td>
             </tr>
             <tr>
                 <td>Second</td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingular'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][6] ?>" /></td>
-                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPlural'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][6] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalSingularSecond'); ?>" name="<?php echo $this->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][6] ?>" /></td>
+                <td><input class="widefat" type="text" id="<?php echo $this->get_field_id('intervalPluralSecond'); ?>" name="<?php echo $this->get_field_name('intervalPlural'); ?>[]" value="<?php echo esc_attr($instance['intervalPlural'][6]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalPlural'][6] ?>" /></td>
             </tr>
         </table>
 
@@ -676,8 +676,8 @@ class gr_progress_cvdm_widget extends WP_Widget {
                     type="checkbox">
                 Delete the cover URL cache the next time you save these settings.
             </label>
-        <p style="text-align: center; color: #31708f; background-color: #d9edf7; border: 1px solid #bce8f1; border-radius: 4px; padding: 15px;">If you have selected "Regenerate cache when saving widget" above, please be patient while saving. If it takes more than 30 seconds, something probably went wrong.</p>
         </p>
+        <p style="text-align: center; color: #31708f; background-color: #d9edf7; border: 1px solid #bce8f1; border-radius: 4px; padding: 15px;">If you have selected "Regenerate cache when saving widget" above, please be patient while saving. If it takes more than 30 seconds, something probably went wrong.</p>
 
         <?php
     }

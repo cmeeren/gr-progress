@@ -18,6 +18,11 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertIsValidHTML($html);
     }
 
+    public function testWidgetFormIsValidHTML() {
+        $html = $this->getWidgetForm();
+        $this->assertIsValidHTML($html);
+    }
+
     public function testCorrectBooksUsingDefaultSettings() {
         $html = $this->getWidgetHTML();
         $this->assertDefaultBooksOnPrimaryShelf($html);

@@ -61,6 +61,19 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
     }
 
     /**
+     * Returns the HTML used for rendering the widget settings form.
+     * @return string
+     */
+    public function getWidgetForm() {
+        $widget = new gr_progress_cvdm_widget();
+
+        ob_start();
+        $widget->form($this->DEFAULT_SETTINGS);
+        $html = ob_get_clean();
+        return $html;
+    }
+
+    /**
      * Asserts that input string is valid HTML.
      * @param string $html
      */
