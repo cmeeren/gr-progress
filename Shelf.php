@@ -153,7 +153,6 @@ class Shelf {
                         . "&sort={$this->getSortBy()}"
                         . "&order={$this->getSortOrder()}"));
 
-        // FIXME: will fetcher->fetch return false, or str_get_html (if fetcher->fetch returns false)?
         if ($html === false) {
             $this->retrievalError = true;
             return;
@@ -183,7 +182,6 @@ class Shelf {
                         . "{$this->widgetData['userid']}"
                         . "?shelf={$this->shelfName}"));
 
-        // FIXME: will fetcher->fetch return false, or str_get_html (if fetcher->fetch returns false)?
         if ($xml === false) {
             $this->retrievalError = true;
             return;
