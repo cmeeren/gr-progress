@@ -62,7 +62,11 @@ class Shelf {
 
     private function getMaxBooks() {
         if ($this->isCurrentlyReadingShelf()) {
-            return $this->widgetData['maxBooksCurrentlyReadingShelf'];
+            if ($this->widgetData['sortByReadingProgress']) {
+                return 100;
+            } else {
+                return $this->widgetData['maxBooksCurrentlyReadingShelf'];
+            }
         } else {
             return $this->widgetData['maxBooksAdditionalShelf'];
         }
@@ -245,6 +249,10 @@ class Shelf {
     private function sortBooksByReadingProgressIfRelevant() {
         if ($this->isCurrentlyReadingShelf() && $this->widgetData['sortByReadingProgress']) {
             mergesort($this->books, 'compareBookProgress');
+            // All books on shelf were fetched previously in order to sort them
+            // by reading progerss. Only keep maxBooksCurrentlyReadingShelf
+            // number of books now after they've been sorted.
+            $this->books = array_slice($this->books, 0, $this->widgetData['maxBooksCurrentlyReadingShelf'], true);
         }
     }
 

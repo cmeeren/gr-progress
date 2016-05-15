@@ -382,7 +382,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertAllBooksHaveCoverImage($html);
     }
 
-    public function testSortByProgress_Title_a() {
+    public function testSortByProgress_title_a() {
         $books = [
             'Harry Potter and the Sorcerer',
             'A Game of Thrones',
@@ -394,7 +394,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
-    public function testSortByProgress_Title_d() {
+    public function testSortByProgress_title_d() {
         $books = [
             'Harry Potter and the Sorcerer',
             'The Lord of the Rings',
@@ -406,7 +406,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
-    public function testSortByProgress_Author_a() {
+    public function testSortByProgress_author_a() {
         $books = [
             'Harry Potter and the Sorcerer',
             'A Game of Thrones',
@@ -418,7 +418,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
-    public function testSortByProgress_Author_d() {
+    public function testSortByProgress_author_d() {
         $books = [
             'Harry Potter and the Sorcerer',
             'The Lord of the Rings',
@@ -427,6 +427,16 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         ];
         $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'author', 'currentlyReadingShelfSortOrder' => 'd', 'sortByReadingProgress' => true]);
         $this->assertOrderedBookTitlesOnPrimaryShelfContains($books, $html);
+        $this->assertDefaultBooksOnSecondaryShelf($html);
+    }
+
+    /**
+     * Tests that the books with most progress are returned even when they would not
+     * normally appear due to being excluded by the queried per_page and sort order
+     */
+    public function testSortByProgress_maxBooks() {
+        $html = $this->getWidgetHTML(['currentlyReadingShelfSortBy' => 'title', 'currentlyReadingShelfSortOrder' => 'a', 'sortByReadingProgress' => true, 'maxBooksCurrentlyReadingShelf' => 1]);
+        $this->assertOrderedBookTitlesOnPrimaryShelfContains(['Harry Potter and the Sorcerer'], $html);
         $this->assertDefaultBooksOnSecondaryShelf($html);
     }
 
