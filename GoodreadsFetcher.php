@@ -1,6 +1,6 @@
 <?php
 
-require_once("simple_html_dom.php");  // FIXME: needed?
+namespace relativisticramblings\gr_progress;
 
 class GoodreadsFetcher {
 

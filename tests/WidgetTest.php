@@ -1,5 +1,7 @@
 <?php
 
+namespace relativisticramblings\gr_progress;
+
 require_once('GR_Progress_UnitTestCase.php');
 
 class WidgetTest extends GR_Progress_UnitTestCase {

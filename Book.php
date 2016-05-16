@@ -1,5 +1,8 @@
 <?php
 
+namespace relativisticramblings\gr_progress;
+
+require_once("simple_html_dom.php");
 require_once("GoodreadsFetcher.php");
 
 class Book {
@@ -14,7 +17,7 @@ class Book {
     private $widgetData;
     public $retrievalError = false;
 
-    public function Book($id, $title, $authors, $comment, $widgetData) {
+    public function __construct($id, $title, $authors, $comment, $widgetData) {
         $this->id = $id;
         $this->title = $title;
         $this->authors = $authors;

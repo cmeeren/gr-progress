@@ -1,9 +1,10 @@
 <?php
 
-require_once('HTML5Validate.php');
-require_once('simple_html_dom.php');
+namespace relativisticramblings\gr_progress;
 
-class GR_Progress_UnitTestCase extends WP_UnitTestCase {
+require_once('HTML5Validate.php');
+
+class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
 
     private $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
@@ -78,7 +79,7 @@ class GR_Progress_UnitTestCase extends WP_UnitTestCase {
      * @param string $html
      */
     public function assertIsValidHTML($html) {
-        $validator = new HTML5Validate();
+        $validator = new \HTML5Validate();
         $result = $validator->Assert($html);
         $this->assertTrue($result, $validator->message);
     }

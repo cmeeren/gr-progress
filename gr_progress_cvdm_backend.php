@@ -1,5 +1,7 @@
 <?php
 
+namespace relativisticramblings\gr_progress;
+
 require_once("simple_html_dom.php");
 require_once("Shelf.php");
 
@@ -253,8 +255,8 @@ class gr_progress_cvdm_backend {
     }
 
     private function time_elapsed_string($datetime) {
-        $now = new DateTime;
-        $then = new DateTime($datetime);
+        $now = new \DateTime;
+        $then = new \DateTime($datetime);
         $dateInterval = $now->diff($then);
 
         $dateInterval->w = floor($dateInterval->d / 7);

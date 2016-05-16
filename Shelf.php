@@ -1,5 +1,7 @@
 <?php
 
+namespace relativisticramblings\gr_progress;
+
 require_once("Book.php");
 require_once("GoodreadsFetcher.php");
 
@@ -13,7 +15,7 @@ class Shelf {
     public $retrievalError = false;
     public static $test_disableCoverFetching = false;
 
-    function Shelf($shelfName, $widgetData) {
+    function __construct($shelfName, $widgetData) {
         $this->shelfName = $shelfName;
         $this->widgetData = $widgetData;
         $this->fetchBooksFromGoodreads();
@@ -246,7 +248,7 @@ class Shelf {
 
     private function sortBooksByReadingProgressIfRelevant() {
         if ($this->isCurrentlyReadingShelf() && $this->widgetData['sortByReadingProgress']) {
-            mergesort($this->books, 'compareBookProgress');
+            mergesort($this->books, '\relativisticramblings\gr_progress\compareBookProgress');
             // All books on shelf were fetched previously in order to sort them
             // by reading progerss. Only keep maxBooksCurrentlyReadingShelf
             // number of books now after they've been sorted.
