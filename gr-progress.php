@@ -12,7 +12,7 @@
 
 namespace relativisticramblings\gr_progress;
 
-require_once('gr_progress_cvdm_backend.php');
+require_once('includes/gr_progress_cvdm_backend.php');
 
 class gr_progress_cvdm_widget extends \WP_Widget {
 
@@ -42,7 +42,7 @@ class gr_progress_cvdm_widget extends \WP_Widget {
 // Register and load the widget
 function load_widget() {
     register_widget('relativisticramblings\gr_progress\gr_progress_cvdm_widget');
-    wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'style.css');
+    wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'css/style.css');
 }
 
 add_action('widgets_init', 'relativisticramblings\gr_progress\load_widget');

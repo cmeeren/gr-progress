@@ -35,7 +35,7 @@ class GoodreadsFetcher {
     }
 
     private function getPath() {
-        return dirname(__FILE__) . '/tests/responses/';
+        return dirname(__FILE__) . '/../tests/responses/';
     }
 
     private function getSafeFilename($str) {
