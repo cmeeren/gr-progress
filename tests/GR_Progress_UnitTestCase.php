@@ -48,17 +48,23 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
      * @return string
      */
     public function getWidgetHTML($overrideSettings = []) {
-        $settings = $this->DEFAULT_SETTINGS;
-        foreach ($overrideSettings as $k => $v) {
-            $settings[$k] = $v;
-        }
+        $settings = $this->getSettingsWithOverride($overrideSettings);
 
         $widget = new gr_progress_cvdm_widget();
-
+        
         ob_start();
         $widget->widget($this->DEFAULT_ARGS, $settings);
         $html = ob_get_clean();
         return $html;
+    }
+
+    private function getSettingsWithOverride($overrideSettings) {
+        $settings = $this->DEFAULT_SETTINGS;
+        foreach ($overrideSettings as $k => $v) {
+            $this->assertArrayHasKey($k, $settings, "Attempted to override non-existent setting $k");
+            $settings[$k] = $v;
+        }
+        return $settings;
     }
 
     /**
@@ -72,6 +78,52 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         $widget->form($this->DEFAULT_SETTINGS);
         $html = ob_get_clean();
         return $html;
+    }
+
+    public function getNewSettings($overrideSettings = []) {
+        $settings = $this->getSettingsWithOverride($overrideSettings);
+
+        $widget = new gr_progress_cvdm_widget();
+
+        $newSettings = $widget->update($settings, $this->DEFAULT_SETTINGS);
+        return $newSettings;
+    }
+
+    public function assertSettingSavedAs($setting, $inputValue, $expectedOutput) {
+        $settings = $this->getNewSettings([$setting => $inputValue]);
+        $this->assertEquals($expectedOutput, $settings[$setting]);
+    }
+
+    public function assertSettingTextIsSaved($setting) {
+        $this->assertSettingSavedAs($setting, "foobar", "foobar");
+    }
+
+    public function assertSettingHTMLEscaped($setting) {
+        $this->assertSettingSavedAs($setting, "<script>evil()</script>foobar", "&lt;script&gt;evil()&lt;/script&gt;foobar");
+    }
+
+    public function assertSettingWhitespaceRemoved($setting) {
+        $this->assertSettingSavedAs($setting, " foobar ", "foobar");
+    }
+
+    public function assertPassesAllTextInputTests($setting) {
+        $this->assertSettingTextIsSaved($setting);
+        $this->assertSettingHTMLEscaped($setting);
+        $this->assertSettingWhitespaceRemoved($setting);
+    }
+
+    public function assertCheckedSettingCorrectlyUpdated($setting) {
+        $this->assertArrayHasKey($setting, $this->DEFAULT_SETTINGS, "Attempted to test nonexistent setting $setting");
+
+        $widget = new gr_progress_cvdm_widget();
+
+        $settingsWithCheckedOption = $this->DEFAULT_SETTINGS;
+        $parsedSettingsChecked = $widget->update($settingsWithCheckedOption, $this->DEFAULT_SETTINGS);
+        $this->assertTrue($parsedSettingsChecked[$setting]);
+
+        $settingsWithoutCheckedOption = array_diff_key($this->DEFAULT_SETTINGS, [$setting => '']);
+        $parsedSettingsUnchecked = $widget->update($settingsWithoutCheckedOption, $this->DEFAULT_SETTINGS);
+        $this->assertFalse($parsedSettingsUnchecked[$setting]);
     }
 
     /**
@@ -218,11 +270,14 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
                 $descriptionFieldElement = $descriptionElement->find($descriptionFieldSelector);
-                $this->assertNotEmpty($descriptionFieldElement, "Expected element with selector '$descriptionFieldSelector' but found none for book $bookNameSubstring");
+                $this->assertNotEmpty($descriptionFieldElement,
+                        "Expected element with selector '$descriptionFieldSelector' but found none for book $bookNameSubstring");
                 if ($exclude) {
-                    $this->assertNotContains($fieldContains, $descriptionFieldElement[0]->innertext, "Element with selector '$descriptionFieldSelector' contains substring for book " . $bookNameSubstring);
+                    $this->assertNotContains($fieldContains, $descriptionFieldElement[0]->innertext,
+                            "Element with selector '$descriptionFieldSelector' contains substring for book " . $bookNameSubstring);
                 } else {
-                    $this->assertContains($fieldContains, $descriptionFieldElement[0]->innertext, "Element with selector '$descriptionFieldSelector' does not contain expected substring for book " . $bookNameSubstring);
+                    $this->assertContains($fieldContains, $descriptionFieldElement[0]->innertext,
+                            "Element with selector '$descriptionFieldSelector' does not contain expected substring for book " . $bookNameSubstring);
                 }
                 break;
             }
@@ -237,7 +292,8 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
             $titleMatches = strpos($bookTitle, $bookNameSubstring) !== false;
             if ($titleMatches) {
                 $descriptionFieldElements = $descriptionElement->find($descriptionFieldSelector);
-                $this->assertEmpty($descriptionFieldElements, "Found unexpected element with selector '$descriptionFieldSelector' for book $bookNameSubstring");
+                $this->assertEmpty($descriptionFieldElements,
+                        "Found unexpected element with selector '$descriptionFieldSelector' for book $bookNameSubstring");
                 break;
             }
         }

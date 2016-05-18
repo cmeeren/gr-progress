@@ -684,24 +684,25 @@ class gr_progress_cvdm_backend {
 
     public function getNewWidgetSettings($new_instance, $old_instance) {
         $instance = $old_instance;
-        $instance['title'] = strip_tags($new_instance['title']);
-        $goodreadsAttribution = trim(strip_tags($new_instance['goodreadsAttribution']));
+        $instance['title'] = trim(htmlspecialchars($new_instance['title']));
+        $goodreadsAttribution = trim(htmlspecialchars($new_instance['goodreadsAttribution']));
         $instance['goodreadsAttribution'] = !empty($goodreadsAttribution) ? $goodreadsAttribution : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
 
         preg_match("/\d+/", $new_instance['userid'], $matches_userid);
-        $instance['userid'] = count($matches_userid) > 0 ? $matches_userid[0] : "";
-        $instance['apiKey'] = strip_tags($new_instance['apiKey']);
-        $instance['currentlyReadingShelfName'] = strip_tags($new_instance['currentlyReadingShelfName']);
-        $instance['emptyMessage'] = strip_tags($new_instance['emptyMessage']);
+        $instance['userid'] = !empty($matches_userid) ? $matches_userid[0] : "";
+
+        $instance['apiKey'] = trim(htmlspecialchars($new_instance['apiKey']));
+        $instance['currentlyReadingShelfName'] = trim(htmlspecialchars($new_instance['currentlyReadingShelfName']));
+        $instance['emptyMessage'] = trim(htmlspecialchars($new_instance['emptyMessage']));
         $instance['displayReviewExcerptCurrentlyReadingShelf'] = isset($new_instance['displayReviewExcerptCurrentlyReadingShelf']) ? true : false;
         $instance['sortByReadingProgress'] = isset($new_instance['sortByReadingProgress']) ? true : false;
         $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
-        $instance['intervalTemplate'] = strip_tags($new_instance['intervalTemplate']);
+        $instance['intervalTemplate'] = trim(htmlspecialchars($new_instance['intervalTemplate']));
 
         foreach (['intervalSingular', 'intervalPlural'] as $intervalPluralSingular) {
             $instance[$intervalPluralSingular] = $new_instance[$intervalPluralSingular];
             foreach ($instance[$intervalPluralSingular] as $i => &$str) {
-                $str = trim(strip_tags($str));
+                $str = trim(htmlspecialchars($str));
                 if (empty($str)) {
                     $str = $this->DEFAULT_SETTINGS[$intervalPluralSingular][$i];
                 }
@@ -712,9 +713,9 @@ class gr_progress_cvdm_backend {
         $instance['currentlyReadingShelfSortBy'] = array_key_exists($new_instance['currentlyReadingShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['currentlyReadingShelfSortBy'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortBy'];
         $instance['currentlyReadingShelfSortOrder'] = array_key_exists($new_instance['currentlyReadingShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['currentlyReadingShelfSortOrder'] : $this->DEFAULT_SETTINGS['currentlyReadingShelfSortOrder'];
         $instance['maxBooksCurrentlyReadingShelf'] = preg_match("/\d+/", $new_instance['maxBooksCurrentlyReadingShelf']) ? intval($new_instance['maxBooksCurrentlyReadingShelf']) : 10;
-        $instance['additionalShelfName'] = strip_tags($new_instance['additionalShelfName']);
-        $instance['additionalShelfHeading'] = strip_tags($new_instance['additionalShelfHeading']);
-        $instance['emptyMessageAdditional'] = strip_tags($new_instance['emptyMessageAdditional']);
+        $instance['additionalShelfName'] = trim(htmlspecialchars($new_instance['additionalShelfName']));
+        $instance['additionalShelfHeading'] = trim(htmlspecialchars($new_instance['additionalShelfHeading']));
+        $instance['emptyMessageAdditional'] = trim(htmlspecialchars($new_instance['emptyMessageAdditional']));
         $instance['displayReviewExcerptAdditionalShelf'] = isset($new_instance['displayReviewExcerptAdditionalShelf']) ? true : false;
         $instance['additionalShelfSortBy'] = array_key_exists($new_instance['additionalShelfSortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['additionalShelfSortBy'] : $this->DEFAULT_SETTINGS['additionalShelfSortBy'];
         $instance['additionalShelfSortOrder'] = array_key_exists($new_instance['additionalShelfSortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['additionalShelfSortOrder'] : $this->DEFAULT_SETTINGS['additionalShelfSortOrder'];
