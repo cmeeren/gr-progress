@@ -108,8 +108,8 @@ class gr_progress_cvdm_backend {
 
     private function loadCachedShelves() {
         $shelves = get_option("gr_progress_cvdm_shelves", null);
-        if ($shelves !== null) {
-            $this->shelves = $shelves;
+        if ($shelves !== null && isset($shelves[$this->widget->number])) {
+            $this->shelves = $shelves[$this->widget->number];
         }
     }
 
@@ -159,7 +159,9 @@ class gr_progress_cvdm_backend {
 
     private function saveCacheIfNeeded() {
         if ($this->cacheNeedsUpdate == true) {
-            update_option("gr_progress_cvdm_shelves", $this->shelves);
+            $shelves = get_option("gr_progress_cvdm_shelves", []);
+            $shelves[$this->widget->number] = $this->shelves;
+            update_option("gr_progress_cvdm_shelves", $shelves);
             $this->cacheNeedsUpdate = false;
         }
     }
