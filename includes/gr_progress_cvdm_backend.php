@@ -583,8 +583,7 @@ class gr_progress_cvdm_backend {
         $instance['emptyMessage'] = trim(htmlspecialchars($new_instance['emptyMessage']));
         $instance['coverSize'] = intval($new_instance['coverSize']);
         $instance['displayReviewExcerpt'] = isset($new_instance['displayReviewExcerpt']) ? true : false;
-        // FIXME: maxBooks - test that 1 is minimum and that default setting is used
-        $instance['maxBooks'] = preg_match("/\d+/", $new_instance['maxBooks']) ? max(1, intval($new_instance['maxBooks'])) : $this->DEFAULT_SETTINGS['maxBooks'];
+        $instance['maxBooks'] = preg_match("/^\d+/", $new_instance['maxBooks']) ? max(1, intval($new_instance['maxBooks'])) : $this->DEFAULT_SETTINGS['maxBooks'];
         $instance['sortByReadingProgress'] = isset($new_instance['sortByReadingProgress']) ? true : false;
         $instance['sortBy'] = array_key_exists($new_instance['sortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['sortBy'] : $this->DEFAULT_SETTINGS['sortBy'];
         $instance['sortOrder'] = array_key_exists($new_instance['sortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['sortOrder'] : $this->DEFAULT_SETTINGS['sortOrder'];
@@ -602,7 +601,7 @@ class gr_progress_cvdm_backend {
             }
         }
 
-        $instance['cacheTimeInHours'] = preg_match("/\d+/", $new_instance['cacheTimeInHours']) ? intval($new_instance['cacheTimeInHours']) : $this->DEFAULT_SETTINGS['cacheTimeInHours'];
+        $instance['cacheTimeInHours'] = preg_match("/^\d+/", $new_instance['cacheTimeInHours']) ? intval($new_instance['cacheTimeInHours']) : $this->DEFAULT_SETTINGS['cacheTimeInHours'];
         $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
 
         $this->widgetData = $instance;

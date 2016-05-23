@@ -66,13 +66,47 @@ class SettingsTest extends GR_Progress_UnitTestCase {
     public function test_emptyMessage() {
         $this->assertPassesAllTextInputTests('emptyMessage');
     }
+    
+    public function test_coverSize() {
+        $this->assertSettingSavedAs("coverSize", (string)CoverSize::SMALL, CoverSize::SMALL);
+        $this->assertSettingSavedAs("coverSize", (string)CoverSize::LARGE, CoverSize::LARGE);
+    }
 
     public function test_displayReviewExcerpt() {
         $this->assertCheckedSettingCorrectlyUpdated('displayReviewExcerpt');
     }
+    
+    public function test_maxBooks() {
+        $this->assertSettingSavedAs("maxBooks", "1", 1);
+        $this->assertSettingSavedAs("maxBooks", "20", 20);
+        $this->assertSettingSavedAs("maxBooks", "200", 200);
+        $this->assertSettingSavedAs("maxBooks", "0", 1);
+        
+        // invalid values revert to default setting, might change in the future
+        $this->assertSettingSavedAs("maxBooks", "-1", 3);
+        $this->assertSettingSavedAs("maxBooks", "foo", 3);
+    }
 
     public function test_sortByReadingProgress() {
         $this->assertCheckedSettingCorrectlyUpdated('sortByReadingProgress');
+    }
+    
+    public function test_sortOrder() {
+        $this->assertSettingSavedAs('sortBy', 'date_updated', 'date_updated');
+        $this->assertSettingSavedAs('sortBy', 'position', 'position');
+        $this->assertSettingSavedAs('sortBy', 'foobar', 'date_updated');
+    }
+    
+    public function test_sortBy() {
+        $this->assertSettingSavedAs('sortOrder', 'a', 'a');
+        $this->assertSettingSavedAs('sortOrder', 'd', 'd');
+        $this->assertSettingSavedAs('sortOrder', 'foobar', 'd');
+    }
+    
+    public function test_progressType() {
+        $this->assertSettingSavedAs("progressType", (string)Progress::DISABLED, Progress::DISABLED);
+        $this->assertSettingSavedAs("progressType", (string)Progress::PROGRESSBAR, Progress::PROGRESSBAR);
+        $this->assertSettingSavedAs("progressType", (string)Progress::TEXT, Progress::TEXT);
     }
 
     public function test_displayProgressUpdateTime() {
@@ -81,7 +115,7 @@ class SettingsTest extends GR_Progress_UnitTestCase {
 
     public function test_intervalTemplate() {
         $this->assertPassesAllTextInputTests('intervalTemplate');
-        $this->assertSettingSavedAs('intervalTemplate', '{num} {period} ago', '{num} {period} ago');
+        $this->assertSettingSavedAs('intervalTemplate', 'updated {num} {period} ago', 'updated {num} {period} ago');
     }
 
     public function test_intervalSingular_intervalPlural() {
@@ -94,10 +128,21 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         $this->assertEquals($newSettings['intervalPlural'], $intervalsExpectedPlural);
     }
     
-    public function test_useProgressBar() {
-        // FIXME: implement
+    public function test_cacheTimeInHours() {
+        $this->assertSettingSavedAs("cacheTimeInHours", "1", 1);
+        $this->assertSettingSavedAs("cacheTimeInHours", "20", 20);
+        $this->assertSettingSavedAs("cacheTimeInHours", "200", 200);
+        $this->assertSettingSavedAs("cacheTimeInHours", "0", 0);
+        
+        // invalid values revert to default setting, might change in the future
+        $this->assertSettingSavedAs("cacheTimeInHours", "-1", 24);
+        $this->assertSettingSavedAs("cacheTimeInHours", "foo", 24);
     }
     
-    // FIXME: implement other tests
+    public function test_regenerateCacheOnSave() {
+        // FIXME: implement if functionality isn't removed
+    }
+    
+    
 
 }

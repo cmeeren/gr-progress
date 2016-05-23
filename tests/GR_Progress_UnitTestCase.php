@@ -105,7 +105,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
 
     public function assertSettingSavedAs($setting, $inputValue, $expectedOutput) {
         $settings = $this->getNewSettings([$setting => $inputValue]);
-        $this->assertEquals($expectedOutput, $settings[$setting]);
+        $this->assertSame($expectedOutput, $settings[$setting]);
     }
 
     public function assertSettingTextIsSaved($setting) {
@@ -131,10 +131,12 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
 
         $widget = new gr_progress_cvdm_widget();
 
+        // $setting is present in the default settings, so it's parsed as checked (true/false doesn't matter)
         $settingsWithCheckedOption = $this->DEFAULT_SETTINGS;
         $parsedSettingsChecked = $widget->update($settingsWithCheckedOption, $this->DEFAULT_SETTINGS);
         $this->assertTrue($parsedSettingsChecked[$setting]);
 
+        // remove $setting key from default settings so it will be parsed as unchecked
         $settingsWithoutCheckedOption = array_diff_key($this->DEFAULT_SETTINGS, [$setting => '']);
         $parsedSettingsUnchecked = $widget->update($settingsWithoutCheckedOption, $this->DEFAULT_SETTINGS);
         $this->assertFalse($parsedSettingsUnchecked[$setting]);
