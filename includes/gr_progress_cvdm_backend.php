@@ -35,15 +35,15 @@ class gr_progress_cvdm_backend {
         'emptyMessage' => 'Not currently reading anything.',
         'coverSize' => CoverSize::SMALL,
         'displayReviewExcerpt' => false,
+        'maxBooks' => 3,
         'sortByReadingProgress' => false,
+        'sortBy' => 'date_updated',
+        'sortOrder' => 'd',
+        'progressType' => Progress::DISABLED,
         'displayProgressUpdateTime' => true,
         'intervalTemplate' => '{num} {period} ago',
         'intervalSingular' => ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
         'intervalPlural' => ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'],
-        'progressType' => Progress::DISABLED,
-        'sortBy' => 'date_updated',
-        'sortOrder' => 'd',
-        'maxBooks' => 3,
         'cacheTimeInHours' => 24,
         'regenerateCacheOnSave' => false,
         'deleteCoverURLCacheOnSave' => false,
@@ -86,7 +86,7 @@ class gr_progress_cvdm_backend {
         //delete_transient($this->getWidgetKey()); // FIXME
         //delete_option($this->getWidgetKey()); // FIXME
         //delete_transient('cvdm_gr_progress_goodreadsFetchFail'); // FIXME
-        
+
         if ($this->hasCache()) {
             echo $this->getCachedHTML();
         } else {
@@ -568,22 +568,27 @@ class gr_progress_cvdm_backend {
 
     public function getNewWidgetSettings($new_instance, $old_instance) {
 
-        // FIXME: go through new settings
-
         $instance = $old_instance;
+
         $instance['title'] = trim(htmlspecialchars($new_instance['title']));
+
         $goodreadsAttribution = trim(htmlspecialchars($new_instance['goodreadsAttribution']));
         $instance['goodreadsAttribution'] = !empty($goodreadsAttribution) ? $goodreadsAttribution : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
 
         preg_match("/\d+/", $new_instance['userid'], $matches_userid);
-        $instance['userid'] = !empty($matches_userid) ? $matches_userid[0] : "";
+        $instance['userid'] = !empty($matches_userid) ? $matches_userid[0] : $this->DEFAULT_SETTINGS['userid'];
 
         $instance['apiKey'] = trim(htmlspecialchars($new_instance['apiKey']));
         $instance['shelfName'] = trim(htmlspecialchars($new_instance['shelfName']));
         $instance['emptyMessage'] = trim(htmlspecialchars($new_instance['emptyMessage']));
         $instance['coverSize'] = intval($new_instance['coverSize']);
         $instance['displayReviewExcerpt'] = isset($new_instance['displayReviewExcerpt']) ? true : false;
+        // FIXME: maxBooks - test that 1 is minimum and that default setting is used
+        $instance['maxBooks'] = preg_match("/\d+/", $new_instance['maxBooks']) ? max(1, intval($new_instance['maxBooks'])) : $this->DEFAULT_SETTINGS['maxBooks'];
         $instance['sortByReadingProgress'] = isset($new_instance['sortByReadingProgress']) ? true : false;
+        $instance['sortBy'] = array_key_exists($new_instance['sortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['sortBy'] : $this->DEFAULT_SETTINGS['sortBy'];
+        $instance['sortOrder'] = array_key_exists($new_instance['sortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['sortOrder'] : $this->DEFAULT_SETTINGS['sortOrder'];
+        $instance['progressType'] = intval($new_instance['progressType']);
         $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
         $instance['intervalTemplate'] = trim(htmlspecialchars($new_instance['intervalTemplate']));
 
@@ -597,10 +602,6 @@ class gr_progress_cvdm_backend {
             }
         }
 
-        $instance['progressType'] = intval($new_instance['progressType']);
-        $instance['sortBy'] = array_key_exists($new_instance['sortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['sortBy'] : $this->DEFAULT_SETTINGS['sortBy'];
-        $instance['sortOrder'] = array_key_exists($new_instance['sortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['sortOrder'] : $this->DEFAULT_SETTINGS['sortOrder'];
-        $instance['maxBooks'] = preg_match("/\d+/", $new_instance['maxBooks']) ? max(1, intval($new_instance['maxBooks'])) : $this->DEFAULT_SETTINGS['maxBooks'];  // FIXME: test that 1 is minimum and that default setting is used
         $instance['cacheTimeInHours'] = preg_match("/\d+/", $new_instance['cacheTimeInHours']) ? intval($new_instance['cacheTimeInHours']) : $this->DEFAULT_SETTINGS['cacheTimeInHours'];
         $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
 
@@ -621,7 +622,7 @@ class gr_progress_cvdm_backend {
     }
 
     private function regenerateCache() {
-        // FIXME: re-implement
+        // FIXME: re-implement - problem, since creating new HTML requires $args
     }
 
     private function deleteCache() {

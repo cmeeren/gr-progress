@@ -13,9 +13,8 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         GoodreadsFetcher::$test_local = true;
         GoodreadsFetcher::$test_fail = false;
         Shelf::$test_disableCoverFetching = false;
-        delete_option('gr_progress_cvdm_shelves');
-        delete_option('gr_progress_cvdm_lastRetrievalErrorTime');
-        delete_option('gr_progress_cvdm_coverURLs');
+        delete_transient('cvdm_gr_progress_goodreadsFetchFail');
+        delete_option("gr_progress_cvdm_coverURLs");
     }
 
     public function test_title() {
@@ -60,16 +59,16 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         $this->assertPassesAllTextInputTests('apiKey');
     }
 
-    public function test_currentlyReadingShelfName() {
-        $this->assertPassesAllTextInputTests('currentlyReadingShelfName');
+    public function test_shelfName() {
+        $this->assertPassesAllTextInputTests('shelfName');
     }
 
     public function test_emptyMessage() {
         $this->assertPassesAllTextInputTests('emptyMessage');
     }
 
-    public function test_displayReviewExcerptCurrentlyReadingShelf() {
-        $this->assertCheckedSettingCorrectlyUpdated('displayReviewExcerptCurrentlyReadingShelf');
+    public function test_displayReviewExcerpt() {
+        $this->assertCheckedSettingCorrectlyUpdated('displayReviewExcerpt');
     }
 
     public function test_sortByReadingProgress() {
