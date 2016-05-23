@@ -214,7 +214,7 @@ class gr_progress_cvdm_backend {
         }
         $progressStatusUpdateTime = $book->getProgressStatusUpdateTime();
         $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . $this->getTimeElapsedString("@" . strval($progressStatusUpdateTime)) . ")" : "";
-        echo "<p class='progress progress-string'>$percent&thinsp;%$time</p>";
+        echo "<p class='progress progress-text'>$percent&thinsp;%$time</p>";
     }
 
     private function getTimeElapsedString($datetime) {

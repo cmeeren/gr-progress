@@ -11,27 +11,20 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'goodreadsAttribution' => 'Data from Goodreads',
         'userid' => '55769144',
         'apiKey' => 'HAZB53duIFj5Ur87DiOW7Q',
-        'currentlyReadingShelfName' => 'currently-reading',
+        'shelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
-        'displayReviewExcerptCurrentlyReadingShelf' => false,
+        'coverSize' => CoverSize::SMALL,
+        'displayReviewExcerpt' => false,
         'sortByReadingProgress' => false,
         'displayProgressUpdateTime' => true,
         'intervalTemplate' => '{num} {period} ago',
         'intervalSingular' => ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
         'intervalPlural' => ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'],
-        'useProgressBar' => true,
-        'currentlyReadingShelfSortBy' => 'date_updated',
-        'currentlyReadingShelfSortOrder' => 'd',
-        'maxBooksCurrentlyReadingShelf' => 15,
-        'additionalShelfName' => 'to-read',
-        'additionalShelfHeading' => 'Reading soon',
-        'emptyMessageAdditional' => "Nothing planned at the moment.",
-        'displayReviewExcerptAdditionalShelf' => false,
-        'additionalShelfSortBy' => 'position',
-        'additionalShelfSortOrder' => 'a',
-        'maxBooksAdditionalShelf' => 15,
-        'progressCacheHours' => 24,
-        'bookCacheHours' => 24,
+        'progressType' => Progress::DISABLED,
+        'sortBy' => 'date_updated',
+        'sortOrder' => 'd',
+        'maxBooks' => 15,
+        'cacheTimeInHours' => 24,
         'regenerateCacheOnSave' => false,
         'deleteCoverURLCacheOnSave' => false,
     ];
@@ -41,6 +34,22 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'before_title' => '',
         'after_title' => '',
     ];
+    protected $DEFAULT_BOOKS_CURRENTLY_READING = [
+        "A Game of Thrones",
+        "The Chronicles of Narnia",
+        "The Lord of the Rings",
+        "Harry Potter and the Sorcerer"];
+    protected $DEFAULT_BOOKS_TO_READ = [
+        "The Name of the Wind",
+        "The Eye of the World",
+        "His Dark Materials",
+        "The Lightning Thief",
+        "Mistborn",
+        "City of Bones",
+        "The Way of Kings",
+        "The Gunslinger",
+        "The Color of Magic",
+        "Artemis Fowl"];
 
     /**
      * Returns the HTML used for rendering the widget.
@@ -50,8 +59,13 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     public function getWidgetHTML($overrideSettings = []) {
         $settings = $this->getSettingsWithOverride($overrideSettings);
 
+        // use a unique title to make sure we don't use cached data
+        if (!array_key_exists("title", $overrideSettings)) {
+            $settings['title'] = rand(0, 10000) . microtime();
+        }
+
         $widget = new gr_progress_cvdm_widget();
-        
+
         ob_start();
         $widget->widget($this->DEFAULT_ARGS, $settings);
         $html = ob_get_clean();
@@ -137,45 +151,22 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     }
 
     /**
-     * Asserts that the book titles on the primary shelf contains the substrings
-     * given in $bookTitles, in order.
-     * @param string[] $bookTitles
-     * @param string $html
-     */
-    public function assertOrderedBookTitlesOnPrimaryShelfContains($bookTitles, $html) {
-        $dom = str_get_html($html);
-        $primaryShelf = $dom->find('.currently-reading-shelf', 0);
-        $this->assertOrderedBookTitlesContains($bookTitles, $primaryShelf);
-    }
-
-    /**
-     * Asserts that the book titles on the secondary shelf contains the
-     * substrings given in $bookTitles, in order.
-     * @param string[] $bookTitles
-     * @param string $html
-     */
-    public function assertOrderedBookTitlesOnSecondaryShelfContains($bookTitles, $html) {
-        $dom = str_get_html($html);
-        $secondaryShelf = $dom->find('.additional-shelf', 0);
-        $this->assertOrderedBookTitlesContains($bookTitles, $secondaryShelf);
-    }
-
-    /**
      * Asserts that the book titles in the given dom element contains the
-     * substrings given in $bookTitlesExpected, in order.
-     * @param string[] $bookTitlesExpected
-     * @param simple_html_dom_node $domElement
+     * substrings given in $bookNameSubstrings, in order.
+     * @param string[] $bookNameSubstrings
+     * @param string $html
      */
-    private function assertOrderedBookTitlesContains($bookTitlesExpected, $domElement) {
+    public function assertBooksOnShelf($bookNameSubstrings, $html) {
+        $dom = str_get_html($html);
         $bookTitlesActual = [];
-        foreach ($domElement->find(".bookTitle") as $bookTitleElement) {
+        foreach ($dom->find('.bookshelf', 0)->find(".bookTitle") as $bookTitleElement) {
             $bookTitlesActual[] = $bookTitleElement->plaintext;
         }
 
-        $this->assertCount(count($bookTitlesExpected), $bookTitlesActual, "Shelf does not contain expected number of books");
+        $this->assertCount(count($bookNameSubstrings), $bookTitlesActual, "Shelf does not contain expected number of books");
 
-        for ($i = 0; $i < count($bookTitlesExpected); $i++) {
-            $this->assertContains($bookTitlesExpected[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
+        for ($i = 0; $i < count($bookNameSubstrings); $i++) {
+            $this->assertContains($bookNameSubstrings[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
         }
     }
 
@@ -183,48 +174,9 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
      * Asserts that there is no primary shelf in the input string.
      * @param string $html
      */
-    public function assertNoPrimaryShelf($html) {
+    public function assertNoShelf($html) {
         $dom = str_get_html($html);
-        $this->assertEmpty($dom->find('.currently-reading-shelf'), "Found primary shelf but expected none");
-    }
-
-    /**
-     * Asserts that there is no secondary shelf in the input string.
-     * @param string $html
-     */
-    public function assertNoSecondaryShelf($html) {
-        $dom = str_get_html($html);
-        $this->assertEmpty($dom->find('.additional-shelf'), "Found secondary shelf but expected none");
-    }
-
-    /**
-     * Asserts that the primary shelf contains the books for the default settings.
-     * @param string $html
-     */
-    public function assertDefaultBooksOnPrimaryShelf($html) {
-        $this->assertOrderedBookTitlesOnPrimaryShelfContains([
-            "A Game of Thrones",
-            "The Chronicles of Narnia",
-            "The Lord of the Rings",
-            "Harry Potter and the Sorcerer"], $html);
-    }
-
-    /**
-     * Asserts that the secondary shelf contains the books for the default settings.
-     * @param string $html
-     */
-    public function assertDefaultBooksOnSecondaryShelf($html) {
-        $this->assertOrderedBookTitlesOnSecondaryShelfContains([
-            "The Name of the Wind",
-            "The Eye of the World",
-            "His Dark Materials",
-            "The Lightning Thief",
-            "Mistborn",
-            "City of Bones",
-            "The Way of Kings",
-            "The Gunslinger",
-            "The Color of Magic",
-            "Artemis Fowl"], $html);
+        $this->assertEmpty($dom->find('.bookshelf'), "Found shelf but expected none");
     }
 
     /**
@@ -254,15 +206,31 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         $this->assertBookDoesNotHaveDescriptionField($bookNameSubstring, ".progress", $html);
     }
 
+    public function assertBooksHaveProgressBar($html) {
+        $dom = str_get_html($html);
+        $progressBars = $dom->find(".progress-bar");
+        $progressTexts = $dom->find(".progress-text");
+        $this->assertNotEmpty($progressBars, "No progress bars found");
+        $this->assertEmpty($progressTexts, "Progress texts found but expected bars");
+    }
+
+    public function assertBooksHaveProgressText($html) {
+        $dom = str_get_html($html);
+        $progressTexts = $dom->find(".progress-text");
+        $progressBars = $dom->find(".progress-bar");
+        $this->assertNotEmpty($progressTexts, "No progress texts found");
+        $this->assertEmpty($progressBars, "Progress bars found but expected texts");
+    }
+
     private function assertBookDescriptionFieldContains($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $html) {
-        $this->assertBookDescrptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, false, $html);
+        $this->assertBookDescriptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, false, $html);
     }
 
     private function assertBookDescriptionFieldNotContains($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $html) {
-        $this->assertBookDescrptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, true, $html);
+        $this->assertBookDescriptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, true, $html);
     }
 
-    private function assertBookDescrptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $exclude, $html) {
+    private function assertBookDescriptionFieldContainsOrNot($bookNameSubstring, $descriptionFieldSelector, $fieldContains, $exclude, $html) {
         $this->assertBookExists($bookNameSubstring, $html);
         $dom = str_get_html($html);
         foreach ($dom->find('.desc') as $descriptionElement) {
