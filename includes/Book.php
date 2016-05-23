@@ -15,7 +15,6 @@ class Book {
     private $progressInPercent;
     private $progressStatusUpdateTime;
     private $widgetData;
-    public $retrievalError = false;
 
     public function __construct($id, $title, $authors, $comment, $widgetData) {
         $this->id = $id;
@@ -56,11 +55,11 @@ class Book {
     public function getProgressStatusUpdateTime() {
         return $this->progressStatusUpdateTime;
     }
-    
+
     public function hasComment() {
         return !empty($this->comment);
     }
-    
+
     public function getComment() {
         return $this->comment;
     }
@@ -70,13 +69,12 @@ class Book {
 
         $fetcher = new GoodreadsFetcher();
         $xml = str_get_html($fetcher->fetch(
-                "http://www.goodreads.com/review/show_by_user_and_book.xml"
-                . "?key={$this->widgetData['apiKey']}"
-                . "&book_id={$this->id}"
-                . "&user_id={$this->widgetData['userid']}"));
+                        "http://www.goodreads.com/review/show_by_user_and_book.xml"
+                        . "?key={$this->widgetData['apiKey']}"
+                        . "&book_id={$this->id}"
+                        . "&user_id={$this->widgetData['userid']}"));
 
         if ($xml === false) {
-            $this->retrievalError = true;
             return;
         }
 
@@ -97,7 +95,6 @@ class Book {
 
         $this->progressInPercent = $percent;
         $this->progressStatusUpdateTime = $latestStatusTimestamp;
-        $this->retrievalError = false;
     }
 
 }

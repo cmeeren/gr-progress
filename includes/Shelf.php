@@ -7,27 +7,20 @@ require_once("GoodreadsFetcher.php");
 
 class Shelf {
 
-    private $shelfName;
     private $widgetData;
     private $books = [];
-    private $bookRetrievalTimestamp;
-    private $lastProgressRetrievalTimestamp = 0;
-    public $retrievalError = false;
     public static $test_disableCoverFetching = false;
 
-    function __construct($shelfName, $widgetData) {
-        $this->shelfName = $shelfName;
+    function __construct($widgetData) {
         $this->widgetData = $widgetData;
-        $this->fetchBooksFromGoodreads();
+        $this->fetchBooksFromGoodreadsUsingAPI();
         $this->loadCachedCoverURLs();
+        if ($this->widgetData['progressType'] !== Progress::DISABLED) {
+            $this->updateProgress();
+        }
         if (!self::$test_disableCoverFetching) {
             $this->fetchCoverURLsIfMissing();
         }
-    }
-
-    private function fetchBooksFromGoodreads() {
-        $this->fetchBooksFromGoodreadsUsingAPI();
-        $this->bookRetrievalTimestamp = time();
     }
 
     private function fetchBooksFromGoodreadsUsingAPI() {
@@ -37,13 +30,12 @@ class Shelf {
                         . "{$this->widgetData['userid']}.xml"
                         . "?v=2"
                         . "&key={$this->widgetData['apiKey']}"
-                        . "&shelf={$this->shelfName}"
+                        . "&shelf={$this->widgetData['shelfName']}"
                         . "&per_page={$this->getMaxBooks()}"
-                        . "&sort={$this->getSortBy()}"
-                        . "&order={$this->getSortOrder()}"));
+                        . "&sort={$this->widgetData['sortBy']}"
+                        . "&order={$this->widgetData['sortOrder']}"));
 
         if ($xml === false) {
-            $this->retrievalError = true;
             return;
         }
 
@@ -63,41 +55,16 @@ class Shelf {
     }
 
     private function getMaxBooks() {
-        if ($this->isCurrentlyReadingShelf()) {
-            if ($this->widgetData['sortByReadingProgress']) {
-                return 100;
-            } else {
-                return $this->widgetData['maxBooksCurrentlyReadingShelf'];
-            }
+        if ($this->widgetData['sortByReadingProgress']) {
+            return 100;
         } else {
-            return $this->widgetData['maxBooksAdditionalShelf'];
+            return $this->widgetData['maxBooks'];
         }
-    }
-
-    private function getSortBy() {
-        if ($this->isCurrentlyReadingShelf()) {
-            return $this->widgetData['currentlyReadingShelfSortBy'];
-        } else {
-            return $this->widgetData['additionalShelfSortBy'];
-        }
-    }
-
-    private function getSortOrder() {
-        if ($this->isCurrentlyReadingShelf()) {
-            return $this->widgetData['currentlyReadingShelfSortOrder'];
-        } else {
-            return $this->widgetData['additionalShelfSortOrder'];
-        }
-    }
-
-    private function isCurrentlyReadingShelf() {
-        return $this->shelfName == $this->widgetData['currentlyReadingShelfName'];
     }
 
     private function getReviewBodyFirstLine($reviewElement) {
         $reviewBodyFirstLine = null;
-        $showBookComment = $this->isCurrentlyReadingShelf() ? $this->widgetData['displayReviewExcerptCurrentlyReadingShelf'] : $this->widgetData['displayReviewExcerptAdditionalShelf'];
-        if ($showBookComment) {
+        if ($this->widgetData['displayReviewExcerpt']) {
             $reviewBody = $reviewElement->find("body", 0)->plaintext;
             $re_CDATA = "/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/";
             if (preg_match($re_CDATA, $reviewBody)) {
@@ -150,13 +117,12 @@ class Shelf {
         $html = str_get_html($fetcher->fetch(
                         "http://www.goodreads.com/review/list/"
                         . "{$this->widgetData['userid']}"
-                        . "?shelf={$this->shelfName}"
+                        . "?shelf={$this->widgetData['shelfName']}"
                         . "&per_page={$this->getMaxBooks()}"
-                        . "&sort={$this->getSortBy()}"
-                        . "&order={$this->getSortOrder()}"));
+                        . "&sort={$this->widgetData['sortBy']}"
+                        . "&order={$this->widgetData['sortOrder']}"));
 
         if ($html === false) {
-            $this->retrievalError = true;
             return;
         }
 
@@ -182,10 +148,9 @@ class Shelf {
         $xml = str_get_html($fetcher->fetch(
                         "http://www.goodreads.com/review/list_rss/"
                         . "{$this->widgetData['userid']}"
-                        . "?shelf={$this->shelfName}"));
+                        . "?shelf={$this->widgetData['shelfName']}"));
 
         if ($xml === false) {
-            $this->retrievalError = true;
             return;
         }
 
@@ -217,42 +182,19 @@ class Shelf {
         return count($this->books) == 0;
     }
 
-    public function bookCacheOutOfDate() {
-        $bookDataAgeInSeconds = time() - $this->bookRetrievalTimestamp;
-        $bookCacheTTLInSeconds = $this->widgetData['bookCacheHours'] * 3600;
-        return $bookDataAgeInSeconds > $bookCacheTTLInSeconds;
-    }
-
-    public function progressCacheOutOfDate() {
-        $progressDataAgeInSeconds = time() - $this->lastProgressRetrievalTimestamp;
-        $progressCacheTTLInSeconds = $this->widgetData['progressCacheHours'] * 3600;
-        return $progressDataAgeInSeconds > $progressCacheTTLInSeconds;
-    }
-
     public function updateProgress() {
-        $progressFetchOk = true;
         foreach ($this->books as $book) {
             $book->fetchProgressUsingAPI($book);
-            if ($book->retrievalError) {
-                $progressFetchOk = false;
-                update_option("gr_progress_cvdm_lastRetrievalErrorTime", time());
-            }
         }
-
-        if ($progressFetchOk) {
-            $this->lastProgressRetrievalTimestamp = time();
-        }
-
         $this->sortBooksByReadingProgressIfRelevant();
     }
 
     private function sortBooksByReadingProgressIfRelevant() {
-        if ($this->isCurrentlyReadingShelf() && $this->widgetData['sortByReadingProgress']) {
+        if ($this->widgetData['sortByReadingProgress']) {
             mergesort($this->books, '\relativisticramblings\gr_progress\compareBookProgress');
-            // All books on shelf were fetched previously in order to sort them
-            // by reading progerss. Only keep maxBooksCurrentlyReadingShelf
-            // number of books now after they've been sorted.
-            $this->books = array_slice($this->books, 0, $this->widgetData['maxBooksCurrentlyReadingShelf'], true);
+            // All books on shelf were fetched previously in order to sort them by reading progerss.
+            // Only keep maxBooks number of books now after they've been sorted.
+            $this->books = array_slice($this->books, 0, $this->widgetData['maxBooks'], true);
         }
     }
 

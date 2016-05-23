@@ -4,18 +4,30 @@ namespace relativisticramblings\gr_progress;
 
 class GoodreadsFetcher {
 
-    private $DEFAULT_TIMEOUT_IN_SECONDS = 5;
+    private $DEFAULT_TIMEOUT_IN_SECONDS = 3;
+    private $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
     public static $test_local = false;
     public static $test_fail = false;
 
     public function fetch($url) {
-        if (self::$test_fail) {
+
+        if (get_transient('cvdm_gr_progress_goodreadsFetchFail') !== false) {
             return false;
-        } elseif (self::$test_local) {
-            return $this->fetchFromFile($url);
-        } else {
-            return $this->fetchFromGoodreads($url);
         }
+
+        if (self::$test_fail) {
+            $result = false;
+        } elseif (self::$test_local) {
+            $result = $this->fetchFromFile($url);
+        } else {
+            $result = $this->fetchFromGoodreads($url);
+        }
+
+        if ($result === false) {
+            set_transient('cvdm_gr_progress_goodreadsFetchFail', time() + $this->SECONDS_TO_WAIT_AFTER_FAILED_FETCH);
+        }
+
+        return $result;
     }
 
     private function fetchFromGoodreads($url) {
@@ -24,7 +36,7 @@ class GoodreadsFetcher {
     }
 
     private function fetchFromFile($url) {
-        $file = $this->getPath() . $this->getSafeFilename($url);
+        $file = $this->getTestStoragePath() . $this->getSafeTestStorageFilename($url);
         if (is_file($file)) {
             return file_get_contents($file);
         } else {
@@ -34,11 +46,11 @@ class GoodreadsFetcher {
         }
     }
 
-    private function getPath() {
+    private function getTestStoragePath() {
         return dirname(__FILE__) . '/../tests/responses/';
     }
 
-    private function getSafeFilename($str) {
+    private function getSafeTestStorageFilename($str) {
         $str = mb_ereg_replace("([^\w\d\-_])", '', $str);
         $str = mb_ereg_replace("([\.]{2,})", '', $str);
         return $str;

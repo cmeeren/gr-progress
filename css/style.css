@@ -25,7 +25,7 @@
     padding-bottom: 1rem;
     padding-right: 1rem;
 }
-.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .book .coverImage {
+.widget_gr_progress_cvdm_widget .bookshelf.small-cover .book .coverImage {
     width: 20%;
     padding-bottom: 0.8rem;
 }
@@ -43,11 +43,11 @@
 .widget_gr_progress_cvdm_widget .bookshelf .book .desc p {
     line-height: 1.5;
 }
-.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .coverImage
+.widget_gr_progress_cvdm_widget .bookshelf.small-cover .coverImage
 {
     padding-right: 0.8rem;
 }
-.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .desc {
+.widget_gr_progress_cvdm_widget .bookshelf.small-cover .desc {
     width: 80% !important;
     padding-bottom: 0.8rem;
 }
@@ -59,10 +59,6 @@
     font-weight: bold;
     margin: 0;
 }
-.widget_gr_progress_cvdm_widget h3.additional-shelf-heading {
-    margin: 1.5rem 0 1rem 0 !important;
-    font-size: 120%;
-}
 .widget_gr_progress_cvdm_widget .bookshelf .book .desc .author {
     margin: 0; /* no margin between book title and author */
 }
@@ -72,7 +68,7 @@
     margin: 0;
     margin-top: 1rem;
 }
-.widget_gr_progress_cvdm_widget .bookshelf.additional-shelf .book .desc .bookComment
+.widget_gr_progress_cvdm_widget .bookshelf.small-cover .book .desc .bookComment
 {
     margin-top: 0.5rem;
 }
