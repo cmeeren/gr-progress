@@ -72,6 +72,10 @@
 {
     margin-top: 0.5rem;
 }
+.widget_gr_progress_cvdm_widget .bookshelf .book .desc .bookComment
+{
+    font-style: italic;
+}
 /* Progress bar */
 .widget_gr_progress_cvdm_widget .bookshelf .book .desc .progress-bar-wrapper {
     position: relative;
