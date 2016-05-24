@@ -32,9 +32,12 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertIsValidHTML($html);
     }
 
-    public function testCorrectBooksUsingDefaultSettings() {
-        $html = $this->getWidgetHTML();
-        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html);
+    public function testCorrectBooksOnTwoSimultaneousShelves() {
+        $html_widget1 = $this->getWidgetHTML();
+        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_widget1);
+        
+        $html_widget2 = $this->getWidgetHTML(['shelfName' => 'to-read', 'sortBy' => 'position', 'sortOrder' => 'a']);
+        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_TO_READ, $html_widget2);
     }
 
     public function testSetting_title() {
@@ -63,6 +66,16 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_PROGRESS;
         $html = $this->getWidgetHTML(['progressType' => Progress::PROGRESSBAR]);
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
+    }
+    
+    public function testErrorMessageOnWidget2AfterFailedBookshelfFetchOnWidget1() {
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
+        $html_widget1 = $this->getWidgetHTML();
+        $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html_widget1);
+        
+        GoodreadsFetcher::$fail_if_url_matches = null;
+        $html_widget2 = $this->getWidgetHTML();
+        $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html_widget2);
     }
 
     public function testUseCacheOnFailedBookshelfFetch() {
