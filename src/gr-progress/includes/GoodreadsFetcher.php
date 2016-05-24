@@ -7,7 +7,13 @@ class GoodreadsFetcher {
     private static $DEFAULT_TIMEOUT_IN_SECONDS = 3;
     private static $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
     public static $test_local = false;
-    public static $test_fail = false;
+
+    /**
+     * Force fetch to fail when regex matches this string.
+     * Used for testing
+     * @var string
+     */
+    public static $fail_if_url_matches = null;
 
     public static function fetch($url) {
 
@@ -15,7 +21,7 @@ class GoodreadsFetcher {
             return false;
         }
 
-        if (self::$test_fail) {
+        if (!empty(self::$fail_if_url_matches) && preg_match(self::$fail_if_url_matches, $url)) {
             $result = false;
         } elseif (self::$test_local) {
             $result = self::fetchFromFile($url);

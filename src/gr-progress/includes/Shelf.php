@@ -9,7 +9,6 @@ class Shelf {
 
     private $widgetData;
     private $books = [];
-    public static $test_disableCoverFetching = false;
 
     function __construct($widgetData) {
         $this->widgetData = $widgetData;
@@ -18,9 +17,7 @@ class Shelf {
         if ($this->widgetData['progressType'] !== Progress::DISABLED) {
             $this->updateProgress();
         }
-        if (!self::$test_disableCoverFetching) {
-            $this->fetchCoverURLsIfMissing();
-        }
+        $this->fetchCoverURLsIfMissing();
     }
 
     private function fetchBooksFromGoodreadsUsingAPI() {

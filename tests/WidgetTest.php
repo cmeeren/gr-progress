@@ -6,10 +6,13 @@ require_once('GR_Progress_UnitTestCase.php');
 
 class WidgetTest extends GR_Progress_UnitTestCase {
 
+    private $RE_FAIL_FETCH_BOOKSHELF = '$goodreads.com/review/list/\d+\.xml$';
+    private $RE_FAIL_FETCH_COVER = '$goodreads.com/review/list_rss/$';
+    private $RE_FAIL_FETCH_PROGRESS = '$review/show_by_user_and_book.xml$';
+
     public function setUp() {
         GoodreadsFetcher::$test_local = true;
-        GoodreadsFetcher::$test_fail = false;
-        Shelf::$test_disableCoverFetching = false;
+        GoodreadsFetcher::$fail_if_url_matches = null;
         delete_transient('cvdm_gr_progress_goodreadsFetchFail');
         delete_option("gr_progress_cvdm_coverURLs");
     }
@@ -39,32 +42,72 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertContains("GOODREADS_ATTRIBUTION_FOOBAR", $html);
     }
 
-    public function testErrorMessageOnFailedFetch() {
-        GoodreadsFetcher::$test_fail = true;
+    public function testErrorMessageOnFailedBookshelfFetch() {
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
         $html = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
     }
 
-    public function testUseCacheOnFailedFetch() {
+    public function testErrorMessageOnFailedCoverFetch() {
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_COVER;
+        $html = $this->getWidgetHTML();
+        $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
+    }
+
+    public function testErrorMessageOnFailedProgressFetch() {
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_PROGRESS;
+        $html = $this->getWidgetHTML(['progressType' => Progress::PROGRESSBAR]);
+        $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
+    }
+
+    public function testUseCacheOnFailedBookshelfFetch() {
         $title = rand(0, 10000) . microtime();
         $html_uncached = $this->getWidgetHTML(['title' => $title]);  // saves books to cache
-        // just to be safe
+        // just to be safe - don't want a false positive if the fetch fails both times
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
         $this->assertAllBooksHaveCoverImage($html_uncached);
 
-        GoodreadsFetcher::$test_fail = true;
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
         $html_cached = $this->getWidgetHTML(['title' => $title]);
+        $this->assertEquals($html_uncached, $html_cached);
+    }
+
+    public function testUseCacheOnFailedCoverFetch() {
+        $title = rand(0, 10000) . microtime();
+        $html_uncached = $this->getWidgetHTML(['title' => $title]);  // saves books to cache
+        // just to be safe - don't want a false positive if the fetch fails both times
+        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
+        $this->assertAllBooksHaveCoverImage($html_uncached);
+
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_COVER;
+        $html_cached = $this->getWidgetHTML(['title' => $title]);
+        $this->assertEquals($html_uncached, $html_cached);
+    }
+
+    public function testUseCacheOnFailedProgressFetch() {
+        $title = rand(0, 10000) . microtime();
+        $html_uncached = $this->getWidgetHTML(['title' => $title, 'progressType' => Progress::PROGRESSBAR]);  // saves books to cache
+        // just to be safe - don't want a false positive if the fetch fails both times
+        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
+        $this->assertAllBooksHaveCoverImage($html_uncached);
+
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_PROGRESS;
+        $html_cached = $this->getWidgetHTML(['title' => $title, 'progressType' => Progress::PROGRESSBAR]);
         $this->assertEquals($html_uncached, $html_cached);
     }
 
     public function testUseCachedCovers() {
         $this->getWidgetHTML();  // saves books and covers to cache
-        Shelf::$test_disableCoverFetching = true;
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_COVER;
         // rebuild shelves - use slightly different settings so
-        // // previous cached results won't be used. Since cover
+        // previous cached results won't be used. Since cover
         // fetching is disabled, using cached covers is the only option.
-        $html = $this->getWidgetHTML(['title' => 'foobar']);
+        $html = $this->getWidgetHTML(['title' => rand(0, 10000) . microtime()]);
         $this->assertAllBooksHaveCoverImage($html);
+
+        // Also check that cvdm_gr_progress_goodreadsFetchFail hasn't been set,
+        // because no covers should have been fetched in the first place
+        $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
     }
 
     public function testSetting_shelfNameAndSorting() {
