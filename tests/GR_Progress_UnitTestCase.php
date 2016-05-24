@@ -145,7 +145,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     }
 
     /**
-     * Asserts that the book titles in the given dom element contains the
+     * Asserts that the book titles in the given html contains the
      * substrings given in $bookNameSubstrings, in order.
      * @param string[] $bookNameSubstrings
      * @param string $html
@@ -161,6 +161,26 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
 
         for ($i = 0; $i < count($bookNameSubstrings); $i++) {
             $this->assertContains($bookNameSubstrings[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
+        }
+    }
+    
+    /**
+     * Asserts that the author names in the given html contains the
+     * substrings given in $authorNameSubstrings, in order.
+     * @param string[] $authorNameSubstrings
+     * @param string $html
+     */
+    public function assertAuthorsOnShelf($authorNameSubstrings, $html) {
+        $dom = str_get_html($html);
+        $authorNamesActual = [];
+        foreach ($dom->find('.bookshelf', 0)->find(".author") as $authorNameElement) {
+            $authorNamesActual[] = $authorNameElement->plaintext;
+        }
+
+        $this->assertCount(count($authorNameSubstrings), $authorNamesActual, "Shelf does not contain expected number of authors");
+
+        for ($i = 0; $i < count($authorNameSubstrings); $i++) {
+            $this->assertContains($authorNameSubstrings[$i], $authorNamesActual[$i], "Wrong book on index " . $i);
         }
     }
 

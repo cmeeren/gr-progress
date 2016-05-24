@@ -31,13 +31,23 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         $this->assertIsValidHTML($html);
     }
-    
+
     public function testWidgetArgsCorrectlyIncluded() {
         $title = rand(0, 10000) . microtime();
         $html = $this->getWidgetHTML(['title' => $title]);
         $this->assertStringStartsWith('BEFORE_WIDGET_FOOBAR', $html);
         $this->assertStringEndsWith('AFTER_WIDGET_FOOBAR', $html);
         $this->assertContains("BEFORE_TITLE_FOOBAR{$title}AFTER_TITLE_FOOBAR", $html);
+    }
+
+    public function testCorrectBooksOnShelfusingDefaultSettings() {
+        $html = $this->getWidgetHTML();
+        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html);
+    }
+
+    public function testCorrectAuthorsOnShelf() {
+        $html = $this->getWidgetHTML();
+        $this->assertAuthorsOnShelf(['Martin', 'Lewis', 'Tolkien', 'Rowling'], $html);
     }
 
     public function testCorrectBooksOnTwoSimultaneousShelves() {
@@ -106,25 +116,25 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         // make sure there wasn't a fetch that failed
         $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
     }
-    
+
     public function testUseCachedOptionAfterTransientExpiresIfFetchFails() {
         // use the same title for both widget instances so the same cache is used
         $title = rand(0, 10000) . microtime();
-        
+
         // cache widget HTML (deleting transient cache) and check books/failed fetch to be safe
         // (don't want a false positive if the fetch fails both times)
         $html_uncached = $this->getWidgetHTML(['title' => $title], true);
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
         $this->assertAllBooksHaveCoverImage($html_uncached);
         $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
-        
+
         // make fetching fail
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
-        
+
         // check that the cached HTML is returned even when transient has been deleted
         $html_cached = $this->getWidgetHTML(['title' => $title]);
         $this->assertEquals($html_uncached, $html_cached);
-        
+
         // make sure there actually was a fetch that failed
         $this->assertTrue(get_transient('cvdm_gr_progress_disableFetchingUntil') !== false);
     }
@@ -153,7 +163,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertContains("CUSTOM_EMPTY_MESSAGE_PRIMARY_SHELF", $html);
         $this->assertNoShelf($html);
     }
-    
+
     public function testSetting_emptyMessage_empty() {
         $html = $this->getWidgetHTML(['shelfName' => 'empty-shelf', 'emptyMessage' => '']);
         $this->assertNotContains('emptyShelfMessage', $html);
@@ -163,6 +173,20 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function testdisplayNoCommentsUsingDefaultSettings() {
         $html = $this->getWidgetHTML();
         $this->assertNoBooksHaveComment($html);
+    }
+
+    public function testSetting_coverSizeSmall() {
+        $html = $this->getWidgetHTML(['coverSize' => CoverSize::SMALL]);
+        $dom = str_get_html($html);
+        $this->assertNotEmpty($dom->find('.small-cover'), 'Expected small covers but found none');
+        $this->assertEmpty($dom->find('.large-cover'), 'Found unexpected large covers');
+    }
+
+    public function testSetting_coverSizeLarge() {
+        $html = $this->getWidgetHTML(['coverSize' => CoverSize::LARGE]);
+        $dom = str_get_html($html);
+        $this->assertNotEmpty($dom->find('.large-cover'), 'Expected large covers but found none');
+        $this->assertEmpty($dom->find('.small-cover'), 'Found unexpected small covers');
     }
 
     public function testSetting_displayReviewExcerpt() {
