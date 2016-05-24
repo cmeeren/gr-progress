@@ -119,14 +119,7 @@ class gr_progress_cvdm_backend {
     }
 
     private function saveCachedHTML($html) {
-        $dontFetchUntil = get_transient('cvdm_gr_progress_goodreadsFetchFail');
-        if ($dontFetchUntil !== false) {
-            $secondsUntilExpiration = $dontFetchUntil - time();
-        } else {
-            $secondsUntilExpiration = $this->widgetData['cacheTimeInHours'] * 3600;
-        }
-
-        set_transient($this->getWidgetKey(), $html, $secondsUntilExpiration);
+        set_transient($this->getWidgetKey(), $html, $this->widgetData['cacheTimeInHours'] * 3600);
         update_option($this->getWidgetKey(), $html);  // to be retrieved if Goodreads fetch fails
     }
 
