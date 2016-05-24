@@ -225,9 +225,11 @@ class gr_progress_cvdm_backend {
             $numberOfIntervals = $dateInterval->$interval;
             if ($numberOfIntervals > 0) {
                 $intervalName = $numberOfIntervals > 1 ? $this->widgetData['intervalPlural'][$i] : $this->widgetData['intervalSingular'][$i];
-                return str_replace(['{num}', '{period}'], [$numberOfIntervals, $intervalName], $this->widgetData['intervalTemplate']);
+                $output = str_replace(['{num}', '{period}'], [$numberOfIntervals, $intervalName], $this->widgetData['intervalTemplate']);
+                break;
             }
         }
+        return $output;
     }
 
     public function printForm($instance) {
