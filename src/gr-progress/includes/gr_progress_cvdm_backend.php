@@ -81,9 +81,6 @@ class gr_progress_cvdm_backend {
 
     public function printWidget($args, $instance) {
         $this->widgetData = $instance;
-        //delete_transient($this->getWidgetKey()); // FIXME
-        //delete_option($this->getWidgetKey()); // FIXME
-        //delete_transient('cvdm_gr_progress_goodreadsFetchFail'); // FIXME
 
         if ($this->hasCache()) {
             echo $this->getCachedHTML();
@@ -573,12 +570,11 @@ class gr_progress_cvdm_backend {
 
         $instance['cacheTimeInHours'] = preg_match("/^\d+/", $new_instance['cacheTimeInHours']) ? intval($new_instance['cacheTimeInHours']) : $this->DEFAULT_SETTINGS['cacheTimeInHours'];
 
-        $this->widgetData = $instance;
-
-        // FIXME: Side effects - factor out
         if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
             delete_option("gr_progress_cvdm_coverURLs");
         }
+
+        $this->widgetData = $instance;
         delete_transient($this->getWidgetKey());
 
         return $instance;
