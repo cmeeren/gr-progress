@@ -145,6 +145,12 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertContains("CUSTOM_EMPTY_MESSAGE_PRIMARY_SHELF", $html);
         $this->assertNoShelf($html);
     }
+    
+    public function testSetting_emptyMessage_empty() {
+        $html = $this->getWidgetHTML(['shelfName' => 'empty-shelf', 'emptyMessage' => '']);
+        $this->assertNotContains('emptyShelfMessage', $html);
+        $this->assertNoShelf($html);
+    }
 
     public function testdisplayNoCommentsUsingDefaultSettings() {
         $html = $this->getWidgetHTML();

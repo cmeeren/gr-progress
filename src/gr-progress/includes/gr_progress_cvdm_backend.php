@@ -147,7 +147,7 @@ class gr_progress_cvdm_backend {
             echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads. Retrying in $minutesUntilRetry minutes.</p>";
         } elseif ($this->shelf->isEmpty() && !empty($this->widgetData['emptyMessage'])) {
             echo "<p class='emptyShelfMessage'>{$this->widgetData['emptyMessage']}</p>";
-        } else {
+        } elseif (!$this->shelf->isEmpty()) {
             $class = $this->widgetData['coverSize'] === CoverSize::SMALL ? 'small-cover' : 'large-cover';
             echo "<ul class='bookshelf $class'>";
             $this->printBooksOnShelf($this->shelf);
