@@ -39,7 +39,9 @@ class gr_progress_cvdm_widget extends \WP_Widget {
 
 }
 
-// Register and load the widget
+/**
+ * @codeCoverageIgnore
+ */
 function load_widget() {
     register_widget('relativisticramblings\gr_progress\gr_progress_cvdm_widget');
     wp_enqueue_style('gr-progress-cvdm-style-default', plugin_dir_url(__FILE__) . 'css/style.css');
