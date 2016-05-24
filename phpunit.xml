@@ -7,22 +7,22 @@
     convertWarningsToExceptions="true"
     >
     <testsuites>
-            <testsuite>
-                    <directory suffix="Test.php">./tests/</directory>
-            </testsuite>
+        <testsuite>
+            <directory suffix="Test.php">./tests/</directory>
+        </testsuite>
     </testsuites>
     <!--
     <logging>
-        <log type="coverage-html" target="/tmp/report" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-html" target="/tmp/report"/>
     </logging>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">.</directory>
             <exclude>
                 <directory>tests</directory>
-                <file>simple_html_dom.php</file>
+                <file>src/gr-progress/includes/simple_html_dom.php</file>
             </exclude>
         </whitelist>
     </filter>
-    -->    
+    -->
 </phpunit>
