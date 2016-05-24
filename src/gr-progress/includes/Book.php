@@ -67,8 +67,7 @@ class Book {
     public function fetchProgressUsingAPI() {
         $allStatusUpdates = [];
 
-        $fetcher = new GoodreadsFetcher();
-        $xml = str_get_html($fetcher->fetch(
+        $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/show_by_user_and_book.xml"
                         . "?key={$this->widgetData['apiKey']}"
                         . "&book_id={$this->id}"

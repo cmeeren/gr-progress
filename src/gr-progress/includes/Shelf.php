@@ -24,8 +24,7 @@ class Shelf {
     }
 
     private function fetchBooksFromGoodreadsUsingAPI() {
-        $fetcher = new GoodreadsFetcher();
-        $xml = str_get_html($fetcher->fetch(
+        $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/list/"
                         . "{$this->widgetData['userid']}.xml"
                         . "?v=2"
@@ -113,8 +112,7 @@ class Shelf {
      * @codeCoverageIgnore
      */
     private function fetchAllCoverURLsUsingHTML() {
-        $fetcher = new GoodreadsFetcher();
-        $html = str_get_html($fetcher->fetch(
+        $html = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/list/"
                         . "{$this->widgetData['userid']}"
                         . "?shelf={$this->widgetData['shelfName']}"
@@ -144,8 +142,7 @@ class Shelf {
     }
 
     private function fetchAllCoverURLsUsingRSS() {
-        $fetcher = new GoodreadsFetcher();
-        $xml = str_get_html($fetcher->fetch(
+        $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/list_rss/"
                         . "{$this->widgetData['userid']}"
                         . "?shelf={$this->widgetData['shelfName']}"));
