@@ -98,46 +98,6 @@ class Shelf {
         }
     }
 
-    /**
-     * Unused - suffers from a bug. It appears that only the 'shelf' parameter
-     * is taken into account. A combination of missing per_page, sort, and order
-     * parameters may cause fewer/different books to be returned as compared to
-     * when we got the shelf via the API. Thus, some books might not get a cover.
-     * Solve this by getting cover images from RSS feed instead of HTML
-     * (see fetchAllCoverURLsUsingRSS). Keeping the function here until
-     * the RSS method has proven problem-free in the wild.
-     * @codeCoverageIgnore
-     */
-    private function fetchAllCoverURLsUsingHTML() {
-        $html = str_get_html(GoodreadsFetcher::fetch(
-                        "http://www.goodreads.com/review/list/"
-                        . "{$this->widgetData['userid']}"
-                        . "?shelf={$this->widgetData['shelfName']}"
-                        . "&per_page={$this->getMaxBooks()}"
-                        . "&sort={$this->widgetData['sortBy']}"
-                        . "&order={$this->widgetData['sortOrder']}"));
-
-        if ($html === false) {
-            return;
-        }
-
-        $tableWrapper = $html->find("table#books", 0);
-        if ($tableWrapper !== null) {
-            $covers = $tableWrapper->find("td.cover");
-            foreach ($covers as $cover) {
-                $src = $cover->find("img", 0)->src;
-                preg_match("/.*\/(\d+)\./", $src, $matches);
-                $bookID = $matches[1];
-                $largeImageSrc = preg_replace("/(.*\/\d*)[sm](\/.*)/", "$1l$2", $src);
-                if (array_key_exists($bookID, $this->books)) {
-                    $this->books[$bookID]->setCoverURL($largeImageSrc);
-                }
-            }
-        }
-
-        $this->addCoverURLsToCache();
-    }
-
     private function fetchAllCoverURLsUsingRSS() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/list_rss/"
