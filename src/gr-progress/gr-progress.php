@@ -8,8 +8,6 @@
   License: MIT
  */
 
-// FIXME: On plugin upgrade, delete cache
-
 namespace relativisticramblings\gr_progress;
 
 require_once('includes/gr_progress_cvdm_backend.php');
