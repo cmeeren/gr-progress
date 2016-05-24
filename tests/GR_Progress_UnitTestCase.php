@@ -33,12 +33,12 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'before_title' => '',
         'after_title' => '',
     ];
-    protected $DEFAULT_BOOKS_CURRENTLY_READING = [
+    protected $DEFAULT_BOOKS_CURRENTLY_READING = [  // order: date updated, descending
         "A Game of Thrones",
         "The Chronicles of Narnia",
         "The Lord of the Rings",
         "Harry Potter and the Sorcerer"];
-    protected $DEFAULT_BOOKS_TO_READ = [
+    protected $DEFAULT_BOOKS_TO_READ = [  // order: shelf position, ascending
         "The Name of the Wind",
         "The Eye of the World",
         "His Dark Materials",
