@@ -13,7 +13,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function setUp() {
         GoodreadsFetcher::$test_local = true;
         GoodreadsFetcher::$fail_if_url_matches = null;
-        delete_transient('cvdm_gr_progress_goodreadsFetchFail');
+        delete_transient('cvdm_gr_progress_disableFetchingUntil');
         delete_option("gr_progress_cvdm_coverURLs");
     }
 
@@ -96,7 +96,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertEquals($html_uncached, $html_cached);
 
         // make sure there wasn't a fetch that failed
-        $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
+        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
     }
     
     public function testUseCachedOptionAfterTransientExpiresIfFetchFails() {
@@ -108,7 +108,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html_uncached = $this->getWidgetHTML(['title' => $title], true);
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
         $this->assertAllBooksHaveCoverImage($html_uncached);
-        $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
+        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
         
         // make fetching fail
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
@@ -118,7 +118,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertEquals($html_uncached, $html_cached);
         
         // make sure there actually was a fetch that failed
-        $this->assertTrue(get_transient('cvdm_gr_progress_goodreadsFetchFail') !== false);
+        $this->assertTrue(get_transient('cvdm_gr_progress_disableFetchingUntil') !== false);
     }
 
     public function testUseCachedCovers() {
@@ -130,9 +130,9 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html = $this->getWidgetHTML(['title' => rand(0, 10000) . microtime()]);
         $this->assertAllBooksHaveCoverImage($html);
 
-        // Also check that cvdm_gr_progress_goodreadsFetchFail hasn't been set,
+        // Also check that cvdm_gr_progress_disableFetchingUntil hasn't been set,
         // because no covers should have been fetched in the first place
-        $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
+        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
     }
 
     public function testSetting_shelfNameAndSorting() {

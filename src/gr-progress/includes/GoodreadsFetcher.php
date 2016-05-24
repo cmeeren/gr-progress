@@ -17,7 +17,7 @@ class GoodreadsFetcher {
 
     public static function fetch($url) {
 
-        if (get_transient('cvdm_gr_progress_goodreadsFetchFail') !== false) {
+        if (get_transient('cvdm_gr_progress_disableFetchingUntil') !== false) {
             return false;
         }
 
@@ -30,7 +30,7 @@ class GoodreadsFetcher {
         }
 
         if ($result === false) {
-            set_transient('cvdm_gr_progress_goodreadsFetchFail', time() + self::$SECONDS_TO_WAIT_AFTER_FAILED_FETCH);
+            set_transient('cvdm_gr_progress_disableFetchingUntil', time() + self::$SECONDS_TO_WAIT_AFTER_FAILED_FETCH);
         }
 
         return $result;

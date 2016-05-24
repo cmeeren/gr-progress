@@ -85,7 +85,7 @@ class gr_progress_cvdm_backend {
             echo $this->getCachedWidgetHTML();
         } else {
             $html = $this->getNewWidgetHTML($args);
-            if (get_transient('cvdm_gr_progress_goodreadsFetchFail') === false) {
+            if (get_transient('cvdm_gr_progress_disableFetchingUntil') === false) {
                 $this->saveCachedHTML($html);
             } else {
                 // Goodreads fetch failed, so get last known HTML from option instead
@@ -141,9 +141,10 @@ class gr_progress_cvdm_backend {
     }
 
     private function printShelf() {
-        $dontFetchUntil = get_transient('cvdm_gr_progress_goodreadsFetchFail');
-        if ($dontFetchUntil !== false) {
-            echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads. Retrying in " . ceil(($dontFetchUntil - time()) / 60) . " minutes.</p>";
+        $disableFetchingUntil = get_transient('cvdm_gr_progress_disableFetchingUntil');
+        if ($disableFetchingUntil !== false) {
+            $minutesUntilRetry = ceil(($disableFetchingUntil - time()) / 60);
+            echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads. Retrying in $minutesUntilRetry minutes.</p>";
         } elseif ($this->shelf->isEmpty() && !empty($this->widgetData['emptyMessage'])) {
             echo "<p class='emptyShelfMessage'>{$this->widgetData['emptyMessage']}</p>";
         } else {
