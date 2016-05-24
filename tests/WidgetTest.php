@@ -35,7 +35,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
     public function testCorrectBooksOnTwoSimultaneousShelves() {
         $html_widget1 = $this->getWidgetHTML();
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_widget1);
-        
+
         $html_widget2 = $this->getWidgetHTML(['shelfName' => 'to-read', 'sortBy' => 'position', 'sortOrder' => 'a']);
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_TO_READ, $html_widget2);
     }
@@ -67,51 +67,36 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html = $this->getWidgetHTML(['progressType' => Progress::PROGRESSBAR]);
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
     }
-    
+
     public function testErrorMessageOnWidget2AfterFailedBookshelfFetchOnWidget1() {
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
         $html_widget1 = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html_widget1);
-        
+
         GoodreadsFetcher::$fail_if_url_matches = null;
         $html_widget2 = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html_widget2);
     }
 
-    public function testUseCacheOnFailedBookshelfFetch() {
+    public function testUseCachedHTML() {
+        // use the same title for both widget instances so the same cache is used
         $title = rand(0, 10000) . microtime();
+
+        // cache widget HTML and check books to be safe
+        // (don't want a false positive if the fetch fails both times)
         $html_uncached = $this->getWidgetHTML(['title' => $title]);  // saves books to cache
-        // just to be safe - don't want a false positive if the fetch fails both times
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
         $this->assertAllBooksHaveCoverImage($html_uncached);
 
+        // make fetching fail - shouldn't matter, because nothing should be fetched in the first place
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
+
+        // check that the cached HTML is returned
         $html_cached = $this->getWidgetHTML(['title' => $title]);
         $this->assertEquals($html_uncached, $html_cached);
-    }
 
-    public function testUseCacheOnFailedCoverFetch() {
-        $title = rand(0, 10000) . microtime();
-        $html_uncached = $this->getWidgetHTML(['title' => $title]);  // saves books to cache
-        // just to be safe - don't want a false positive if the fetch fails both times
-        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
-        $this->assertAllBooksHaveCoverImage($html_uncached);
-
-        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_COVER;
-        $html_cached = $this->getWidgetHTML(['title' => $title]);
-        $this->assertEquals($html_uncached, $html_cached);
-    }
-
-    public function testUseCacheOnFailedProgressFetch() {
-        $title = rand(0, 10000) . microtime();
-        $html_uncached = $this->getWidgetHTML(['title' => $title, 'progressType' => Progress::PROGRESSBAR]);  // saves books to cache
-        // just to be safe - don't want a false positive if the fetch fails both times
-        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
-        $this->assertAllBooksHaveCoverImage($html_uncached);
-
-        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_PROGRESS;
-        $html_cached = $this->getWidgetHTML(['title' => $title, 'progressType' => Progress::PROGRESSBAR]);
-        $this->assertEquals($html_uncached, $html_cached);
+        // make sure there wasn't a fetch that failed
+        $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
     }
 
     public function testUseCachedCovers() {
