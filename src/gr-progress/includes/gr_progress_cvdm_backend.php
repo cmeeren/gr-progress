@@ -20,7 +20,6 @@ abstract class CoverSize {
 
 }
 
-// Creating the widget
 class gr_progress_cvdm_backend {
 
     private $widget;
@@ -45,7 +44,6 @@ class gr_progress_cvdm_backend {
         'intervalSingular' => ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
         'intervalPlural' => ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'],
         'cacheTimeInHours' => 24,
-        'regenerateCacheOnSave' => false,
         'deleteCoverURLCacheOnSave' => false,
     ];
     private $SORT_BY_OPTIONS = [
@@ -519,28 +517,7 @@ class gr_progress_cvdm_backend {
                 hours (default 24)
             </label>
             <br />
-            <small>Set to 0 to make last until you delete it by saving the widget settings again.</small>
-        </p>
-        <p>
-            <label for="<?php echo $this->widget->get_field_id('deleteCacheOnSave'); ?>">
-                <input
-                    id="<?php echo $this->widget->get_field_id('deleteCacheOnSave'); ?>"
-                    name="<?php echo $this->widget->get_field_name('regenerateCacheOnSave'); ?>"
-                    <?php echo!$instance['regenerateCacheOnSave'] ? "checked" : ""; ?>
-                    value="noRegenerateCache"
-                    type="radio">
-                Delete cache when saving widget (first visitor will regenerate)
-            </label>
-            <br />
-            <label for="<?php echo $this->widget->get_field_id('regenerateCacheOnSave'); ?>">
-                <input
-                    id="<?php echo $this->widget->get_field_id('regenerateCacheOnSave'); ?>"
-                    name="<?php echo $this->widget->get_field_name('regenerateCacheOnSave'); ?>"
-                    <?php echo $instance['regenerateCacheOnSave'] ? "checked" : ""; ?>
-                    value="regenerateCache"
-                    type="radio">
-                Regenerate cache when saving widget (visitors will not notice)
-            </label>
+            <small>If you set it to 0 it will only be updated whenever you save the widget settings.</small>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('deleteCoverURLCacheOnSave'); ?>">
@@ -602,7 +579,6 @@ class gr_progress_cvdm_backend {
         }
 
         $instance['cacheTimeInHours'] = preg_match("/^\d+/", $new_instance['cacheTimeInHours']) ? intval($new_instance['cacheTimeInHours']) : $this->DEFAULT_SETTINGS['cacheTimeInHours'];
-        $instance['regenerateCacheOnSave'] = $new_instance['regenerateCacheOnSave'] == 'regenerateCache' ? true : false;
 
         $this->widgetData = $instance;
 
@@ -610,22 +586,9 @@ class gr_progress_cvdm_backend {
         if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
             delete_option("gr_progress_cvdm_coverURLs");
         }
-
-        if ($instance['regenerateCacheOnSave']) {
-            $this->regenerateCache($instance);
-        } else {
-            $this->deleteCache();
-        }
+        delete_transient($this->getWidgetKey());
 
         return $instance;
-    }
-
-    private function regenerateCache() {
-        // FIXME: re-implement - problem, since creating new HTML requires $args
-    }
-
-    private function deleteCache() {
-        delete_transient($this->getWidgetKey());
     }
 
 }

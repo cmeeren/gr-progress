@@ -25,7 +25,6 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'sortOrder' => 'd',
         'maxBooks' => 15,
         'cacheTimeInHours' => 24,
-        'regenerateCacheOnSave' => false,
         'deleteCoverURLCacheOnSave' => false,
     ];
     private $DEFAULT_ARGS = [
