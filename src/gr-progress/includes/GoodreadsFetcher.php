@@ -47,7 +47,7 @@ class GoodreadsFetcher {
     }
 
     private function getTestStoragePath() {
-        return dirname(__FILE__) . '/../tests/responses/';
+        return dirname(__FILE__) . '/../../../tests/responses/';
     }
 
     private function getSafeTestStorageFilename($str) {
