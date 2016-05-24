@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GoodreadsResponse>
+  <Request>
+    <authentication>true</authentication>
+      <key><![CDATA[HAZB53duIFj5Ur87DiOW7Q]]></key>
+    <method><![CDATA[review_show_by_user_and_book]]></method>
+  </Request>
+      <review>
+  <id>1635396502</id>
+    
+  <user>
+    <id>55769144</id>
+    <name>Neil</name>
+
+    <location>Bergen, 07, Norway</location>
+
+    <link><![CDATA[http://www.goodreads.com/user/show/55769144-neil-mackenzie]]></link>
+
+    <image_url><![CDATA[http://s.gr-assets.com/assets/nophoto/user/u_111x148-9394ebedbb3c6c218f64be9549657029.png]]></image_url>
+    <small_image_url><![CDATA[http://s.gr-assets.com/assets/nophoto/user/u_50x66-632230dc9882b4352d753eedf9396530.png]]></small_image_url>
+
+  </user>
+
+    <book>
+  <id type="integer">18116</id>
+  <isbn>0440238609</isbn>
+  <isbn13>9780440238607</isbn13>
+  <text_reviews_count type="integer">3402</text_reviews_count>
+  <title>His Dark Materials (His Dark Materials #1-3)</title>
+  <image_url>http://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png</image_url>
+  <small_image_url>http://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png</small_image_url>
+  <large_image_url/>
+  <link>http://www.goodreads.com/book/show/18116.His_Dark_Materials</link>
+  <num_pages>1088</num_pages>
+  <format></format>
+  <edition_information/>
+  <publisher></publisher>
+  <publication_day></publication_day>
+  <publication_year></publication_year>
+  <publication_month></publication_month>
+  <average_rating>4.24</average_rating>
+  <ratings_count>93760</ratings_count>
+  <description>The extraordinary story moves between parallel universes. Beginning in Oxford, it takes Lyra and her animal-daemon Pantalaimon on a dangerous rescue mission to the ice kingdoms of the far North, where she begins to learn about the mysterious particles they call Dust - a substance for which terrible war between different worlds will be fought...</description>
+<authors>
+<author>
+<id>3618</id>
+<name>Philip Pullman</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1396622492p5/3618.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[http://d.gr-assets.com/authors/1396622492p2/3618.jpg]]>
+</small_image_url>
+<link><![CDATA[http://www.goodreads.com/author/show/3618.Philip_Pullman]]></link>
+<average_rating>3.98</average_rating>
+<ratings_count>1544907</ratings_count>
+<text_reviews_count>35996</text_reviews_count>
+</author>
+</authors>
+  <published></published>
+</book>
+
+
+    <read_statuses>
+        <read_status>
+          <id type="integer">1350006607</id>
+          <old_status></old_status>
+          <status>to-read</status>
+          <updated_at type="datetime">Wed May 11 13:32:15 -0700 2016</updated_at>
+          <ratings_count>0</ratings_count>
+          <comments_count>0</comments_count>
+        </read_status>
+    </read_statuses>
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf name="to-read" exclusive="true" review_shelf_id="1307203323" sortable="true" />
+</shelves>
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed May 11 13:32:14 -0700 2016</date_added>
+  <date_updated>Wed May 11 13:32:15 -0700 2016</date_updated>
+  <read_count></read_count>
+  <body>
+  </body>
+  <comments_count>0</comments_count>
+    <url><![CDATA[http://www.goodreads.com/review/show/1635396502]]></url>
+  <link><![CDATA[http://www.goodreads.com/review/show/1635396502]]></link>
+    <owned>0</owned>
+</review>
+
+
+</GoodreadsResponse>

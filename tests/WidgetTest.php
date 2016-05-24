@@ -164,6 +164,17 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasNoProgress("The Chronicles of Narnia", $html);
         $this->assertBookProgressContains("Harry Potter and the Sorcerer", "30", $html);
     }
+    
+    public function testProgressTextToRead() {
+        $html = $this->getWidgetHTML(['shelfName' => 'to-read', 'progressType' => Progress::TEXT]);
+        foreach ($this->DEFAULT_BOOKS_TO_READ as $book) {
+            if ($book == 'Artemis Fowl') {
+                $this->assertBookProgressContains($book, "10", $html);
+            } else {
+                $this->assertBookHasNoProgress($book, $html);
+            }
+        }
+    }
 
     public function testSortCurrentlyReading_author_a() {
         $books = [
