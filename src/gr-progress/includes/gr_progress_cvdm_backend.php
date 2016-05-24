@@ -529,8 +529,6 @@ class gr_progress_cvdm_backend {
                 Reset cover URL cache upon next save.
             </label>
         </p>
-        <p style="text-align: center; color: #31708f; background-color: #d9edf7; border: 1px solid #bce8f1; border-radius: 4px; padding: 15px;">If you have selected "Regenerate cache when saving widget" above, please be patient while saving. If it takes more than 30 seconds, something probably went wrong.</p>
-
         <?php
     }
 
