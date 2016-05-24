@@ -31,6 +31,14 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         $this->assertIsValidHTML($html);
     }
+    
+    public function testWidgetArgsCorrectlyIncluded() {
+        $title = rand(0, 10000) . microtime();
+        $html = $this->getWidgetHTML(['title' => $title]);
+        $this->assertStringStartsWith('BEFORE_WIDGET_FOOBAR', $html);
+        $this->assertStringEndsWith('AFTER_WIDGET_FOOBAR', $html);
+        $this->assertContains("BEFORE_TITLE_FOOBAR{$title}AFTER_TITLE_FOOBAR", $html);
+    }
 
     public function testCorrectBooksOnTwoSimultaneousShelves() {
         $html_widget1 = $this->getWidgetHTML();

@@ -28,10 +28,10 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'deleteCoverURLCacheOnSave' => false,
     ];
     private $DEFAULT_ARGS = [
-        'before_widget' => '',
-        'after_widget' => '',
-        'before_title' => '',
-        'after_title' => '',
+        'before_widget' => 'BEFORE_WIDGET_FOOBAR',
+        'after_widget' => 'AFTER_WIDGET_FOOBAR',
+        'before_title' => 'BEFORE_TITLE_FOOBAR',
+        'after_title' => 'AFTER_TITLE_FOOBAR',
     ];
     protected $DEFAULT_BOOKS_CURRENTLY_READING = [  // order: date updated, descending
         "A Game of Thrones",
@@ -69,11 +69,11 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         ob_start();
         $widget->widget($this->DEFAULT_ARGS, $settings);
         $html = ob_get_clean();
-        
+
         if ($deleteCachedHTML) {
             delete_transient($widget->widget->getWidgetKey());
         }
-        
+
         return $html;
     }
 
