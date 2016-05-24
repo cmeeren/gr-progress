@@ -14,7 +14,7 @@ require_once('includes/gr_progress_cvdm_backend.php');
 
 class gr_progress_cvdm_widget extends \WP_Widget {
 
-    private $widget;
+    public $widget;
 
     function __construct() {
         parent::__construct(

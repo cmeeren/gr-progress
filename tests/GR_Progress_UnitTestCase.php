@@ -53,9 +53,10 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     /**
      * Returns the HTML used for rendering the widget.
      * @param array $overrideSettings Key-value pairs of settings to override
+     * @param boolean $deleteCachedHTML If true, the widget HTML cache is deleted
      * @return string
      */
-    public function getWidgetHTML($overrideSettings = []) {
+    public function getWidgetHTML($overrideSettings = [], $deleteCachedHTML = false) {
         $settings = $this->getSettingsWithOverride($overrideSettings);
 
         // use a unique title to make sure we don't use cached data
@@ -68,6 +69,11 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         ob_start();
         $widget->widget($this->DEFAULT_ARGS, $settings);
         $html = ob_get_clean();
+        
+        if ($deleteCachedHTML) {
+            delete_transient($widget->widget->getWidgetKey());
+        }
+        
         return $html;
     }
 

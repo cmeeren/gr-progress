@@ -72,10 +72,9 @@ class gr_progress_cvdm_backend {
     }
 
     /**
-     * Returns a unique widget ID based on the widget instance data
-     * @return string md5 hash based on widget instance data
+     * @return string a unique widget ID (md5 hash based on the widget instance data)
      */
-    private function getWidgetKey() {
+    public function getWidgetKey() {
         return 'cvdm-' . md5(serialize($this->widgetData));
     }
 
@@ -83,9 +82,9 @@ class gr_progress_cvdm_backend {
         $this->widgetData = $instance;
 
         if ($this->hasCache()) {
-            echo $this->getCachedHTML();
+            echo $this->getCachedWidgetHTML();
         } else {
-            $html = $this->getNewHTML($args);
+            $html = $this->getNewWidgetHTML($args);
             if (get_transient('cvdm_gr_progress_goodreadsFetchFail') === false) {
                 $this->saveCachedHTML($html);
             } else {
@@ -98,14 +97,14 @@ class gr_progress_cvdm_backend {
     }
 
     private function hasCache() {
-        return $this->getCachedHTML() !== false;
+        return $this->getCachedWidgetHTML() !== false;
     }
 
-    private function getCachedHTML() {
+    private function getCachedWidgetHTML() {
         return get_transient($this->getWidgetKey());
     }
 
-    private function getNewHTML($args) {
+    private function getNewWidgetHTML($args) {
         $this->fetchNewShelf();
         ob_start();
         $this->printWidgetBoilerplateStart($args);

@@ -84,7 +84,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         // cache widget HTML and check books to be safe
         // (don't want a false positive if the fetch fails both times)
-        $html_uncached = $this->getWidgetHTML(['title' => $title]);  // saves books to cache
+        $html_uncached = $this->getWidgetHTML(['title' => $title]);
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
         $this->assertAllBooksHaveCoverImage($html_uncached);
 
@@ -97,6 +97,28 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         // make sure there wasn't a fetch that failed
         $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
+    }
+    
+    public function testUseCachedOptionAfterTransientExpiresIfFetchFails() {
+        // use the same title for both widget instances so the same cache is used
+        $title = rand(0, 10000) . microtime();
+        
+        // cache widget HTML (deleting transient cache) and check books/failed fetch to be safe
+        // (don't want a false positive if the fetch fails both times)
+        $html_uncached = $this->getWidgetHTML(['title' => $title], true);
+        $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
+        $this->assertAllBooksHaveCoverImage($html_uncached);
+        $this->assertFalse(get_transient('cvdm_gr_progress_goodreadsFetchFail'));
+        
+        // make fetching fail
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
+        
+        // check that the cached HTML is returned even when transient has been deleted
+        $html_cached = $this->getWidgetHTML(['title' => $title]);
+        $this->assertEquals($html_uncached, $html_cached);
+        
+        // make sure there actually was a fetch that failed
+        $this->assertTrue(get_transient('cvdm_gr_progress_goodreadsFetchFail') !== false);
     }
 
     public function testUseCachedCovers() {
