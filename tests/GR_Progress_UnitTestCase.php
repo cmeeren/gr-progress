@@ -6,7 +6,10 @@ require_once('HTML5Validate.php');
 
 class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
 
-    private $DEFAULT_SETTINGS = [
+    protected $RE_FAIL_FETCH_BOOKSHELF = '$goodreads.com/review/list/\d+\.xml$';
+    protected $RE_FAIL_FETCH_COVER = '$goodreads.com/review/list_rss/$';
+    protected $RE_FAIL_FETCH_PROGRESS = '$review/show_by_user_and_book.xml$';
+    protected $DEFAULT_SETTINGS = [
         'title' => 'Currently reading',
         'goodreadsAttribution' => 'Data from Goodreads',
         'userid' => '55769144',
@@ -27,7 +30,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'cacheTimeInHours' => 24,
         'deleteCoverURLCacheOnSave' => false,
     ];
-    private $DEFAULT_ARGS = [
+    protected $DEFAULT_ARGS = [
         'before_widget' => 'BEFORE_WIDGET_FOOBAR',
         'after_widget' => 'AFTER_WIDGET_FOOBAR',
         'before_title' => 'BEFORE_TITLE_FOOBAR',
@@ -163,7 +166,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
             $this->assertContains($bookNameSubstrings[$i], $bookTitlesActual[$i], "Wrong book on index " . $i);
         }
     }
-    
+
     /**
      * Asserts that the author names in the given html contains the
      * substrings given in $authorNameSubstrings, in order.

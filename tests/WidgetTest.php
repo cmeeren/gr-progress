@@ -6,10 +6,6 @@ require_once('GR_Progress_UnitTestCase.php');
 
 class WidgetTest extends GR_Progress_UnitTestCase {
 
-    private $RE_FAIL_FETCH_BOOKSHELF = '$goodreads.com/review/list/\d+\.xml$';
-    private $RE_FAIL_FETCH_COVER = '$goodreads.com/review/list_rss/$';
-    private $RE_FAIL_FETCH_PROGRESS = '$review/show_by_user_and_book.xml$';
-
     public function setUp() {
         GoodreadsFetcher::$test_local = true;
         GoodreadsFetcher::$fail_if_url_matches = null;
@@ -114,7 +110,8 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertEquals($html_uncached, $html_cached);
 
         // make sure there wasn't a fetch that failed
-        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
+        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'),
+                'Did not expect to find transient cvdm_gr_progress_disableFetchingUntil');
     }
 
     public function testUseCachedOptionAfterTransientExpiresIfFetchFails() {
@@ -126,7 +123,8 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html_uncached = $this->getWidgetHTML(['title' => $title], true);
         $this->assertBooksOnShelf($this->DEFAULT_BOOKS_CURRENTLY_READING, $html_uncached);
         $this->assertAllBooksHaveCoverImage($html_uncached);
-        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
+        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'),
+                'Did not expect to find transient cvdm_gr_progress_disableFetchingUntil');
 
         // make fetching fail
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
@@ -136,7 +134,8 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertEquals($html_uncached, $html_cached);
 
         // make sure there actually was a fetch that failed
-        $this->assertTrue(get_transient('cvdm_gr_progress_disableFetchingUntil') !== false);
+        $this->assertTrue(get_transient('cvdm_gr_progress_disableFetchingUntil') !== false,
+                'Expected transient not found: cvdm_gr_progress_disableFetchingUntil');
     }
 
     public function testUseCachedCovers() {
@@ -150,7 +149,8 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         // Also check that cvdm_gr_progress_disableFetchingUntil hasn't been set,
         // because no covers should have been fetched in the first place
-        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'));
+        $this->assertFalse(get_transient('cvdm_gr_progress_disableFetchingUntil'),
+                'Did not expect to find transient cvdm_gr_progress_disableFetchingUntil');
     }
 
     public function testSetting_shelfNameAndSorting() {
