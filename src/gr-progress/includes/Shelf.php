@@ -145,60 +145,28 @@ class Shelf {
 
     private function sortBooksByReadingProgressIfRelevant() {
         if ($this->widgetData['sortByReadingProgress']) {
-            mergesort($this->books, '\relativisticramblings\gr_progress\compareBookProgress');
+
+            $progress = [];
+            $ids = [];
+            foreach ($this->books as $bookID => $book) {
+                $progress[] = $book->hasProgress() ? $book->getProgressInPercent() : "0";
+                $ids[] = $bookID;
+            }
+            $arrayToMakeSortStable = range(0, count($progress) - 1);
+            array_multisort($progress, SORT_DESC, $arrayToMakeSortStable, $ids);
+
+            $sortedBooks = [];
+            for ($i = 0; $i < count($progress); $i++) {
+                $bookID = $ids[$i];
+                $sortedBooks[$bookID] = $this->books[$bookID];
+            }
+
+            $this->books = $sortedBooks;
+
             // All books on shelf were fetched previously in order to sort them by reading progerss.
             // Only keep maxBooks number of books now after they've been sorted.
             $this->books = array_slice($this->books, 0, $this->widgetData['maxBooks'], true);
         }
     }
 
-}
-
-/**
- * sorting function from http://php.net/manual/en/function.usort.php#38827
- * preserves ordering if elements compare as equal
- * @codeCoverageIgnore
- */
-function mergesort(&$array, $cmp_function = 'strcmp') {
-    // Arrays of size < 2 require no action.
-    if (count($array) < 2) {
-        return;
-    }
-    // Split the array in half
-    $halfway = count($array) / 2;
-    $array1 = array_slice($array, 0, $halfway);
-    $array2 = array_slice($array, $halfway);
-    // Recurse to sort the two halves
-    mergesort($array1, $cmp_function);
-    mergesort($array2, $cmp_function);
-    // If all of $array1 is <= all of $array2, just append them.
-    if (call_user_func($cmp_function, end($array1), $array2[0]) < 1) {
-        $array = array_merge($array1, $array2);
-        return;
-    }
-    // Merge the two sorted arrays into a single sorted array
-    $array = array();
-    $ptr1 = $ptr2 = 0;
-    while ($ptr1 < count($array1) && $ptr2 < count($array2)) {
-        if (call_user_func($cmp_function, $array1[$ptr1], $array2[$ptr2]) < 1) {
-            $array[] = $array1[$ptr1++];
-        } else {
-            $array[] = $array2[$ptr2++];
-        }
-    }
-    // Merge the remainder
-    while ($ptr1 < count($array1))
-        $array[] = $array1[$ptr1++];
-    while ($ptr2 < count($array2))
-        $array[] = $array2[$ptr2++];
-    return;
-}
-
-function compareBookProgress($book1, $book2) {
-    // return negative number if progress of book 1 is less than progress of book 2
-    // return positive number if progress of book 1 is larger than progress of book 2
-    // return zero if progress is equal
-    $progress1 = $book1->hasProgress() ? $book1->getProgressInPercent() : 0;
-    $progress2 = $book2->hasProgress() ? $book2->getProgressInPercent() : 0;
-    return $progress2 - $progress1;
 }

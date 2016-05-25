@@ -475,6 +475,13 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBooksOnShelf($books, $html);
     }
 
+    // FIXME: why is  'progressType' => Progress::PROGRESSBAR   needed in the above functions?
+
+    public function testAllBooksHaveCoverImageWhenSortByProgress() {
+        $html = $this->getWidgetHTML(['progressType' => Progress::PROGRESSBAR, 'sortByReadingProgress' => true]);
+        $this->assertAllBooksHaveCoverImage($html);
+    }
+
     /**
      * Tests that the books with most progress are returned even when they would not
      * normally appear due to being excluded by the queried per_page and sort order
