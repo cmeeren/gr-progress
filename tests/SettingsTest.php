@@ -138,4 +138,57 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         $this->assertSettingSavedAs("cacheTimeInHours", "foo", 24);
     }
 
+    public function test_cacheDeletedAfterSavingSettings() {
+        $settings = $this->DEFAULT_SETTINGS;
+        $settings['title'] = rand(0, 10000) . microtime();
+
+        $widget = new gr_progress_cvdm_widget();
+
+        // get parsed settings
+        $parsedSettings = $widget->update($settings, $settings);
+
+        // cache widget HTML
+        ob_start();
+        $widget->widget($this->DEFAULT_ARGS, $parsedSettings);
+        ob_end_clean();
+
+        // check that widget HTML is cached
+        $key1 = $widget->widget->getWidgetKey();
+        $this->assertTrue(get_transient($key1) !== false, 'Expected to find cached HTML but found none');
+
+        // update widget settings (cache should then be deleted)
+        $widget->update($parsedSettings, $parsedSettings);
+
+        // we should not have the transient anymore
+        $key2 = $widget->widget->getWidgetKey();
+        $this->assertEquals($key1, $key2, 'Widget keys unexpectedly differ; cannot proceed with testing');
+        $this->assertFalse(get_transient($key2), 'Found unexpected cached HTML');
+    }
+
+    public function test_deleteCoverURLCacheOnSave() {
+        $settings = $this->DEFAULT_SETTINGS;
+        $settings['title'] = rand(0, 10000) . microtime();
+        $settings['deleteCoverURLCacheOnSave'] = true;
+
+        $widget = new gr_progress_cvdm_widget();
+
+        // get parsed settings
+        $parsedSettings = $widget->update($settings, $settings);
+
+        // cache covers and check that all books have covers
+        ob_start();
+        $widget->widget($this->DEFAULT_ARGS, $parsedSettings);
+        $html1 = ob_get_clean();
+        $this->assertAllBooksHaveCoverImage($html1);
+
+        // disable cover fetching
+        GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_COVER;
+
+        // covers should still be present since they are cached
+        ob_start();
+        $widget->widget($this->DEFAULT_ARGS, $parsedSettings);
+        $html2 = ob_get_clean();
+        $this->assertAllBooksHaveCoverImage($html2);
+    }
+
 }
