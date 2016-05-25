@@ -12,15 +12,18 @@ class Shelf {
 
     function __construct($widgetData) {
         $this->widgetData = $widgetData;
-        $this->fetchBooksFromGoodreadsUsingAPI();
+        $this->fetchBooksFromGoodreads();
         $this->loadCachedCoverURLs();
+        $this->fetchCoverURLsIfMissing();
         if ($this->widgetData['progressType'] !== Progress::DISABLED) {
             $this->updateProgress();
         }
-        $this->fetchCoverURLsIfMissing();
+        if ($this->widgetData['sortByReadingProgress']) {
+            $this->sortBooksByReadingProgress();
+        }
     }
 
-    private function fetchBooksFromGoodreadsUsingAPI() {
+    private function fetchBooksFromGoodreads() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/list/"
                         . "{$this->widgetData['userid']}.xml"
@@ -35,16 +38,16 @@ class Shelf {
             return;
         }
 
-        foreach ($xml->find("reviews", 0)->find("review") as $reviewElement) {
+        foreach ($xml->find("review") as $reviewElement) {
             $bookElement = $reviewElement->find("book", 0);
             $id = $bookElement->find("id", 0)->plaintext;
             $title = $bookElement->find("title", 0)->plaintext;
             $authors = [];
-            foreach ($bookElement->find("author") as $author) {
-                $authors[] = $author->find("name", 0)->plaintext;
+            foreach ($bookElement->find("author name") as $name) {
+                $authors[] = $name->plaintext;
             }
 
-            $reviewBodyFirstLine = $this->getReviewBodyFirstLine($reviewElement);
+            $reviewBodyFirstLine = $this->widgetData['displayReviewExcerpt'] ? $this->getReviewBodyFirstLine($reviewElement) : null;
 
             $this->books[$id] = new Book($id, $title, $authors, $reviewBodyFirstLine, $this->widgetData);
         }
@@ -52,6 +55,8 @@ class Shelf {
 
     private function getMaxBooks() {
         if ($this->widgetData['sortByReadingProgress']) {
+            // If sorting by reading progress, we need to fetch all books
+            // so that we can sort them ourselves.
             return 100;
         } else {
             return $this->widgetData['maxBooks'];
@@ -60,21 +65,17 @@ class Shelf {
 
     private function getReviewBodyFirstLine($reviewElement) {
         $reviewBodyFirstLine = null;
-        if ($this->widgetData['displayReviewExcerpt']) {
-            $reviewBody = $reviewElement->find("body", 0)->plaintext;
-            $re_CDATA = "/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/";
-            if (preg_match($re_CDATA, $reviewBody)) {
-                $reviewBody = preg_replace($re_CDATA, '$1', $reviewBody);
-            } else {
-                $reviewBody = html_entity_decode($reviewBody);  // to fix GR bug
-            }
+        $reviewBody = $reviewElement->find("body", 0)->plaintext;
+        $re_CDATA = "/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/";
+        if (preg_match($re_CDATA, $reviewBody)) {
+            $reviewBody = preg_replace($re_CDATA, '$1', $reviewBody);
+        } else {
+            $reviewBody = html_entity_decode($reviewBody);  // to fix Goodreads bug
+        }
 
-            // for some reason, if the first line is empty, Goodreads may
-            // return &lt;br /&gt; instead of <br />, so split by that too
-            $reviewBodySplit = preg_split("/(<|&lt;)br/", $reviewBody, 2);
-            if (!empty($reviewBodySplit)) {
-                $reviewBodyFirstLine = trim($reviewBodySplit[0]);
-            }
+        $reviewBodySplit = preg_split("/<br/", $reviewBody, 2);
+        if (!empty($reviewBodySplit)) {
+            $reviewBodyFirstLine = trim($reviewBodySplit[0]);
         }
 
         return $reviewBodyFirstLine;
@@ -92,13 +93,13 @@ class Shelf {
     private function fetchCoverURLsIfMissing() {
         foreach ($this->books as $book) {
             if (!$book->hasCover()) {
-                $this->fetchAllCoverURLsUsingRSS();
+                $this->fetchAllCoverURLs();
                 break;
             }
         }
     }
 
-    private function fetchAllCoverURLsUsingRSS() {
+    private function fetchAllCoverURLs() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/list_rss/"
                         . "{$this->widgetData['userid']}"
@@ -128,45 +129,53 @@ class Shelf {
         update_option("gr_progress_cvdm_coverURLs", $cachedCoverURLs);
     }
 
-    public function getBooks() {
-        return $this->books;
-    }
-
     public function isEmpty() {
         return count($this->books) == 0;
     }
 
-    public function updateProgress() {
-        foreach ($this->books as $book) {
-            $book->fetchProgressUsingAPI($book);
-        }
-        $this->sortBooksByReadingProgressIfRelevant();
+    public function getBooks() {
+        return $this->books;
     }
 
-    private function sortBooksByReadingProgressIfRelevant() {
-        if ($this->widgetData['sortByReadingProgress']) {
-
-            $progress = [];
-            $ids = [];
-            foreach ($this->books as $bookID => $book) {
-                $progress[] = $book->hasProgress() ? $book->getProgressInPercent() : "0";
-                $ids[] = $bookID;
-            }
-            $arrayToMakeSortStable = range(0, count($progress) - 1);
-            array_multisort($progress, SORT_DESC, $arrayToMakeSortStable, $ids);
-
-            $sortedBooks = [];
-            for ($i = 0; $i < count($progress); $i++) {
-                $bookID = $ids[$i];
-                $sortedBooks[$bookID] = $this->books[$bookID];
-            }
-
-            $this->books = $sortedBooks;
-
-            // All books on shelf were fetched previously in order to sort them by reading progerss.
-            // Only keep maxBooks number of books now after they've been sorted.
-            $this->books = array_slice($this->books, 0, $this->widgetData['maxBooks'], true);
+    public function updateProgress() {
+        foreach ($this->books as $book) {
+            $book->fetchProgress($book);
         }
+    }
+
+    private function sortBooksByReadingProgress() {
+        // This is rather messy. Ideally we would simply use a stable user sort maintaining (numeric) keys,
+        // but such a sort doesn't exist.
+
+        // First, get all the progresses and associated book IDs. These need to be
+        // in separate arrays, because array_multisort (used later) doesn't preserve
+        // numeric keys (otherwise we could index $progress using the book IDs).
+        $progresses = [];
+        $ids = [];
+        foreach ($this->books as $bookID => $book) {
+            $progresses[] = $book->hasProgress() ? $book->getProgressInPercent() : 0;
+            $ids[] = $bookID;
+        }
+        
+        // Now, sort the progresses. We use a simple [1, 2, 3, ...] array as secondary
+        // array to make the sort stable (i.e. preserve the existing order of identical
+        // progresses). We also sort $ids so it matches with $progresses.
+        $arrayToMakeSortStable = range(0, count($progresses) - 1);
+        array_multisort($progresses, SORT_DESC, $arrayToMakeSortStable, $ids);
+
+        // Create a new array which we fill with all the Book objects in the correct order
+        $sortedBooks = [];
+        for ($i = 0; $i < count($progresses); $i++) {
+            $bookID = $ids[$i];
+            $sortedBooks[$bookID] = $this->books[$bookID];
+        }
+
+        // Finally, set the internal book list to this new sorted list
+        $this->books = $sortedBooks;
+
+        // All books on shelf were fetched previously in order to sort them by reading progress.
+        // Now that they've been sorted, only keep the first maxBooks.
+        $this->books = array_slice($this->books, 0, $this->widgetData['maxBooks'], true);
     }
 
 }

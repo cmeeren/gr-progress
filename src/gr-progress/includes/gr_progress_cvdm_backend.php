@@ -179,10 +179,10 @@ class gr_progress_cvdm_backend {
     }
 
     private function printProgressBar($book) {
-        $percent = $book->getProgressInPercent();
-        if (empty($percent)) {
+        if (!$book->hasProgress()) {
             return;
         }
+        $percent = $book->getProgressInPercent();
         $progressStatusUpdateTime = $book->getProgressStatusUpdateTime();
         $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . $this->getTimeElapsedString("@" . strval($progressStatusUpdateTime)) . ")" : "";
         ?>
@@ -196,10 +196,10 @@ class gr_progress_cvdm_backend {
     }
 
     private function printProgressString($book) {
-        $percent = $book->getProgressInPercent();
-        if (empty($percent)) {
+        if (!$book->hasProgress()) {
             return;
         }
+        $percent = $book->getProgressInPercent();
         $progressStatusUpdateTime = $book->getProgressStatusUpdateTime();
         $time = $this->widgetData['displayProgressUpdateTime'] ? " (" . $this->getTimeElapsedString("@" . strval($progressStatusUpdateTime)) . ")" : "";
         echo "<p class='progress progress-text'>$percent&thinsp;%$time</p>";

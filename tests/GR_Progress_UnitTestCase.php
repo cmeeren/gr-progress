@@ -156,7 +156,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     public function assertBooksOnShelf($bookNameSubstrings, $html) {
         $dom = str_get_html($html);
         $bookTitlesActual = [];
-        foreach ($dom->find('.bookshelf', 0)->find(".bookTitle") as $bookTitleElement) {
+        foreach ($dom->find('.bookTitle') as $bookTitleElement) {
             $bookTitlesActual[] = $bookTitleElement->plaintext;
         }
 
@@ -176,7 +176,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     public function assertAuthorsOnShelf($authorNameSubstrings, $html) {
         $dom = str_get_html($html);
         $authorNamesActual = [];
-        foreach ($dom->find('.bookshelf', 0)->find(".author") as $authorNameElement) {
+        foreach ($dom->find('.author') as $authorNameElement) {
             $authorNamesActual[] = $authorNameElement->plaintext;
         }
 

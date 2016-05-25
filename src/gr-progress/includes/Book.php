@@ -64,9 +64,7 @@ class Book {
         return $this->comment;
     }
 
-    public function fetchProgressUsingAPI() {
-        $allStatusUpdates = [];
-
+    public function fetchProgress() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
                         "http://www.goodreads.com/review/show_by_user_and_book.xml"
                         . "?key={$this->widgetData['apiKey']}"
@@ -77,23 +75,21 @@ class Book {
             return;
         }
 
+        $allProgressUpdates = [];
         foreach ($xml->find("user_status") as $status) {
             $statusTimestamp = strtotime($status->find("created_at", 0)->plaintext);
             $percent = $status->find("percent", 0)->plaintext;
-            $allStatusUpdates[$statusTimestamp] = $percent;
+            $allProgressUpdates[$statusTimestamp] = $percent;
         }
 
-        krsort($allStatusUpdates);
-        if (empty($allStatusUpdates)) {
-            $percent = "";
-            $latestStatusTimestamp = 0;
+        if (empty($allProgressUpdates)) {
+            $this->progressInPercent = 0;
+            $this->progressStatusUpdateTime = 0;
         } else {
-            $percent = reset($allStatusUpdates);
-            $latestStatusTimestamp = key($allStatusUpdates);
+            krsort($allProgressUpdates);  // sort by descending status timestamp (array key)
+            $this->progressInPercent = intval(reset($allProgressUpdates));
+            $this->progressStatusUpdateTime = key($allProgressUpdates);
         }
-
-        $this->progressInPercent = $percent;
-        $this->progressStatusUpdateTime = $latestStatusTimestamp;
     }
 
 }
