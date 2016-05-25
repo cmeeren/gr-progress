@@ -104,6 +104,11 @@ class gr_progress_cvdm_backend {
         return get_transient($this->getWidgetKey());
     }
 
+    private function saveCachedHTML($html) {
+        set_transient($this->getWidgetKey(), $html, $this->widgetData['cacheTimeInHours'] * 3600);
+        update_option($this->getWidgetKey(), $html);  // to be retrieved if Goodreads fetch fails
+    }
+
     private function getNewWidgetHTML($args) {
         $this->fetchNewShelf();
         ob_start();
@@ -114,9 +119,8 @@ class gr_progress_cvdm_backend {
         return ob_get_clean();
     }
 
-    private function saveCachedHTML($html) {
-        set_transient($this->getWidgetKey(), $html, $this->widgetData['cacheTimeInHours'] * 3600);
-        update_option($this->getWidgetKey(), $html);  // to be retrieved if Goodreads fetch fails
+    private function fetchNewShelf() {
+        $this->shelf = new Shelf($this->widgetData);
     }
 
     private function printWidgetBoilerplateStart($args) {
@@ -130,10 +134,6 @@ class gr_progress_cvdm_backend {
 
     private function printWidgetBoilerplateEnd($args) {
         echo $args['after_widget'];  // defined by themes
-    }
-
-    private function fetchNewShelf() {
-        $this->shelf = new Shelf($this->widgetData);
     }
 
     private function printGoodreadsAttribution() {
@@ -516,7 +516,7 @@ class gr_progress_cvdm_backend {
                 <input
                     id="<?php echo $this->widget->get_field_id('deleteCoverURLCacheOnSave'); ?>"
                     name="<?php echo $this->widget->get_field_name('deleteCoverURLCacheOnSave'); ?>"
-                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save           ?>
+                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save ?>
                     type="checkbox">
                 Reset cover URL cache upon next save.
             </label>
@@ -570,12 +570,12 @@ class gr_progress_cvdm_backend {
 
         $instance['cacheTimeInHours'] = preg_match("/^\d+/", $new_instance['cacheTimeInHours']) ? intval($new_instance['cacheTimeInHours']) : $this->DEFAULT_SETTINGS['cacheTimeInHours'];
 
+        $this->widgetData = $instance;
+        delete_transient($this->getWidgetKey());
+
         if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
             delete_option("gr_progress_cvdm_coverURLs");
         }
-
-        $this->widgetData = $instance;
-        delete_transient($this->getWidgetKey());
 
         return $instance;
     }
