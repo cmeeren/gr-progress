@@ -18,7 +18,7 @@ class gr_progress_cvdm_widget extends \WP_Widget {
 
     function __construct() {
         parent::__construct(
-                'gr_progress_cvdm_widget', 'GR progress', ['description' => 'Displays reading progress and shelves from Goodreads.']
+                'gr_progress_cvdm_widget', 'GR Progress', ['description' => 'Displays reading progress and shelves from Goodreads.']
         );
         $this->widget = new gr_progress_cvdm_backend($this);
     }
