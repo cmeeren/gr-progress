@@ -110,7 +110,9 @@ class gr_progress_cvdm_backend {
     }
 
     private function getNewWidgetHTML($args) {
-        $this->fetchNewShelf();
+        if ($this->widgetProperlyConfigured()) {
+            $this->fetchNewShelf();
+        }
         ob_start();
         $this->printWidgetBoilerplateStart($args);
         $this->printGoodreadsAttribution();
@@ -145,6 +147,8 @@ class gr_progress_cvdm_backend {
         if ($disableFetchingUntil !== false) {
             $minutesUntilRetry = ceil(($disableFetchingUntil - time()) / 60);
             echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads. Retrying in $minutesUntilRetry minutes.</p>";
+        } elseif (!$this->widgetProperlyConfigured()) {
+            echo "<p class='emptyShelfMessage'>Widget not configured correctly.</p>";
         } elseif ($this->shelf->isEmpty() && !empty($this->widgetData['emptyMessage'])) {
             echo "<p class='emptyShelfMessage'>{$this->widgetData['emptyMessage']}</p>";
         } elseif (!$this->shelf->isEmpty()) {
@@ -153,6 +157,11 @@ class gr_progress_cvdm_backend {
             $this->printBooksOnShelf($this->shelf);
             echo "</ul>";
         }
+    }
+
+    private function widgetProperlyConfigured() {
+        $d = $this->widgetData;
+        return !empty($d['userid']) && !empty($d['apiKey']) && !empty($d['shelfName']);
     }
 
     private function printBooksOnShelf($shelf) {

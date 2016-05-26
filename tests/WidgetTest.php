@@ -68,28 +68,51 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
         $html = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
+        $this->assertNoShelf($html);
     }
 
     public function testErrorMessageOnFailedCoverFetch() {
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_COVER;
         $html = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
+        $this->assertNoShelf($html);
     }
 
     public function testErrorMessageOnFailedProgressFetch() {
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_PROGRESS;
         $html = $this->getWidgetHTML(['progressType' => Progress::PROGRESSBAR]);
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html);
+        $this->assertNoShelf($html);
     }
 
     public function testErrorMessageOnWidget2AfterFailedBookshelfFetchOnWidget1() {
         GoodreadsFetcher::$fail_if_url_matches = $this->RE_FAIL_FETCH_BOOKSHELF;
         $html_widget1 = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html_widget1);
+        $this->assertNoShelf($html_widget1);
 
         GoodreadsFetcher::$fail_if_url_matches = null;
         $html_widget2 = $this->getWidgetHTML();
         $this->assertContains("Error retrieving data from Goodreads. Retrying in 60 minutes.", $html_widget2);
+        $this->assertNoShelf($html_widget2);
+    }
+
+    public function testErrorMessageIfNoUserid() {
+        $html = $this->getWidgetHTML(['userid' => '']);
+        $this->assertContains("Widget not configured correctly.", $html);
+        $this->assertNoShelf($html);
+    }
+
+    public function testErrorMessageIfNoApiKey() {
+        $html = $this->getWidgetHTML(['apiKey' => '']);
+        $this->assertContains("Widget not configured correctly.", $html);
+        $this->assertNoShelf($html);
+    }
+
+    public function testErrorMessageIfNoShelfName() {
+        $html = $this->getWidgetHTML(['shelfName' => '']);
+        $this->assertContains("Widget not configured correctly.", $html);
+        $this->assertNoShelf($html);
     }
 
     public function testUseCachedHTML() {
