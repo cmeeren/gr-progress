@@ -290,7 +290,7 @@ class gr_progress_cvdm_backend {
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('apiKey'); ?>">
-                Your Goodreads API key (get one <a target="_blank" href="https://www.goodreads.com/api/keys">here</a> - doesn't matter what you write):
+                Goodreads API key:
             </label>
             <input
                 class="widefat"
@@ -299,10 +299,11 @@ class gr_progress_cvdm_backend {
                 name="<?php echo $this->widget->get_field_name('apiKey'); ?>"
                 value="<?php echo esc_attr($instance['apiKey']); ?>"
                 />
+            <br />
+            <small>Get one <a target="_blank" href="https://www.goodreads.com/api/keys">here</a> - doesn't matter what you write.</small>
         </p>
 
         <h3 style="margin-top: 2.5rem;">Shelf configuration</h3>
-        <p>Reading progress will be displayed for books on this shelf.</p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('shelfName'); ?>">
                 Name of shelf on Goodreads:
@@ -330,16 +331,6 @@ class gr_progress_cvdm_backend {
         </p>
         <p>
             Cover image size:<br />
-            <label for="<?php echo $this->widget->get_field_id('coverSize_small'); ?>">
-                <input
-                    id="<?php echo $this->widget->get_field_id('coverSize_small'); ?>"
-                    name="<?php echo $this->widget->get_field_name('coverSize'); ?>"
-                    <?php checked($instance['coverSize'], CoverSize::SMALL); ?>
-                    value="<?php echo CoverSize::SMALL ?>"
-                    type="radio">
-                Small
-            </label>
-            <br />
             <label for="<?php echo $this->widget->get_field_id('coverSize_large'); ?>">
                 <input
                     id="<?php echo $this->widget->get_field_id('coverSize_large'); ?>"
@@ -349,6 +340,17 @@ class gr_progress_cvdm_backend {
                     type="radio">
                 Large
             </label>
+            <br />
+            <label for="<?php echo $this->widget->get_field_id('coverSize_small'); ?>">
+                <input
+                    id="<?php echo $this->widget->get_field_id('coverSize_small'); ?>"
+                    name="<?php echo $this->widget->get_field_name('coverSize'); ?>"
+                    <?php checked($instance['coverSize'], CoverSize::SMALL); ?>
+                    value="<?php echo CoverSize::SMALL ?>"
+                    type="radio">
+                Small
+            </label>
+
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('displayReviewExcerpt'); ?>">
@@ -384,7 +386,7 @@ class gr_progress_cvdm_backend {
                     name="<?php echo $this->widget->get_field_name('sortByReadingProgress'); ?>"
                     <?php echo $instance['sortByReadingProgress'] ? "checked" : ""; ?>
                     type="checkbox">
-                Sort books on this shelf by reading progress instead of the sorting options below (which will be used for books with identical or missing reading progress).
+                Sort books by reading progress instead of the sorting options below (which will be used for books with identical or missing reading progress)
             </label>
         </p>
         <p>
@@ -464,8 +466,14 @@ class gr_progress_cvdm_backend {
             id="<?php echo $this->widget->get_field_id('intervalTemplate'); ?>"
             name="<?php echo $this->widget->get_field_name('intervalTemplate'); ?>"
             value="<?php echo esc_attr($instance['intervalTemplate']); ?>"
+            placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalTemplate'] ?>"
             />
         <table>
+            <tr>
+                <td></td>
+                <td>Singular:</td>
+                <td>Plural:</td>
+            </tr>
             <tr>
                 <td>Year</td>
                 <td><input class="widefat" type="text" id="<?php echo $this->widget->get_field_id('intervalSingularYear'); ?>" name="<?php echo $this->widget->get_field_name('intervalSingular'); ?>[]" value="<?php echo esc_attr($instance['intervalSingular'][0]); ?>" placeholder="<?php echo $this->DEFAULT_SETTINGS['intervalSingular'][0] ?>" /></td>
@@ -506,7 +514,7 @@ class gr_progress_cvdm_backend {
         <h3 style="margin-top: 2.5rem;">Caching</h3>
         <p>
             <label for="<?php echo $this->widget->get_field_id('cacheTimeInHours'); ?>">
-                Cache Goodreads data for 
+                Cache book and progress data for
                 <input
                     id="<?php echo $this->widget->get_field_id('cacheTimeInHours'); ?>"
                     name="<?php echo $this->widget->get_field_name('cacheTimeInHours'); ?>"
@@ -514,8 +522,9 @@ class gr_progress_cvdm_backend {
                     min="0"
                     value="<?php echo $instance['cacheTimeInHours']; ?>"
                     style="width: 5em;"
+                    placeholder="<?php echo $this->DEFAULT_SETTINGS['cacheTimeInHours'] ?>"
                     type="number">
-                hours (default 24)
+                hours
             </label>
             <br />
             <small>If you set it to 0 it will only be updated whenever you save the widget settings.</small>
@@ -527,7 +536,7 @@ class gr_progress_cvdm_backend {
                     name="<?php echo $this->widget->get_field_name('deleteCoverURLCacheOnSave'); ?>"
                     <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save ?>
                     type="checkbox">
-                Reset cover URL cache upon next save.
+                Reset cover URL cache upon next save
             </label>
         </p>
         <?php
@@ -565,7 +574,9 @@ class gr_progress_cvdm_backend {
         $instance['sortOrder'] = array_key_exists($new_instance['sortOrder'], $this->SORT_ORDER_OPTIONS) ? $new_instance['sortOrder'] : $this->DEFAULT_SETTINGS['sortOrder'];
         $instance['progressType'] = intval($new_instance['progressType']);
         $instance['displayProgressUpdateTime'] = isset($new_instance['displayProgressUpdateTime']) ? true : false;
-        $instance['intervalTemplate'] = trim(htmlspecialchars($new_instance['intervalTemplate']));
+
+        $intervalTemplate = trim(htmlspecialchars($new_instance['intervalTemplate']));
+        $instance['intervalTemplate'] = !empty($intervalTemplate) ? $intervalTemplate : $this->DEFAULT_SETTINGS['intervalTemplate'];
 
         foreach (['intervalSingular', 'intervalPlural'] as $intervalPluralSingular) {
             $instance[$intervalPluralSingular] = $new_instance[$intervalPluralSingular];
@@ -581,6 +592,7 @@ class gr_progress_cvdm_backend {
 
         $this->widgetData = $instance;
         delete_transient($this->getWidgetKey());
+        delete_transient('cvdm_gr_progress_disableFetchingUntil');
 
         if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
             delete_option("gr_progress_cvdm_coverURLs");
