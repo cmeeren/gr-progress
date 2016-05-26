@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Widget to displays shelves and reading progress from Goodreads.
+Widget to display shelves and reading progress from Goodreads.
 
 == Description ==
 
