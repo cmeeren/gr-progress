@@ -274,7 +274,7 @@ class gr_progress_cvdm_backend {
                 placeholder="<?php echo $this->DEFAULT_SETTINGS['goodreadsAttribution'] ?>"
                 />
             <br />
-            <small>Goodreads attribution is required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. This field will let you change/translate it, not remove it.</small>
+            <small>Goodreads attribution is required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. This field will let you change/translate it, not remove it. You have to mention "Goodreads" in this field.</small>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('userid'); ?>">
@@ -558,7 +558,7 @@ class gr_progress_cvdm_backend {
         $instance['title'] = trim(htmlspecialchars($new_instance['title']));
 
         $goodreadsAttribution = trim(htmlspecialchars($new_instance['goodreadsAttribution']));
-        $instance['goodreadsAttribution'] = !empty($goodreadsAttribution) ? $goodreadsAttribution : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
+        $instance['goodreadsAttribution'] = preg_match("/goodreads/i", $goodreadsAttribution) ? $goodreadsAttribution : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
 
         preg_match("/\d+/", $new_instance['userid'], $matches_userid);
         $instance['userid'] = !empty($matches_userid) ? $matches_userid[0] : $this->DEFAULT_SETTINGS['userid'];

@@ -21,8 +21,13 @@ class SettingsTest extends GR_Progress_UnitTestCase {
     }
 
     public function test_goodreadsAttribution() {
-        $this->assertPassesAllTextInputTests('goodreadsAttribution');
-        $this->assertSettingSavedAs('goodreadsAttribution', '', 'Data from Goodreads');
+        $this->assertSettingSavedAs('goodreadsAttribution', 'Goodreads', 'Goodreads');
+        $this->assertSettingSavedAs('goodreadsAttribution', 'goodreads', 'goodreads');
+        $this->assertSettingSavedAs('goodreadsAttribution', ' bargoodreadsbaz ', 'bargoodreadsbaz');
+        $this->assertSettingSavedAs('goodreadsAttribution', "<script>evil()</script>Goodreads",
+                "&lt;script&gt;evil()&lt;/script&gt;Goodreads");
+        $this->assertSettingSavedAs('goodreadsAttribution', 'foobar', $this->DEFAULT_SETTINGS['goodreadsAttribution']);
+        $this->assertSettingSavedAs('goodreadsAttribution', '', $this->DEFAULT_SETTINGS['goodreadsAttribution']);
     }
 
     public function test_userid_numeric() {
