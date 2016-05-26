@@ -115,6 +115,7 @@ class SettingsTest extends GR_Progress_UnitTestCase {
     public function test_intervalTemplate() {
         $this->assertPassesAllTextInputTests('intervalTemplate');
         $this->assertSettingSavedAs('intervalTemplate', 'updated {num} {period} ago', 'updated {num} {period} ago');
+        $this->assertSettingSavedAs('intervalTemplate', ' ', $this->DEFAULT_SETTINGS['intervalTemplate']);
     }
 
     public function test_intervalSingular_intervalPlural() {
@@ -133,9 +134,9 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         $this->assertSettingSavedAs("cacheTimeInHours", "200", 200);
         $this->assertSettingSavedAs("cacheTimeInHours", "0", 0);
 
-        // invalid values revert to default setting, might change in the future
-        $this->assertSettingSavedAs("cacheTimeInHours", "-1", 24);
-        $this->assertSettingSavedAs("cacheTimeInHours", "foo", 24);
+        $this->assertSettingSavedAs("cacheTimeInHours", "-1", $this->DEFAULT_SETTINGS['cacheTimeInHours']);
+        $this->assertSettingSavedAs("cacheTimeInHours", "foo", $this->DEFAULT_SETTINGS['cacheTimeInHours']);
+        $this->assertSettingSavedAs("cacheTimeInHours", "", $this->DEFAULT_SETTINGS['cacheTimeInHours']);
     }
 
     public function test_cacheDeletedAfterSavingSettings() {
