@@ -82,37 +82,39 @@ class gr_progress_cvdm_backend {
         $this->widgetData = $instance;
 
         if ($this->hasCache()) {
-            echo $this->getCachedWidgetHTML();
-        } else {
-            $html = $this->getNewWidgetHTML($args);
+            $this->shelf = $this->getCachedShelf();
+        } elseif ($this->widgetProperlyConfigured()) {
+            $this->fetchNewShelf();
             if (get_transient('cvdm_gr_progress_disableFetchingUntil') === false) {
-                $this->saveCachedHTML($html);
+                $this->saveShelfToCache();
             } else {
-                // Goodreads fetch failed, so get last known HTML from option instead
-                // (default to current $html, i.e. error message, if option doesn't exist)
-                $html = get_option($this->getWidgetKey(), $html);
+                // Goodreads fetch failed, so get last known shelf data from option instead
+                $this->shelf = get_option($this->getWidgetKey(), null);
             }
-            echo $html;
         }
+
+        echo $this->getWidgetHTML($args);
     }
 
     private function hasCache() {
-        return $this->getCachedWidgetHTML() !== false;
+        return $this->getCachedShelf() !== false;
     }
 
-    private function getCachedWidgetHTML() {
+    private function getCachedShelf() {
         return get_transient($this->getWidgetKey());
     }
 
-    private function saveCachedHTML($html) {
-        set_transient($this->getWidgetKey(), $html, $this->widgetData['cacheTimeInHours'] * 3600);
-        update_option($this->getWidgetKey(), $html);  // to be retrieved if Goodreads fetch fails
+    private function saveShelfToCache() {
+        set_transient($this->getWidgetKey(), $this->shelf, $this->widgetData['cacheTimeInHours'] * 3600);
+        update_option($this->getWidgetKey(), $this->shelf);  // to be retrieved if Goodreads fetch fails
     }
 
-    private function getNewWidgetHTML($args) {
-        if ($this->widgetProperlyConfigured()) {
-            $this->fetchNewShelf();
-        }
+    private function widgetProperlyConfigured() {
+        $d = $this->widgetData;
+        return !empty($d['userid']) && !empty($d['apiKey']) && !empty($d['shelfName']);
+    }
+
+    private function getWidgetHTML($args) {
         ob_start();
         $this->printWidgetBoilerplateStart($args);
         $this->printGoodreadsAttribution();
@@ -144,7 +146,7 @@ class gr_progress_cvdm_backend {
 
     private function printShelf() {
         $disableFetchingUntil = get_transient('cvdm_gr_progress_disableFetchingUntil');
-        if ($disableFetchingUntil !== false) {
+        if ($this->shelf === null && $disableFetchingUntil !== false) {
             $minutesUntilRetry = ceil(($disableFetchingUntil - time()) / 60);
             echo "<p>Error retrieving data from Goodreads. Retrying in $minutesUntilRetry minutes.</p>";
         } elseif (!$this->widgetProperlyConfigured()) {
@@ -157,11 +159,6 @@ class gr_progress_cvdm_backend {
             $this->printBooksOnShelf($this->shelf);
             echo "</ul>";
         }
-    }
-
-    private function widgetProperlyConfigured() {
-        $d = $this->widgetData;
-        return !empty($d['userid']) && !empty($d['apiKey']) && !empty($d['shelfName']);
     }
 
     private function printBooksOnShelf($shelf) {
@@ -534,7 +531,7 @@ class gr_progress_cvdm_backend {
                 <input
                     id="<?php echo $this->widget->get_field_id('deleteCoverURLCacheOnSave'); ?>"
                     name="<?php echo $this->widget->get_field_name('deleteCoverURLCacheOnSave'); ?>"
-                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save ?>
+                    <?php // Don't set "checked" attribute - this should be reset to unchecked/false on each save  ?>
                     type="checkbox">
                 Reset cover URL cache upon next save
             </label>
