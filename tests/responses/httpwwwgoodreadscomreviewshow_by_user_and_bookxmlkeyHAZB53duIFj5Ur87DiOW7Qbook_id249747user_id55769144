@@ -25,7 +25,7 @@
   <id type="integer">249747</id>
   <isbn>0786817879</isbn>
   <isbn13>9780786817870</isbn13>
-  <text_reviews_count type="integer">6520</text_reviews_count>
+  <text_reviews_count type="integer">6522</text_reviews_count>
   <title>Artemis Fowl (Artemis Fowl, #1)</title>
   <image_url>http://d.gr-assets.com/books/1327945104m/249747.jpg</image_url>
   <small_image_url>http://d.gr-assets.com/books/1327945104s/249747.jpg</small_image_url>
@@ -39,7 +39,7 @@
   <publication_year>2003</publication_year>
   <publication_month>3</publication_month>
   <average_rating>3.81</average_rating>
-  <ratings_count>354956</ratings_count>
+  <ratings_count>355162</ratings_count>
   <description>Twelve-year-old Artemis Fowl is a millionaire, a genius—and, above all, a criminal mastermind. But even Artemis doesn't know what he's taken on when he kidnaps a fairy, Captain Holly Short of the LEPrecon Unit. These aren't the fairies of bedtime stories—they're dangerous! Full of unexpected twists and turns, &lt;em&gt;Artemis Fowl&lt;/em&gt; is a riveting, magical adventure.</description>
 <authors>
 <author>
@@ -54,7 +54,7 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/10896.Eoin_Colfer]]></link>
 <average_rating>3.92</average_rating>
-<ratings_count>979163</ratings_count>
+<ratings_count>978945</ratings_count>
 <text_reviews_count>29029</text_reviews_count>
 </author>
 </authors>

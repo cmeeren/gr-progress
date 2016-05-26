@@ -25,7 +25,7 @@
   <id type="integer">228665</id>
   <isbn>0812511816</isbn>
   <isbn13>9780812511819</isbn13>
-  <text_reviews_count type="integer">6191</text_reviews_count>
+  <text_reviews_count type="integer">6194</text_reviews_count>
   <title>The Eye of the World (Wheel of Time, #1)</title>
   <image_url>http://d.gr-assets.com/books/1337818095m/228665.jpg</image_url>
   <small_image_url>http://d.gr-assets.com/books/1337818095s/228665.jpg</small_image_url>
@@ -39,7 +39,7 @@
   <publication_year>1990</publication_year>
   <publication_month>11</publication_month>
   <average_rating>4.16</average_rating>
-  <ratings_count>229294</ratings_count>
+  <ratings_count>229345</ratings_count>
   <description>The Wheel of Time turns and Ages come and go, leaving memories that become legend. Legend fades to myth, and even myth is long forgotten when the Age that gave it birth returns again. In the Third Age, an Age of Prophecy, the World and Time themselves hang in the balance. What was, what will be, and what is, may yet fall under the Shadow.</description>
 <authors>
 <author>
@@ -54,8 +54,8 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/6252.Robert_Jordan]]></link>
 <average_rating>4.15</average_rating>
-<ratings_count>1540838</ratings_count>
-<text_reviews_count>33970</text_reviews_count>
+<ratings_count>1540456</ratings_count>
+<text_reviews_count>33962</text_reviews_count>
 </author>
 </authors>
   <published>1990</published>
