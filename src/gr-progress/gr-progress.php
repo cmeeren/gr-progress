@@ -5,7 +5,7 @@
   Version: 1.0.0
   Author: Christer van der Meeren
   Author URI: http://relativisticramblings.com
-  License: MIT
+  License: GPLv2 or later
  */
 
 namespace relativisticramblings\gr_progress;
