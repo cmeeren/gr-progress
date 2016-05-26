@@ -146,9 +146,9 @@ class gr_progress_cvdm_backend {
         $disableFetchingUntil = get_transient('cvdm_gr_progress_disableFetchingUntil');
         if ($disableFetchingUntil !== false) {
             $minutesUntilRetry = ceil(($disableFetchingUntil - time()) / 60);
-            echo "<p class='emptyShelfMessage'>Error retrieving data from Goodreads. Retrying in $minutesUntilRetry minutes.</p>";
+            echo "<p>Error retrieving data from Goodreads. Retrying in $minutesUntilRetry minutes.</p>";
         } elseif (!$this->widgetProperlyConfigured()) {
-            echo "<p class='emptyShelfMessage'>Widget not configured correctly.</p>";
+            echo "<p>Widget not configured correctly.</p>";
         } elseif ($this->shelf->isEmpty() && !empty($this->widgetData['emptyMessage'])) {
             echo "<p class='emptyShelfMessage'>{$this->widgetData['emptyMessage']}</p>";
         } elseif (!$this->shelf->isEmpty()) {
