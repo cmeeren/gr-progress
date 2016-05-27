@@ -33,6 +33,8 @@ The widget looks OK on the most popular Wordpress themes.
 
 Requires PHP 5.4 or later (PHP 7 supported).
 
+The source is hosted on [GitHub](https://github.com/cmeeren/gr-progress).
+
 == Installation ==
 
 1. Make your Goodreads profile public (Account Settings - Settings - Who can view my profile: anyone),

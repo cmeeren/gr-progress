@@ -4,8 +4,6 @@ Contributing
 How to set up development environment
 -------------------------------------
 
-Linux required (you may get it working on Windows, but you're on your own).
-
 1. Install and configure your favorite flavor of Apache/PHP/MySQL
 2. Install and configure Wordpress
 3. Add `define( 'WP_DEBUG', true );` to your `wp-config.php`
@@ -16,12 +14,15 @@ Linux required (you may get it working on Windows, but you're on your own).
 6. Make a symlink to `src/gr-progress` into your `wp-content/plugins` folder
 7. Make your changes
 8. Make sure the tests run after you're done (see the section below), and remember
-   to add new tests for all the functionality you add
+   to add new tests for all the functionality you add. If you can't run the tests locally,
+   just make a pull request and they'll be run automatically in the cloud.
 9. Push your changes to your fork on GitHub
 10. Make a pull request
 
 How to set up testing environment
 ---------------------------------
+
+Linux required (you may get it working on Windows, but you're on your own).
 
 1. Install [PHPUnit](https://phpunit.de)
 2. Go to the source folder (containing `phpunit.xml`)
