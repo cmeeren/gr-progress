@@ -73,5 +73,8 @@ that the data in both widgets come from Goodreads.
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix bug which made plugin appear twice in the Plugins list.
+
 = 1.0.0 =
 * Initial release.
