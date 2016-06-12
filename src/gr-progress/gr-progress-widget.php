@@ -1,13 +1,5 @@
 <?php
 
-/* Plugin Name: GR Progress
-  Description: Displays shelves and reading progress from Goodreads.
-  Version: 1.0.0
-  Author: Christer van der Meeren
-  Author URI: http://relativisticramblings.com
-  License: GPLv2 or later
- */
-
 namespace relativisticramblings\gr_progress;
 
 require_once('includes/gr_progress_cvdm_backend.php');
