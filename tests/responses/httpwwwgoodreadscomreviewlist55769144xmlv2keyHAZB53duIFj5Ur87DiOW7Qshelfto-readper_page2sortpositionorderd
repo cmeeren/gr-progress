@@ -12,7 +12,7 @@
   <id type="integer">249747</id>
   <isbn>0786817879</isbn>
   <isbn13>9780786817870</isbn13>
-  <text_reviews_count type="integer">6522</text_reviews_count>
+  <text_reviews_count type="integer">6563</text_reviews_count>
   <title>Artemis Fowl (Artemis Fowl, #1)</title>
   <image_url>http://d.gr-assets.com/books/1327945104m/249747.jpg</image_url>
   <small_image_url>http://d.gr-assets.com/books/1327945104s/249747.jpg</small_image_url>
@@ -26,7 +26,7 @@
   <publication_year>2003</publication_year>
   <publication_month>3</publication_month>
   <average_rating>3.81</average_rating>
-  <ratings_count>355162</ratings_count>
+  <ratings_count>357606</ratings_count>
   <description>Twelve-year-old Artemis Fowl is a millionaire, a genius—and, above all, a criminal mastermind. But even Artemis doesn't know what he's taken on when he kidnaps a fairy, Captain Holly Short of the LEPrecon Unit. These aren't the fairies of bedtime stories—they're dangerous! Full of unexpected twists and turns, &lt;em&gt;Artemis Fowl&lt;/em&gt; is a riveting, magical adventure.</description>
 <authors>
 <author>
@@ -41,8 +41,8 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/10896.Eoin_Colfer]]></link>
 <average_rating>3.92</average_rating>
-<ratings_count>978945</ratings_count>
-<text_reviews_count>29029</text_reviews_count>
+<ratings_count>985889</ratings_count>
+<text_reviews_count>29183</text_reviews_count>
 </author>
 </authors>
   <published>2003</published>
@@ -80,7 +80,7 @@
   <id type="integer">34497</id>
   <isbn>0060855924</isbn>
   <isbn13>9780060855925</isbn13>
-  <text_reviews_count type="integer">3067</text_reviews_count>
+  <text_reviews_count type="integer">3088</text_reviews_count>
   <title>The Color of Magic (Discworld, #1; Rincewind #1)</title>
   <image_url>http://d.gr-assets.com/books/1407111017m/34497.jpg</image_url>
   <small_image_url>http://d.gr-assets.com/books/1407111017s/34497.jpg</small_image_url>
@@ -94,7 +94,7 @@
   <publication_year>2005</publication_year>
   <publication_month>9</publication_month>
   <average_rating>3.95</average_rating>
-  <ratings_count>189373</ratings_count>
+  <ratings_count>190798</ratings_count>
   <description>Terry Pratchett's profoundly irreverent, bestselling novels have garnered him a revered position in the halls of parody next to the likes of Mark Twain, Kurt Vonnegut, Douglas Adams, and Carl Hiaasen.&lt;br&gt;&lt;br&gt;&lt;em&gt;The Color of Magic&lt;/em&gt; is Terry Pratchett's maiden voyage through the now-legendary land of Discworld. This is where it all begins -- with the tourist Twoflower and his wizard guide, Rincewind.&lt;br&gt;&lt;br&gt;&lt;em&gt;On a world supported on the back of a giant turtle (sex unknown), a gleeful, explosive, wickedly eccentric expedition sets out. There's an avaricious but inept wizard, a naive tourist whose luggage moves on hundreds of dear little legs, dragons who only exist if you believe in them, and of course THE EDGE of the planet...&lt;/em&gt;</description>
 <authors>
 <author>
@@ -109,8 +109,8 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/1654.Terry_Pratchett]]></link>
 <average_rating>4.12</average_rating>
-<ratings_count>2763178</ratings_count>
-<text_reviews_count>85225</text_reviews_count>
+<ratings_count>2783773</ratings_count>
+<text_reviews_count>86016</text_reviews_count>
 </author>
 </authors>
   <published>2005</published>

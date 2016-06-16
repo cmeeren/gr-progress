@@ -25,7 +25,7 @@
   <id type="integer">3</id>
   <isbn>0439554934</isbn>
   <isbn13>9780439554930</isbn13>
-  <text_reviews_count type="integer">46931</text_reviews_count>
+  <text_reviews_count type="integer">47395</text_reviews_count>
   <title>Harry Potter and the Sorcerer's Stone (Harry Potter, #1)</title>
   <image_url>http://d.gr-assets.com/books/1361572757m/3.jpg</image_url>
   <small_image_url>http://d.gr-assets.com/books/1361572757s/3.jpg</small_image_url>
@@ -39,7 +39,7 @@
   <publication_year>2003</publication_year>
   <publication_month>11</publication_month>
   <average_rating>4.42</average_rating>
-  <ratings_count>3903031</ratings_count>
+  <ratings_count>3944409</ratings_count>
   <description>Harry Potter thinks he is an ordinary boy. He lives with his Uncle Vernon, Aunt Petunia and cousin Dudley, who are mean to him and make him sleep in a cupboard under the stairs. (Dudley, however, has two bedrooms, one to sleep in and one for all his toys and games.) Then Harry starts receiving mysterious letters and his life is changed forever. He is whisked away by a beetle-eyed giant of a man and enrolled at Hogwarts School of Witchcraft and Wizardry. The reason: Harry Potter is a wizard! The first book in the "Harry Potter" series makes the perfect introduction to the world of Hogwarts.&lt;br&gt;</description>
 <authors>
 <author>
@@ -54,8 +54,8 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/1077326.J_K_Rowling]]></link>
 <average_rating>4.42</average_rating>
-<ratings_count>15039530</ratings_count>
-<text_reviews_count>316588</text_reviews_count>
+<ratings_count>15251115</ratings_count>
+<text_reviews_count>321679</text_reviews_count>
 </author>
 </authors>
   <published>2003</published>

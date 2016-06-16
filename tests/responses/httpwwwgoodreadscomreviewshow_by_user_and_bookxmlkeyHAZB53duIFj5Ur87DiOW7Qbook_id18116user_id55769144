@@ -25,7 +25,7 @@
   <id type="integer">18116</id>
   <isbn>0440238609</isbn>
   <isbn13>9780440238607</isbn13>
-  <text_reviews_count type="integer">3403</text_reviews_count>
+  <text_reviews_count type="integer">3415</text_reviews_count>
   <title>His Dark Materials (His Dark Materials #1-3)</title>
   <image_url>http://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png</image_url>
   <small_image_url>http://s.gr-assets.com/assets/nophoto/book/50x75-a91bf249278a81aabab721ef782c4a74.png</small_image_url>
@@ -39,7 +39,7 @@
   <publication_year></publication_year>
   <publication_month></publication_month>
   <average_rating>4.24</average_rating>
-  <ratings_count>93819</ratings_count>
+  <ratings_count>94353</ratings_count>
   <description>The extraordinary story moves between parallel universes. Beginning in Oxford, it takes Lyra and her animal-daemon Pantalaimon on a dangerous rescue mission to the ice kingdoms of the far North, where she begins to learn about the mysterious particles they call Dust - a substance for which terrible war between different worlds will be fought...</description>
 <authors>
 <author>
@@ -54,8 +54,8 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/3618.Philip_Pullman]]></link>
 <average_rating>3.98</average_rating>
-<ratings_count>1545189</ratings_count>
-<text_reviews_count>35999</text_reviews_count>
+<ratings_count>1555036</ratings_count>
+<text_reviews_count>36219</text_reviews_count>
 </author>
 </authors>
   <published></published>

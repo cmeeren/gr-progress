@@ -25,7 +25,7 @@
   <id type="integer">6421982</id>
   <isbn nil="true"/>
   <isbn13 nil="true"/>
-  <text_reviews_count type="integer">1184</text_reviews_count>
+  <text_reviews_count type="integer">1204</text_reviews_count>
   <title>A Game of Thrones (A Song of Ice and Fire, #1)</title>
   <image_url>http://d.gr-assets.com/books/1327957410m/6421982.jpg</image_url>
   <small_image_url>http://d.gr-assets.com/books/1327957410s/6421982.jpg</small_image_url>
@@ -39,7 +39,7 @@
   <publication_year>2003</publication_year>
   <publication_month>1</publication_month>
   <average_rating>4.44</average_rating>
-  <ratings_count>1186872</ratings_count>
+  <ratings_count>1200526</ratings_count>
   <description>&lt;strong&gt;Summers span decades. Winter can last a lifetime. And the struggle for the Iron Throne has begun.&lt;/strong&gt; &lt;br&gt;&lt;br&gt;As Warden of the north, Lord Eddard Stark counts it a curse when King Robert bestows on him the office of the Hand. His honour weighs him down at court where a true man does what he will, not what he must ...and a dead enemy is a thing of beauty. &lt;br&gt;&lt;br&gt;The old gods have no power in the south, Stark's family is split and there is treachery at court. Worse, the vengeance-mad heir of the deposed Dragon King has grown to maturity in exile in the Free Cities. He claims the Iron Throne.</description>
 <authors>
 <author>
@@ -54,8 +54,8 @@
 </small_image_url>
 <link><![CDATA[http://www.goodreads.com/author/show/346732.George_R_R_Martin]]></link>
 <average_rating>4.36</average_rating>
-<ratings_count>3501319</ratings_count>
-<text_reviews_count>143422</text_reviews_count>
+<ratings_count>3538370</ratings_count>
+<text_reviews_count>144499</text_reviews_count>
 </author>
 </authors>
   <published>2003</published>
