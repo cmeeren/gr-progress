@@ -10,6 +10,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         GoodreadsFetcher::$test_local = true;
         GoodreadsFetcher::$fail_if_url_matches = null;
         delete_transient('cvdm_gr_progress_disableFetchingUntil');
+        delete_option('cvdm_gr_progress_shelves');
         delete_option("gr_progress_cvdm_coverURLs");
     }
 

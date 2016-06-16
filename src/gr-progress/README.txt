@@ -73,6 +73,11 @@ that the data in both widgets come from Goodreads.
 
 == Changelog ==
 
+= 1.1.0 =
+* Synchronize multiple widgets so that they all fetch data at the same time
+  (to avoid books being shown in more than one shelf if it is moved on Goodreads).
+  The shortest cache time will be used.
+
 = 1.0.1 =
 * Fix bug which made plugin appear twice in the Plugins list.
 

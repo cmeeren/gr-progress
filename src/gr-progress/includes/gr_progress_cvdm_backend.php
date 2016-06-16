@@ -89,7 +89,7 @@ class gr_progress_cvdm_backend {
                 $this->saveShelfToCache();
             } else {
                 // Goodreads fetch failed, so get last known shelf data from option instead
-                $this->shelf = get_option($this->getWidgetKey(), null);
+                $this->shelf = $this->getCachedShelf();
             }
         }
 
@@ -97,16 +97,38 @@ class gr_progress_cvdm_backend {
     }
 
     private function hasCache() {
-        return $this->getCachedShelf() !== false;
+        return $this->cacheNotExpired() && $this->getCachedShelf() !== null;
+    }
+
+    private function cacheNotExpired() {
+        return get_transient($this->getWidgetKey()) !== false;
     }
 
     private function getCachedShelf() {
-        return get_transient($this->getWidgetKey());
+        $shelves = get_option('cvdm_gr_progress_shelves', []);
+        $shelfName = $this->widgetData['shelfName'];
+        return array_key_exists($shelfName, $shelves) ? $shelves[$shelfName] : null;
     }
 
     private function saveShelfToCache() {
-        set_transient($this->getWidgetKey(), $this->shelf, $this->widgetData['cacheTimeInHours'] * 3600);
-        update_option($this->getWidgetKey(), $this->shelf);  // to be retrieved if Goodreads fetch fails
+        set_transient($this->getWidgetKey(), true, $this->widgetData['cacheTimeInHours'] * 3600);
+        
+        // if the shelf exists in cache, we assume this is the first
+        // widget instance to update, so delete the whole cache (which makes
+        // the above assumption true) to force the other widgets to update
+        // their cache at the same time
+        if ($this->getCachedShelf() !== null) {
+            delete_option('cvdm_gr_progress_shelves');
+        }
+        
+        $shelves = get_option('cvdm_gr_progress_shelves', []);
+        $shelves[$this->widgetData['shelfName']] = $this->shelf;
+        update_option('cvdm_gr_progress_shelves', $shelves);
+    }
+
+    private function firstWidgetToUpdate() {
+        $cachedShelves = get_option('cvdm_gr_progress_shelves', []);
+        return array_key_exists($this->widgetData['shelfName'], $cachedShelves);
     }
 
     private function widgetProperlyConfigured() {
@@ -524,7 +546,7 @@ class gr_progress_cvdm_backend {
                 hours
             </label>
             <br />
-            <small>If you set it to 0 it will only be updated whenever you save the widget settings.</small>
+            <small>If you set it to 0 it will only be updated whenever you save the widget settings. If you have multiple GR Progress widgets, they will update at the same time, and the shortest cache time will be used.</small>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('deleteCoverURLCacheOnSave'); ?>">
@@ -589,6 +611,7 @@ class gr_progress_cvdm_backend {
 
         $this->widgetData = $instance;
         delete_transient($this->getWidgetKey());
+        delete_option('cvdm_gr_progress_shelves');
         delete_transient('cvdm_gr_progress_disableFetchingUntil');
 
         if (isset($new_instance['deleteCoverURLCacheOnSave'])) {
