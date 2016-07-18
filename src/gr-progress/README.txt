@@ -73,6 +73,9 @@ that the data in both widgets come from Goodreads.
 
 == Changelog ==
 
+= 1.2.0 =
+* Allow links in book titles and Goodreads attribution 
+
 = 1.1.0 =
 * Synchronize multiple widgets so that they all fetch data at the same time
   (to avoid books being shown in more than one shelf if it is moved on Goodreads).
