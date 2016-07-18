@@ -30,6 +30,16 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         $this->assertSettingSavedAs('goodreadsAttribution', '', $this->DEFAULT_SETTINGS['goodreadsAttribution']);
     }
 
+    public function test_goodreadsAttribution_link_singleQuote() {
+        $str = "Data from my <a href='https://www.goodreads.com/user/show/55769144'>Goodreads profile</a>";
+        $this->assertSettingSavedAs('goodreadsAttribution', $str, $str);
+    }
+
+    public function test_goodreadsAttribution_link_doubleQuote() {
+        $str = 'Data from my <a href="https://www.goodreads.com/user/show/55769144">Goodreads profile</a>';
+        $this->assertSettingSavedAs('goodreadsAttribution', $str, $str);
+    }
+
     public function test_userid_numeric() {
         $this->assertSettingSavedAs('userid', '55769144', '55769144');
         $this->assertSettingSavedAs('userid', '7691', '7691');

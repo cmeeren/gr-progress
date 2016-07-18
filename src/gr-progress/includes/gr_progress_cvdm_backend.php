@@ -114,7 +114,7 @@ class gr_progress_cvdm_backend {
 
     private function saveShelfToCache() {
         set_transient($this->getWidgetKey(), true, $this->widgetData['cacheTimeInHours'] * 3600);
-        
+
         // if the shelf exists in cache, we assume this is the first
         // widget instance to update, so delete the whole cache (which makes
         // the above assumption true) to force the other widgets to update
@@ -122,7 +122,7 @@ class gr_progress_cvdm_backend {
         if ($this->getCachedShelf() !== null) {
             delete_option('cvdm_gr_progress_shelves');
         }
-        
+
         $shelves = get_option('cvdm_gr_progress_shelves', []);
         $shelves[$this->widgetData['shelfName']] = $this->shelf;
         update_option('cvdm_gr_progress_shelves', $shelves);
@@ -190,7 +190,7 @@ class gr_progress_cvdm_backend {
             $this->printBook($book);
         }
     }
-    
+
     private function printBook($book) {
         echo "<li class='book'>";
         echo "<div class='coverImage'><img alt='Book cover' src='{$book->getCoverURL()}' /></div>";
@@ -211,7 +211,7 @@ class gr_progress_cvdm_backend {
         echo "</div>";
         echo "</li>";
     }
-    
+
     private function getBookTitleHTML($book) {
         $output = "<p class='bookTitle'>";
         if ($this->widgetData['bookLink']) {
@@ -311,7 +311,7 @@ class gr_progress_cvdm_backend {
                 placeholder="<?php echo $this->DEFAULT_SETTINGS['goodreadsAttribution'] ?>"
                 />
             <br />
-            <small>Goodreads attribution is required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. This field will let you change/translate it, not remove it. You have to mention "Goodreads" in this field.</small>
+            <small>Goodreads attribution is required per the <a target="_blank" href="https://www.goodreads.com/api/terms">Goodreads API Terms of Service</a>. This field will let you change/translate it, not remove it. You have to mention "Goodreads" in this field. Links are possible, e.g. <span style='font-family:monospace'>&lt;a href="https://www.goodreads.com/user/show/123456789-user"&gt;My Goodreads profile&lt;/a&gt;</span></small>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('userid'); ?>">
@@ -614,8 +614,10 @@ class gr_progress_cvdm_backend {
 
         $instance['title'] = trim(htmlspecialchars($new_instance['title']));
 
-        $goodreadsAttribution = trim(htmlspecialchars($new_instance['goodreadsAttribution']));
+        $goodreadsAttribution = trim(htmlspecialchars($new_instance['goodreadsAttribution'], $flags = ENT_NOQUOTES));
         $instance['goodreadsAttribution'] = preg_match("/goodreads/i", $goodreadsAttribution) ? $goodreadsAttribution : $this->DEFAULT_SETTINGS['goodreadsAttribution'];
+        $instance['goodreadsAttribution'] = preg_replace('#&lt;a(.*?)\s*&gt;#', '<a\1>', $instance['goodreadsAttribution']);
+        $instance['goodreadsAttribution'] = preg_replace('#&lt;/a\s*&gt;#', '</a>', $instance['goodreadsAttribution']);
 
         preg_match("/\d+/", $new_instance['userid'], $matches_userid);
         $instance['userid'] = !empty($matches_userid) ? $matches_userid[0] : $this->DEFAULT_SETTINGS['userid'];
