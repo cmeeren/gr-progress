@@ -48,8 +48,10 @@ class Shelf {
             }
 
             $reviewBodyFirstLine = $this->widgetData['displayReviewExcerpt'] ? $this->getReviewBodyFirstLine($reviewElement) : null;
+            
+            $link = $bookElement->find("link text", 0)->plaintext;
 
-            $this->books[$id] = new Book($id, $title, $authors, $reviewBodyFirstLine, $this->widgetData);
+            $this->books[$id] = new Book($id, $title, $authors, $reviewBodyFirstLine, $link, $this->widgetData);
         }
     }
 

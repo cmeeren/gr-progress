@@ -18,6 +18,8 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'emptyMessage' => 'Not currently reading anything.',
         'coverSize' => CoverSize::SMALL,
         'displayReviewExcerpt' => false,
+        'bookLink' => false,
+        'bookLinkNewTab' => false,
         'sortByReadingProgress' => false,
         'displayProgressUpdateTime' => true,
         'intervalTemplate' => '{num} {period} ago',

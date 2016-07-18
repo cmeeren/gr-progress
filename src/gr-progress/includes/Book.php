@@ -12,15 +12,17 @@ class Book {
     private $authors;
     private $comment;
     private $coverURL;
+    private $link;
     private $progressInPercent;
     private $progressStatusUpdateTime;
     private $widgetData;
 
-    public function __construct($id, $title, $authors, $comment, $widgetData) {
+    public function __construct($id, $title, $authors, $comment, $link, $widgetData) {
         $this->id = $id;
         $this->title = $title;
         $this->authors = $authors;
         $this->comment = $comment;
+        $this->link = $link;
         $this->widgetData = $widgetData;
     }
 
@@ -34,6 +36,10 @@ class Book {
 
     public function getCoverURL() {
         return $this->coverURL;
+    }
+    
+    public function getLink() {
+        return $this->link;
     }
 
     public function getTitle() {

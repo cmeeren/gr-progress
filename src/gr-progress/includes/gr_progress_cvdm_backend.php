@@ -34,6 +34,8 @@ class gr_progress_cvdm_backend {
         'emptyMessage' => 'Not currently reading anything.',
         'coverSize' => CoverSize::SMALL,
         'displayReviewExcerpt' => false,
+        'bookLink' => false,
+        'bookLinkNewTab' => false,
         'maxBooks' => 3,
         'sortByReadingProgress' => false,
         'sortBy' => 'date_updated',
@@ -193,7 +195,7 @@ class gr_progress_cvdm_backend {
         echo "<li class='book'>";
         echo "<div class='coverImage'><img alt='Book cover' src='{$book->getCoverURL()}' /></div>";
         echo "<div class='desc'>";
-        echo "<p class='bookTitle'>{$book->getTitle()}</p>";
+        echo $this->getBookTitleHTML($book);
         echo "<p class='author'>{$book->getAuthor()}</p>";
 
         if ($this->widgetData['progressType'] === Progress::PROGRESSBAR) {
@@ -208,6 +210,18 @@ class gr_progress_cvdm_backend {
 
         echo "</div>";
         echo "</li>";
+    }
+    
+    private function getBookTitleHTML($book) {
+        $output = "<p class='bookTitle'>";
+        if ($this->widgetData['bookLink']) {
+            $target = $this->widgetData['bookLinkNewTab'] ? "target='_blank'" : '';
+            $output .= "<a href='{$book->getLink()}' $target>{$book->getTitle()}</a>";
+        } else {
+            $output .= $book->getTitle();
+        }
+        $output .= "</p>";
+        return $output;
     }
 
     private function printProgressBar($book) {
@@ -384,6 +398,26 @@ class gr_progress_cvdm_backend {
                     type="checkbox">
                 Display the first line of your Goodreads review for each book<br/>
                 <small>Intended for quick notes such as "reading this together with Alice" or "recommended by Bob" or whatever else strikes you fancy.</small>
+            </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->widget->get_field_id('bookLink'); ?>">
+                <input
+                    id="<?php echo $this->widget->get_field_id('bookLink'); ?>"
+                    name="<?php echo $this->widget->get_field_name('bookLink'); ?>"
+                    <?php checked($instance['bookLink']); ?>
+                    type="checkbox">
+                Link book titles to the book pages on Goodreads<br/>
+            </label>
+        </p>
+        <p>
+            <label for="<?php echo $this->widget->get_field_id('bookLinkNewTab'); ?>">
+                <input
+                    id="<?php echo $this->widget->get_field_id('bookLinkNewTab'); ?>"
+                    name="<?php echo $this->widget->get_field_name('bookLinkNewTab'); ?>"
+                    <?php checked($instance['bookLinkNewTab']); ?>
+                    type="checkbox">
+                Open book links in a new tab/window<br/>
             </label>
         </p>
         <p>
@@ -590,7 +624,9 @@ class gr_progress_cvdm_backend {
         $instance['shelfName'] = trim(htmlspecialchars($new_instance['shelfName']));
         $instance['emptyMessage'] = trim(htmlspecialchars($new_instance['emptyMessage']));
         $instance['coverSize'] = intval($new_instance['coverSize']);
-        $instance['displayReviewExcerpt'] = isset($new_instance['displayReviewExcerpt']) ? true : false;
+        $instance['displayReviewExcerpt'] = isset($new_instance['displayReviewExcerpt']) ? true : $this->DEFAULT_SETTINGS['displayReviewExcerpt'];
+        $instance['bookLink'] = isset($new_instance['bookLink']) ? true : $this->DEFAULT_SETTINGS['bookLink'];
+        $instance['bookLinkNewTab'] = isset($new_instance['bookLinkNewTab']) ? true : $this->DEFAULT_SETTINGS['bookLinkNewTab'];
         $instance['maxBooks'] = preg_match("/^\d+/", $new_instance['maxBooks']) ? max(1, intval($new_instance['maxBooks'])) : $this->DEFAULT_SETTINGS['maxBooks'];
         $instance['sortByReadingProgress'] = isset($new_instance['sortByReadingProgress']) ? true : false;
         $instance['sortBy'] = array_key_exists($new_instance['sortBy'], $this->SORT_BY_OPTIONS) ? $new_instance['sortBy'] : $this->DEFAULT_SETTINGS['sortBy'];
