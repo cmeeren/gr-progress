@@ -185,25 +185,29 @@ class gr_progress_cvdm_backend {
 
     private function printBooksOnShelf($shelf) {
         foreach ($shelf->getBooks() as $book) {
-            echo "<li class='book'>";
-            echo "<div class='coverImage'><img alt='Book cover' src='{$book->getCoverURL()}' /></div>";
-            echo "<div class='desc'>";
-            echo "<p class='bookTitle'>{$book->getTitle()}</p>";
-            echo "<p class='author'>{$book->getAuthor()}</p>";
-
-            if ($this->widgetData['progressType'] === Progress::PROGRESSBAR) {
-                $this->printProgressBar($book);
-            } elseif ($this->widgetData['progressType'] === Progress::TEXT) {
-                $this->printProgressString($book);
-            }
-
-            if ($book->hasComment()) {
-                echo "<p class='bookComment'>{$book->getComment()}</p>";
-            }
-
-            echo "</div>";
-            echo "</li>";
+            $this->printBook($book);
         }
+    }
+    
+    private function printBook($book) {
+        echo "<li class='book'>";
+        echo "<div class='coverImage'><img alt='Book cover' src='{$book->getCoverURL()}' /></div>";
+        echo "<div class='desc'>";
+        echo "<p class='bookTitle'>{$book->getTitle()}</p>";
+        echo "<p class='author'>{$book->getAuthor()}</p>";
+
+        if ($this->widgetData['progressType'] === Progress::PROGRESSBAR) {
+            $this->printProgressBar($book);
+        } elseif ($this->widgetData['progressType'] === Progress::TEXT) {
+            $this->printProgressString($book);
+        }
+
+        if ($book->hasComment()) {
+            echo "<p class='bookComment'>{$book->getComment()}</p>";
+        }
+
+        echo "</div>";
+        echo "</li>";
     }
 
     private function printProgressBar($book) {
