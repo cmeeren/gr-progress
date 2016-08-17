@@ -71,7 +71,7 @@ class HTML5Validate {
 	}
 	
 	private function WrapDoctype($html) {
-		return '<!DOCTYPE html><html><head><meta charset=utf-8 /><title>Any Title</title></head><body>'.$html.'</body></html>';
+		return '<!DOCTYPE html><html lang="en"><head><meta charset=utf-8 /><title>Any Title</title></head><body>'.$html.'</body></html>';
 	}
 	
 }
