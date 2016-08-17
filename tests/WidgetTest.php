@@ -19,7 +19,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         // add lang='en' to html tag to avoid warning in validator
         // (which makes the test fail)
-        $html = str_replace("<html", "<html lang='en'", $html, 1);
+        $html = str_replace("<html", "<html lang='en'", $html);
 
         $this->assertIsValidHTML($html);
     }
@@ -33,7 +33,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
         // add lang='en' to html tag to avoid warning in validator
         // (which makes the test fail)
-        $html = str_replace("<html", "<html lang='en'", $html, 1);
+        $html = str_replace("<html", "<html lang='en'", $html);
 
         $this->assertIsValidHTML($html);
     }
