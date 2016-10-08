@@ -21,8 +21,8 @@ Some configuration options:
 * Message to display if shelf is empty
 * Sort books by reading progress, date updated, shelf position, author, title, etc.
 * Number of books to display
-* Show first line of your Goodreads review (intended for quick notes such as "reading this together with Alice"
-  or "recommended by Bob" or whatever else strikes you fancy)
+* Show first line of your Goodreads review (intended for quick notes such as "reading this together with Alice",
+  "recommended by Bob", links to reviews, or whatever else strikes you fancy)
 * Show reading progress bar, progress text (no bar) or don't show progress at all
 * Display time since last update (e.g. "2 days ago")
 * Custom strings for time since last update (e.g. for quick and easy translating, or
@@ -69,12 +69,15 @@ that the data in both widgets come from Goodreads.
 == Screenshots ==
 1. The plugin in action
 2. The plugin with a bit of custom styling to make two widgets look like one
-3. The widget settings
+3. The widget settings as of version 1.0.0
 
 == Changelog ==
 
+= 1.3.0 =
+* Cover images now use the same protocol (http or https) as the rest of the page
+
 = 1.2.0 =
-* Allow links in book titles and Goodreads attribution 
+* Allow links in book titles and Goodreads attribution
 
 = 1.1.0 =
 * Synchronize multiple widgets so that they all fetch data at the same time
