@@ -115,6 +115,7 @@ class Shelf {
             $bookID = $item->find("book_id", 0)->plaintext;
             $srcWithCDATA = $item->find("book_large_image_url", 0)->plaintext;
             $src = preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $srcWithCDATA);
+            $src = preg_replace('/^https?:/', '', $src);  // remove http: or https: to use the same protocol as the page
             if (array_key_exists($bookID, $this->books)) {
                 $this->books[$bookID]->setCoverURL($src);
             }
