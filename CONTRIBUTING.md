@@ -30,3 +30,17 @@ Linux required (you may get it working on Windows, but you're on your own).
    with the database user, password and hostname (you can find the values in your `wp-config.php`)
    * If you get a `database exists` error at the end, that's probably fine.
 4. Run `phpunit`
+
+Deployment checklist (for myself)
+---------------------------------
+
+1. Make changes
+2. If possible, run unit tests locally and test manually in a local Wordpress environment.
+3. Update changelog in `src/gr-progress/README.txt`
+4. Update other info in `src/gr-progress/README.txt`
+5. Run `bumpversion` in repo root (or manually update version numbers in `.bumpversion.cfg` and the files it references)
+6. Push to GitHub and ensure tests pass on Travis
+7. Check-out plugin SVN repo: `mkdir ~/gr-progress && cd ~/gr-progress && svn co https://plugins.svn.wordpress.org/gr-progress .`
+8. Copy contents of git repo's `src/gr-progress` into SVN repo's `trunk` folder, overwrite
+9. Tag new release: `svn cp trunk tags/2.0.0` (replace version number)
+10. Commit the SVN repo: `svn ci -m "commit message"` (replace commit message)
