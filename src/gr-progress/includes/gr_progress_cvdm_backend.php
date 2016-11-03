@@ -584,7 +584,10 @@ class gr_progress_cvdm_backend {
                 hours
             </label>
             <br />
-            <small>If you set it to 0 it will only be updated whenever you save the widget settings. If you have multiple GR Progress widgets, they will update at the same time, and the shortest cache time will be used.</small>
+            <small>If you set it to 0 it will only be updated whenever you save the widget settings, or when you visit the page containing the widget and add the URL parameter <code>force_gr_progress_update</code>. For example, you can visit <code>http://yoursite.com/pageWithWidget/?force_gr_progress_update</code>. This can be automated by cron jobs if your host supports it, meaning that visitors will never experience slowdowns due to the widget having to fetch data from Goodreads.
+            <br />
+            <br />
+            If you have multiple GR Progress widgets, they will update at the same time, and the shortest cache time will be used.</small>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('deleteCoverURLCacheOnSave'); ?>">
