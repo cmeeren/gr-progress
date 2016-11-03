@@ -73,6 +73,13 @@ that the data in both widgets come from Goodreads.
 
 == Changelog ==
 
+= 1.4.0 =
+* You can now force updates by adding 'force_gr_progress_update' as a url variable
+  (e.g. by visiting http://yoursite.com/page_with_gr_progress_widget/?force_gr_progress_update).
+  This can be automated e.g. using cron jobs if your host supports it. Combined
+  with setting cache time to 0 (infinite), visitors to your site will never
+  experience slow loading times due to the widget having to fetch data from Goodreads.
+
 = 1.3.0 =
 * Cover images now use the same protocol (http or https) as the rest of the page
 
