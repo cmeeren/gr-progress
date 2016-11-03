@@ -99,7 +99,7 @@ class gr_progress_cvdm_backend {
     }
 
     private function hasCache() {
-        return $this->cacheNotExpired() && $this->getCachedShelf() !== null;
+        return $this->cacheNotExpired() && $this->getCachedShelf() !== null && !isset($_GET['force_gr_progress_update']);
     }
 
     private function cacheNotExpired() {
