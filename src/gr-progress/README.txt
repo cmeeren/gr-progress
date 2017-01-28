@@ -73,6 +73,10 @@ that the data in both widgets come from Goodreads.
 
 == Changelog ==
 
+= 1.4.1 =
+* Fixed bug where any error in fetching data from Goodreads would disable
+  all future fetching until the widget settings were re-saved.
+
 = 1.4.0 =
 * You can now force updates by adding 'force_gr_progress_update' as a url variable
   (e.g. by visiting http://yoursite.com/page_with_gr_progress_widget/?force_gr_progress_update).
