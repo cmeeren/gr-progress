@@ -21,6 +21,7 @@ Some configuration options:
 * Message to display if shelf is empty
 * Sort books by reading progress, date updated, shelf position, author, title, etc.
 * Number of books to display
+* Display your rating
 * Show first line of your Goodreads review (intended for quick notes such as "reading this together with Alice",
   "recommended by Bob", links to reviews, or whatever else strikes you fancy)
 * Show reading progress bar, progress text (no bar) or don't show progress at all
@@ -49,8 +50,8 @@ The source is hosted on [GitHub](https://github.com/cmeeren/gr-progress).
 == Frequently Asked Questions ==
 
 = Why do I have to get my own Goodreads API key? = 
-Because Goodreads doesn't allow calling any given API endpoint more than
-once per second. On the off-chance this plugin gets wildly popular, I don't
+Because Goodreads doesn't allow calling any given combination of an API key and an API endpoint
+more than once per second. On the off-chance this plugin gets wildly popular, I don't
 want Goodreads shutting down my own API key due to excessive usage.
 
 = What if I'm unable/unwilling to use my own API key? = 
@@ -58,12 +59,11 @@ Create a new Goodreads user and get an API key for that user. Doesn't matter
 which key you use, it just has to be a valid Goodreads API key.
 
 = Is the Goodreads attribution really mandatory? = 
-Yes. If you hide it and it gets discovered by Goodreads somehow, they may politely ask you to
-attribute them, or they may simply block your API key.
+Yes, according to the Goodreads API terms of service.
 
 = What if I style my widgets like one of the screenshots, so that the second shelf/widget appears to be part of the first widget - can I then hide the attribution on the second widget? =
 My personal guess is yes, because it would be clear from the first attribution
-that the data in both widgets come from Goodreads.
+that the data in both widgets come from Goodreads. I don't make the rules, though.
 
 
 == Screenshots ==
