@@ -17,6 +17,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
         'shelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
         'coverSize' => CoverSize::SMALL,
+        'displayRating' => false,
         'displayReviewExcerpt' => false,
         'bookLink' => false,
         'bookLinkNewTab' => false,
@@ -196,6 +197,19 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     public function assertNoShelf($html) {
         $dom = str_get_html($html);
         $this->assertEmpty($dom->find('.bookshelf'), "Found shelf but expected none");
+    }
+    
+    public function assertBookHasRating($bookNameSubstring, $rating, $html) {
+        $this->assertBookDescriptionFieldContains($bookNameSubstring, ".bookRating", , $html);
+        
+        $ratingHtml = 
+              str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-filled'>&#9733;</span>", $rating) 
+            + str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-empty'>&#9734;</span>", 5 - $rating);
+        $this->assertBookDescriptionFieldContains($bookNameSubstring, $ratingHtml, $html);
+    }
+
+    public function assertBookHasNoRating($bookNameSubstring, $html) {
+        $this->assertBookDoesNotHaveDescriptionField($bookNameSubstring, ".bookRating", $html);
     }
 
     /**

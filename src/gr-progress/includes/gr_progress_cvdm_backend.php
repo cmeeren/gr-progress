@@ -33,6 +33,7 @@ class gr_progress_cvdm_backend {
         'shelfName' => 'currently-reading',
         'emptyMessage' => 'Not currently reading anything.',
         'coverSize' => CoverSize::SMALL,
+        'displayRating' => false,
         'displayReviewExcerpt' => false,
         'bookLink' => false,
         'bookLinkNewTab' => false,
@@ -198,6 +199,10 @@ class gr_progress_cvdm_backend {
         echo $this->getBookTitleHTML($book);
         echo "<p class='author'>{$book->getAuthor()}</p>";
 
+        if ($this->widgetData['displayRating'] === true && $book->hasRating()) {
+            echo $this->getBookRatingHTML($book);
+        }
+
         if ($this->widgetData['progressType'] === Progress::PROGRESSBAR) {
             $this->printProgressBar($book);
         } elseif ($this->widgetData['progressType'] === Progress::TEXT) {
@@ -220,6 +225,16 @@ class gr_progress_cvdm_backend {
         } else {
             $output .= $book->getTitle();
         }
+        $output .= "</p>";
+        return $output;
+    }
+
+    private function getBookRatingHTML($book) {
+        $output = "<p class='bookRating'>";
+        $numFilledStars = $book->getRating();
+        $numEmptyStars = 5 - $numFilledStars;
+        $output .= str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-filled'>&#9733;</span>", $numFilledStars);
+        $output .= str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-empty'>&#9734;</span>", $numEmptyStars);
         $output .= "</p>";
         return $output;
     }
@@ -390,6 +405,16 @@ class gr_progress_cvdm_backend {
                 Small
             </label>
 
+        </p>
+        <p>
+            <label for="<?php echo $this->widget->get_field_id('displayRating'); ?>">
+                <input
+                    id="<?php echo $this->widget->get_field_id('displayRating'); ?>"
+                    name="<?php echo $this->widget->get_field_name('displayRating'); ?>"
+                    <?php checked($instance['displayRating']); ?>
+                    type="checkbox">
+                Display your rating of each book on this shelf<br/>
+            </label>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('displayReviewExcerpt'); ?>">
@@ -631,6 +656,7 @@ class gr_progress_cvdm_backend {
         $instance['shelfName'] = trim(htmlspecialchars($new_instance['shelfName']));
         $instance['emptyMessage'] = trim(htmlspecialchars($new_instance['emptyMessage']));
         $instance['coverSize'] = intval($new_instance['coverSize']);
+        $instance['displayRating'] = isset($new_instance['displayRating']) ? true : $this->DEFAULT_SETTINGS['displayRating'];
         $instance['displayReviewExcerpt'] = isset($new_instance['displayReviewExcerpt']) ? true : $this->DEFAULT_SETTINGS['displayReviewExcerpt'];
         $instance['bookLink'] = isset($new_instance['bookLink']) ? true : $this->DEFAULT_SETTINGS['bookLink'];
         $instance['bookLinkNewTab'] = isset($new_instance['bookLinkNewTab']) ? true : $this->DEFAULT_SETTINGS['bookLinkNewTab'];

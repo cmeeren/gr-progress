@@ -86,6 +86,10 @@ class SettingsTest extends GR_Progress_UnitTestCase {
         $this->assertSettingSavedAs("coverSize", (string) CoverSize::LARGE, CoverSize::LARGE);
     }
 
+    public function test_displayRating() {
+        $this->assertCheckedSettingCorrectlyUpdated('displayRating');
+    }
+
     public function test_displayReviewExcerpt() {
         $this->assertCheckedSettingCorrectlyUpdated('displayReviewExcerpt');
     }

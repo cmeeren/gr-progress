@@ -39,6 +39,7 @@ class Shelf {
         }
 
         foreach ($xml->find("review") as $reviewElement) {
+            $rating = $reviewElement->find("rating", 0)->plaintext;
             $bookElement = $reviewElement->find("book", 0);
             $id = $bookElement->find("id", 0)->plaintext;
             $title = $bookElement->find("title", 0)->plaintext;
@@ -48,10 +49,10 @@ class Shelf {
             }
 
             $reviewBodyFirstLine = $this->widgetData['displayReviewExcerpt'] ? $this->getReviewBodyFirstLine($reviewElement) : null;
-            
+
             $link = $bookElement->find("link text", 0)->plaintext;
 
-            $this->books[$id] = new Book($id, $title, $authors, $reviewBodyFirstLine, $link, $this->widgetData);
+            $this->books[$id] = new Book($id, $title, $authors, $reviewBodyFirstLine, $rating, $link, $this->widgetData);
         }
     }
 
@@ -159,7 +160,7 @@ class Shelf {
             $progresses[] = $book->hasProgress() ? $book->getProgressInPercent() : 0;
             $ids[] = $bookID;
         }
-        
+
         // Now, sort the progresses. We use a simple [1, 2, 3, ...] array as secondary
         // array to make the sort stable (i.e. preserve the existing order of identical
         // progresses). We also sort $ids so it matches with $progresses.

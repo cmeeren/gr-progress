@@ -10,6 +10,7 @@ class Book {
     private $id;
     private $title;
     private $authors;
+    private $rating;
     private $comment;
     private $coverURL;
     private $link;
@@ -17,10 +18,11 @@ class Book {
     private $progressStatusUpdateTime;
     private $widgetData;
 
-    public function __construct($id, $title, $authors, $comment, $link, $widgetData) {
+    public function __construct($id, $title, $authors, $comment, $rating, $link, $widgetData) {
         $this->id = $id;
         $this->title = $title;
         $this->authors = $authors;
+        $this->rating = $rating;
         $this->comment = $comment;
         $this->link = $link;
         $this->widgetData = $widgetData;
@@ -37,7 +39,7 @@ class Book {
     public function getCoverURL() {
         return $this->coverURL;
     }
-    
+
     public function getLink() {
         return $this->link;
     }
@@ -60,6 +62,14 @@ class Book {
 
     public function getProgressStatusUpdateTime() {
         return $this->progressStatusUpdateTime;
+    }
+
+    public function hasRating() {
+        return $this->rating != 0;
+    }
+
+    public function getRating() {
+        return $this->rating;
     }
 
     public function hasComment() {

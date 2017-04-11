@@ -16,14 +16,14 @@ class WidgetTest extends GR_Progress_UnitTestCase {
 
     public function testWidgetOutputIsValidHTML() {
         $this->markTestSkipped('Test skipped due to errors in HTML validator');
-        
+
         $html = $this->getWidgetHTML();
         $this->assertIsValidHTML($html);
     }
 
     public function testWidgetFormIsValidHTML() {
         $this->markTestSkipped('Test skipped due to errors in HTML validator');
-        
+
         $widget = new gr_progress_cvdm_widget();
 
         ob_start();
@@ -216,6 +216,13 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertEmpty($dom->find('.small-cover'), 'Found unexpected small covers');
     }
 
+    public function testSetting_displayRating() {
+        $html = $this->getWidgetHTML(['displayRating' => true, 'shelfName' => 'read']);
+        $this->assertBookHasRating("Life of Pi", 5, $html);
+        $this->assertBookHasRating("The Kite Runner", 2, $html);
+        $this->assertBookHasNoRating("The Belgariad", $html);
+    }
+
     public function testSetting_displayReviewExcerpt() {
         $html = $this->getWidgetHTML(['displayReviewExcerpt' => true]);
         $this->assertBookHasNoComment("The Lord of the Rings", $html);
@@ -223,7 +230,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $this->assertBookHasComment("The Chronicles of Narnia", "Only line, with &lt;3 and <a", $html);
         $this->assertBookHasNoComment("Harry Potter and the Sorcerer", $html);
     }
-    
+
     public function testSetting_bookLink_false() {
         $html = $this->getWidgetHTML(['bookLink' => false]);
         $dom = str_get_html($html);
@@ -231,7 +238,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
             $this->assertNotContains("<a href", $bookTitle->innertext);
         }
     }
-    
+
     public function testSetting_bookLink_true() {
         $html = $this->getWidgetHTML(['bookLink' => true, 'bookLinkNewTab' => false]);
         $dom = str_get_html($html);
@@ -239,7 +246,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
             $this->assertContains("<a href='http://", $bookTitle->innertext);
         }
     }
-    
+
     public function testSetting_bookLinkNewTab() {
         $html = $this->getWidgetHTML(['bookLink' => true, 'bookLinkNewTab' => true]);
         $dom = str_get_html($html);
