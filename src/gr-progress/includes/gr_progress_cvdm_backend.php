@@ -324,6 +324,8 @@ class gr_progress_cvdm_backend {
                 name="<?php echo $this->widget->get_field_name('userid'); ?>"
                 value="<?php echo esc_attr($instance['userid']); ?>"
                 />
+                <br />
+                <small>If you're a Goodreads author (i.e., if your profile url contains "author" instead of "user"), then the number in your profile URL is your author ID, not your user ID. You'll have to find your user ID to use this widget. To do that, visit <strong>goodreads.com/author/show/YOUR_AUTHOR_ID?key=YOUR_API_KEY</strong> (see below for the API key). Search for <strong>&lt;user&gt;</strong> to find your user ID and enter it above.</small>
         </p>
         <p>
             <label for="<?php echo $this->widget->get_field_id('apiKey'); ?>">
