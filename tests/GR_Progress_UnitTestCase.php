@@ -202,7 +202,7 @@ class GR_Progress_UnitTestCase extends \WP_UnitTestCase {
     public function assertBookHasRating($bookNameSubstring, $rating, $html) {
         $ratingHtml =
               str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-filled'>&#9733;</span>", $rating)
-            + str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-empty'>&#9734;</span>", 5 - $rating);
+            . str_repeat("<span class='gr-progress-rating-star gr-progress-rating-star-empty'>&#9734;</span>", 5 - $rating);
         $this->assertBookDescriptionFieldContains($bookNameSubstring, ".bookRating", $ratingHtml, $html);
     }
 
