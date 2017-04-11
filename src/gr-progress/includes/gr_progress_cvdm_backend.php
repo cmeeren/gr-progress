@@ -398,7 +398,7 @@ class gr_progress_cvdm_backend {
                     name="<?php echo $this->widget->get_field_name('displayReviewExcerpt'); ?>"
                     <?php checked($instance['displayReviewExcerpt']); ?>
                     type="checkbox">
-                Display the first line of your Goodreads review for each book<br/>
+                Display the first paragraph of your Goodreads review for each book<br/>
                 <small>Intended for quick notes such as "reading this together with Alice" or "recommended by Bob" or whatever else strikes you fancy.</small>
             </label>
         </p>
