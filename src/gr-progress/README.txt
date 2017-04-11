@@ -73,6 +73,10 @@ that the data in both widgets come from Goodreads.
 
 == Changelog ==
 
+= 1.5.0 =
+* Added support for displaying your book ratings
+* Added help text explaining how Goodreads authors can find their user ID
+
 = 1.4.1 =
 * Fixed bug where any error in fetching data from Goodreads would disable
   all future fetching until the widget settings were re-saved.
