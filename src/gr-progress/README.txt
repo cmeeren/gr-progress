@@ -3,7 +3,7 @@ Contributors: cmeeren
 Tags: books, goodreads, reading, reading lists
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QW6S8UK8SETUN&lc=US&item_name=Donation%20to%20GR%20Progress%20Widget&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 3.7
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
