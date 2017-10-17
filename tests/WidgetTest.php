@@ -243,7 +243,7 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $html = $this->getWidgetHTML(['bookLink' => true, 'bookLinkNewTab' => false]);
         $dom = str_get_html($html);
         foreach ($dom->find(".bookTitle") as $bookTitle) {
-            $this->assertContains("<a href='http://", $bookTitle->innertext);
+            $this->assertContains("<a href='https://", $bookTitle->innertext);
         }
     }
 
