@@ -25,7 +25,7 @@ class Shelf {
 
     private function fetchBooksFromGoodreads() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
-                        "http://www.goodreads.com/review/list/"
+                        "https://www.goodreads.com/review/list/"
                         . "{$this->widgetData['userid']}.xml"
                         . "?v=2"
                         . "&key={$this->widgetData['apiKey']}"
@@ -104,7 +104,7 @@ class Shelf {
 
     private function fetchAllCoverURLs() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
-                        "http://www.goodreads.com/review/list_rss/"
+                        "https://www.goodreads.com/review/list_rss/"
                         . "{$this->widgetData['userid']}"
                         . "?shelf={$this->widgetData['shelfName']}"));
 

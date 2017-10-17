@@ -61,6 +61,9 @@ My personal guess is yes, because it would be clear from the first attribution t
 
 == Changelog ==
 
+= 1.5.1 =
+* Switched all Goodreads URLs to HTTPS
+
 = 1.5.0 =
 * Added support for displaying your book ratings
 * Added help text explaining how Goodreads authors can find their user ID

@@ -82,7 +82,7 @@ class Book {
 
     public function fetchProgress() {
         $xml = str_get_html(GoodreadsFetcher::fetch(
-                        "http://www.goodreads.com/review/show_by_user_and_book.xml"
+                        "https://www.goodreads.com/review/show_by_user_and_book.xml"
                         . "?key={$this->widgetData['apiKey']}"
                         . "&book_id={$this->id}"
                         . "&user_id={$this->widgetData['userid']}"));
