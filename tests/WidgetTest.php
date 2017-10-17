@@ -381,10 +381,10 @@ class WidgetTest extends GR_Progress_UnitTestCase {
             "City of Bones",
             "The Color of Magic",
             "The Eye of the World",
+            "Mistborn",
             "The Gunslinger",
             "His Dark Materials",
             "The Lightning Thief",
-            "Mistborn",
             "The Name of the Wind",
             "The Way of Kings",
         ];
@@ -396,10 +396,10 @@ class WidgetTest extends GR_Progress_UnitTestCase {
         $books = [
             "The Way of Kings",
             "The Name of the Wind",
-            "Mistborn",
             "The Lightning Thief",
             "His Dark Materials",
             "The Gunslinger",
+            "Mistborn",
             "The Eye of the World",
             "The Color of Magic",
             "City of Bones",
