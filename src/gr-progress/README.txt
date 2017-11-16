@@ -3,7 +3,7 @@ Contributors: cmeeren
 Tags: books, goodreads, reading, reading lists
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QW6S8UK8SETUN&lc=US&item_name=Donation%20to%20GR%20Progress%20Widget&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 3.7
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,22 @@ The source is hosted on [GitHub](https://github.com/cmeeren/gr-progress).
 3. Go to Appearance -> Widgets and find "GR Progress". Drag it to your preferred sidebar or other widget area.
 4. Go through all the widget settings and configure according to your preferences. User ID, API key, and Goodreads shelf name are mandatory. Get a Goodreads API key [here](https://www.goodreads.com/api/keys) (it doesn't matter what you write).
 
+== Troubleshooting ==
+
+Before we start, let me make clear that I have made this plugin for myself and provide it free of charge in case anyone else likes it. If it doesn't work for you, there are a few things you can try, and I might be able to help you on the forum. But remember that I don't have paying customers, so don't expect me to spend much of my spare time debugging problems, particularly if I can't reproduce them myself.
+
+= It just says "Error retrieving data from Goodreads" =
+
+Follow the below steps:
+
+1. Make sure you've configured it correctly. Double-check your user ID, your API key, and the shelf name. Note that the shelf name is typically something like "currently-reading", not "Currently reading".
+
+2. Make sure your Goodreads profile really is public. Go to your Goodreads profile, copy the URL, and visit it in a browser where you are signed out of Goodreads. If you can't see your shelves and books, neither can this widget. If you make changes to your Goodreads privacy settings, make sure to re-save the widget settings before testing to reset the widget's cache.
+
+3. If your settings are correct and your profile is publis and it still doesn't work, go to the plugin support forum and describe the error. Include the most important widget settings (user ID, API key, and shelf name). I will then be able to test your settings myself.
+
+4. If everything works fine when I test it, there is usually little I can do for you. Note that certain webhosts have been reported to cause problems with this widget, and one user reported the widget working again after switching hosts.
+
 == Frequently Asked Questions ==
 
 = Why do I have to get my own Goodreads API key? = 
@@ -61,7 +77,7 @@ My personal guess is yes, because it would be clear from the first attribution t
 
 == Changelog ==
 
-= 1.5.1 =
+= 1.5.3 =
 * Switched all Goodreads URLs to HTTPS
 
 = 1.5.0 =
