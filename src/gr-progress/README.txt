@@ -39,11 +39,21 @@ The source is hosted on [GitHub](https://github.com/cmeeren/gr-progress).
 3. Go to Appearance -> Widgets and find "GR Progress". Drag it to your preferred sidebar or other widget area.
 4. Go through all the widget settings and configure according to your preferences. User ID, API key, and Goodreads shelf name are mandatory. Get a Goodreads API key [here](https://www.goodreads.com/api/keys) (it doesn't matter what you write).
 
-== Troubleshooting ==
+== Frequently Asked Questions ==
+
+= Important performance considerations =
+
+If you can, please use this widget with shelfs with few books (for example, less than 100 books should work fine in most cases). If you use a shelf with many books, then regardless of the "Display at most X books" setting, fetching books will take a long time because the Goodreads servers need to sort all your books before picking the X books send to the widget.
+
+This has two important implications. Firstly, it causes a poor experience for the first visitor to your page after the GR Progress Widget cache has expired and needs to refresh, since that user will potentially be waiting a long time for your page to load. Secondly, depending on your PHP settings, it may cause timeouts causing the widget to fail and report an "Error retrieving data from Goodreads" message. (The widget currently has a hardcoded timeout setting of 30 seconds, which is shorter than most PHP installations and longer than you should find acceptable.)
+
+If you're a somewhat advanced user, you can set the widget's cache time to 0 (infinite) and schedule an automated job (e.g. a cron job) that fetches/visits your blog with the url variable 'force_gr_progress_update' added (e.g. http://yoursite.com/page_with_gr_progress_widget/?force_gr_progress_update). If you do this, visitors to your site will never experience slow loading times due to the widget, because updates will be done solely by the cron job.
+
+= Troubleshooting =
 
 Before we start, let me make clear that I have made this plugin for myself and provide it free of charge in case anyone else likes it. If it doesn't work for you, there are a few things you can try, and I might be able to help you on the forum. But remember that I don't have paying customers, so don't expect me to spend much of my spare time debugging problems, particularly if I can't reproduce them myself.
 
-= It just says "Error retrieving data from Goodreads" =
+* It just says "Error retrieving data from Goodreads" *
 
 Follow the below steps:
 
@@ -54,8 +64,6 @@ Follow the below steps:
 3. If your settings are correct and your profile is publis and it still doesn't work, go to the plugin support forum and describe the error. Include the most important widget settings (user ID, API key, and shelf name). I will then be able to test your settings myself.
 
 4. If everything works fine when I test it, there is usually little I can do for you. Note that certain webhosts have been reported to cause problems with this widget, and one user reported the widget working again after switching hosts.
-
-== Frequently Asked Questions ==
 
 = Why do I have to get my own Goodreads API key? = 
 Because Goodreads doesn't allow calling any given combination of an API key and an API endpoint more than once per second. On the off-chance this plugin gets wildly popular, I don't want Goodreads shutting down my own API key due to excessive usage.
@@ -76,6 +84,9 @@ My personal guess is yes, because it would be clear from the first attribution t
 3. The widget settings as of version 1.0.0
 
 == Changelog ==
+
+= 1.5.4 =
+* Increased the widget timeout to 30 seconds, which should fix the "Error retrieving data from Goodreads" message some people have been seeing. Please read the new "Important performance considerations" part of the readme.
 
 = 1.5.3 =
 * Switched all Goodreads URLs to HTTPS

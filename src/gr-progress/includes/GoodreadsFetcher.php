@@ -4,7 +4,7 @@ namespace relativisticramblings\gr_progress;
 
 class GoodreadsFetcher {
 
-    private static $DEFAULT_TIMEOUT_IN_SECONDS = 3;
+    private static $DEFAULT_TIMEOUT_IN_SECONDS = 30;
     private static $SECONDS_TO_WAIT_AFTER_FAILED_FETCH = 3600;
     public static $test_local = false;
 
