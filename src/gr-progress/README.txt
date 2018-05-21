@@ -85,6 +85,9 @@ My personal guess is yes, because it would be clear from the first attribution t
 
 == Changelog ==
 
+= 1.5.5 =
+* Fixed bug where multiple widgets with different user IDs produced the same shelves when the shelf names were identical
+
 = 1.5.4 =
 * Increased the widget timeout to 30 seconds, which should fix the "Error retrieving data from Goodreads" message some people have been seeing. Please read the new "Important performance considerations" part of the readme.
 

@@ -107,10 +107,13 @@ class gr_progress_cvdm_backend {
         return get_transient($this->getWidgetKey()) !== false;
     }
 
+    private function getCacheKey() {
+      return $this->widgetData['userid'] . $this->widgetData['shelfName'];
+    }
+
     private function getCachedShelf() {
         $shelves = get_option('cvdm_gr_progress_shelves', []);
-        $shelfName = $this->widgetData['shelfName'];
-        return array_key_exists($shelfName, $shelves) ? $shelves[$shelfName] : null;
+        return array_key_exists($this->getCacheKey(), $shelves) ? $shelves[$this->getCacheKey()] : null;
     }
 
     private function saveShelfToCache() {
@@ -125,13 +128,13 @@ class gr_progress_cvdm_backend {
         }
 
         $shelves = get_option('cvdm_gr_progress_shelves', []);
-        $shelves[$this->widgetData['shelfName']] = $this->shelf;
+        $shelves[$this->getCacheKey()] = $this->shelf;
         update_option('cvdm_gr_progress_shelves', $shelves);
     }
 
     private function firstWidgetToUpdate() {
         $cachedShelves = get_option('cvdm_gr_progress_shelves', []);
-        return array_key_exists($this->widgetData['shelfName'], $cachedShelves);
+        return array_key_exists($this->getCacheKey(), $cachedShelves);
     }
 
     private function widgetProperlyConfigured() {
