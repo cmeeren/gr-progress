@@ -37,6 +37,9 @@ class Shelf {
         if ($xml === false) {
             return;
         }
+        
+        $reviews = $xml->find("reviews", 0);
+        $this->books_total = $reviews->total;
 
         foreach ($xml->find("review") as $reviewElement) {
             $rating = $reviewElement->find("rating", 0)->plaintext;
@@ -111,10 +114,14 @@ class Shelf {
         if ($xml === false) {
             return;
         }
+        
+        // We want to know how many books a shelf contains in total, regardless of how many books are returned by our query.
+        $reviews = $xml->find("reviews", 0);
+        $this->books_total = $reviews->total;
 
         foreach ($xml->find("item") as $item) {
             $bookID = $item->find("book_id", 0)->plaintext;
-            $srcWithCDATA = $item->find("book_large_image_url", 0)->plaintext;
+            $srcWithCDATA = $item->find("book_small_image_url", 0)->plaintext;
             $src = preg_replace('/^\s*(?:\/\/)?<!\[CDATA\[([\s\S]*)(?:\/\/)?\]\]>\s*\z/', '$1', $srcWithCDATA);
             $src = preg_replace('/^https?:/', '', $src);  // remove http: or https: to use the same protocol as the page
             if (array_key_exists($bookID, $this->books)) {
@@ -139,6 +146,10 @@ class Shelf {
 
     public function getBooks() {
         return $this->books;
+    }
+
+    public function getBooksTotal() {
+        return $this->books_total;
     }
 
     public function updateProgress() {
