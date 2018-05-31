@@ -119,6 +119,8 @@ class Shelf {
         $reviews = $xml->find("reviews", 0);
         $this->books_total = $reviews->total;
 
+        // Goodreads return three image sizes, book_small_image_url, book_medium_image_url and book_large_image_url.
+        // This could be an option?
         foreach ($xml->find("item") as $item) {
             $bookID = $item->find("book_id", 0)->plaintext;
             $srcWithCDATA = $item->find("book_small_image_url", 0)->plaintext;
