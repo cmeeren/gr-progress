@@ -145,8 +145,8 @@ class gr_progress_cvdm_backend {
     private function getWidgetHTML($args) {
         ob_start();
         $this->printWidgetBoilerplateStart($args);
-        $this->printGoodreadsAttribution();
         $this->printShelf();
+        $this->printGoodreadsAttribution();
         $this->printWidgetBoilerplateEnd($args);
         return ob_get_clean();
     }
@@ -169,7 +169,14 @@ class gr_progress_cvdm_backend {
     }
 
     private function printGoodreadsAttribution() {
-        echo "<p class='goodreads-attribution'>{$this->widgetData['goodreadsAttribution']}</p>";
+        // If the attribution text was changed by the user, replace #books_total by $this->shelf->books_total.
+        // Could be changed to check not for change in general, but for existance of "#books_total" - search might be more costly than complete string comparison.
+        if ($this->widgetData['goodreadsAttribution'] !== $this->DEFAULT_SETTINGS['goodreadsAttribution']) {
+            $attribution = str_replace('#books_total', $this->shelf->books_total, $this->widgetData['goodreadsAttribution']);
+            echo "<p class='goodreads-attribution'>$attribution</p>";
+        } else {
+            echo "<p class='goodreads-attribution'>{$this->widgetData['goodreadsAttribution']}</p>";
+        }
     }
 
     private function printShelf() {
