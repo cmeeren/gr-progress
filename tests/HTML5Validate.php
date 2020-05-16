@@ -26,7 +26,7 @@ class HTML5Validate {
 	*
 	* @param bool $ssl
 	*/
-	function HTML5Validate($ssl=true) {
+	function __construct($ssl=true) {
 		$this->url=$ssl?$this->urlHTTPS:$this->urlHTTP;
 	}
 	
