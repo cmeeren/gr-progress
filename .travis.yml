@@ -6,38 +6,35 @@ notifications:
     on_failure: change
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
   - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=3.7 WP_MULTISITE=0
-  - WP_VERSION=3.8 WP_MULTISITE=0
-  - WP_VERSION=3.9 WP_MULTISITE=0
-  - WP_VERSION=4.0 WP_MULTISITE=0
-  - WP_VERSION=4.1 WP_MULTISITE=0
-  - WP_VERSION=4.2 WP_MULTISITE=0
-  - WP_VERSION=4.3 WP_MULTISITE=0
-  - WP_VERSION=4.4 WP_MULTISITE=0
-  - WP_VERSION=4.5 WP_MULTISITE=0
-  - WP_VERSION=4.6 WP_MULTISITE=0
-  - WP_VERSION=4.7 WP_MULTISITE=0
-  - WP_VERSION=4.8 WP_MULTISITE=0
-  - WP_VERSION=4.9 WP_MULTISITE=0
-
-matrix:
-  include:
-    - php: 5.6
-      env: WP_VERSION=latest WP_MULTISITE=1
-  exclude:
-    - php: 7.0
-      env: WP_VERSION=3.7 WP_MULTISITE=0
-    - php: 7.0
-      env: WP_VERSION=3.8 WP_MULTISITE=0
+  - WP_VERSION=5.4 WP_MULTISITE=0
+  - WP_VERSION=5.3 WP_MULTISITE=0
+  - WP_VERSION=5.2 WP_MULTISITE=0
+  - WP_VERSION=5.1 WP_MULTISITE=0
+  - WP_VERSION=5.0 WP_MULTISITE=0
+  
+services:
+  - mysql
+  
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS wordpress_test;'
 
 before_script:
+  - |
+    echo "TRAVIS_PHP_VERSION:" $TRAVIS_PHP_VERSION;
+    php -v;
+    php -r 'echo "PHP: ".PHP_VERSION."\n";';
+    if [ $(echo "$TRAVIS_PHP_VERSION >= 7.2" | bc -l) -eq 1 ]; then
+      echo using PHPUnit 7.5.2
+      curl -sSfL -o ~/.phpenv/versions/$TRAVIS_PHP_VERSION/bin/phpunit https://phar.phpunit.de/phpunit-7.5.2.phar;
+    fi
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 
 script: phpunit
